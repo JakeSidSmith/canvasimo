@@ -55,7 +55,7 @@ describe('sensible canvas', function () {
         isPointInPath: [0, 0]
       };
 
-      var isGetter = /^(to|get|create|is)/i;
+      var isGetter = /^(get|create|is)/i;
 
       for (var key in canvas) {
         if (!isGetter.exec(key)) {
