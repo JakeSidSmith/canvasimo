@@ -1,0 +1,43 @@
+{
+  "name": "sensible-canvas-interface",
+  "version": "0.0.0",
+  "description": "A simple, fluent interface that extends the HTML5 Canvas API",
+  "main": "lib/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
+    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5 index.js scripts && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
+    "test": "npm run eslint && npm run mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakesidsmith/sensible-canvas-interface.git"
+  },
+  "keywords": [
+    "sensible",
+    "simple",
+    "fluent",
+    "canvas",
+    "api",
+    "interface",
+    "html5",
+    "chain"
+  ],
+  "author": "Jake 'Sid' Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jakesidsmith/sensible-canvas-interface/issues"
+  },
+  "homepage": "https://github.com/jakesidsmith/sensible-canvas-interface#readme",
+  "devDependencies": {
+    "chai": "=3.5.0",
+    "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.1",
+    "istanbul": "=1.0.0-alpha.2",
+    "jsdom": "=8.4.1",
+    "mocha": "=2.4.5",
+    "sinon": "=1.17.3",
+    "sinon-chai": "=2.8.0"
+  }
+}

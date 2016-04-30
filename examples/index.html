@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Canvas</title>
+  <link rel="stylesheet" href="demo-only-stuff/styles.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <script do-not-document="true" type="text/javascript" src="canvas-api.js"></script>
+  <script do-not-document="true" type="text/javascript" src="demo-only-stuff/create-canvas.js"></script>
+
+  <div id="container" class="container">
+    <h2>
+      Test that setters &amp; actions always return the canvas
+    </h2>
+
+    <script type="text/javascript">
+      var element = document.createElement('canvas');
+      var canvas = new Canvas(element);
+
+      var argumentMap = {
+        setWidth: [0],
+        setHeight: [0],
+        setSize: [0, 0],
+        scale: [1, 1],
+        rotate: [0],
+        translate: [0, 0],
+        setTransform: [1, 0, 0, 1, 0, 0],
+        transform: [1, 0, 0, 1, 0, 0],
+        drawFocusIfNeeded: [element],
+        clearRect: [0, 0, 0, 0],
+        moveTo: [0, 0],
+        lineTo: [0, 0],
+        quadraticCurveTo: [0, 0, 0, 0],
+        bezierCurveTo: [0, 0, 0, 0, 0, 0],
+        arcTo: [0, 0, 0, 0, 0],
+        fillText: ['', 0, 0],
+        strokeText: ['', 0, 0],
+        drawImage: [new Image(), 0, 0],
+        putImageData: [new ImageData(1, 1), 0, 0],
+        plotRect: [0, 0, 0, 0],
+        plotArc: [0, 0, 0, 0, 0],
+        plotEllipse: [0, 0, 0, 0, 0, 0, 0],
+        setStrokeDash: [[]],
+        isPointInPath: [0, 0]
+      };
+
+      var isGetter = /^(to|get|create|is)/i
+
+      for (var key in canvas) {
+        if (!isGetter.exec(key)) {
+          canvas = canvas[key].apply(null, argumentMap[key]);
+        }
+      }
+    </script>
+
+    <h2>
+      Rectangle methods
+    </h2>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(640)
+        .setHeight(320)
+        .fillRect(10, 10, 40, 40, 'cyan');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(640)
+        .setHeight(320)
+        .setFill('red')
+        .fillRect(10, 10, 40, 40);
+    </script>
+  </div>
+
+  <script do-not-document="true" type="text/javascript" src="demo-only-stuff/display-source.js"></script>
+
+</body>
+</html>
