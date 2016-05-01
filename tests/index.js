@@ -67,7 +67,9 @@ describe('sensible canvas', function () {
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
+
     stub(element, 'getContext', getContextStub);
+
     canvas = new Canvas(element);
 
     expect(canvas).to.exist;
@@ -93,6 +95,18 @@ describe('sensible canvas', function () {
 
     it('should return the context type', function () {
       expect(canvas.getContextType()).to.equal('2d');
+    });
+
+  });
+
+  describe('get data url', function () {
+
+    it('should return a data url of the canvas', function () {
+      stub(element, 'toDataURL', function () {
+        return 'url';
+      });
+
+      expect(canvas.getDataURL()).to.equal('url');
     });
 
   });
