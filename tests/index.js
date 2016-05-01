@@ -236,6 +236,22 @@ describe('sensible canvas', function () {
       expect(canvas.getFontFamily()).to.be.null;
     });
 
+    it('should set the default font if a font value is incorrect', function () {
+      // Set to something correct
+      canvas.setFont('20px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20px times');
+
+      canvas.setFont('oops');
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to something correct
+      canvas.setFont('20px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20px times');
+
+      canvas.setFont('not real values 15px arial');
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+    });
+
   });
 
   describe('actions and setters', function () {
