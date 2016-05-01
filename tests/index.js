@@ -17,7 +17,7 @@ describe('sensible canvas', function () {
 
   var getters = {
     getOpacity: {value: 1, type: 'number'},
-    getGlobalCompositeOperation: {value: 'source-over', type: 'string'},
+    getCompositeOperation: {value: 'source-over', type: 'string'},
     getFill: {value: '#000000', type: 'string'},
     getStroke: {value: '#000000', type: 'string'},
     getStrokeWidth: {value: 1, type: 'number'},
