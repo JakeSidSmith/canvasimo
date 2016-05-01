@@ -203,6 +203,11 @@ describe('sensible canvas', function () {
       expect(canvas.createRGBA(111, 222, 333, 0.5)).to.equal('rgba(111,222,333,0.5)');
     });
 
+    it('should remove alpha values from colors', function () {
+      expect(canvas.getHSLFromHSLA(canvas.createHSLA(123, 40, 50, 0.5))).to.equal('hsl(123,40%,50%)');
+      expect(canvas.getRGBFromRGBA(canvas.createRGBA(111, 222, 333, 0.5))).to.equal('rgb(111,222,333)');
+    });
+
     it('should convert angles', function () {
       expect(canvas.getRadiansFromDegrees(0)).to.equal(0);
       expect(canvas.getRadiansFromDegrees(180)).to.equal(Math.PI);
