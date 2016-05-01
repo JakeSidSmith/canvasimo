@@ -24,7 +24,6 @@ describe('sensible canvas', function () {
     getShadowBlur: {value: 0, type: 'number'},
     getShadowOffsetX: {value: 0, type: 'number'},
     getShadowOffsetY: {value: 0, type: 'number'},
-    getFont: {value: 'normal normal normal 10px sans-serif', type: 'string'},
     getTextAlign: {value: 'start', type: 'string'},
     getTextBaseline: {value: 'alphabetic', type: 'string'}
   };
@@ -173,6 +172,45 @@ describe('sensible canvas', function () {
       canvas.setImageSmoothing(true);
 
       expect(canvas.getImageSmoothing()).to.be.null;
+    });
+
+  });
+
+  describe('font methods', function () {
+
+    it('should return a formatted font value', function () {
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+    });
+
+    it('should set the font', function () {
+      canvas.setFont('small-caps normal bold 20px arial');
+      expect(canvas.getFont()).to.equal('normal small-caps bold 20px arial');
+    });
+
+    it('should return individual font properties', function () {
+      expect(canvas.getFontStyle()).to.equal('normal');
+      expect(canvas.getFontVariant()).to.equal('small-caps');
+      expect(canvas.getFontWeight()).to.equal('bold');
+      expect(canvas.getFontSize()).to.equal(20);
+      expect(canvas.getFontFamily()).to.equal('arial');
+    });
+
+    it('should set individual font properties', function () {
+      canvas.setFontStyle('italic');
+      expect(canvas.getFont()).to.equal('italic small-caps bold 20px arial');
+
+      canvas.setFontVariant('normal');
+      expect(canvas.getFont()).to.equal('italic normal bold 20px arial');
+
+      canvas.setFontWeight('normal');
+      expect(canvas.getFont()).to.equal('italic normal normal 20px arial');
+
+      canvas.setFontSize(15);
+      expect(canvas.getFont()).to.equal('italic normal normal 15px arial');
+
+      canvas.setFontFamily('times');
+      expect(canvas.getFont()).to.equal('italic normal normal 15px times');
+
     });
 
   });
