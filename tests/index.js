@@ -228,6 +228,14 @@ describe('sensible canvas', function () {
       }
     });
 
+    it('should return null for individual properties when a special font is set', function () {
+      expect(canvas.getFontStyle()).to.be.null;
+      expect(canvas.getFontVariant()).to.be.null;
+      expect(canvas.getFontWeight()).to.be.null;
+      expect(canvas.getFontSize()).to.be.null;
+      expect(canvas.getFontFamily()).to.be.null;
+    });
+
   });
 
   describe('actions and setters', function () {
