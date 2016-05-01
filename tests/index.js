@@ -288,6 +288,13 @@ describe('sensible canvas', function () {
 
       canvas.setFont('not real values 15px arial');
       expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to something correct
+      canvas.setFont('20px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20px times');
+
+      canvas.setFont('italic bold');
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
     });
 
   });
