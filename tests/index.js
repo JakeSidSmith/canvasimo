@@ -236,6 +236,44 @@ describe('sensible canvas', function () {
       expect(canvas.getFontFamily()).to.be.null;
     });
 
+    it('should set the default font if properties are set when a special font is set', function () {
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontStyle();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontVariant();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontWeight();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontSize();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontFamily();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+    });
+
     it('should set the default font if a font value is incorrect', function () {
       // Set to something correct
       canvas.setFont('20px times');
