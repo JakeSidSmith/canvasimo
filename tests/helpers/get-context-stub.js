@@ -2,6 +2,8 @@
 
 (function () {
 
+  var ImageData = require('./image-data-stub');
+
   var ctx = {
     imageSmoothingEnabled: true,
     webkitImageSmoothingEnabled: false,
@@ -22,7 +24,9 @@
     textAlign: 'start', // string
     textBaseline: 'alphabetic', // string
     getContextAttributes: function () {},
-    getImageData: function () {},
+    getImageData: function (x, y, width, height) {
+      return new ImageData(width, height);
+    },
     createLinearGradient: function () {},
     createRadialGradient: function () {},
     createPattern: function () {},

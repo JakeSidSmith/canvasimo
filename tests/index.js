@@ -4,16 +4,11 @@ var expect = require('chai').expect;
 var stub = require('sinon').stub;
 var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
+var ImageData = require('./helpers/image-data-stub');
 
 describe('sensible canvas', function () {
 
   var canvas, element;
-
-  function ImageData (x, y) {
-    this.width = x;
-    this.height = y;
-    this.data = new Array(x * y * 4);
-  }
 
   var getters = {
     getOpacity: {value: 1, type: 'number'},
@@ -231,6 +226,13 @@ describe('sensible canvas', function () {
 
       expect(canvas.getPercentOfHeight(75)).to.equal(150);
       expect(canvas.getFractionOfHeight(0.25)).to.equal(50);
+    });
+
+    it('should return information about a pixel', function () {
+      canvas.setSize(5, 5);
+
+      expect(canvas.getPixelData(2, 2)).to.eql([0, 0, 0, 0]);
+      expect(canvas.getPixelColor(2, 2)).to.equal('rgba(0,0,0,0)');
     });
 
   });
