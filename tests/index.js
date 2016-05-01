@@ -24,7 +24,7 @@ describe('sensible canvas', function () {
     getShadowBlur: {value: 0, type: 'number'},
     getShadowOffsetX: {value: 0, type: 'number'},
     getShadowOffsetY: {value: 0, type: 'number'},
-    getFont: {value: '10px sans-serif', type: 'string'},
+    getFont: {value: 'normal normal normal 10px sans-serif', type: 'string'},
     getTextAlign: {value: 'start', type: 'string'},
     getTextBaseline: {value: 'alphabetic', type: 'string'}
   };
