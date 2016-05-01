@@ -85,6 +85,61 @@ describe('sensible canvas', function () {
 
   });
 
+  describe('context getters', function () {
+
+    it('should return the actual canvas context', function () {
+      expect(canvas.getContext()).to.equal(element.getContext('2d'));
+    });
+
+    it('should return the context type', function () {
+      expect(canvas.getContextType()).to.equal('2d');
+    });
+
+  });
+
+  describe('canvas sizes', function () {
+
+    it('should return the canvas width and height as an integer', function () {
+      element.setAttribute('width', 123);
+      element.setAttribute('height', 456);
+
+      expect(canvas.getWidth()).to.equal(123);
+      expect(canvas.getHeight()).to.equal(456);
+
+      expect(typeof canvas.getWidth()).to.equal('number');
+      expect(typeof canvas.getHeight()).to.equal('number');
+
+      element.setAttribute('width', 12.3);
+      element.setAttribute('height', 45.6);
+
+      expect(canvas.getWidth()).to.equal(12);
+      expect(canvas.getHeight()).to.equal(45);
+
+      expect(typeof canvas.getWidth()).to.equal('number');
+      expect(typeof canvas.getHeight()).to.equal('number');
+    });
+
+    it('should set the canvas width and height as integers', function () {
+      canvas.setWidth(456);
+      canvas.setHeight(123);
+
+      expect(element.getAttribute('width')).to.equal('456');
+      expect(element.getAttribute('height')).to.equal('123');
+
+      canvas.setWidth(45.6);
+      canvas.setHeight(12.3);
+
+      expect(element.getAttribute('width')).to.equal('45');
+      expect(element.getAttribute('height')).to.equal('12');
+
+      canvas.setSize(32.1, 65.4);
+
+      expect(element.getAttribute('width')).to.equal('32');
+      expect(element.getAttribute('height')).to.equal('65');
+    });
+
+  });
+
   describe('image smoothing', function () {
 
     it('should return the first image smoothing value', function () {
@@ -95,18 +150,6 @@ describe('sensible canvas', function () {
       canvas.setImageSmoothing(false);
 
       expect(canvas.getImageSmoothing()).to.be.false;
-    });
-
-  });
-
-  describe('context getters', function () {
-
-    it('should return the actual canvas context', function () {
-      expect(canvas.getContext()).to.equal(element.getContext('2d'));
-    });
-
-    it('should return the context type', function () {
-      expect(canvas.getContextType()).to.equal('2d');
     });
 
   });
