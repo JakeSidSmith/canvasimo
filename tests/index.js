@@ -218,6 +218,11 @@ describe('sensible canvas', function () {
       expect(canvas.getDegreesFromRadians(Math.PI * 2)).to.equal(360);
     });
 
+    it('should convert fractions & percentages', function () {
+      expect(canvas.getPercentFromFraction(0.75)).to.equal(75);
+      expect(canvas.getFractionFromPercent(25)).to.equal(0.25);
+    });
+
   });
 
 });
