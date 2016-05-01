@@ -117,6 +117,8 @@ describe('sensible canvas', function () {
 
       expect(typeof canvas.getWidth()).to.equal('number');
       expect(typeof canvas.getHeight()).to.equal('number');
+
+      expect(canvas.getSize()).to.eql({width: 12, height: 45});
     });
 
     it('should set the canvas width and height as integers', function () {
