@@ -203,6 +203,16 @@ describe('sensible canvas', function () {
       expect(canvas.createRGBA(111, 222, 333, 0.5)).to.equal('rgba(111,222,333,0.5)');
     });
 
+    it('should convert angles', function () {
+      expect(canvas.getRadiansFromDegrees(0)).to.equal(0);
+      expect(canvas.getRadiansFromDegrees(180)).to.equal(Math.PI);
+      expect(canvas.getRadiansFromDegrees(360)).to.equal(Math.PI * 2);
+
+      expect(canvas.getDegreesFromRadians(0)).to.equal(0);
+      expect(canvas.getDegreesFromRadians(Math.PI)).to.equal(180);
+      expect(canvas.getDegreesFromRadians(Math.PI * 2)).to.equal(360);
+    });
+
   });
 
 });
