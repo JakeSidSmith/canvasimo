@@ -168,6 +168,20 @@ describe('sensible canvas', function () {
       expect(canvas.getImageSmoothing()).to.be.false;
     });
 
+    it('should return null if no image smoothing keys present', function () {
+      var context = element.getContext('2d');
+      delete context.imageSmoothingEnabled;
+      delete context.webkitImageSmoothingEnabled;
+
+      expect(canvas.getImageSmoothing()).to.be.null;
+    });
+
+    it('should not set a value if no image smoothing keys present', function () {
+      canvas.setImageSmoothing(true);
+
+      expect(canvas.getImageSmoothing()).to.be.null;
+    });
+
   });
 
   describe('actions and setters', function () {
