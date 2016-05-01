@@ -223,6 +223,16 @@ describe('sensible canvas', function () {
       expect(canvas.getFractionFromPercent(25)).to.equal(0.25);
     });
 
+    it('should get fractions & percentages of the canvas size', function () {
+      canvas.setSize(400, 200);
+
+      expect(canvas.getPercentOfWidth(75)).to.equal(300);
+      expect(canvas.getFractionOfWidth(0.25)).to.equal(100);
+
+      expect(canvas.getPercentOfHeight(75)).to.equal(150);
+      expect(canvas.getFractionOfHeight(0.25)).to.equal(50);
+    });
+
   });
 
 });
