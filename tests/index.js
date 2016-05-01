@@ -10,6 +10,15 @@ describe('sensible canvas', function () {
 
   var canvas, element;
 
+  var specialFontTypes = [
+    'caption',
+    'icon',
+    'menu',
+    'message-box',
+    'small-caption',
+    'status-bar'
+  ];
+
   var getters = {
     getOpacity: {value: 1, type: 'number'},
     getCompositeOperation: {value: 'source-over', type: 'string'},
@@ -210,7 +219,13 @@ describe('sensible canvas', function () {
 
       canvas.setFontFamily('times');
       expect(canvas.getFont()).to.equal('italic normal normal 15px times');
+    });
 
+    it('should allow setting special font types', function () {
+      for (var i = 0; i < specialFontTypes.length; i += 1) {
+        canvas.setFont(specialFontTypes[i]);
+        expect(canvas.getFont()).to.equal(specialFontTypes[i]);
+      }
     });
 
   });
