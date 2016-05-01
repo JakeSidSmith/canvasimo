@@ -10,11 +10,9 @@ describe('sensible canvas', function () {
   var canvas, element;
 
   function ImageData (x, y) {
-    return {
-      width: x,
-      height: y,
-      data: new Array(x * y * 4)
-    };
+    this.width = x;
+    this.height = y;
+    this.data = new Array(x * y * 4);
   }
 
   var getters = {
