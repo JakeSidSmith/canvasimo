@@ -194,4 +194,15 @@ describe('sensible canvas', function () {
 
   });
 
+  describe('helper methods', function () {
+
+    it('should create color values', function () {
+      expect(canvas.createHSL(123, 40, 50)).to.equal('hsl(123,40%,50%)');
+      expect(canvas.createHSLA(123, 40, 50, 0.5)).to.equal('hsla(123,40%,50%,0.5)');
+      expect(canvas.createRGB(111, 222, 333)).to.equal('rgb(111,222,333)');
+      expect(canvas.createRGBA(111, 222, 333, 0.5)).to.equal('rgba(111,222,333,0.5)');
+    });
+
+  });
+
 });
