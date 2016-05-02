@@ -63,6 +63,47 @@
     </script>
 
     <h3>
+      Point
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillPoint(50, 50, 'red');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .fillPoint(50, 50);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .plotPoint(50, 50)
+        .fill()
+        .stroke();
+    </script>
+
+    <h3>
       Rounded rectangle
     </h3>
 
