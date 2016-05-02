@@ -12,49 +12,6 @@
   <script do-not-document="true" type="text/javascript" src="demo-only-stuff/create-canvas.js"></script>
 
   <div id="container" class="container">
-    <h2>
-      Test that setters &amp; actions always return the canvas
-    </h2>
-
-    <script type="text/javascript">
-      var element = document.createElement('canvas');
-      var canvas = new Canvas(element);
-
-      var argumentMap = {
-        setWidth: [0],
-        setHeight: [0],
-        setSize: [0, 0],
-        scale: [1, 1],
-        rotate: [0],
-        translate: [0, 0],
-        setTransform: [1, 0, 0, 1, 0, 0],
-        transform: [1, 0, 0, 1, 0, 0],
-        drawFocusIfNeeded: [element],
-        clearRect: [0, 0, 0, 0],
-        moveTo: [0, 0],
-        lineTo: [0, 0],
-        quadraticCurveTo: [0, 0, 0, 0],
-        bezierCurveTo: [0, 0, 0, 0, 0, 0],
-        arcTo: [0, 0, 0, 0, 0],
-        fillText: ['', 0, 0],
-        strokeText: ['', 0, 0],
-        drawImage: [new Image(), 0, 0],
-        putImageData: [new ImageData(1, 1), 0, 0],
-        plotRect: [0, 0, 0, 0],
-        plotArc: [0, 0, 0, 0, 0],
-        plotEllipse: [0, 0, 0, 0, 0, 0, 0],
-        setStrokeDash: [[]],
-        isPointInPath: [0, 0]
-      };
-
-      var isGetter = /^(to|get|create|is)/i
-
-      for (var key in canvas) {
-        if (!isGetter.exec(key)) {
-          canvas = canvas[key].apply(null, argumentMap[key]);
-        }
-      }
-    </script>
 
     <h2>
       Rectangle methods
@@ -66,9 +23,12 @@
       var canvas = new Canvas(element);
 
       canvas
-        .setWidth(640)
-        .setHeight(320)
-        .fillRect(10, 10, 40, 40, 'cyan');
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('red')
+        .setStroke('black')
+        .fillRect(25, 25, 50, 50)
+        .strokeRect(25, 25, 50, 50);
     </script>
 
     <script type="text/javascript">
@@ -77,11 +37,76 @@
       var canvas = new Canvas(element);
 
       canvas
-        .setWidth(640)
-        .setHeight(320)
-        .setFill('red')
-        .fillRect(10, 10, 40, 40);
+        .setWidth(100)
+        .setHeight(100)
+        .fillRect(25, 25, 50, 50, 'cyan')
+        .strokeRect(25, 25, 50, 50, 'black');
     </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('red')
+        .fillRect(25, 25, 50, 50, 'blue');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .plotRect(25, 25, 50, 50)
+        .fill();
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillRoundedRect(25, 25, 50, 50, 10, 'cyan')
+        .strokeRoundedRect(25, 25, 50, 50, 10, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('red')
+        .fillRoundedRect(25, 25, 50, 50, 100);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .plotRoundedRect(25, 40, 50, 20, 100)
+        .fill()
+        .stroke();
+    </script>
+
   </div>
 
   <script do-not-document="true" type="text/javascript" src="demo-only-stuff/display-source.js"></script>
