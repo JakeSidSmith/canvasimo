@@ -168,8 +168,12 @@
       canvas
         .setWidth(100)
         .setHeight(100)
+        .beginPath()
         .fillArc(45, 45, 25, 0, Math.PI, false, 'red')
-        .strokeArc(55, 55, 25, 0, Math.PI, true, 'black');
+        .endPath()
+        .beginPath()
+        .strokeArc(55, 55, 25, 0, Math.PI, true, 'black')
+        .endPath();
     </script>
 
     <script type="text/javascript">
@@ -182,8 +186,12 @@
         .setHeight(100)
         .setFill('green')
         .setStroke('black')
+        .beginPath()
         .fillArc(45, 45, 25, 0, Math.PI, false)
-        .strokeArc(55, 55, 25, 0, Math.PI, true);
+        .endPath()
+        .beginPath()
+        .strokeArc(55, 55, 25, 0, Math.PI, true)
+        .endPath();
     </script>
 
     <script type="text/javascript">
@@ -196,7 +204,9 @@
         .setHeight(100)
         .setFill('blue')
         .setStroke('black')
+        .beginPath()
         .plotArc(50, 50, 25, 0, Math.PI)
+        .endPath()
         .fill()
         .stroke();
     </script>
@@ -213,8 +223,12 @@
       canvas
         .setWidth(100)
         .setHeight(100)
+        .beginPath()
         .fillEllipse(45, 45, 25, 25, 0, 0, Math.PI, false, 'red')
-        .strokeEllipse(55, 55, 25, 25, 0, 0, Math.PI, true, 'black');
+        .endPath()
+        .beginPath()
+        .strokeEllipse(55, 55, 25, 25, 0, 0, Math.PI, true, 'black')
+        .endPath();
     </script>
 
     <script type="text/javascript">
@@ -227,8 +241,12 @@
         .setHeight(100)
         .setFill('green')
         .setStroke('black')
+        .beginPath()
         .fillEllipse(45, 45, 25, 10, 0, 0, Math.PI, false)
-        .strokeEllipse(55, 55, 25, 10, 0, 0, Math.PI, true);
+        .endPath()
+        .beginPath()
+        .strokeEllipse(55, 55, 25, 10, 0, 0, Math.PI, true)
+        .endPath();
     </script>
 
     <script type="text/javascript">
@@ -241,7 +259,9 @@
         .setHeight(100)
         .setFill('blue')
         .setStroke('black')
+        .beginPath()
         .plotEllipse(50, 50, 10, 25, Math.PI / 4, 0, Math.PI)
+        .endPath()
         .fill()
         .stroke();
     </script>
@@ -258,7 +278,9 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .strokeLine(25, 25, 75, 75, 'red');
+        .beginPath()
+        .strokeLine(25, 25, 75, 75, 'red')
+        .endPath();
     </script>
 
     <script type="text/javascript">
@@ -270,7 +292,9 @@
         .setWidth(100)
         .setHeight(100)
         .setStroke('green')
-        .strokeLine(25, 25, 75, 75);
+        .beginPath()
+        .strokeLine(25, 25, 75, 75)
+        .endPath();
     </script>
 
     <script type="text/javascript">
@@ -282,7 +306,9 @@
         .setWidth(100)
         .setHeight(100)
         .setStroke('blue')
+        .beginPath()
         .plotLine(25, 40, 75, 60)
+        .endPath()
         .stroke();
     </script>
 
