@@ -194,6 +194,15 @@ describe('sensible canvas', function () {
     });
 
     it('should set the font', function () {
+      canvas.setFont('20.2px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20.2px times');
+
+      canvas.setFont('.2% arial');
+      expect(canvas.getFont()).to.equal('normal normal normal .2% arial');
+
+      canvas.setFont('300 italic normal 20px times');
+      expect(canvas.getFont()).to.equal('italic normal 300 20px times');
+
       canvas.setFont('small-caps normal bold 20px arial');
       expect(canvas.getFont()).to.equal('normal small-caps bold 20px arial');
     });
