@@ -17,6 +17,8 @@
     newCanvas.id = 'canvas';
 
     latestScript.parentNode.insertBefore(newCanvas, latestScript);
+
+    return new Canvas(newCanvas);
   }
 
   window.createCanvas = createCanvas;
