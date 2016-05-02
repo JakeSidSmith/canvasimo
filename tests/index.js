@@ -1,7 +1,9 @@
 'use strict';
 
 var expect = require('chai').expect;
-var stub = require('sinon').stub;
+var sinon = require('sinon');
+var spy = sinon.spy;
+var stub = sinon.stub;
 var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
 var ImageData = require('./helpers/image-data-stub');
@@ -295,6 +297,31 @@ describe('sensible canvas', function () {
 
       canvas.setFont('italic bold');
       expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+    });
+
+  });
+
+  describe('plot path', function () {
+
+    it('should accept and plot valid point arrays', function () {
+      var context = canvas.getContext();
+      var moveToSpy = spy(context, 'moveTo');
+      var lineToSpy = spy(context, 'lineTo');
+
+      canvas.plotPath([0, 1, 2, 3]);
+
+      expect(moveToSpy).to.have.been.calledWith(0, 1);
+      expect(lineToSpy).to.have.been.calledWith(2, 3);
+
+      canvas.plotPath([[4, 5], [6, 7]]);
+
+      expect(moveToSpy).to.have.been.calledWith(4, 5);
+      expect(lineToSpy).to.have.been.calledWith(6, 7);
+
+      canvas.plotPath([{x: 8, y: 9}, {x: 10, y: 11}]);
+
+      expect(moveToSpy).to.have.been.calledWith(8, 9);
+      expect(lineToSpy).to.have.been.calledWith(10, 11);
     });
 
   });
