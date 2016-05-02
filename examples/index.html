@@ -14,7 +14,7 @@
   <div id="container" class="container">
 
     <h2>
-      Rectangle methods
+      Solid shape methods
     </h2>
 
     <h3>
@@ -29,8 +29,8 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillRect(25, 25, 50, 50, 'red')
-        .strokeRect(25, 25, 50, 50, 'black');
+        .fillRect(20, 20, 50, 50, 'red')
+        .strokeRect(30, 30, 50, 50, 'black');
     </script>
 
     <script type="text/javascript">
@@ -43,8 +43,8 @@
         .setHeight(100)
         .setFill('green')
         .setStroke('black')
-        .fillRect(25, 25, 50, 50)
-        .strokeRect(25, 25, 50, 50);
+        .fillRect(20, 20, 50, 50)
+        .strokeRect(30, 30, 50, 50);
     </script>
 
     <script type="text/javascript">
@@ -74,8 +74,8 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillRoundedRect(25, 25, 50, 50, 10, 'red')
-        .strokeRoundedRect(25, 25, 50, 50, 10, 'black');
+        .fillRoundedRect(20, 20, 50, 50, 10, 'red')
+        .strokeRoundedRect(30, 30, 50, 50, 10, 'black');
     </script>
 
     <script type="text/javascript">
@@ -88,8 +88,8 @@
         .setHeight(100)
         .setFill('green')
         .setStroke('black')
-        .fillRoundedRect(25, 25, 50, 50, 100)
-        .strokeRoundedRect(25, 25, 50, 50, 100);
+        .fillRoundedRect(20, 20, 50, 50, 100)
+        .strokeRoundedRect(30, 30, 50, 50, 100);
     </script>
 
     <script type="text/javascript">
@@ -103,100 +103,6 @@
         .setFill('blue')
         .setStroke('black')
         .plotRoundedRect(25, 40, 50, 20, 100)
-        .fill()
-        .stroke();
-    </script>
-
-    <h2>
-      Rounded shape methods
-    </h2>
-
-    <h3>
-      Arc
-    </h3>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .fillArc(50, 50, 25, 0, Math.PI, false, 'red')
-        .strokeArc(50, 50, 25, 0, Math.PI, true, 'black');
-    </script>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
-        .fillArc(50, 50, 25, 0, Math.PI, false)
-        .strokeArc(50, 50, 25, 0, Math.PI, true);
-    </script>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
-        .plotArc(50, 50, 25, 0, Math.PI)
-        .fill()
-        .stroke();
-    </script>
-
-    <h3>
-      Ellipse
-    </h3>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .fillEllipse(50, 50, 25, 25, 0, 0, Math.PI, false, 'red')
-        .strokeEllipse(50, 50, 25, 25, 0, 0, Math.PI, true, 'black');
-    </script>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
-        .fillEllipse(50, 50, 25, 10, 0, 0, Math.PI, false)
-        .strokeEllipse(50, 50, 25, 10, 0, 0, Math.PI, true);
-    </script>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
-        .plotEllipse(50, 50, 10, 25, Math.PI / 4, 0, Math.PI)
         .fill()
         .stroke();
     </script>
@@ -247,8 +153,98 @@
     </script>
 
     <h2>
-      Line methods
+      Path plotting methods
     </h2>
+
+    <h3>
+      Arc
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillArc(45, 45, 25, 0, Math.PI, false, 'red')
+        .strokeArc(55, 55, 25, 0, Math.PI, true, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .setStroke('black')
+        .fillArc(45, 45, 25, 0, Math.PI, false)
+        .strokeArc(55, 55, 25, 0, Math.PI, true);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .plotArc(50, 50, 25, 0, Math.PI)
+        .fill()
+        .stroke();
+    </script>
+
+    <h3>
+      Ellipse
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillEllipse(45, 45, 25, 25, 0, 0, Math.PI, false, 'red')
+        .strokeEllipse(55, 55, 25, 25, 0, 0, Math.PI, true, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .setStroke('black')
+        .fillEllipse(45, 45, 25, 10, 0, 0, Math.PI, false)
+        .strokeEllipse(55, 55, 25, 10, 0, 0, Math.PI, true);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .plotEllipse(50, 50, 10, 25, Math.PI / 4, 0, Math.PI)
+        .fill()
+        .stroke();
+    </script>
 
     <h3>
       Line
