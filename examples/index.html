@@ -347,6 +347,67 @@
         .stroke();
     </script>
 
+    <h3>
+      Path
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .save()
+        .translate(-5, 0)
+        .beginPath()
+        .fillPath([25, 25, 75, 50, 25, 75], 'red')
+        .restore()
+        .translate(5, 0)
+        .beginPath()
+        .strokePath([25, 25, 75, 50, 25, 75], 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .setStroke('black')
+        .beginPath()
+        .save()
+        .translate(-5, 0)
+        .beginPath()
+        .fillPath([[25, 25], [75, 50], [25, 75]])
+        .restore()
+        .translate(5, 0)
+        .beginPath()
+        .strokePath([[25, 25], [75, 50], [25, 75]]);
+
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .beginPath()
+        .plotPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
+        .endPath()
+        .fill()
+        .stroke();
+    </script>
+
   </div>
 
   <script do-not-document="true" type="text/javascript" src="demo-only-stuff/display-source.js"></script>
