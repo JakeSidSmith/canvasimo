@@ -322,6 +322,18 @@ describe('sensible canvas', function () {
       lineToSpy.restore();
     });
 
+    it('should throw an error if provided incorrect points arrays', function () {
+      var anError = /must be an array of/;
+
+      expect(canvas.plotPath.bind(null, {})).to.throw(anError);
+      expect(canvas.plotPath.bind(null, [[0]])).to.throw(anError);
+      expect(canvas.plotPath.bind(null, [{x: 0}])).to.throw(anError);
+      expect(canvas.plotPath.bind(null, [{y: 0}])).to.throw(anError);
+      expect(canvas.plotPath.bind(null, [{}])).to.throw(anError);
+      expect(canvas.plotPath.bind(null, [[0, 1, 2]])).to.throw(anError);
+      expect(canvas.plotPath.bind(null, ['wat'])).to.throw(anError);
+    });
+
     it('should accept and plot valid point arrays', function () {
       var context = canvas.getContext();
       var moveToSpy = spy(context, 'moveTo');
