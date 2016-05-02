@@ -158,6 +158,51 @@
         .stroke();
     </script>
 
+    <h3>
+      Ellipse
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillEllipse(50, 50, 25, 25, 0, 0, Math.PI, false, 'red')
+        .strokeEllipse(50, 50, 25, 25, 0, 0, Math.PI, true, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .setStroke('black')
+        .fillEllipse(50, 50, 25, 10, 0, 0, Math.PI, false)
+        .strokeEllipse(50, 50, 25, 10, 0, 0, Math.PI, true);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .plotEllipse(50, 50, 25, 10, Math.PI / 4, 0, Math.PI)
+        .fill()
+        .stroke();
+    </script>
+
     <h2>
       Line methods
     </h2>
