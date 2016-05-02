@@ -29,7 +29,19 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('red')
+        .fillRect(25, 25, 50, 50, 'red')
+        .strokeRect(25, 25, 50, 50, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('cyan')
         .setStroke('black')
         .fillRect(25, 25, 50, 50)
         .strokeRect(25, 25, 50, 50);
@@ -43,33 +55,11 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillRect(25, 25, 50, 50, 'cyan')
-        .strokeRect(25, 25, 50, 50, 'black');
-    </script>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill('red')
-        .fillRect(25, 25, 50, 50, 'blue');
-    </script>
-
-    <script type="text/javascript">
-      createCanvas();
-      var element = document.getElementById('canvas');
-      var canvas = new Canvas(element);
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
         .setFill('green')
-        .plotRect(25, 25, 50, 50)
-        .fill();
+        .setStroke('black')
+        .plotRect(25, 40, 50, 20)
+        .fill()
+        .stroke();
     </script>
 
     <h3>
@@ -84,7 +74,7 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillRoundedRect(25, 25, 50, 50, 10, 'cyan')
+        .fillRoundedRect(25, 25, 50, 50, 10, 'red')
         .strokeRoundedRect(25, 25, 50, 50, 10, 'black');
     </script>
 
@@ -96,8 +86,10 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('red')
-        .fillRoundedRect(25, 25, 50, 50, 100);
+        .setFill('cyan')
+        .setStroke('black')
+        .fillRoundedRect(25, 25, 50, 50, 100)
+        .strokeRoundedRect(25, 25, 50, 50, 100);
     </script>
 
     <script type="text/javascript">
@@ -108,7 +100,7 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
+        .setFill('green')
         .setStroke('black')
         .plotRoundedRect(25, 40, 50, 20, 100)
         .fill()
