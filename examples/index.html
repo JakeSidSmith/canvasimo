@@ -108,6 +108,57 @@
     </script>
 
     <h2>
+      Rounded shape methods
+    </h2>
+
+    <h3>
+      Arc
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillArc(50, 50, 25, 0, Math.PI, false, 'red')
+        .strokeArc(50, 50, 25, 0, Math.PI, true, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .setStroke('black')
+        .fillArc(50, 50, 25, 0, Math.PI, false)
+        .strokeArc(50, 50, 25, 0, Math.PI, true);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .beginPath()
+        .plotArc(50, 50, 25, 0, Math.PI)
+        .endPath()
+        .fill()
+        .stroke();
+    </script>
+
+    <h2>
       Line methods
     </h2>
 
