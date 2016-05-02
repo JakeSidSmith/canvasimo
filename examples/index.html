@@ -203,6 +203,51 @@
         .stroke();
     </script>
 
+    <h3>
+      Circle
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillCircle(50, 50, 25, false, 'red')
+        .strokeCircle(50, 50, 25, false, 'black');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('green')
+        .setStroke('black')
+        .fillCircle(50, 50, 30, false)
+        .strokeCircle(50, 50, 30, true);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill('blue')
+        .setStroke('black')
+        .plotCircle(50, 50, 20)
+        .fill()
+        .stroke();
+    </script>
+
     <h2>
       Line methods
     </h2>
