@@ -303,6 +303,25 @@ describe('sensible canvas', function () {
 
   describe('plot path', function () {
 
+    it('should accept but do nothing with empty and near empty point arrays', function () {
+      var context = canvas.getContext();
+      var moveToSpy = spy(context, 'moveTo');
+      var lineToSpy = spy(context, 'lineTo');
+
+      canvas.plotPath(null);
+      canvas.plotPath(undefined);
+      canvas.plotPath([]);
+      canvas.plotPath([0]);
+      canvas.plotPath([[0, 1]]);
+      canvas.plotPath([{x: 0, y: 0}]);
+
+      expect(moveToSpy).not.to.have.been.called;
+      expect(lineToSpy).not.to.have.been.called;
+
+      moveToSpy.restore();
+      lineToSpy.restore();
+    });
+
     it('should accept and plot valid point arrays', function () {
       var context = canvas.getContext();
       var moveToSpy = spy(context, 'moveTo');
@@ -322,6 +341,9 @@ describe('sensible canvas', function () {
 
       expect(moveToSpy).to.have.been.calledWith(8, 9);
       expect(lineToSpy).to.have.been.calledWith(10, 11);
+
+      moveToSpy.restore();
+      lineToSpy.restore();
     });
 
   });
