@@ -107,6 +107,50 @@
         .stroke();
     </script>
 
+    <h2>
+      Lines
+    </h2>
+
+    <h3>
+      Line
+    </h3>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .strokeLine(25, 25, 75, 75, 'red');
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setStroke('green')
+        .strokeLine(25, 25, 75, 75);
+    </script>
+
+    <script type="text/javascript">
+      createCanvas();
+      var element = document.getElementById('canvas');
+      var canvas = new Canvas(element);
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setStroke('blue')
+        .plotLine(25, 40, 75, 60)
+        .stroke();
+    </script>
+
   </div>
 
   <script do-not-document="true" type="text/javascript" src="demo-only-stuff/display-source.js"></script>
