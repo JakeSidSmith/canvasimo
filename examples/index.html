@@ -359,12 +359,9 @@
       canvas
         .setWidth(100)
         .setHeight(100)
-        .save()
-        .translate(-5, 0)
         .beginPath()
         .fillPath([25, 25, 75, 50, 25, 75], 'red')
-        .restore()
-        .translate(5, 0)
+        .translate(10, 0)
         .beginPath()
         .strokePath([25, 25, 75, 50, 25, 75], 'black');
     </script>
@@ -380,12 +377,8 @@
         .setFill('green')
         .setStroke('black')
         .beginPath()
-        .save()
-        .translate(-5, 0)
-        .beginPath()
         .fillPath([[25, 25], [75, 50], [25, 75]])
-        .restore()
-        .translate(5, 0)
+        .translate(10, 0)
         .beginPath()
         .strokePath([[25, 25], [75, 50], [25, 75]]);
 
