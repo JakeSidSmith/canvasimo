@@ -10,6 +10,15 @@ describe('sensible canvas', function () {
 
   var canvas, element;
 
+  var specialFontTypes = [
+    'caption',
+    'icon',
+    'menu',
+    'message-box',
+    'small-caption',
+    'status-bar'
+  ];
+
   var getters = {
     getOpacity: {value: 1, type: 'number'},
     getCompositeOperation: {value: 'source-over', type: 'string'},
@@ -24,7 +33,6 @@ describe('sensible canvas', function () {
     getShadowBlur: {value: 0, type: 'number'},
     getShadowOffsetX: {value: 0, type: 'number'},
     getShadowOffsetY: {value: 0, type: 'number'},
-    getFont: {value: '10px sans-serif', type: 'string'},
     getTextAlign: {value: 'start', type: 'string'},
     getTextBaseline: {value: 'alphabetic', type: 'string'}
   };
@@ -173,6 +181,129 @@ describe('sensible canvas', function () {
       canvas.setImageSmoothing(true);
 
       expect(canvas.getImageSmoothing()).to.be.null;
+    });
+
+  });
+
+  describe('font methods', function () {
+
+    it('should return a formatted font value', function () {
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+    });
+
+    it('should set the font', function () {
+      canvas.setFont('20.2px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20.2px times');
+
+      canvas.setFont('.2% arial');
+      expect(canvas.getFont()).to.equal('normal normal normal .2% arial');
+
+      canvas.setFont('300 italic normal 20px times');
+      expect(canvas.getFont()).to.equal('italic normal 300 20px times');
+
+      canvas.setFont('small-caps normal bold 20px arial');
+      expect(canvas.getFont()).to.equal('normal small-caps bold 20px arial');
+    });
+
+    it('should return individual font properties', function () {
+      expect(canvas.getFontStyle()).to.equal('normal');
+      expect(canvas.getFontVariant()).to.equal('small-caps');
+      expect(canvas.getFontWeight()).to.equal('bold');
+      expect(canvas.getFontSize()).to.equal(20);
+      expect(canvas.getFontFamily()).to.equal('arial');
+    });
+
+    it('should set individual font properties', function () {
+      canvas.setFontStyle('italic');
+      expect(canvas.getFont()).to.equal('italic small-caps bold 20px arial');
+
+      canvas.setFontVariant('normal');
+      expect(canvas.getFont()).to.equal('italic normal bold 20px arial');
+
+      canvas.setFontWeight('normal');
+      expect(canvas.getFont()).to.equal('italic normal normal 20px arial');
+
+      canvas.setFontSize(15);
+      expect(canvas.getFont()).to.equal('italic normal normal 15px arial');
+
+      canvas.setFontFamily('times');
+      expect(canvas.getFont()).to.equal('italic normal normal 15px times');
+    });
+
+    it('should allow setting special font types', function () {
+      for (var i = 0; i < specialFontTypes.length; i += 1) {
+        canvas.setFont(specialFontTypes[i]);
+        expect(canvas.getFont()).to.equal(specialFontTypes[i]);
+      }
+    });
+
+    it('should return null for individual properties when a special font is set', function () {
+      expect(canvas.getFontStyle()).to.be.null;
+      expect(canvas.getFontVariant()).to.be.null;
+      expect(canvas.getFontWeight()).to.be.null;
+      expect(canvas.getFontSize()).to.be.null;
+      expect(canvas.getFontFamily()).to.be.null;
+    });
+
+    it('should set the default font if properties are set when a special font is set', function () {
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontStyle();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontVariant();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontWeight();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontSize();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to special font type
+      canvas.setFont(specialFontTypes[0]);
+      expect(canvas.getFont()).to.equal(specialFontTypes[0]);
+
+      canvas.setFontFamily();
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+    });
+
+    it('should set the default font if a font value is incorrect', function () {
+      // Set to something correct
+      canvas.setFont('20px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20px times');
+
+      canvas.setFont('oops');
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to something correct
+      canvas.setFont('20px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20px times');
+
+      canvas.setFont('not real values 15px arial');
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
+
+      // Set to something correct
+      canvas.setFont('20px times');
+      expect(canvas.getFont()).to.equal('normal normal normal 20px times');
+
+      canvas.setFont('italic bold');
+      expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
     });
 
   });
