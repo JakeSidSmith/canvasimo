@@ -231,7 +231,7 @@ var canvas = new Canvas(element);</pre>
         .setStroke('black')
         .beginPath()
         .plotArc(50, 50, 25, 0, Math.PI)
-        .endPath()
+        .closePath()
         .fill()
         .stroke();
     </script>
@@ -276,7 +276,7 @@ var canvas = new Canvas(element);</pre>
         .setStroke('black')
         .beginPath()
         .plotEllipse(50, 50, 10, 25, Math.PI / 4, 0, Math.PI)
-        .endPath()
+        .closePath()
         .fill()
         .stroke();
     </script>
@@ -362,7 +362,7 @@ var canvas = new Canvas(element);</pre>
         .setStroke('black')
         .beginPath()
         .plotPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
-        .endPath()
+        .closePath()
         .fill()
         .stroke();
     </script>
