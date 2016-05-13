@@ -234,6 +234,96 @@ var canvas = new Canvas(element);</pre>
     </script>
 
     <h2>
+      Open shape methods
+    </h2>
+
+    <h3>
+      Line
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .beginPath()
+        .strokeLine(25, 25, 75, 75, RED);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setStroke(GREEN)
+        .beginPath()
+        .strokeLine(25, 25, 75, 75);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setStroke(BLUE)
+        .beginPath()
+        .plotLine(25, 25, 75, 50)
+        .plotLine(75, 50, 25, 75)
+        .stroke();
+    </script>
+
+    <h3>
+      Path
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .beginPath()
+        .fillPath([25, 25, 75, 50, 25, 75], RED)
+        .translate(10, 0)
+        .beginPath()
+        .strokePath([25, 25, 75, 50, 25, 75], BLACK);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(GREEN)
+        .setStroke(BLACK)
+        .beginPath()
+        .fillPath([[25, 25], [75, 50], [25, 75]])
+        .translate(10, 0)
+        .beginPath()
+        .strokePath([[25, 25], [75, 50], [25, 75]]);
+
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(BLUE)
+        .setStroke(BLACK)
+        .beginPath()
+        .plotPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
+        .closePath()
+        .fill()
+        .stroke();
+    </script>
+
+    <h2>
       Path plotting methods
     </h2>
 
@@ -322,92 +412,6 @@ var canvas = new Canvas(element);</pre>
         .setStroke(BLACK)
         .beginPath()
         .plotEllipse(50, 50, 10, 25, Math.PI / 4, 0, Math.PI)
-        .closePath()
-        .fill()
-        .stroke();
-    </script>
-
-    <h3>
-      Line
-    </h3>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .beginPath()
-        .strokeLine(25, 25, 75, 75, RED);
-    </script>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setStroke(GREEN)
-        .beginPath()
-        .strokeLine(25, 25, 75, 75);
-    </script>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setStroke(BLUE)
-        .beginPath()
-        .plotLine(25, 25, 75, 50)
-        .plotLine(75, 50, 25, 75)
-        .stroke();
-    </script>
-
-    <h3>
-      Path
-    </h3>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .beginPath()
-        .fillPath([25, 25, 75, 50, 25, 75], RED)
-        .translate(10, 0)
-        .beginPath()
-        .strokePath([25, 25, 75, 50, 25, 75], BLACK);
-    </script>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill(GREEN)
-        .setStroke(BLACK)
-        .beginPath()
-        .fillPath([[25, 25], [75, 50], [25, 75]])
-        .translate(10, 0)
-        .beginPath()
-        .strokePath([[25, 25], [75, 50], [25, 75]]);
-
-    </script>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill(BLUE)
-        .setStroke(BLACK)
-        .beginPath()
-        .plotPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
         .closePath()
         .fill()
         .stroke();
