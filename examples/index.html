@@ -11,6 +11,13 @@
   <script do-not-document="true" type="text/javascript" src="../lib/index.js"></script>
   <script do-not-document="true" type="text/javascript" src="demo-only-stuff/create-canvas.js"></script>
 
+  <script do-not-document="true" type="text/javascript">
+    var BLACK = '#000';
+    var RED = '#f88';
+    var GREEN = '#7d7';
+    var BLUE = '#99f';
+  </script>
+
   <div id="container" class="container">
 
     <h2>
@@ -41,8 +48,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillRect(20, 20, 50, 50, 'red')
-        .strokeRect(30, 30, 50, 50, 'black');
+        .fillRect(20, 20, 50, 50, RED)
+        .strokeRect(30, 30, 50, 50, BLACK);
     </script>
 
     <script type="text/javascript">
@@ -51,8 +58,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(GREEN)
+        .setStroke(BLACK)
         .fillRect(20, 20, 50, 50)
         .strokeRect(30, 30, 50, 50);
     </script>
@@ -63,8 +70,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLUE)
+        .setStroke(BLACK)
         .plotRect(25, 40, 50, 20)
         .fill()
         .stroke();
@@ -80,8 +87,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillRoundedRect(20, 20, 50, 50, 10, 'red')
-        .strokeRoundedRect(30, 30, 50, 50, 10, 'black');
+        .fillRoundedRect(20, 20, 50, 50, 10, RED)
+        .strokeRoundedRect(30, 30, 50, 50, 10, BLACK);
     </script>
 
     <script type="text/javascript">
@@ -90,8 +97,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(GREEN)
+        .setStroke(BLACK)
         .fillRoundedRect(20, 20, 50, 50, 100)
         .strokeRoundedRect(30, 30, 50, 50, 100);
     </script>
@@ -102,8 +109,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLUE)
+        .setStroke(BLACK)
         .plotRoundedRect(25, 40, 50, 20, 100)
         .fill()
         .stroke();
@@ -119,8 +126,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillCircle(45, 45, 25, false, 'red')
-        .strokeCircle(55, 55, 25, false, 'black');
+        .fillCircle(45, 45, 25, false, RED)
+        .strokeCircle(55, 55, 25, false, BLACK);
     </script>
 
     <script type="text/javascript">
@@ -129,8 +136,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(GREEN)
+        .setStroke(BLACK)
         .fillCircle(45, 45, 30, false)
         .strokeCircle(55, 55, 30, true);
     </script>
@@ -141,8 +148,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLUE)
+        .setStroke(BLACK)
         .plotCircle(50, 50, 20)
         .fill()
         .stroke();
@@ -158,8 +165,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .fillPixel(45, 45, 'red')
-        .strokePixel(55, 55, 'black');
+        .fillPixel(45, 45, BLACK)
+        .strokePixel(55, 55, RED);
     </script>
 
     <script type="text/javascript">
@@ -168,8 +175,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(BLACK)
+        .setStroke(GREEN)
         .fillPixel(45, 45)
         .strokePixel(55, 55);
     </script>
@@ -180,8 +187,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLACK)
+        .setStroke(BLUE)
         .plotPixel(50, 50)
         .fill()
         .stroke();
@@ -202,9 +209,9 @@ var canvas = new Canvas(element);</pre>
         .setWidth(100)
         .setHeight(100)
         .beginPath()
-        .fillArc(45, 45, 25, 0, Math.PI, false, 'red')
+        .fillArc(45, 45, 25, 0, Math.PI, false, RED)
         .beginPath()
-        .strokeArc(55, 55, 25, 0, Math.PI, true, 'black');
+        .strokeArc(55, 55, 25, 0, Math.PI, true, BLACK);
     </script>
 
     <script type="text/javascript">
@@ -213,8 +220,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(GREEN)
+        .setStroke(BLACK)
         .beginPath()
         .fillArc(45, 45, 25, 0, Math.PI, false)
         .beginPath()
@@ -227,8 +234,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLUE)
+        .setStroke(BLACK)
         .beginPath()
         .plotArc(50, 50, 25, 0, Math.PI)
         .closePath()
@@ -247,9 +254,9 @@ var canvas = new Canvas(element);</pre>
         .setWidth(100)
         .setHeight(100)
         .beginPath()
-        .fillEllipse(45, 45, 25, 25, 0, 0, Math.PI, false, 'red')
+        .fillEllipse(45, 45, 25, 25, 0, 0, Math.PI, false, RED)
         .beginPath()
-        .strokeEllipse(55, 55, 25, 25, 0, 0, Math.PI, true, 'black');
+        .strokeEllipse(55, 55, 25, 25, 0, 0, Math.PI, true, BLACK);
     </script>
 
     <script type="text/javascript">
@@ -258,8 +265,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(GREEN)
+        .setStroke(BLACK)
         .beginPath()
         .fillEllipse(45, 45, 25, 10, 0, 0, Math.PI, false)
         .beginPath()
@@ -272,8 +279,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLUE)
+        .setStroke(BLACK)
         .beginPath()
         .plotEllipse(50, 50, 10, 25, Math.PI / 4, 0, Math.PI)
         .closePath()
@@ -292,7 +299,7 @@ var canvas = new Canvas(element);</pre>
         .setWidth(100)
         .setHeight(100)
         .beginPath()
-        .strokeLine(25, 25, 75, 75, 'red');
+        .strokeLine(25, 25, 75, 75, RED);
     </script>
 
     <script type="text/javascript">
@@ -301,7 +308,7 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setStroke('green')
+        .setStroke(GREEN)
         .beginPath()
         .strokeLine(25, 25, 75, 75);
     </script>
@@ -312,7 +319,7 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setStroke('blue')
+        .setStroke(BLUE)
         .beginPath()
         .plotLine(25, 25, 75, 50)
         .plotLine(75, 50, 25, 75)
@@ -330,10 +337,10 @@ var canvas = new Canvas(element);</pre>
         .setWidth(100)
         .setHeight(100)
         .beginPath()
-        .fillPath([25, 25, 75, 50, 25, 75], 'red')
+        .fillPath([25, 25, 75, 50, 25, 75], RED)
         .translate(10, 0)
         .beginPath()
-        .strokePath([25, 25, 75, 50, 25, 75], 'black');
+        .strokePath([25, 25, 75, 50, 25, 75], BLACK);
     </script>
 
     <script type="text/javascript">
@@ -342,8 +349,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('green')
-        .setStroke('black')
+        .setFill(GREEN)
+        .setStroke(BLACK)
         .beginPath()
         .fillPath([[25, 25], [75, 50], [25, 75]])
         .translate(10, 0)
@@ -358,8 +365,8 @@ var canvas = new Canvas(element);</pre>
       canvas
         .setWidth(100)
         .setHeight(100)
-        .setFill('blue')
-        .setStroke('black')
+        .setFill(BLUE)
+        .setStroke(BLACK)
         .beginPath()
         .plotPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
         .closePath()
