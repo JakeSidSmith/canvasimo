@@ -315,6 +315,44 @@ var canvas = new Canvas(element);</pre>
     </script>
 
     <h3>
+      Length
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .beginPath()
+        .strokeLength(50, 50, 25, canvas.getRadiansFromDegrees(0), RED);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setStroke(GREEN)
+        .beginPath()
+        .strokeLength(50, 50, 25, canvas.getRadiansFromDegrees(45));
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setStroke(BLUE)
+        .beginPath()
+        .plotLength(50, 50, 25, canvas.getRadiansFromDegrees(45))
+        .plotLength(50, 50, 25, canvas.getRadiansFromDegrees(90))
+        .stroke();
+    </script>
+
+    <h3>
       Path
     </h3>
 
