@@ -195,6 +195,45 @@ var canvas = new Canvas(element);</pre>
     </script>
 
     <h3>
+      Star
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillStar(45, 45, 25, 3, false, RED)
+        .strokeStar(55, 55, 25, 4, false, BLACK);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(GREEN)
+        .setStroke(BLACK)
+        .fillStar(45, 45, 30, 5, false)
+        .strokeStar(55, 55, 30, 6, true);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(BLUE)
+        .setStroke(BLACK)
+        .plotStar(50, 50, 20, 7)
+        .fill()
+        .stroke();
+    </script>
+
+    <h3>
       Burst
     </h3>
 
