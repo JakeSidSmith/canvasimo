@@ -311,6 +311,48 @@ var canvas = new Canvas(element);</pre>
         .stroke();
     </script>
 
+    <h3>
+      Closed Path
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillClosedPath([25, 25, 75, 50, 25, 75, 50, 50], RED)
+        .translate(10, 0)
+        .strokeClosedPath([25, 25, 75, 50, 25, 75, 50, 50], BLACK);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(GREEN)
+        .setStroke(BLACK)
+        .fillClosedPath([[25, 25], [75, 25], [25, 75], [75, 75]])
+        .translate(10, 0)
+        .strokeClosedPath([[25, 25], [75, 25], [25, 75], [75, 75]]);
+
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(BLUE)
+        .setStroke(BLACK)
+        .plotClosedPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
+        .fill()
+        .stroke();
+    </script>
+
     <h2>
       Open shape methods
     </h2>
