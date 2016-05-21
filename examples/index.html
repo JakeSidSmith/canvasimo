@@ -273,45 +273,6 @@ var canvas = new Canvas(element);</pre>
     </script>
 
     <h3>
-      Pixel
-    </h3>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .fillPixel(45, 45, BLACK)
-        .strokePixel(55, 55, RED);
-    </script>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill(BLACK)
-        .setStroke(GREEN)
-        .fillPixel(45, 45)
-        .strokePixel(55, 55);
-    </script>
-
-    <script type="text/javascript">
-      var canvas = createCanvas();
-
-      canvas
-        .setWidth(100)
-        .setHeight(100)
-        .setFill(BLACK)
-        .setStroke(BLUE)
-        .plotPixel(50, 50)
-        .fill()
-        .stroke();
-    </script>
-
-    <h3>
       Closed Path
     </h3>
 
@@ -349,6 +310,45 @@ var canvas = new Canvas(element);</pre>
         .setFill(BLUE)
         .setStroke(BLACK)
         .plotClosedPath([{x: 25, y: 25}, {x: 75, y: 50}, {x: 25, y: 75}])
+        .fill()
+        .stroke();
+    </script>
+
+    <h3>
+      Pixel
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillPixel(45, 45, BLACK)
+        .strokePixel(55, 55, RED);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(BLACK)
+        .setStroke(GREEN)
+        .fillPixel(45, 45)
+        .strokePixel(55, 55);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(BLACK)
+        .setStroke(BLUE)
+        .plotPixel(50, 50)
         .fill()
         .stroke();
     </script>
