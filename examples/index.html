@@ -195,6 +195,45 @@ var canvas = new Canvas(element);</pre>
     </script>
 
     <h3>
+      Rounded polygon
+    </h3>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .fillRoundedPoly(45, 45, 25, 3, 4, false, RED)
+        .strokeRoundedPoly(55, 55, 25, 4, 8, false, BLACK);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(GREEN)
+        .setStroke(BLACK)
+        .fillRoundedPoly(45, 45, 30, 5, 4, false)
+        .strokeRoundedPoly(55, 55, 30, 6, 10, true);
+    </script>
+
+    <script type="text/javascript">
+      var canvas = createCanvas();
+
+      canvas
+        .setWidth(100)
+        .setHeight(100)
+        .setFill(BLUE)
+        .setStroke(BLACK)
+        .plotRoundedPoly(50, 50, 20, 8, 2)
+        .fill()
+        .stroke();
+    </script>
+
+    <h3>
       Star
     </h3>
 
