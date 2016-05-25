@@ -1,5 +1,5 @@
 {
-  "name": "sensible-canvas-interface",
+  "name": "canvasimo",
   "version": "0.0.0",
   "description": "A simple, fluent interface that extends the HTML5 Canvas API",
   "main": "lib/index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jakesidsmith/sensible-canvas-interface.git"
+    "url": "git+https://github.com/jakesidsmith/canvasimo.git"
   },
   "keywords": [
     "sensible",
@@ -23,14 +23,15 @@
     "api",
     "interface",
     "html5",
-    "chain"
+    "chain",
+    "canvasimo"
   ],
   "author": "Jake 'Sid' Smith",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jakesidsmith/sensible-canvas-interface/issues"
+    "url": "https://github.com/jakesidsmith/canvasimo/issues"
   },
-  "homepage": "https://github.com/jakesidsmith/sensible-canvas-interface#readme",
+  "homepage": "https://github.com/jakesidsmith/canvasimo#readme",
   "devDependencies": {
     "chai": "=3.5.0",
     "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.1",
