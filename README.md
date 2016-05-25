@@ -1,3 +1,3 @@
-# Sensible Canvas Interface [![Build Status](https://travis-ci.org/JakeSidSmith/sensible-canvas-interface.svg?branch=master)](https://travis-ci.org/JakeSidSmith/sensible-canvas-interface)
+# Canvasimo [![Build Status](https://travis-ci.org/JakeSidSmith/canvasimo.svg?branch=master)](https://travis-ci.org/JakeSidSmith/canvasimo)
 
-A simple, fluent interface that extends the HTML5 Canvas API
+Canvasimo (canvas in my opinion) is a simple, fluent interface that extends, simplifies, and standardizes the HTML5 Canvas API
