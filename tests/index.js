@@ -6,7 +6,7 @@ var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
 var ImageData = require('./helpers/image-data-stub');
 
-describe('sensible canvas', function () {
+describe('canvasimo', function () {
 
   var canvas, element;
 
