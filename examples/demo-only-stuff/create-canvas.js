@@ -18,7 +18,7 @@
 
     latestScript.parentNode.insertBefore(newCanvas, latestScript);
 
-    return new Canvas(newCanvas);
+    return new Canvasimo(newCanvas);
   }
 
   window.createCanvas = createCanvas;
