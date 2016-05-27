@@ -427,6 +427,51 @@ describe('canvasimo', function () {
       expect(canvas.getPixelColor(2, 2)).to.equal('rgba(0,0,0,0)');
     });
 
+    it('should calculate the distance between 2 points', function () {
+      expect(canvas.getDistance()).to.be.NaN;
+      expect(canvas.getDistance(0, 0, 0, 10)).to.equal(10);
+      expect(canvas.getDistance(0, 0, 0, -10)).to.equal(10);
+      expect(canvas.getDistance(0, 0, 10, 0)).to.equal(10);
+      expect(canvas.getDistance(0, 3, 4, 0)).to.equal(5);
+      expect(canvas.getDistance(4, 0, 0, 3)).to.equal(5);
+      expect(canvas.getDistance(-4, 0, 0, -3)).to.equal(5);
+    });
+
+    it('should error when calculating angles with wrong arguments', function () {
+      var anError = /Incorrect number of arguments/;
+
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0)).not.to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0, 0)).not.to.throw(anError);
+
+      expect(canvas.getAngle.bind(null)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0, 0, 0, 0, 0)).to.throw(anError);
+    });
+
+    it('should calculate the angle between 2 points', function () {
+      expect(canvas.getAngle(0, 0, 10, 0)).to.equal(0);
+      expect(canvas.getAngle(0, 0, 0, 10)).to.equal(Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 0, -10)).to.equal(-Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 10, 10)).to.equal(Math.PI * 0.25);
+      expect(canvas.getAngle(0, 0, 10, -10)).to.equal(-Math.PI * 0.25);
+      expect(canvas.getAngle(0, 0, -10, 10)).to.equal(Math.PI * 0.75);
+      expect(canvas.getAngle(0, 0, -10, -10)).to.equal(-Math.PI * 0.75);
+    });
+
+    it('should calculate the angle between 3 points', function () {
+      expect(canvas.getAngle(0, 0, 10, 0, 20, 0)).to.equal(Math.PI);
+      expect(canvas.getAngle(20, 0, 10, 0, 0, 0)).to.equal(Math.PI);
+      expect(canvas.getAngle(0, 0, 10, 0, 10, 10)).to.equal(Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 10, 0, 10, -10)).to.equal(-Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 10, 0, 20, 10)).to.equal(Math.PI * 0.75);
+      expect(canvas.getAngle(0, 0, 10, 0, 20, -10)).to.equal(-Math.PI * 0.75);
+      expect(canvas.getAngle(0, 0, 10, 0, 0, 0)).to.equal(0);
+      expect(canvas.getAngle(0, 0, -10, 10, -10, 0)).to.equal(Math.PI * 0.25);
+      expect(canvas.getAngle(0, 0, -10, 10, 0, 10)).to.equal(-Math.PI * 0.25);
+    });
+
   });
 
 });
