@@ -427,13 +427,23 @@ describe('canvasimo', function () {
       expect(canvas.getPixelColor(2, 2)).to.equal('rgba(0,0,0,0)');
     });
 
-    it('should calculate distance between 2 points', function () {
+    it('should calculate the distance between 2 points', function () {
       expect(canvas.getDistance(0, 0, 0, 10)).to.equal(10);
       expect(canvas.getDistance(0, 0, 0, -10)).to.equal(10);
       expect(canvas.getDistance(0, 0, 10, 0)).to.equal(10);
       expect(canvas.getDistance(0, 3, 4, 0)).to.equal(5);
       expect(canvas.getDistance(4, 0, 0, 3)).to.equal(5);
       expect(canvas.getDistance(-4, 0, 0, -3)).to.equal(5);
+    });
+
+    it('should calculate the angle between 2 points', function () {
+      expect(canvas.getAngle(0, 0, 10, 0)).to.equal(0);
+      expect(canvas.getAngle(0, 0, 0, 10)).to.equal(Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 0, -10)).to.equal(-Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 10, 10)).to.equal(Math.PI * 0.25);
+      expect(canvas.getAngle(0, 0, 10, -10)).to.equal(-Math.PI * 0.25);
+      expect(canvas.getAngle(0, 0, -10, 10)).to.equal(Math.PI * 0.75);
+      expect(canvas.getAngle(0, 0, -10, -10)).to.equal(-Math.PI * 0.75);
     });
 
   });
