@@ -428,12 +428,26 @@ describe('canvasimo', function () {
     });
 
     it('should calculate the distance between 2 points', function () {
+      expect(canvas.getDistance()).to.be.NaN;
       expect(canvas.getDistance(0, 0, 0, 10)).to.equal(10);
       expect(canvas.getDistance(0, 0, 0, -10)).to.equal(10);
       expect(canvas.getDistance(0, 0, 10, 0)).to.equal(10);
       expect(canvas.getDistance(0, 3, 4, 0)).to.equal(5);
       expect(canvas.getDistance(4, 0, 0, 3)).to.equal(5);
       expect(canvas.getDistance(-4, 0, 0, -3)).to.equal(5);
+    });
+
+    it('should error when calculating angles with wrong arguments', function () {
+      var anError = /Incorrect number of arguments/;
+
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0)).not.to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0, 0)).not.to.throw(anError);
+
+      expect(canvas.getAngle.bind(null)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0)).to.throw(anError);
+      expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0, 0, 0, 0, 0)).to.throw(anError);
     });
 
     it('should calculate the angle between 2 points', function () {
