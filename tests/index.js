@@ -460,6 +460,16 @@ describe('canvasimo', function () {
       expect(canvas.getAngle(0, 0, -10, -10)).to.equal(-Math.PI * 0.75);
     });
 
+    it('should calculate the angle between 3 points', function () {
+      expect(canvas.getAngle(0, 0, 10, 0, 20, 0)).to.equal(Math.PI);
+      expect(canvas.getAngle(20, 0, 10, 0, 0, 0)).to.equal(Math.PI);
+      expect(canvas.getAngle(0, 0, 10, 0, 10, 10)).to.equal(Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 10, 0, 10, -10)).to.equal(-Math.PI * 0.5);
+      expect(canvas.getAngle(0, 0, 10, 0, 20, 10)).to.equal(Math.PI * 0.75);
+      expect(canvas.getAngle(0, 0, 10, 0, 20, -10)).to.equal(-Math.PI * 0.75);
+      expect(canvas.getAngle(0, 0, 10, 0, 0, 0)).to.equal(0);
+    });
+
   });
 
 });
