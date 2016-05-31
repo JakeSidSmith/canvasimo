@@ -1,6 +1,6 @@
 {
   "name": "canvasimo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple, fluent interface that extends, and standardizes the HTML5 Canvas API",
   "main": "lib/index.js",
   "directories": {
