@@ -1,3 +1,5 @@
+/* global Canvasimo */
+
 'use strict';
 
 (function () {
