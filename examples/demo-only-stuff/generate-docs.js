@@ -47,7 +47,7 @@
     }
 
     var comment = document.createElement('span');
-    comment.textContent = '\n// Returns ';
+    comment.textContent = '\nReturns ';
     snippet.appendChild(comment);
 
     var name = document.createElement('span');

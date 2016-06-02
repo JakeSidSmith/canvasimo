@@ -79,15 +79,38 @@
       methods: [
         {
           name: 'getContext',
-          description: ''
+          description: 'Get the standard canvas context (used for drawing)',
+          arguments: [
+            {
+              name: 'contextType',
+              type: types.string
+            },
+            {
+              name: 'contextAttributes',
+              type: types.object,
+              optional: true
+            }
+          ],
+          returns: {
+            name: 'context',
+            type: types.object
+          }
         },
         {
           name: 'getContextType',
-          description: ''
+          description: 'Get the context type used (2d, webgl, etc)',
+          returns: {
+            name: 'contextType',
+            type: types.string
+          }
         },
         {
           name: 'getContextAttributes',
-          description: ''
+          description: 'Get the context attributes used',
+          returns: {
+            name: 'contextAttributes',
+            type: types.object
+          }
         }
       ]
     },
