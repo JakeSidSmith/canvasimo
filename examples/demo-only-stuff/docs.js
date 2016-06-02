@@ -118,66 +118,6 @@
       name: 'Solid Shapes',
       methods: [
         {
-          name: 'plotBurst',
-          description: ''
-        },
-        {
-          name: 'strokeBurst',
-          description: ''
-        },
-        {
-          name: 'fillBurst',
-          description: ''
-        },
-        {
-          name: 'plotCircle',
-          description: ''
-        },
-        {
-          name: 'strokeCircle',
-          description: ''
-        },
-        {
-          name: 'fillCircle',
-          description: ''
-        },
-        {
-          name: 'plotClosedPath',
-          description: ''
-        },
-        {
-          name: 'strokeClosedPath',
-          description: ''
-        },
-        {
-          name: 'fillClosedPath',
-          description: ''
-        },
-        {
-          name: 'plotPixel',
-          description: ''
-        },
-        {
-          name: 'strokePixel',
-          description: ''
-        },
-        {
-          name: 'fillPixel',
-          description: ''
-        },
-        {
-          name: 'plotPoly',
-          description: ''
-        },
-        {
-          name: 'strokePoly',
-          description: ''
-        },
-        {
-          name: 'fillPoly',
-          description: ''
-        },
-        {
           name: 'plotRect',
           description: ''
         },
@@ -202,6 +142,30 @@
           description: ''
         },
         {
+          name: 'plotCircle',
+          description: ''
+        },
+        {
+          name: 'strokeCircle',
+          description: ''
+        },
+        {
+          name: 'fillCircle',
+          description: ''
+        },
+        {
+          name: 'plotPoly',
+          description: ''
+        },
+        {
+          name: 'strokePoly',
+          description: ''
+        },
+        {
+          name: 'fillPoly',
+          description: ''
+        },
+        {
           name: 'plotStar',
           description: ''
         },
@@ -211,6 +175,42 @@
         },
         {
           name: 'fillStar',
+          description: ''
+        },
+        {
+          name: 'plotBurst',
+          description: ''
+        },
+        {
+          name: 'strokeBurst',
+          description: ''
+        },
+        {
+          name: 'fillBurst',
+          description: ''
+        },
+        {
+          name: 'plotPixel',
+          description: ''
+        },
+        {
+          name: 'strokePixel',
+          description: ''
+        },
+        {
+          name: 'fillPixel',
+          description: ''
+        },
+        {
+          name: 'plotClosedPath',
+          description: ''
+        },
+        {
+          name: 'strokeClosedPath',
+          description: ''
+        },
+        {
+          name: 'fillClosedPath',
           description: ''
         }
       ]
