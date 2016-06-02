@@ -29,6 +29,34 @@ pre {
   border-radius: 2px;
   border: 1px solid #f0f0f0;
   overflow: auto;
+  color: #777;
+}
+
+.code-object,
+.code-argument {
+  color: #555;
+}
+
+.code-property {
+  color: #795da3;
+}
+
+.code-return {
+  color: #a71d5d;
+}
+
+.code-type,
+.code-optional {
+  color: #0086b3;
+}
+
+a {
+  color: #4078c0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 canvas {

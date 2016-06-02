@@ -35,17 +35,20 @@
       var arg = args[i];
 
       var name = document.createElement('span');
+      name.setAttribute('class', 'code-argument');
       name.textContent = arg.name;
       snippet.appendChild(name);
 
       if (arg.type) {
         var type = document.createElement('span');
+        type.setAttribute('class', 'code-type');
         type.textContent = ' <' + arg.type + '>';
         snippet.appendChild(type);
       }
 
       if (arg.optional) {
         var optional = document.createElement('span');
+        optional.setAttribute('class', 'code-optional');
         optional.textContent = ' (optional)';
         snippet.appendChild(optional);
       }
@@ -68,11 +71,13 @@
     snippet.appendChild(comment);
 
     var name = document.createElement('span');
+    name.setAttribute('class', 'code-return');
     name.textContent = returns.name;
     snippet.appendChild(name);
 
     if (returns.type) {
       var type = document.createElement('span');
+      type.setAttribute('class', 'code-type');
       type.textContent = ' <' + returns.type + '>';
       snippet.appendChild(type);
     }
@@ -82,6 +87,7 @@
     var snippet = document.createElement('span');
 
     var instance = document.createElement('span');
+    instance.setAttribute('class', 'code-object');
     instance.textContent = 'canvas';
     snippet.appendChild(instance);
 
@@ -90,6 +96,7 @@
     snippet.appendChild(dot);
 
     var call = document.createElement('span');
+    call.setAttribute('class', 'code-property');
     call.textContent = method.name;
     snippet.appendChild(call);
 
