@@ -148,7 +148,9 @@
     if (index === 0) {
       container.insertBefore(groupNode, container.childNodes[0]);
     } else {
-      insertAfter(groupNode, groupNodes[groupNodes.length - 1]);
+      var hr = document.createElement('hr');
+      insertAfter(hr, groupNodes[groupNodes.length - 1]);
+      insertAfter(groupNode, hr);
     }
 
     groupNodes.push(groupNode);

@@ -19,8 +19,15 @@ h4,
 h5,
 h6,
 p,
-pre {
+pre,
+hr {
   margin: 10px auto;
+}
+
+hr {
+  display: block;
+  height: 0;
+  border-top: 1px solid #ccc;
 }
 
 pre {
