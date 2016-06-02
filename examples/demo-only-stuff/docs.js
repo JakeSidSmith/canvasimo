@@ -16,6 +16,7 @@
       methods: [
         {
           name: 'setSize',
+          description: 'Set the canvas dimensions',
           arguments: [
             {
               name: 'width',
@@ -25,16 +26,19 @@
               name: 'height',
               type: types.number
             }
-          ],
-          description: ''
+          ]
         },
         {
           name: 'getSize',
-          description: ''
+          description: 'Get the canvas dimentions',
+          returns: {
+            name: '{width, height}',
+            type: types.object
+          }
         },
         {
           name: 'setWidth',
-          description: '',
+          description: 'Set the canvas width',
           arguments: [
             {
               name: 'width',
@@ -44,11 +48,15 @@
         },
         {
           name: 'getWidth',
-          description: ''
+          description: 'Get the canvas width',
+          returns: {
+            name: 'width',
+            type: types.number
+          }
         },
         {
           name: 'setHeight',
-          description: '',
+          description: 'Set the canvas height',
           arguments: [
             {
               name: 'height',
@@ -58,7 +66,11 @@
         },
         {
           name: 'getHeight',
-          description: ''
+          description: 'Get the canvas height',
+          returns: {
+            name: 'height',
+            type: types.number
+          }
         }
       ]
     },
