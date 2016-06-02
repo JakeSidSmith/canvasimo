@@ -9,6 +9,23 @@
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 
+  function createSlug (text) {
+    return (text || '').toLowerCase().replace(/^\s+/, '').replace(/\s+$/, '').replace(/[\s_]/gi, '-');
+  }
+
+  function createLinkedHeader (type, content) {
+    var slug = createSlug(content);
+    var header = document.createElement(type);
+    header.setAttribute('id', slug);
+
+    var link = document.createElement('a');
+    link.setAttribute('href', '#' + slug);
+    link.textContent = content;
+    header.appendChild(link);
+
+    return header;
+  }
+
   function createArguments (args, snippet) {
     if (!args || !args.length) {
       return;
@@ -94,8 +111,7 @@
   function documentMethod (method, index) {
     var methodNode = document.createElement('div');
 
-    var methodName = document.createElement('h3');
-    methodName.textContent = method.name;
+    var methodName = createLinkedHeader('h3', method.name);
     methodNode.appendChild(methodName);
 
     var methodDescription = document.createElement('p');
@@ -112,8 +128,7 @@
   function createDocumentation (group, index) {
     var groupNode = document.createElement('div');
 
-    var groupName = document.createElement('h2');
-    groupName.textContent = group.name;
+    var groupName = createLinkedHeader('h2', group.name);
     groupNode.appendChild(groupName);
 
     for (var i = 0; i < group.methods.length; i += 1) {
