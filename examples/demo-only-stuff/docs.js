@@ -4,7 +4,7 @@
 
   module.exports = [
     {
-      name: ' Canvas size',
+      name: 'Canvas size',
       methods: [
         {
           name: 'setSize',
@@ -33,7 +33,7 @@
       ]
     },
     {
-      name: ' Context',
+      name: 'Context',
       methods: [
         {
           name: 'getContext',
@@ -50,7 +50,7 @@
       ]
     },
     {
-      name: ' Solid Shapes',
+      name: 'Solid Shapes',
       methods: [
         {
           name: 'plotBurst',
@@ -151,7 +151,7 @@
       ]
     },
     {
-      name: ' Open Shapes',
+      name: 'Open Shapes',
       methods: [
         {
           name: 'plotLine',
@@ -184,7 +184,7 @@
       ]
     },
     {
-      name: ' Paths',
+      name: 'Paths',
       methods: [
         {
           name: 'plotArc',
@@ -213,7 +213,7 @@
       ]
     },
     {
-      name: ' Text',
+      name: 'Text',
       methods: [
         {
           name: 'strokeText',
@@ -226,7 +226,7 @@
       ]
     },
     {
-      name: ' Fonts',
+      name: 'Fonts',
       methods: [
         {
           name: 'setFont',
@@ -279,7 +279,7 @@
       ]
     },
     {
-      name: ' Text Alignment',
+      name: 'Text Alignment',
       methods: [
         {
           name: 'setTextAlign',
@@ -300,7 +300,7 @@
       ]
     },
     {
-      name: ' Measure Text',
+      name: 'Measure Text',
       methods: [
         {
           name: 'getTextSize',
@@ -309,7 +309,7 @@
       ]
     },
     {
-      name: ' Stroke Styles',
+      name: 'Stroke Styles',
       methods: [
         {
           name: 'stroke',
@@ -374,7 +374,7 @@
       ]
     },
     {
-      name: ' Fill styles',
+      name: 'Fill styles',
       methods: [
         {
           name: 'fill',
@@ -419,7 +419,7 @@
       ]
     },
     {
-      name: ' Image Data',
+      name: 'Image Data',
       methods: [
         {
           name: 'getDataURL',
@@ -448,7 +448,7 @@
       ]
     },
     {
-      name: ' Color Helpers',
+      name: 'Color Helpers',
       methods: [
         {
           name: 'createHSL',
@@ -477,7 +477,7 @@
       ]
     },
     {
-      name: ' Converting Sizes',
+      name: 'Converting Sizes',
       methods: [
         {
           name: 'getFractionFromPercent',
@@ -510,7 +510,7 @@
       ]
     },
     {
-      name: ' Converting Angles',
+      name: 'Converting Angles',
       methods: [
         {
           name: 'getRadiansFromDegrees',
@@ -527,7 +527,7 @@
       ]
     },
     {
-      name: ' Path Plotting',
+      name: 'Path Plotting',
       methods: [
         {
           name: 'beginPath',
@@ -560,7 +560,7 @@
       ]
     },
     {
-      name: ' Canvas State',
+      name: 'Canvas State',
       methods: [
         {
           name: 'save',
@@ -657,7 +657,7 @@
       ]
     },
     {
-      name: ' Misc',
+      name: 'Misc',
       methods: [
         {
           name: 'drawFocusIfNeeded',
