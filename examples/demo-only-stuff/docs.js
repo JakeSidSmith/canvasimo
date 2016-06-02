@@ -3,11 +3,12 @@
 (function () {
 
   var types = window.types = {
-    number: 'number',
-    boolean: 'boolean',
-    string: 'string',
-    object: 'object',
-    array: 'array'
+    number: 'Number',
+    boolean: 'Boolean',
+    string: 'String',
+    object: 'Object',
+    array: 'Array',
+    context: 'RenderingContext'
   };
 
   var docs = window.docs = [
@@ -93,7 +94,7 @@
           ],
           returns: {
             name: 'context',
-            type: types.object
+            type: types.context
           }
         },
         {

@@ -49,7 +49,7 @@
       if (arg.optional) {
         var optional = document.createElement('span');
         optional.setAttribute('class', 'code-optional');
-        optional.textContent = ' (optional)';
+        optional.textContent = ' (Optional)';
         snippet.appendChild(optional);
       }
 
