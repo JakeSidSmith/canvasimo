@@ -1,3 +1,5 @@
+/* global docs */
+
 'use strict';
 
 (function () {
@@ -115,7 +117,7 @@
     return snippet;
   }
 
-  function documentMethod (method, index) {
+  function documentMethod (method) {
     var methodNode = document.createElement('div');
     methodNode.setAttribute('class', 'method');
 

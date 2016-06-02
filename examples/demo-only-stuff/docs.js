@@ -11,7 +11,7 @@
     context: 'RenderingContext'
   };
 
-  var docs = window.docs = [
+  window.docs = [
     {
       name: 'Canvas size',
       methods: [
