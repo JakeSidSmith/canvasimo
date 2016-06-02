@@ -2,12 +2,30 @@
 
 (function () {
 
+  var types = {
+    number: 'number',
+    boolean: 'boolean',
+    string: 'string',
+    object: 'object',
+    array: 'array'
+  };
+
   module.exports = [
     {
       name: 'Canvas size',
       methods: [
         {
           name: 'setSize',
+          arguments: [
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            }
+          ],
           description: ''
         },
         {
@@ -16,7 +34,13 @@
         },
         {
           name: 'setWidth',
-          description: ''
+          description: '',
+          arguments: [
+            {
+              name: 'width',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getWidth',
@@ -24,7 +48,13 @@
         },
         {
           name: 'setHeight',
-          description: ''
+          description: '',
+          arguments: [
+            {
+              name: 'height',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getHeight',
