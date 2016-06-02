@@ -117,6 +117,7 @@
 
   function documentMethod (method, index) {
     var methodNode = document.createElement('div');
+    methodNode.setAttribute('class', 'method');
 
     var methodName = createLinkedHeader('h3', method.name);
     methodNode.appendChild(methodName);
@@ -134,8 +135,10 @@
 
   function createDocumentation (group, index) {
     var groupNode = document.createElement('div');
+    groupNode.setAttribute('class', 'group');
 
     var groupName = createLinkedHeader('h2', group.name);
+    groupName.setAttribute('class', 'group-header');
     groupNode.appendChild(groupName);
 
     for (var i = 0; i < group.methods.length; i += 1) {

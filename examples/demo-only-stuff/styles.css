@@ -32,6 +32,18 @@ pre {
   color: #777;
 }
 
+.group-header {
+  margin: 20px auto;
+}
+
+.group {
+  margin-bottom: 40px;
+}
+
+.method {
+  margin-bottom: 40px;
+}
+
 .code-object,
 .code-argument {
   color: #555;
