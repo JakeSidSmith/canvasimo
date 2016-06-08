@@ -95,10 +95,12 @@ describe('canvasimo', function () {
     it('should return the actual canvas context', function () {
       expect(canvas.getContext('2d')).to.equal(element.getContext('2d'));
       expect(canvas.getContext('someothercontext')).to.eql({});
+      expect(canvas.getContext(null)).to.eql({});
     });
 
-    it('should return the context type', function () {
-      expect(canvas.getContextType()).to.equal('2d');
+    it('should return the current context & context type', function () {
+      expect(canvas.getCurrentContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getCurrentContextType()).to.equal('2d');
     });
 
   });
