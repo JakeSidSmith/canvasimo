@@ -316,7 +316,7 @@ describe('canvasimo', function () {
   describe('plot path', function () {
 
     it('should accept but do nothing with empty and near empty point arrays', function () {
-      var context = canvas.getContext('2d');
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
@@ -347,7 +347,7 @@ describe('canvasimo', function () {
     });
 
     it('should accept and plot valid point arrays', function () {
-      var context = canvas.getContext('2d');
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
