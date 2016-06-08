@@ -71,7 +71,7 @@
     if (type === '2d') {
       return ctx;
     }
-    throw new Error('Context must be "2d"');
+    return {};
   };
 
 })();
