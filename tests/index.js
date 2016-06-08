@@ -93,11 +93,14 @@ describe('canvasimo', function () {
   describe('context getters', function () {
 
     it('should return the actual canvas context', function () {
-      expect(canvas.getContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getContext('2d')).to.equal(element.getContext('2d'));
+      expect(canvas.getContext('someothercontext')).to.eql({});
+      expect(canvas.getContext(null)).to.eql({});
     });
 
-    it('should return the context type', function () {
-      expect(canvas.getContextType()).to.equal('2d');
+    it('should return the current context & context type', function () {
+      expect(canvas.getCurrentContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getCurrentContextType()).to.equal('2d');
     });
 
   });
@@ -313,7 +316,7 @@ describe('canvasimo', function () {
   describe('plot path', function () {
 
     it('should accept but do nothing with empty and near empty point arrays', function () {
-      var context = canvas.getContext();
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
@@ -344,7 +347,7 @@ describe('canvasimo', function () {
     });
 
     it('should accept and plot valid point arrays', function () {
-      var context = canvas.getContext();
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
