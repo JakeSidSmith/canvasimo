@@ -66,7 +66,7 @@ describe('canvasimo', function () {
     isPointInPath: [0, 0]
   };
 
-  var isGetter = /^(get|create|is)/i;
+  var isGetter = /^(get|create|is|measure)/i;
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
@@ -165,13 +165,13 @@ describe('canvasimo', function () {
   describe('image smoothing', function () {
 
     it('should return the first image smoothing value', function () {
-      expect(canvas.getImageSmoothing()).to.be.true;
+      expect(canvas.getImageSmoothingEnabled()).to.be.true;
     });
 
     it('should set the first image smoothing value', function () {
-      canvas.setImageSmoothing(false);
+      canvas.setImageSmoothingEnabled(false);
 
-      expect(canvas.getImageSmoothing()).to.be.false;
+      expect(canvas.getImageSmoothingEnabled()).to.be.false;
     });
 
     it('should return null if no image smoothing keys present', function () {
@@ -179,13 +179,13 @@ describe('canvasimo', function () {
       delete context.imageSmoothingEnabled;
       delete context.webkitImageSmoothingEnabled;
 
-      expect(canvas.getImageSmoothing()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
     it('should not set a value if no image smoothing keys present', function () {
-      canvas.setImageSmoothing(true);
+      canvas.setImageSmoothingEnabled(true);
 
-      expect(canvas.getImageSmoothing()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
   });
