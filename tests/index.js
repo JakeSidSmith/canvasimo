@@ -4,6 +4,8 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var spy = sinon.spy;
 var stub = sinon.stub;
+var utils = require('./helpers/utils');
+var each = utils.each;
 var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
 var ImageData = require('./helpers/image-data-stub');
@@ -81,11 +83,11 @@ describe('canvasimo', function () {
   describe('property getters', function () {
 
     it('should return the correct property values from the context', function () {
-      for (var key in getters) {
+      each(getters, function (expected, key) {
         var result = canvas[key]();
-        expect(result).to.equal(getters[key].value);
-        expect(typeof result).to.equal(getters[key].type);
-      }
+        expect(result).to.equal(expected.value);
+        expect(typeof result).to.equal(expected.type);
+      });
     });
 
   });
@@ -236,10 +238,10 @@ describe('canvasimo', function () {
     });
 
     it('should allow setting special font types', function () {
-      for (var i = 0; i < specialFontTypes.length; i += 1) {
-        canvas.setFont(specialFontTypes[i]);
-        expect(canvas.getFont()).to.equal(specialFontTypes[i]);
-      }
+      each(specialFontTypes, function (specialFontType) {
+        canvas.setFont(specialFontType);
+        expect(canvas.getFont()).to.equal(specialFontType);
+      });
     });
 
     it('should return null for individual properties when a special font is set', function () {
@@ -375,11 +377,11 @@ describe('canvasimo', function () {
   describe('actions and setters', function () {
 
     it('should return the canvas', function () {
-      for (var key in canvas) {
+      each(canvas, function (method, key) {
         if (!isGetter.exec(key)) {
-          expect(canvas[key].apply(null, argumentMap[key])).to.equal(canvas);
+          expect(method.apply(null, argumentMap[key])).to.equal(canvas);
         }
-      }
+      });
     });
 
   });
