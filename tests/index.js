@@ -66,7 +66,7 @@ describe('canvasimo', function () {
     isPointInPath: [0, 0]
   };
 
-  var isGetter = /^(get|create|is)/i;
+  var isGetter = /^(get|create|is|measure)/i;
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
@@ -93,11 +93,14 @@ describe('canvasimo', function () {
   describe('context getters', function () {
 
     it('should return the actual canvas context', function () {
-      expect(canvas.getContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getContext('2d')).to.equal(element.getContext('2d'));
+      expect(canvas.getContext('someothercontext')).to.eql({});
+      expect(canvas.getContext(null)).to.eql({});
     });
 
-    it('should return the context type', function () {
-      expect(canvas.getContextType()).to.equal('2d');
+    it('should return the current context & context type', function () {
+      expect(canvas.getCurrentContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getCurrentContextType()).to.equal('2d');
     });
 
   });
@@ -162,13 +165,13 @@ describe('canvasimo', function () {
   describe('image smoothing', function () {
 
     it('should return the first image smoothing value', function () {
-      expect(canvas.getImageSmoothing()).to.be.true;
+      expect(canvas.getImageSmoothingEnabled()).to.be.true;
     });
 
     it('should set the first image smoothing value', function () {
-      canvas.setImageSmoothing(false);
+      canvas.setImageSmoothingEnabled(false);
 
-      expect(canvas.getImageSmoothing()).to.be.false;
+      expect(canvas.getImageSmoothingEnabled()).to.be.false;
     });
 
     it('should return null if no image smoothing keys present', function () {
@@ -176,13 +179,13 @@ describe('canvasimo', function () {
       delete context.imageSmoothingEnabled;
       delete context.webkitImageSmoothingEnabled;
 
-      expect(canvas.getImageSmoothing()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
     it('should not set a value if no image smoothing keys present', function () {
-      canvas.setImageSmoothing(true);
+      canvas.setImageSmoothingEnabled(true);
 
-      expect(canvas.getImageSmoothing()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
   });
@@ -313,7 +316,7 @@ describe('canvasimo', function () {
   describe('plot path', function () {
 
     it('should accept but do nothing with empty and near empty point arrays', function () {
-      var context = canvas.getContext();
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
@@ -344,7 +347,7 @@ describe('canvasimo', function () {
     });
 
     it('should accept and plot valid point arrays', function () {
-      var context = canvas.getContext();
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
