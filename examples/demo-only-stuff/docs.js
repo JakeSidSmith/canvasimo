@@ -8,13 +8,23 @@
     string: 'String',
     object: 'Object',
     array: 'Array',
-    context: 'RenderingContext'
+    context: 'RenderingContext',
+    htmlElement: 'HTMLElement'
   };
 
   window.docs = [
     {
-      name: 'Canvas size',
+      name: 'Canvas element',
       methods: [
+        {
+          name: 'getCanvas',
+          alias: 'getElement',
+          description: 'Returns the canvas element',
+          returns: {
+            name: 'element',
+            type: types.htmlElement
+          }
+        },
         {
           name: 'setSize',
           description: 'Set the canvas dimensions',
@@ -98,8 +108,16 @@
           }
         },
         {
-          name: 'getContextType',
-          description: 'Get the context type used (2d, webgl, etc)',
+          name: 'getCurrentContext',
+          description: 'Get canvas context used by Canvasimo (2d)',
+          returns: {
+            name: 'context',
+            type: types.context
+          }
+        },
+        {
+          name: 'getCurrentContextType',
+          description: 'Get the context type used by Canvasimo (2d, webgl, etc)',
           returns: {
             name: 'contextType',
             type: types.string
@@ -120,6 +138,7 @@
       methods: [
         {
           name: 'plotRect',
+          alias: 'rect',
           description: ''
         },
         {
@@ -254,6 +273,7 @@
       methods: [
         {
           name: 'plotArc',
+          alias: 'arc',
           description: ''
         },
         {
@@ -266,6 +286,7 @@
         },
         {
           name: 'plotEllipse',
+          alias: 'ellipse',
           description: ''
         },
         {
@@ -370,6 +391,7 @@
       methods: [
         {
           name: 'getTextSize',
+          alias: 'measureText',
           description: ''
         }
       ]
@@ -383,50 +405,62 @@
         },
         {
           name: 'setStroke',
+          alias: 'setStrokeStyle',
           description: ''
         },
         {
           name: 'getStroke',
+          alias: 'getStrokeStyle',
           description: ''
         },
         {
           name: 'setStrokeCap',
+          alias: 'setLineCap',
           description: ''
         },
         {
           name: 'getStrokeCap',
+          alias: 'getLineCap',
           description: ''
         },
         {
           name: 'setStrokeDash',
+          alias: 'setLineDash',
           description: ''
         },
         {
           name: 'getStrokeDash',
+          alias: 'getLineDash',
           description: ''
         },
         {
           name: 'setStrokeDashOffset',
+          alias: 'setLineDashOffset',
           description: ''
         },
         {
           name: 'getStrokeDashOffset',
+          alias: 'getLineDashOffset',
           description: ''
         },
         {
           name: 'setStrokeJoin',
+          alias: 'setLineJoin',
           description: ''
         },
         {
           name: 'getStrokeJoin',
+          alias: 'getLineJoin',
           description: ''
         },
         {
           name: 'setStrokeWidth',
+          alias: 'setLineWidth',
           description: ''
         },
         {
           name: 'getStrokeWidth',
+          alias: 'getLineWidth',
           description: ''
         },
         {
@@ -460,10 +494,12 @@
         },
         {
           name: 'setFill',
+          alias: 'setFillStyle',
           description: ''
         },
         {
           name: 'getFill',
+          alias: 'getFillStyle',
           description: ''
         },
         {
@@ -666,26 +702,30 @@
         },
         {
           name: 'setOpacity',
+          alias: 'setGlobalAlpha',
           description: ''
         },
         {
           name: 'getOpacity',
+          alias: 'getGlobalAlpha',
           description: ''
         },
         {
           name: 'setCompositeOperation',
+          alias: 'setGlobalCompositeOperation',
           description: ''
         },
         {
           name: 'getCompositeOperation',
+          alias: 'getGlobalCompositeOperation',
           description: ''
         },
         {
-          name: 'setImageSmoothing',
+          name: 'setImageSmoothingEnabled',
           description: ''
         },
         {
-          name: 'getImageSmoothing',
+          name: 'getImageSmoothingEnabled',
           description: ''
         },
         {
