@@ -52,6 +52,25 @@ pre {
   margin-bottom: 40px;
 }
 
+.alias {
+  font-size: 14px;
+  font-style: italic;
+  display: inline;
+  margin-left: 10px;
+  color: #888;
+}
+
+.alias-word {
+  font-weight: normal;
+}
+
+@media all and (max-width: 480px) {
+  .alias {
+    display: block;
+    margin-left: 0;
+  }
+}
+
 .code-object,
 .code-argument {
   color: #555;

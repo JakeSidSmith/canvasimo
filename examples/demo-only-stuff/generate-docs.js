@@ -124,6 +124,23 @@
     var methodName = createLinkedHeader('h3', method.name);
     methodNode.appendChild(methodName);
 
+    if (method.alias) {
+      var aliasNode = document.createElement('p');
+      aliasNode.setAttribute('class', 'alias');
+
+      var aliasWord = document.createElement('span');
+      aliasWord.setAttribute('class', 'alias-word');
+      aliasWord.textContent = 'Alias: ';
+      aliasNode.appendChild(aliasWord);
+
+      var aliasMethod = document.createElement('strong');
+      aliasMethod.setAttribute('class', 'alias-method');
+      aliasMethod.textContent = method.alias;
+      aliasNode.appendChild(aliasMethod);
+
+      methodName.appendChild(aliasNode);
+    }
+
     var methodDescription = document.createElement('p');
     methodDescription.textContent = method.description;
     methodNode.appendChild(methodDescription);
