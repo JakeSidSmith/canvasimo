@@ -39,4 +39,15 @@ describe('docs', function () {
     });
   });
 
+  it('should have names and descriptions for all methods', function () {
+    each(docs, function (group) {
+      each(group.methods, function (method) {
+        expect(method.name).to.exist;
+        expect(method.description).to.exist;
+        expect(method.name.length).to.be.above(5);
+        expect(method.description.length).to.be.above(5);
+      });
+    });
+  });
+
 });
