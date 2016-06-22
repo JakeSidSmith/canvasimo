@@ -19,7 +19,7 @@
         {
           name: 'getCanvas',
           alias: 'getElement',
-          description: 'Returns the canvas element',
+          description: 'Get the canvas element',
           returns: {
             name: 'element',
             type: types.htmlElement
