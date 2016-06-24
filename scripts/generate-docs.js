@@ -176,7 +176,7 @@
     return methodNode;
   }
 
-  function createDocumentation (group, index) {
+  function createGroup (group, index) {
     var groupNode = document.createElement('div');
     groupNode.setAttribute('class', 'group');
 
@@ -199,9 +199,13 @@
     groupNodes.push(groupNode);
   }
 
-  for (var i = 0; i < docs.length; i += 1) {
-    createDocumentation(docs[i], i);
+  function createDocumentation () {
+    for (var i = 0; i < docs.length; i += 1) {
+      createGroup(docs[i], i);
+    }
   }
+
+  createDocumentation();
 
   fs.writeFile('index.html', '<!DOCTYPE html>' + document.documentElement.outerHTML);
 
