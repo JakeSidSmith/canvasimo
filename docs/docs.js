@@ -2,7 +2,7 @@
 
 (function () {
 
-  var types = window.types = {
+  var types = {
     number: 'Number',
     boolean: 'Boolean',
     string: 'String',
@@ -12,7 +12,7 @@
     htmlElement: 'HTMLElement'
   };
 
-  window.docs = [
+  module.exports = [
     {
       name: 'Canvas element',
       methods: [

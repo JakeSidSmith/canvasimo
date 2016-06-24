@@ -4,8 +4,32 @@
 
 (function () {
 
+  var fs = require('fs');
+  var jsdom = require('jsdom');
+  var docs = require('../docs/docs');
+
+  // Jsdom document
+  var document = jsdom.jsdom(
+    '<!DOCTYPE html>' +
+    '<html>' +
+      '<head>' +
+      '<meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' +
+      '<title>Canvasimo</title>' +
+      '<link rel="stylesheet" href="docs/styles.css" media="screen" title="no title" charset="utf-8">' +
+      '</head>' +
+      '<body>' +
+        '<div id="container" class="container">' +
+          '<div id="doc-container"></div>' +
+        '</div>' +
+      '</body>' +
+    '</html>'
+  );
+
+  var window = document.defaultView;
+
   var groupNodes = [];
-  var container = document.getElementById('container');
+  var container = document.getElementById('doc-container');
 
   function insertAfter (newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -178,5 +202,9 @@
   for (var i = 0; i < docs.length; i += 1) {
     createDocumentation(docs[i], i);
   }
+
+  fs.writeFile('index.html', '<!DOCTYPE html>' + document.documentElement.outerHTML);
+
+  console.log('Docs generated!');
 
 })();

@@ -1,6 +1,6 @@
 'use strict';
 
-require('../examples/demo-only-stuff/docs');
+var docs = require('../docs/docs');
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var stub = sinon.stub;
@@ -15,8 +15,6 @@ describe('docs', function () {
   var element = document.createElement('canvas');
   stub(element, 'getContext', getContextStub);
   var canvas = new Canvas(element);
-
-  var docs = window.docs;
 
   it('is a list of groups', function () {
     expect(docs.length).to.be.above(1);
