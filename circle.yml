@@ -8,8 +8,10 @@ general:
       - gh-pages
 
 dependencies:
-  override:
-    - npm install --dev
+  pre:
+    - nvm use
+    - npm install
+    - npm run build
   cache_directories:
     - node_modules
 
