@@ -7,4 +7,4 @@ install:
 - npm install
 
 script:
-- npm run test-no-coverage
+- npm test
