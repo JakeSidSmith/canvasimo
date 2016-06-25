@@ -7,8 +7,8 @@
     "example": "examples"
   },
   "scripts": {
-    "build": "node scripts/generate-docs",
-    "start": "http-server . -c-0 -o",
+    "start": "http-server docs -c-0 -o",
+    "build": "scripts/generate-docs.js",
     "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
     "mocha-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
     "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5 lib/index.js docs/ tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
