@@ -16,7 +16,7 @@
       '<meta charset="utf-8">' +
       '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' +
       '<title>Canvasimo</title>' +
-      '<link rel="stylesheet" href="docs/styles.css" media="screen" title="no title" charset="utf-8">' +
+      '<link rel="stylesheet" href="styles.css" media="screen" title="no title" charset="utf-8">' +
       '</head>' +
       '<body>' +
         '<div id="container" class="container">' +
@@ -203,12 +203,20 @@
     for (var i = 0; i < docs.length; i += 1) {
       createGroup(docs[i], i);
     }
+
+    fs.writeFile(
+      'docs/index.html',
+      '<!DOCTYPE html>' + document.documentElement.outerHTML,
+      function (error) {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log('Docs generated!');
+        }
+      }
+    );
   }
 
   createDocumentation();
-
-  fs.writeFile('index.html', '<!DOCTYPE html>' + document.documentElement.outerHTML);
-
-  console.log('Docs generated!');
 
 })();
