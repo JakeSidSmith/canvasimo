@@ -11,7 +11,6 @@ dependencies:
   pre:
     - nvm use
     - npm install
-    - npm run build
   cache_directories:
     - node_modules
 
@@ -23,4 +22,5 @@ deployment:
   master:
     branch: master
     commands:
+      - npm run build
       - ./scripts/deploy.sh
