@@ -40,7 +40,7 @@
     "chai": "=3.5.0",
     "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.1",
     "http-server": "=0.9.0",
-    "istanbul": "=1.0.0-alpha.2",
+    "istanbul": "=1.1.0-alpha.1",
     "jsdom": "=8.4.1",
     "mocha": "=2.4.5",
     "sinon": "=1.17.3",
