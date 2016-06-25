@@ -9,7 +9,6 @@ general:
 
 dependencies:
   pre:
-    - nvm use
     - npm install
   cache_directories:
     - node_modules
