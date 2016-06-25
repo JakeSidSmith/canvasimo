@@ -1,0 +1,25 @@
+machine:
+  node:
+    version: 6.2.2
+
+general:
+  branches:
+    ignore:
+      - gh-pages
+
+dependencies:
+  pre:
+    - npm install
+    - npm run build
+  cache_directories:
+    - node_modules
+
+test:
+  override:
+    - npm test
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - ./scripts/deploy.sh
