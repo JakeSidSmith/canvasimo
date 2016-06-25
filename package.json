@@ -7,8 +7,12 @@
     "example": "examples"
   },
   "scripts": {
+    "build": "node scripts/generate-docs",
+    "start": "http-server . -c-0 -o",
     "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
-    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5 lib/index.js tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
+    "mocha-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
+    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5 lib/index.js docs/ tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
+    "test-no-coverage": "npm run eslint && npm run mocha-no-coverage",
     "test": "npm run eslint && npm run mocha"
   },
   "repository": {
@@ -35,10 +39,14 @@
   "devDependencies": {
     "chai": "=3.5.0",
     "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.1",
-    "istanbul": "=1.0.0-alpha.2",
+    "http-server": "=0.9.0",
+    "istanbul": "=1.1.0-alpha.1",
     "jsdom": "=8.4.1",
     "mocha": "=2.4.5",
     "sinon": "=1.17.3",
     "sinon-chai": "=2.8.0"
+  },
+  "engines": {
+    "node": "6.2.2"
   }
 }
