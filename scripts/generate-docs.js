@@ -1,4 +1,4 @@
-/* global docs */
+#!/usr/bin/env node
 
 'use strict';
 
