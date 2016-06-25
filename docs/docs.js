@@ -41,7 +41,7 @@
         },
         {
           name: 'getSize',
-          description: 'Get the canvas dimentions',
+          description: 'Get the canvas dimensions',
           returns: {
             name: '{width, height}',
             type: types.object
