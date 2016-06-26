@@ -109,3 +109,9 @@ canvas {
     margin-left: 10px;
   }
 }
+
+@media all and (min-width: 1025px) {
+  .container {
+    padding-left: 200px;
+  }
+}
