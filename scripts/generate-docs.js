@@ -20,10 +20,11 @@
       '</head>' +
       '<body>' +
         '<div class="container">' +
-          '<div class="sidebar">' +
-            '<a class="toggle">' +
+          '<div class="sidebar" tabindex="1">' +
+            '<div class="toggle">' +
               '<div class="toggle-inner"></div>' +
-            '</a>' +
+              '<div class="toggle-close" tabindex="2"></div>' +
+            '</div>' +
           '</div>' +
           '<div id="doc-container" class="main"></div>' +
         '</div>' +
