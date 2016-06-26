@@ -216,14 +216,14 @@ canvas {
   top: 23px;
 }
 
-@media all and (min-width: 481px) {
+@media all and (min-width: 480px) {
   .alias {
     display: inline;
     margin-left: 10px;
   }
 }
 
-@media all and (min-width: 1025px) {
+@media all and (min-width: 768px) {
   .sidebar {
     left: 0;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
