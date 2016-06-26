@@ -25,6 +25,7 @@
               '<div class="toggle-inner"></div>' +
               '<div class="toggle-close" tabindex="2"></div>' +
             '</div>' +
+            '<div id="list-container"></div>' +
           '</div>' +
           '<div id="doc-container" class="main"></div>' +
         '</div>' +
@@ -36,6 +37,7 @@
 
   var groupNodes = [];
   var container = document.getElementById('doc-container');
+  var sidebar = document.getElementById('list-container');
 
   function insertAfter (newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -205,9 +207,38 @@
     groupNodes.push(groupNode);
   }
 
+  function listMethods (list, group) {
+    for (var i = 0; i < group.methods.length; i += 1) {
+      var methodNode = document.createElement('li');
+      methodNode.textContent = group.methods[i].name;
+      list.appendChild(methodNode);
+    }
+  }
+
+  function createListGroup (list, group) {
+    var groupNode = document.createElement('li');
+    var innerList = document.createElement('ul');
+    groupNode.appendChild(innerList);
+
+    var groupTitleItem = document.createElement('li');
+    var groupTitle = document.createElement('strong');
+    groupTitle.textContent = group.name;
+    groupTitleItem.appendChild(groupTitle);
+
+    innerList.appendChild(groupTitleItem);
+
+    listMethods(innerList, group);
+
+    list.appendChild(groupNode);
+  }
+
   function createDocumentation () {
+    var list = document.createElement('ul');
+    sidebar.appendChild(list);
+
     for (var i = 0; i < docs.length; i += 1) {
       createGroup(docs[i], i);
+      createListGroup(list, docs[i]);
     }
 
     fs.writeFile(
