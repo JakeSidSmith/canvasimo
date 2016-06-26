@@ -119,6 +119,25 @@ canvas {
   transition: 0.1s 0.1s ease-in-out left, 0.1s 0.1s ease-in-out box-shadow;
 }
 
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar > ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar li {
+  padding: 2px 8px 2px 4px;
+}
+
 .sidebar:focus {
   left: 0;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
