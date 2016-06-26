@@ -217,15 +217,12 @@
 
   function createListGroup (group) {
     var groupNode = document.createElement('li');
+
+    groupNode.appendChild(createLinkedElement('strong', group.name));
+
     var innerList = document.createElement('ul');
-    groupNode.appendChild(innerList);
-
-    var groupTitleItem = document.createElement('li');
-    groupTitleItem.appendChild(createLinkedElement('strong', group.name));
-
-    innerList.appendChild(groupTitleItem);
-
     listMethods(innerList, group);
+    groupNode.appendChild(innerList);
 
     list.appendChild(groupNode);
   }
