@@ -95,10 +95,10 @@ canvas {
   border: 1px solid #ccc;
 }
 
-.container {
+.main {
   width: 100%;
   height: auto;
-  max-width: 800px;
+  max-width: 1024px;
   padding: 0 10px;
   margin: auto;
 }

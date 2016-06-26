@@ -19,8 +19,13 @@
       '<link rel="stylesheet" href="styles.css" media="screen" title="no title" charset="utf-8">' +
       '</head>' +
       '<body>' +
-        '<div id="container" class="container">' +
-          '<div id="doc-container"></div>' +
+        '<div class="container">' +
+          '<div class="sidebar">' +
+            '<a class="toggle">' +
+              '<div class="toggle-inner"></div>' +
+            '</a>' +
+          '</div>' +
+          '<div id="doc-container" class="main"></div>' +
         '</div>' +
       '</body>' +
     '</html>'
