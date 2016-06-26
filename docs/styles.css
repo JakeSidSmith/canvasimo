@@ -55,20 +55,12 @@ pre {
 .alias {
   font-size: 14px;
   font-style: italic;
-  display: inline;
-  margin-left: 10px;
+  display: block;
   color: #888;
 }
 
 .alias-word {
   font-weight: normal;
-}
-
-@media all and (max-width: 480px) {
-  .alias {
-    display: block;
-    margin-left: 0;
-  }
 }
 
 .code-object,
@@ -109,4 +101,11 @@ canvas {
   max-width: 800px;
   padding: 0 10px;
   margin: auto;
+}
+
+@media all and (min-width: 481px) {
+  .alias {
+    display: inline;
+    margin-left: 10px;
+  }
 }
