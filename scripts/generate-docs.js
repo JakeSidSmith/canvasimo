@@ -47,10 +47,12 @@
     return (text || '').toLowerCase().replace(/^\s+/, '').replace(/\s+$/, '').replace(/[\s_]/gi, '-');
   }
 
-  function createLinkedHeader (type, content) {
+  function createLinkedElement (type, content, linkToSelf) {
     var slug = createSlug(content);
     var header = document.createElement(type);
-    header.setAttribute('id', slug);
+    if (linkToSelf) {
+      header.setAttribute('id', slug);
+    }
 
     var link = document.createElement('a');
     link.setAttribute('href', '#' + slug);
@@ -153,7 +155,7 @@
     var methodNode = document.createElement('div');
     methodNode.setAttribute('class', 'method');
 
-    var methodName = createLinkedHeader('h3', method.name);
+    var methodName = createLinkedElement('h3', method.name, true);
     methodNode.appendChild(methodName);
 
     if (method.alias) {
@@ -188,7 +190,7 @@
     var groupNode = document.createElement('div');
     groupNode.setAttribute('class', 'group');
 
-    var groupName = createLinkedHeader('h2', group.name);
+    var groupName = createLinkedElement('h2', group.name, true);
     groupName.setAttribute('class', 'group-header');
     groupNode.appendChild(groupName);
 
@@ -209,9 +211,7 @@
 
   function listMethods (innerList, group) {
     for (var i = 0; i < group.methods.length; i += 1) {
-      var methodNode = document.createElement('li');
-      methodNode.textContent = group.methods[i].name;
-      innerList.appendChild(methodNode);
+      innerList.appendChild(createLinkedElement('li', group.methods[i].name));
     }
   }
 
@@ -221,9 +221,7 @@
     groupNode.appendChild(innerList);
 
     var groupTitleItem = document.createElement('li');
-    var groupTitle = document.createElement('strong');
-    groupTitle.textContent = group.name;
-    groupTitleItem.appendChild(groupTitle);
+    groupTitleItem.appendChild(createLinkedElement('strong', group.name));
 
     innerList.appendChild(groupTitleItem);
 
