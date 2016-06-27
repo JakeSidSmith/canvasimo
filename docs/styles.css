@@ -112,11 +112,11 @@ canvas {
   background-color: #fff;
   z-index: 100;
   outline: none;
-  -webkit-transition: 0.1s 0.1s ease-in-out left, 0.1s 0.1s ease-in-out box-shadow;
-  -moz-transition: 0.1s 0.1s ease-in-out left, 0.1s 0.1s ease-in-out box-shadow;
-  -ms-transition: 0.1s 0.1s ease-in-out left, 0.1s 0.1s ease-in-out box-shadow;
-  -o-transition: 0.1s 0.1s ease-in-out left, 0.1s 0.1s ease-in-out box-shadow;
-  transition: 0.1s 0.1s ease-in-out left, 0.1s 0.1s ease-in-out box-shadow;
+  -webkit-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  -moz-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  -ms-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  -o-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
 }
 
 .sidebar ul {
@@ -155,20 +155,20 @@ canvas {
 
 .sidebar:focus .toggle::before {
   top: 17px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
+  -webkit-transform: rotate(225deg);
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -o-transform: rotate(225deg);
+  transform: rotate(225deg);
 }
 
 .sidebar:focus .toggle::after {
   top: 17px;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-225deg);
+  -moz-transform: rotate(-225deg);
+  -ms-transform: rotate(-225deg);
+  -o-transform: rotate(-225deg);
+  transform: rotate(-225deg);
 }
 .sidebar:focus .toggle-close {
   display: block;
@@ -221,11 +221,11 @@ canvas {
   -ms-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  -webkit-transition: 0.2s ease-in-out all;
-  -moz-transition: 0.2s ease-in-out all;
-  -ms-transition: 0.2s ease-in-out all;
-  -o-transition: 0.2s ease-in-out all;
-  transition: 0.2s ease-in-out all;
+  -webkit-transition: 0.3s ease-in-out all;
+  -moz-transition: 0.3s ease-in-out all;
+  -ms-transition: 0.3s ease-in-out all;
+  -o-transition: 0.3s ease-in-out all;
+  transition: 0.3s ease-in-out all;
 }
 
 .toggle::before,
