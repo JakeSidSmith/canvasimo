@@ -19,8 +19,15 @@
       '<link rel="stylesheet" href="styles.css" media="screen" title="no title" charset="utf-8">' +
       '</head>' +
       '<body>' +
-        '<div id="container" class="container">' +
-          '<div id="doc-container"></div>' +
+        '<div class="container">' +
+          '<div class="sidebar" tabindex="1">' +
+            '<div class="toggle">' +
+              '<div class="toggle-inner"></div>' +
+              '<div class="toggle-close" tabindex="2"></div>' +
+            '</div>' +
+            '<ul id="list"></ul>' +
+          '</div>' +
+          '<div id="doc-container" class="main"></div>' +
         '</div>' +
       '</body>' +
     '</html>'
@@ -30,6 +37,7 @@
 
   var groupNodes = [];
   var container = document.getElementById('doc-container');
+  var list = document.getElementById('list');
 
   function insertAfter (newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -39,10 +47,12 @@
     return (text || '').toLowerCase().replace(/^\s+/, '').replace(/\s+$/, '').replace(/[\s_]/gi, '-');
   }
 
-  function createLinkedHeader (type, content) {
+  function createLinkedElement (type, content, linkToSelf) {
     var slug = createSlug(content);
     var header = document.createElement(type);
-    header.setAttribute('id', slug);
+    if (linkToSelf) {
+      header.setAttribute('id', slug);
+    }
 
     var link = document.createElement('a');
     link.setAttribute('href', '#' + slug);
@@ -145,7 +155,7 @@
     var methodNode = document.createElement('div');
     methodNode.setAttribute('class', 'method');
 
-    var methodName = createLinkedHeader('h3', method.name);
+    var methodName = createLinkedElement('h3', method.name, true);
     methodNode.appendChild(methodName);
 
     if (method.alias) {
@@ -180,7 +190,7 @@
     var groupNode = document.createElement('div');
     groupNode.setAttribute('class', 'group');
 
-    var groupName = createLinkedHeader('h2', group.name);
+    var groupName = createLinkedElement('h2', group.name, true);
     groupName.setAttribute('class', 'group-header');
     groupNode.appendChild(groupName);
 
@@ -199,9 +209,28 @@
     groupNodes.push(groupNode);
   }
 
+  function listMethods (innerList, group) {
+    for (var i = 0; i < group.methods.length; i += 1) {
+      innerList.appendChild(createLinkedElement('li', group.methods[i].name));
+    }
+  }
+
+  function createListGroup (group) {
+    var groupNode = document.createElement('li');
+
+    groupNode.appendChild(createLinkedElement('strong', group.name));
+
+    var innerList = document.createElement('ul');
+    listMethods(innerList, group);
+    groupNode.appendChild(innerList);
+
+    list.appendChild(groupNode);
+  }
+
   function createDocumentation () {
     for (var i = 0; i < docs.length; i += 1) {
       createGroup(docs[i], i);
+      createListGroup(docs[i]);
     }
 
     fs.writeFile(

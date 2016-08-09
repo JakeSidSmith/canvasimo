@@ -55,20 +55,12 @@ pre {
 .alias {
   font-size: 14px;
   font-style: italic;
-  display: inline;
-  margin-left: 10px;
+  display: block;
   color: #888;
 }
 
 .alias-word {
   font-weight: normal;
-}
-
-@media all and (max-width: 480px) {
-  .alias {
-    display: block;
-    margin-left: 0;
-  }
 }
 
 .code-object,
@@ -103,10 +95,170 @@ canvas {
   border: 1px solid #ccc;
 }
 
-.container {
+.main {
   width: 100%;
   height: auto;
-  max-width: 800px;
+  max-width: 1024px;
   padding: 0 10px;
   margin: auto;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px;
+  width: 200px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 100;
+  outline: none;
+  -webkit-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  -moz-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  -ms-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  -o-transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+  transition: 0.1s 0.2s ease-in-out left, 0.1s 0.2s ease-in-out box-shadow;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar > ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 15px 0;
+}
+
+.sidebar li {
+  margin: 5px 10px;
+  font-size: 12px;
+}
+
+.sidebar li strong {
+  font-size: 14px;
+}
+
+.sidebar:focus {
+  left: 0;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.sidebar:focus .toggle-inner {
+  opacity: 0;
+}
+
+.sidebar:focus .toggle::before {
+  top: 17px;
+  -webkit-transform: rotate(225deg);
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -o-transform: rotate(225deg);
+  transform: rotate(225deg);
+}
+
+.sidebar:focus .toggle::after {
+  top: 17px;
+  -webkit-transform: rotate(-225deg);
+  -moz-transform: rotate(-225deg);
+  -ms-transform: rotate(-225deg);
+  -o-transform: rotate(-225deg);
+  transform: rotate(-225deg);
+}
+.sidebar:focus .toggle-close {
+  display: block;
+}
+
+.toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  z-index: -1;
+  opacity: 1;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -ms-tap-highlight-color: transparent;
+  -o-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+.toggle-close {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  z-index: 1;
+}
+
+.toggle-inner,
+.toggle::before,
+.toggle::after {
+  position: absolute;
+  z-index: 0;
+  opacity: 1;
+  top: 17px;
+  left: 9px;
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #4078c0;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transition: 0.3s ease-in-out all;
+  -moz-transition: 0.3s ease-in-out all;
+  -ms-transition: 0.3s ease-in-out all;
+  -o-transition: 0.3s ease-in-out all;
+  transition: 0.3s ease-in-out all;
+}
+
+.toggle::before,
+.toggle::after {
+  content: '';
+}
+
+.toggle::before {
+  top: 11px;
+}
+
+.toggle::after {
+  top: 23px;
+}
+
+@media all and (min-width: 480px) {
+  .alias {
+    display: inline;
+    margin-left: 10px;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .sidebar {
+    left: 0;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .container {
+    padding-left: 200px;
+  }
 }
