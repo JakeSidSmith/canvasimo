@@ -16,7 +16,13 @@
             <title>
               Canvasimo
             </title>
-            <link rel="stylesheet" href="src/css/styles.css" media="screen" title="no title" charSet="utf-8" />
+            <link
+              rel="stylesheet"
+              href="src/css/styles.css"
+              media="screen"
+              title="no title"
+              charSet="utf-8"
+            />
           </head>
           <body>
             <div className="container">
