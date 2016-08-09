@@ -4,6 +4,7 @@
 
   var React = require('react');
   var LinkHeader = require('./link-header');
+  var Method = require('./method');
 
   var Group = React.createClass({
     render: function () {
@@ -29,6 +30,7 @@
                   <p>
                     {method.description}
                   </p>
+                  <Method />
                 </div>
               );
             })
