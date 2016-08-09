@@ -4,7 +4,7 @@
 
   var React = require('react');
   var docs = require('../docs');
-  var LinkHeader = require('./link-header');
+  var Group = require('./group');
 
   var Document = React.createClass({
     render: function () {
@@ -24,30 +24,7 @@
                 {
                   docs.map(function (group) {
                     return (
-                      <div className="group" key={group.name}>
-                        <LinkHeader type="h2" header={group.name} className="group-header" />
-                        {
-                          group.methods.map(function (method) {
-                            return (
-                              <div className="method" key={method.name}>
-                                <LinkHeader type="h3" header={method.name}>
-                                  {
-                                    method.alias && (
-                                      <span className="alias">
-                                        <span className="alias-word">Alias: </span>
-                                        <strong className="alias-method">{method.alias}</strong>
-                                      </span>
-                                    )
-                                  }
-                                </LinkHeader>
-                                <p>
-                                  {method.description}
-                                </p>
-                              </div>
-                            );
-                          })
-                        }
-                      </div>
+                      <Group key={group.name} group={group} />
                     );
                   })
                 }
