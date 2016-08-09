@@ -30,7 +30,7 @@
                   <p>
                     {method.description}
                   </p>
-                  <Method />
+                  <Method method={method} />
                 </div>
               );
             })
