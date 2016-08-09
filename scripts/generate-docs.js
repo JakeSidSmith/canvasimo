@@ -10,7 +10,7 @@
 
   var cwd = process.cwd();
 
-  var DocsContainer = require(cwd + '/docs/src/js/components/docs-container');
+  var DocsContainer = require(cwd + '/docs/src/js/components/document');
 
   rimraf.sync(cwd + '/docs/build/js/');
   mkdirp.sync(cwd + '/docs/build/js/');
