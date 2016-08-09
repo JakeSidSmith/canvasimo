@@ -6,11 +6,13 @@
   var React = require('react');
   var ReactDOM = require('react-dom/server');
   var mkdirp = require('mkdirp');
+  var rimraf = require('rimraf');
 
   var cwd = process.cwd();
 
   var DocsContainer = require(cwd + '/docs/src/js/components/docs-container');
 
+  rimraf.sync(cwd + '/docs/build/js/');
   mkdirp.sync(cwd + '/docs/build/js/');
 
   fs.writeFile(
