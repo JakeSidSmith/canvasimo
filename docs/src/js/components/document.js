@@ -18,7 +18,7 @@
             </title>
             <link
               rel="stylesheet"
-              href="src/css/styles.css"
+              href="build/css/styles.css"
               media="screen"
               title="no title"
               charSet="utf-8"

@@ -12,8 +12,12 @@
 
   var DocsContainer = require(cwd + '/docs/src/js/components/document');
 
-  rimraf.sync(cwd + '/docs/build/js/');
+  rimraf.sync(cwd + '/docs/build/');
   mkdirp.sync(cwd + '/docs/build/js/');
+  mkdirp.sync(cwd + '/docs/build/css/');
+
+  fs.createReadStream(cwd + '/docs/src/css/styles.css')
+    .pipe(fs.createWriteStream(cwd + '/docs/build/css/styles.css'));
 
   fs.writeFile(
     cwd + '/docs/index.html',
