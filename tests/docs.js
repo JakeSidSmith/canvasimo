@@ -1,6 +1,6 @@
 'use strict';
 
-var docs = require('../docs/docs');
+var docs = require('../docs/src/js/docs');
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var stub = sinon.stub;
