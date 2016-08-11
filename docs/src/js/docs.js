@@ -9,7 +9,8 @@
     object: 'Object',
     array: 'Array',
     context: 'RenderingContext',
-    htmlElement: 'HTMLElement'
+    htmlElement: 'HTMLElement',
+    rect: 'DOMRect'
   };
 
   module.exports = [
@@ -81,6 +82,14 @@
           returns: {
             name: 'height',
             type: types.number
+          }
+        },
+        {
+          name: 'getBoundingClientRect',
+          description: 'Returns the canvas size & position on screen',
+          returns: {
+            name: '{top, right, bottom, left, width, height}',
+            type: types.rect
           }
         }
       ]
