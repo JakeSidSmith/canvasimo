@@ -7,8 +7,12 @@
     "example": "examples"
   },
   "scripts": {
+    "start": "http-server docs -c-0 -o",
+    "build": "babel-node scripts/generate-docs.js",
     "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
-    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5 lib/index.js tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
+    "mocha-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
+    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5-react lib/index.js docs/ tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
+    "test-no-coverage": "npm run eslint && npm run mocha-no-coverage",
     "test": "npm run eslint && npm run mocha"
   },
   "repository": {
@@ -33,12 +37,22 @@
   },
   "homepage": "https://github.com/jakesidsmith/canvasimo#readme",
   "devDependencies": {
+    "babel-cli": "=6.11.4",
+    "babel-preset-react": "=6.11.1",
     "chai": "=3.5.0",
     "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.1",
-    "istanbul": "=1.0.0-alpha.2",
+    "http-server": "=0.9.0",
+    "istanbul": "=1.1.0-alpha.1",
     "jsdom": "=8.4.1",
+    "mkdirp": "=0.5.1",
     "mocha": "=2.4.5",
+    "react": "=15.3.0",
+    "react-dom": "=15.3.0",
+    "rimraf": "=2.5.4",
     "sinon": "=1.17.3",
     "sinon-chai": "=2.8.0"
+  },
+  "engines": {
+    "node": "6.2.2"
   }
 }
