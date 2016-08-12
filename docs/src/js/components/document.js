@@ -110,6 +110,8 @@
                     )
                   }
 
+                  <LinkHeader type="h1" header="Documentation" className="main-header" />
+
                   {
                     docs.map(function (group) {
                       return (
