@@ -25,6 +25,14 @@
       });
     },
 
+    onSidebarToggleClick: function () {
+      this.toggleSidebar();
+    },
+
+    onSidebarOverlayClick: function () {
+      this.toggleSidebar();
+    },
+
     render: function () {
       var javascript = this.props.javascript;
 
@@ -32,7 +40,7 @@
         <span id="sidebar">
           {
             javascript && (
-              <div className="sidebar-toggle" onClick={this.onToggleSidebar}>
+              <div className="sidebar-toggle" onClick={this.onSidebarToggleClick}>
                 <span />
               </div>
             )
@@ -41,7 +49,7 @@
             javascript && (
               <div
                 className={'sidebar-overlay' + (this.state.open ? ' open' : '')}
-                onClick={this.onToggleSidebar}
+                onClick={this.onSidebarOverlayClick}
               />
             )
           }
