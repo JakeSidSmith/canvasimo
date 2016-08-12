@@ -172,6 +172,7 @@ canvas {
   border: 1px solid #ccc;
   padding: 0 5px;
   font-size: 14px;
+  overflow: hidden;
 }
 
 .sidebar.open {
