@@ -144,6 +144,7 @@ canvas {
   background-color: #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   z-index: 20;
+  overflow: hidden;
   -webkit-transition: ease-in-out 0.1s left;
   -moz-transition: ease-in-out 0.1s left;
   -ms-transition: ease-in-out 0.1s left;
@@ -172,7 +173,6 @@ canvas {
   border: 1px solid #ccc;
   padding: 0 5px;
   font-size: 14px;
-  overflow: hidden;
 }
 
 .sidebar.open {
