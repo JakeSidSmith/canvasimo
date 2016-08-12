@@ -138,8 +138,8 @@ canvas {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -200px;
-  width: 200px;
+  left: -240px;
+  width: 240px;
   height: 100%;
   background-color: #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -308,6 +308,6 @@ canvas {
   }
 
   .wrapper {
-    padding-left: 200px;
+    padding-left: 240px;
   }
 }

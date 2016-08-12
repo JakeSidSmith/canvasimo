@@ -109,7 +109,9 @@
                                 type="li"
                                 header={method.name}
                                 key={method.name}
-                              />
+                              >
+                              {method.alias && (' / ' + method.alias)}
+                            </LinkHeader>
                             );
                           }, this)
                         }
