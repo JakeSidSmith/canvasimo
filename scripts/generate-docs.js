@@ -11,8 +11,34 @@
   var mkdirp = require('mkdirp');
   var rimraf = require('rimraf');
   var watch = require('watch');
+  var browserify = require('browserify');
 
   var packageJSON = JSON.parse(fs.readFileSync(cwd + '/package.json'));
+
+  var b = browserify(
+    {
+      entries: [cwd + '/docs/src/js/sidebar.js'],
+      extensions: ['.js', '.jsx'],
+      paths: ['node_modules'],
+      debug: true,
+      cache: {}
+    }
+  )
+  .plugin('minifyify', {
+    map: 'build/js/sidebar.map.json',
+    output: cwd + '/docs/build/js/sidebar.map.json'
+  })
+  .transform('babelify', {presets: ['react']});
+
+  var bundle = function () {
+    b.bundle(function () {
+      console.log('Sidebar compiled.', new Date().toString());
+    })
+    .on('error', function (error) {
+      console.log(error);
+    })
+    .pipe(fs.createWriteStream(cwd + '/docs/build/js/sidebar.js'));
+  };
 
   var clearModuleCache = function (path) {
     delete require.cache[require.resolve(path)]
@@ -68,7 +94,7 @@
         if (error) {
           console.error(error);
         } else {
-          console.log('Docs generated!', new Date().toString());
+          console.log('Docs generated.', new Date().toString());
         }
       }
     );
@@ -79,6 +105,7 @@
     createBuildDirectories(verbose);
     copyFilesToBuildDirectory(verbose);
     createDocumentation(verbose);
+    bundle();
   };
 
   if (shouldWatch) {

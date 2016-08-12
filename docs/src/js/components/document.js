@@ -123,6 +123,8 @@
               </div>
 
             </div>
+
+            <script type="text/javascript" src="build/js/sidebar.js" />
           </body>
         </html>
       );
