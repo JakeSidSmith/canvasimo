@@ -20,20 +20,18 @@ h5,
 h6,
 p,
 pre,
-hr {
+hr,
+li {
   margin: 10px auto;
 }
 
-p {
+p,
+ul {
   line-height: 18px;
 }
 
 ul {
   padding: 0 0 0 20px;
-}
-
-li {
-  line-height: 24px;
 }
 
 hr {
