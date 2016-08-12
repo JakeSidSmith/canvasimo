@@ -54,6 +54,7 @@ pre {
   overflow: auto;
 }
 
+.main-header,
 .group-header {
   margin: 40px auto;
 }

@@ -27,7 +27,7 @@
           <body>
             <div className="container">
               <div className="doc-container">
-                <h1>
+                <h1 className="main-header">
                   <a href="#">
                     Canvasimo
                   </a>
