@@ -170,6 +170,8 @@ canvas {
   height: 24px;
   border-radius: 2px;
   border: 1px solid #ccc;
+  padding: 0 5px;
+  font-size: 14px;
 }
 
 .sidebar.open {
