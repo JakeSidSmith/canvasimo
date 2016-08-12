@@ -24,6 +24,10 @@ hr {
   margin: 10px auto;
 }
 
+p {
+  line-height: 18px;
+}
+
 hr {
   display: block;
   height: 0;
@@ -31,13 +35,23 @@ hr {
   border-top: 1px solid #ccc;
 }
 
+code,
 pre {
-  padding: 10px;
   background-color: #f5f5f5;
+  color: #777;
   border-radius: 2px;
   border: 1px solid #f0f0f0;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+code {
+  padding: 1px 2px;
+}
+
+pre {
+  padding: 10px;
   overflow: auto;
-  color: #777;
 }
 
 .group-header {
