@@ -18,6 +18,22 @@
     delete require.cache[require.resolve(path)]
   };
 
+  var clearAllModuleCache = function () {
+    var modulesToClear = [];
+
+    for (var key in require.cache) {
+      var path = require.cache[key].id.toString();
+
+      if (path.indexOf('node_modules') < 0 && path.indexOf('.js') === path.length - 3) {
+        modulesToClear.push(path.replace(/\.js$/, ''));
+      }
+    }
+
+    for (var i = 0; i < modulesToClear.length; i += 1) {
+      clearModuleCache(modulesToClear[i]);
+    }
+  };
+
   var copy = function copy (src, dest) {
     fs.createReadStream(src).pipe(fs.createWriteStream(dest));
   }
@@ -41,7 +57,6 @@
   };
 
   var createDocumentation = function () {
-    clearModuleCache(cwd + '/docs/src/js/components/document');
     var Document = require(cwd + '/docs/src/js/components/document');
 
     fs.writeFile(
@@ -67,7 +82,15 @@
   };
 
   if (shouldWatch) {
-    watch.watchTree(cwd + '/docs/src/', {ignoreDotFiles: true}, function () {
+    watch.watchTree(cwd + '/docs/src/', {ignoreDotFiles: true}, function (path) {
+      if (
+        typeof path === 'string' &&
+        path.indexOf('node_modules') < 0 &&
+        path.indexOf('.js') === path.length - 3
+      ) {
+        clearAllModuleCache();
+      }
+
       buildEverything(false);
     });
   } else {
