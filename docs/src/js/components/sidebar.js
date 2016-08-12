@@ -2,6 +2,7 @@
 
 (function () {
 
+  var _ = require('underscore');
   var React = require('react');
   var docs = require('../docs');
   var LinkHeader = require('./link-header');
@@ -9,8 +10,15 @@
   var Sidebar = React.createClass({
     getInitialState: function () {
       return {
-        open: false
+        open: false,
+        query: ''
       };
+    },
+
+    onSearchChange: function (event) {
+      this.setState({
+        query: event.target.value
+      });
     },
 
     getClassName: function () {
@@ -57,13 +65,33 @@
             {
               javascript && (
                 <div className="input-wrapper">
-                  <input type="text" placeholder="Search for a method..." />
+                  <input
+                    type="text"
+                    placeholder="Search for a method..."
+                    value={this.state.query}
+                    onChange={this.onSearchChange}
+                  />
                 </div>
               )
             }
             <ul className="scrollable">
               {
-                docs.map(function (group) {
+                _.map(docs, function (group) {
+                  var methods = group.methods;
+
+                  if (this.state.query) {
+                    var parts = this.state.query.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/g);
+                    methods = _.filter(methods, function (method) {
+                      return _.every(parts, function (part) {
+                        return method.name.indexOf(part) >= 0;
+                      }, this);
+                    }, this);
+                  }
+
+                  if (!methods.length) {
+                    return null;
+                  }
+
                   return (
                     <LinkHeader
                       noId
@@ -73,7 +101,7 @@
                     >
                       <ul>
                         {
-                          group.methods.map(function (method) {
+                          _.map(methods, function (method) {
                             return (
                               <LinkHeader
                                 noId
@@ -82,12 +110,12 @@
                                 key={method.name}
                               />
                             );
-                          })
+                          }, this)
                         }
                       </ul>
                     </LinkHeader>
                   );
-                })
+                }, this)
               }
             </ul>
           </div>
