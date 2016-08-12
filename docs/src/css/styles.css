@@ -143,9 +143,133 @@ canvas {
   height: 100%;
   background-color: #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  -webkit-transition: ease-in-out 0.1s left;
+  -moz-transition: ease-in-out 0.1s left;
+  -ms-transition: ease-in-out 0.1s left;
+  -o-transition: ease-in-out 0.1s left;
+  transition: ease-in-out 0.1s left;
+}
+
+.sidebar.with-search {
+  padding-top: 44px;
+}
+
+.sidebar .input-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar input {
+  margin: 10px;
+  width: 180px;
+  height: 24px;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 5;
+  background: transparent;
+  -webkit-transition: ease-in-out 0s 0.1s width, ease-in-out 0s 0.1s height, ease-in-out 0.1s 0s background-color;
+  -moz-transition: ease-in-out 0s 0.1s width, ease-in-out 0s 0.1s height, ease-in-out 0.1s 0s background-color;
+  -ms-transition: ease-in-out 0s 0.1s width, ease-in-out 0s 0.1s height, ease-in-out 0.1s 0s background-color;
+  -o-transition: ease-in-out 0s 0.1s width, ease-in-out 0s 0.1s height, ease-in-out 0.1s 0s background-color;
+  transition: ease-in-out 0s 0.1s width, ease-in-out 0s 0.1s height, ease-in-out 0.1s 0s background-color;
+}
+
+.sidebar-overlay.open {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-transition: ease-in-out 0s 0s width, ease-in-out 0s 0s height, ease-in-out 0.1s 0.01s background-color;
+  -moz-transition: ease-in-out 0s 0s width, ease-in-out 0s 0s height, ease-in-out 0.1s 0.01s background-color;
+  -ms-transition: ease-in-out 0s 0s width, ease-in-out 0s 0s height, ease-in-out 0.1s 0.01s background-color;
+  -o-transition: ease-in-out 0s 0s width, ease-in-out 0s 0s height, ease-in-out 0.1s 0.01s background-color;
+  transition: ease-in-out 0s 0s width, ease-in-out 0s 0s height, ease-in-out 0.1s 0.01s background-color;
+}
+
+.sidebar-toggle {
+  display: block;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.sidebar-toggle:hover {
+  background-color: #eee;
+  -webkit-transition: ease-in-out 0.1s background-color;
+  -moz-transition: ease-in-out 0.1s background-color;
+  -ms-transition: ease-in-out 0.1s background-color;
+  -o-transition: ease-in-out 0.1s background-color;
+  transition: ease-in-out 0.1s background-color;
+}
+
+.sidebar-toggle:active {
+  background-color: #ddd;
+}
+
+.sidebar-toggle span,
+.sidebar-toggle::before,
+.sidebar-toggle::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 60%;
+  height: 2px;
+  left: 20%;
+  margin-top: -1px;
+  background-color: #555;
+}
+
+.sidebar-toggle span {
+  top: 50%;
+}
+
+.sidebar-toggle::before {
+  top: 30%;
+}
+
+.sidebar-toggle::after {
+  top: 70%;
+}
+
+@media all and (min-width: 768px) {
+  .sidebar-toggle {
+    display: none;
+  }
+}
+
+.sidebar .scrollable {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: auto;
   overflow-x: hidden;
   overflow-y: auto;
+  margin: 0;
+  padding: 5px 0;
 }
 
 .sidebar ul {
