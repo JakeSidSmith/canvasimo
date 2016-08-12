@@ -30,7 +30,7 @@
                               header={method.name}
                               key={method.name}
                             />
-                          )
+                          );
                         })
                       }
                     </ul>
