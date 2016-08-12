@@ -27,18 +27,22 @@
         (this.state.open ? ' open' : '');
     },
 
-    toggleSidebar: function () {
+    onSidebarToggleClick: function () {
       this.setState({
-        open: !this.state.open
+        open: true
       });
     },
 
-    onSidebarToggleClick: function () {
-      this.toggleSidebar();
+    onSidebarOverlayClick: function () {
+      this.setState({
+        open: false
+      });
     },
 
-    onSidebarOverlayClick: function () {
-      this.toggleSidebar();
+    onMethodOrGroupClick: function () {
+      this.setState({
+        open: false
+      });
     },
 
     render: function () {
@@ -99,6 +103,7 @@
                       type="li"
                       header={group.name}
                       key={group.name}
+                      onClick={this.onMethodOrGroupClick}
                     >
                       <ul>
                         {
@@ -109,6 +114,7 @@
                                 type="li"
                                 header={method.name}
                                 key={method.name}
+                                onClick={this.onMethodOrGroupClick}
                               >
                               {method.alias && (' / ' + method.alias)}
                               </LinkHeader>
