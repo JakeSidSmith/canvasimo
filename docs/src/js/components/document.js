@@ -62,6 +62,8 @@
 
                 <LinkHeader type="h2" header="About" />
 
+                {/* eslint-disable max-len */}
+
                 <p>
                   Canvasimo (Canvas in my opinion) started off as a simple concept - create wrappers for the standard canvas API to create a fluent interface, and allow access to canvas attributes with getters and setters.
                 </p>
@@ -90,6 +92,8 @@
                   Additionally, any methods that previously relied on setting the stroke or fill color before-hand, can now optionally have a color passed as their final argument, e.g. <code>fillRect(0, 0, 10, 10, 'black')</code>, <code>strokeLine(0, 0, 0, 20, 'red')</code>.
                   And similarly, the fill and stroke methods can now be passed a color; <code>fill('red')</code>, <code>stroke('green')</code>, <code>fillCanvas('blue')</code>.
                 </p>
+
+                {/* eslint-enable max-len */}
 
                 {
                   false && (
