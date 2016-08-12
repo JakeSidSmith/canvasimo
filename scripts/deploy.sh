@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-NODE_ENV=production
 BRANCH=gh-pages # Branch to deploy to, probably gh-pages
 DIST_DIR=docs  # Location of build static files to deploy
 DEPLOY_DIR=site_deploy/  # Temp directory to clone to during deployment
