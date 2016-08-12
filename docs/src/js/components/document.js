@@ -5,6 +5,7 @@
   var React = require('react');
   var docs = require('../docs');
   var Group = require('./group');
+  var LinkHeader = require('./link-header');
 
   var Document = React.createClass({
     render: function () {
@@ -35,6 +36,31 @@
                     (Version: {this.props.version})
                   </span>
                 </h1>
+
+                <LinkHeader type="h2" header="Features" />
+
+                <ul>
+                  <li>
+                    Fluent interface
+                  </li>
+                  <li>
+                    Idiomatic method names
+                  </li>
+                  <li>
+                    Alias original canvas methods
+                  </li>
+                  <li>
+                    Improved browser compatibility
+                  </li>
+                  <li>
+                    Additional drawing methods
+                  </li>
+                  <li>
+                    Useful helper functions
+                  </li>
+                </ul>
+
+                <LinkHeader type="h2" header="About" />
 
                 <p>
                   Canvasimo (Canvas in my opinion) started off as a simple concept - create wrappers for the standard canvas API to create a fluent interface, and allow access to canvas attributes with getters and setters.

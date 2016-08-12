@@ -28,6 +28,14 @@ p {
   line-height: 18px;
 }
 
+ul {
+  padding: 0 0 0 20px;
+}
+
+li {
+  line-height: 24px;
+}
+
 hr {
   display: block;
   height: 0;
