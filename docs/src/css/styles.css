@@ -52,7 +52,8 @@ pre {
   margin-bottom: 40px;
 }
 
-.alias {
+.alias,
+.version {
   font-size: 14px;
   font-style: italic;
   display: inline;
@@ -66,7 +67,8 @@ pre {
 }
 
 @media all and (max-width: 480px) {
-  .alias {
+  .alias,
+  .version {
     display: block;
     margin-left: 0;
   }

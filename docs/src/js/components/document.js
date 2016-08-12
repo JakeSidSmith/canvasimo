@@ -27,6 +27,25 @@
           <body>
             <div className="container">
               <div className="doc-container">
+                <h1>
+                  <a href="#">
+                    Canvasimo
+                  </a>
+                  <span className="version">
+                    (Version: {this.props.version})
+                  </span>
+                </h1>
+
+                {
+                  false && (
+                    <div>
+                      <canvas id="canvas" width="400" height="200" />
+                      <script type="text/javascript" src="build/js/canvasimo.js" />
+                      <script type="text/javascript" src="build/js/demo.js" />
+                    </div>
+                  )
+                }
+
                 {
                   docs.map(function (group) {
                     return (
@@ -35,7 +54,6 @@
                   })
                 }
               </div>
-              Hello, World!
             </div>
           </body>
         </html>
