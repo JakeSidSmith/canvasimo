@@ -7,7 +7,7 @@
   var LinkHeader = require('./link-header');
 
   var Sidebar = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
       return {
         open: false
       };
@@ -32,7 +32,7 @@
         <span id="sidebar">
           {
             javascript && (
-              <div className="sidebar-toggle" onClick={this.toggleSidebar}>
+              <div className="sidebar-toggle" onClick={this.onToggleSidebar}>
                 <span />
               </div>
             )
@@ -41,7 +41,7 @@
             javascript && (
               <div
                 className={'sidebar-overlay' + (this.state.open ? ' open' : '')}
-                onClick={this.toggleSidebar}
+                onClick={this.onToggleSidebar}
               />
             )
           }
