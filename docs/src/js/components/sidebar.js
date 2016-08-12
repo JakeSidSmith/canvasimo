@@ -111,7 +111,7 @@
                                 key={method.name}
                               >
                               {method.alias && (' / ' + method.alias)}
-                            </LinkHeader>
+                              </LinkHeader>
                             );
                           }, this)
                         }
