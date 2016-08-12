@@ -83,7 +83,7 @@
                     var parts = this.state.query.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/g);
                     methods = _.filter(methods, function (method) {
                       return _.every(parts, function (part) {
-                        return method.name.indexOf(part) >= 0;
+                        return method.name.toLowerCase().indexOf(part.toLowerCase()) >= 0;
                       }, this);
                     }, this);
                   }
