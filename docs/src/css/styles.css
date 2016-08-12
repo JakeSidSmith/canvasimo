@@ -204,6 +204,12 @@ canvas {
   transition: ease-in-out 0s 0s width, ease-in-out 0s 0s height, ease-in-out 0.1s 0.01s background-color;
 }
 
+@media all and (min-width: 768px) {
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
 .sidebar-toggle {
   display: block;
   position: fixed;
