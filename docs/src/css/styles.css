@@ -134,3 +134,47 @@ canvas {
   padding: 0 10px;
   margin: auto;
 }
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px;
+  width: 200px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 0 10px;
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar > ul > li {
+  font-weight: bold;
+}
+
+.sidebar > ul ul > li {
+  font-weight: normal;
+}
+
+@media all and (min-width: 768px) {
+  .sidebar {
+    left: 0;
+  }
+
+  .wrapper {
+    padding-left: 200px;
+  }
+}

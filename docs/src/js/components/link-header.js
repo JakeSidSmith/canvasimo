@@ -12,9 +12,10 @@
     render: function () {
       var Component = this.props.type;
       var slug = createSlug(this.props.header);
+      var noId = this.props.noId;
 
       return (
-        <Component className={this.props.className} id={slug}>
+        <Component className={this.props.className} id={noId ? null : slug}>
           <a href={'#' + slug}>
             {this.props.header}
           </a>
