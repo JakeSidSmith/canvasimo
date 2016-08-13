@@ -25,6 +25,7 @@
               title="no title"
               charSet="utf-8"
             />
+            <script async defer src="https://buttons.github.io/buttons.js" />
           </head>
           <body>
             <div className="wrapper">
@@ -41,6 +42,23 @@
                       (Version: {this.props.version})
                     </span>
                   </h1>
+
+                  <p className="badges">
+                    <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
+                    <a
+                      className="github-button" href="https://github.com/jakesidsmith/canvasimo"
+                      aria-label="Canvasimo on GitHub"
+                    >
+                      GitHub
+                    </a>
+                    <a
+                      className="github-button" href="https://github.com/jakesidsmith/canvasimo/issues"
+                      data-icon="octicon-issue-opened"
+                      aria-label="Canvasimo issues on GitHub"
+                    >
+                      Issue
+                    </a>
+                  </p>
 
                   <LinkHeader type="h2" header="Demo" />
 
