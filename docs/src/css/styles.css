@@ -138,18 +138,18 @@ canvas {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -240px;
+  right: -240px;
   width: 240px;
   height: 100%;
   background-color: #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   z-index: 20;
   overflow: hidden;
-  -webkit-transition: ease-in-out 0.1s left;
-  -moz-transition: ease-in-out 0.1s left;
-  -ms-transition: ease-in-out 0.1s left;
-  -o-transition: ease-in-out 0.1s left;
-  transition: ease-in-out 0.1s left;
+  -webkit-transition: ease-in-out 0.1s right;
+  -moz-transition: ease-in-out 0.1s right;
+  -ms-transition: ease-in-out 0.1s right;
+  -o-transition: ease-in-out 0.1s right;
+  transition: ease-in-out 0.1s right;
 }
 
 .sidebar.with-search {
@@ -176,7 +176,7 @@ canvas {
 }
 
 .sidebar.open {
-  left: 0;
+  right: 0;
 }
 
 .sidebar-overlay {
@@ -214,10 +214,10 @@ canvas {
 .sidebar-toggle {
   display: block;
   position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 32px;
-  height: 32px;
+  bottom: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
@@ -245,9 +245,9 @@ canvas {
   display: block;
   box-sizing: border-box;
   position: absolute;
-  width: 60%;
+  width: 50%;
   height: 2px;
-  left: 20%;
+  left: 25%;
   margin-top: -1px;
   background-color: #555;
 }
@@ -257,11 +257,11 @@ canvas {
 }
 
 .sidebar-toggle::before {
-  top: 30%;
+  top: 35%;
 }
 
 .sidebar-toggle::after {
-  top: 70%;
+  top: 65%;
 }
 
 @media all and (min-width: 768px) {
@@ -304,10 +304,10 @@ canvas {
 
 @media all and (min-width: 768px) {
   .sidebar {
-    left: 0;
+    right: 0;
   }
 
   .wrapper {
-    padding-left: 240px;
+    padding-right: 240px;
   }
 }
