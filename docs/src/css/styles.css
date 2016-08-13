@@ -211,7 +211,8 @@ canvas {
   }
 }
 
-.sidebar-toggle {
+.sidebar-toggle,
+.back-to-top {
   display: block;
   position: fixed;
   bottom: 10px;
@@ -223,10 +224,6 @@ canvas {
   background-color: #fff;
   cursor: pointer;
   z-index: 10;
-}
-
-.sidebar-toggle:hover {
-  background-color: #eee;
   -webkit-transition: ease-in-out 0.1s background-color;
   -moz-transition: ease-in-out 0.1s background-color;
   -ms-transition: ease-in-out 0.1s background-color;
@@ -234,8 +231,18 @@ canvas {
   transition: ease-in-out 0.1s background-color;
 }
 
-.sidebar-toggle:active {
+.sidebar-toggle + .back-to-top {
+  bottom: 56px;
+}
+
+.sidebar-toggle:active,
+.back-to-top:active {
   background-color: #ddd;
+  -webkit-transition: ease-in-out 0s background-color;
+  -moz-transition: ease-in-out 0s background-color;
+  -ms-transition: ease-in-out 0s background-color;
+  -o-transition: ease-in-out 0s background-color;
+  transition: ease-in-out 0s background-color;
 }
 
 .sidebar-toggle span,
@@ -248,8 +255,8 @@ canvas {
   width: 50%;
   height: 2px;
   left: 25%;
-  margin-top: -1px;
   background-color: #555;
+  margin-top: -1px;
 }
 
 .sidebar-toggle span {
@@ -264,7 +271,59 @@ canvas {
   top: 65%;
 }
 
+.back-to-top span,
+.back-to-top::before,
+.back-to-top::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  height: 50%;
+  width: 2px;
+  top: 25%;
+  left: 50%;
+  margin-left: -1px;
+  background-color: #555;
+}
+
+.back-to-top::before,
+.back-to-top::after {
+  height: 25%;
+  margin-top: 1px;
+  -webkit-transform-origin: 50% 0;
+  -moz-transform-origin: 50% 0;
+  -ms-transform-origin: 50% 0;
+  -o-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+}
+
+.back-to-top::before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.back-to-top::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
 @media all and (min-width: 768px) {
+  .sidebar-toggle,
+  .back-to-top {
+    right: 250px;
+  }
+
+  .back-to-top,
+  .sidebar-toggle + .back-to-top {
+    bottom: 10px;
+  }
+
   .sidebar-toggle {
     display: none;
   }
