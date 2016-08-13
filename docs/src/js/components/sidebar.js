@@ -52,19 +52,22 @@
         <span id="sidebar">
           {
             javascript && (
-              <div className="sidebar-toggle" onClick={this.onSidebarToggleClick}>
-                <span />
-              </div>
-            )
-          }
-          {
-            javascript && (
               <div
                 className={'sidebar-overlay' + (this.state.open ? ' open' : '')}
                 onClick={this.onSidebarOverlayClick}
               />
             )
           }
+          {
+            javascript && (
+              <div className="sidebar-toggle" onClick={this.onSidebarToggleClick}>
+                <span />
+              </div>
+            )
+          }
+          <a href="#" className="back-to-top">
+            <span />
+          </a>
           <div className={this.getClassName()}>
             {
               javascript && (
