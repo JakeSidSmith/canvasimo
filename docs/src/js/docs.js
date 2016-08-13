@@ -318,6 +318,27 @@
         {
           name: 'fillText',
           description: ''
+        },
+        {
+          name: 'getTextSize',
+          alias: 'measureText',
+          description: ''
+        },
+        {
+          name: 'setTextAlign',
+          description: ''
+        },
+        {
+          name: 'getTextAlign',
+          description: ''
+        },
+        {
+          name: 'setTextBaseline',
+          description: ''
+        },
+        {
+          name: 'getTextBaseline',
+          description: ''
         }
       ]
     },
@@ -370,37 +391,6 @@
         },
         {
           name: 'getFontWeight',
-          description: ''
-        }
-      ]
-    },
-    {
-      name: 'Text Alignment',
-      methods: [
-        {
-          name: 'setTextAlign',
-          description: ''
-        },
-        {
-          name: 'getTextAlign',
-          description: ''
-        },
-        {
-          name: 'setTextBaseline',
-          description: ''
-        },
-        {
-          name: 'getTextBaseline',
-          description: ''
-        }
-      ]
-    },
-    {
-      name: 'Measure Text',
-      methods: [
-        {
-          name: 'getTextSize',
-          alias: 'measureText',
           description: ''
         }
       ]
