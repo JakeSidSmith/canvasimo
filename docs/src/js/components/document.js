@@ -42,6 +42,12 @@
                     </span>
                   </h1>
 
+                  <LinkHeader type="h2" header="Demo" />
+
+                  <canvas id="canvas" width="400" height="200" />
+                  <script type="text/javascript" src="build/js/canvasimo.js" />
+                  <script type="text/javascript" src="build/js/demo.js" />
+
                   <LinkHeader type="h2" header="Features" />
 
                   <ul>
@@ -99,16 +105,6 @@
                   </p>
 
                   {/* eslint-enable max-len */}
-
-                  {
-                    false && (
-                      <div>
-                        <canvas id="canvas" width="400" height="200" />
-                        <script type="text/javascript" src="build/js/canvasimo.js" />
-                        <script type="text/javascript" src="build/js/demo.js" />
-                      </div>
-                    )
-                  }
 
                   <LinkHeader type="h1" header="Documentation" className="main-header" />
 
