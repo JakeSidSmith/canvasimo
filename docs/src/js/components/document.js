@@ -62,7 +62,12 @@
 
                   <LinkHeader type="h2" header="Demo" />
 
-                  <canvas id="canvas" width="400" height="200" />
+                  <canvas id="canvas" width="400" height="200">
+                    Looks like this browser doesn't support the canvas element, or you have javascript disabled.
+                  </canvas>
+                  <noscript>
+                    You must have javascript enabled for this demo.
+                  </noscript>
                   <script type="text/javascript" src="build/js/canvasimo.js" />
                   <script type="text/javascript" src="build/js/demo.js" />
 
