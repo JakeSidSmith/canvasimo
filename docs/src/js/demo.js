@@ -46,13 +46,16 @@
   var treeDone = false;
   var lastPos;
   var velocity = 0;
+  var tree;
 
-  var tree = {
-    length: 0,
-    targetLength: 30 + Math.random() * 5,
-    angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
-    children: null
-  };
+  function createTree () {
+    return {
+      length: 0,
+      targetLength: 30 + Math.random() * 5,
+      angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
+      children: null
+    };
+  }
 
   function drawBranch (branch, depth, maxBranchDepth) {
     if (depth > maxBranchDepth) {
@@ -143,11 +146,19 @@
     lastPos = undefined;
   }
 
+  function reset () {
+    treeDone = false;
+    tree = createTree();
+    window.requestAnimationFrame(draw);
+  }
+
+  element.addEventListener('click', reset);
   element.addEventListener('mousemove', mouseMove);
   element.addEventListener('touchmove', touchMove);
   element.addEventListener('touchend', touchEnd);
   window.addEventListener('resize', setCanvasSize);
 
+  tree = createTree();
   setCanvasSize();
 
 })();
