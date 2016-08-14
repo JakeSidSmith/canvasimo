@@ -25,6 +25,7 @@
               title="no title"
               charSet="utf-8"
             />
+            <script async defer src="https://buttons.github.io/buttons.js" />
           </head>
           <body>
             <div className="wrapper">
@@ -42,9 +43,31 @@
                     </span>
                   </h1>
 
+                  <p className="badges">
+                    <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
+                    <a
+                      className="github-button" href="https://github.com/jakesidsmith/canvasimo"
+                      aria-label="Canvasimo on GitHub"
+                    >
+                      GitHub
+                    </a>
+                    <a
+                      className="github-button" href="https://github.com/jakesidsmith/canvasimo/issues"
+                      data-icon="octicon-issue-opened"
+                      aria-label="Canvasimo issues on GitHub"
+                    >
+                      Issue
+                    </a>
+                  </p>
+
                   <LinkHeader type="h2" header="Demo" />
 
-                  <canvas id="canvas" width="400" height="200" />
+                  <canvas id="canvas" width="400" height="200">
+                    Looks like this browser doesn't support the canvas element, or you have javascript disabled.
+                  </canvas>
+                  <noscript>
+                    You must have javascript enabled for this demo.
+                  </noscript>
                   <script type="text/javascript" src="build/js/canvasimo.js" />
                   <script type="text/javascript" src="build/js/demo.js" />
 
