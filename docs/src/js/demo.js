@@ -43,7 +43,6 @@
   var canvas = new Canvasimo(element);
 
   var raf;
-  var treeDone = false;
   var lastPos;
   var velocity = 0;
   var tree;
@@ -58,10 +57,7 @@
   }
 
   function drawBranch (branch, depth, maxBranchDepth) {
-    if (depth > maxBranchDepth) {
-      treeDone = true;
-    }
-
+    var treeDone;
     var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.1);
 
     canvas
@@ -81,8 +77,10 @@
       .translate(branch.length, 0);
 
     if (branch.length < branch.targetLength) {
-      branch.length += branch.targetLength / 20;
-    } else if (!branch.children && branch.targetLength > 10 && !treeDone) {
+      branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
+    } else if (depth === maxBranchDepth && branch.length === branch.targetLength) {
+      treeDone = true;
+    } else if (!branch.children && depth < maxBranchDepth) {
       branch.children = [];
       var childCount = 2 + Math.floor(Math.random() * 2);
 
@@ -100,11 +98,17 @@
       for (var i = 0; i < branch.children.length; i += 1) {
         var child = branch.children[i];
 
-        drawBranch(child, depth + 1, maxBranchDepth);
+        var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
+
+        if (treeDone !== false) {
+          treeDone = branchDone;
+        }
       }
     }
 
     canvas.restore();
+
+    return treeDone;
   }
 
   function draw () {
@@ -116,7 +120,7 @@
       .setStrokeJoin('round')
       .translate(canvas.getWidth() / 2, canvas.getHeight());
 
-    drawBranch(tree, 0, 7);
+    var treeDone = drawBranch(tree, 0, 7);
 
     if (!treeDone || Math.abs(velocity) > 0.5) {
       raf = window.requestAnimationFrame(draw);
@@ -157,7 +161,6 @@
   }
 
   function reset () {
-    treeDone = false;
     tree = createTree();
     window.requestAnimationFrame(draw);
   }
