@@ -62,12 +62,21 @@
       treeDone = true;
     }
 
+    var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.5);
+
     canvas
       .save()
       .rotate(branch.angle + canvas.getRadiansFromDegrees(velocity * 0.01))
-      .setStrokeWidth(Math.max(maxBranchDepth / (depth + 1) / 2, 0.5))
+      .setStrokeWidth(strokeWidth)
       .beginPath()
-      .strokeLine(0, 0, branch.length, 0, 'black')
+      .plotClosedPath([
+        0, -strokeWidth / 4,
+        branch.length, 0,
+        branch.length, 0,
+        0, strokeWidth / 4
+      ])
+      .fill('black')
+      .stroke('black')
       .closePath()
       .translate(branch.length, 0);
 
@@ -104,6 +113,7 @@
     canvas
       .clearCanvas()
       .setStrokeCap('round')
+      .setStrokeJoin('round')
       .translate(canvas.getWidth() / 2, canvas.getHeight());
 
     drawBranch(tree, 0, 7);
