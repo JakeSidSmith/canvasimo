@@ -120,13 +120,16 @@
       .setStrokeJoin('round')
       .translate(canvas.getWidth() / 2, canvas.getHeight());
 
-    var treeDone = drawBranch(tree, 0, 7);
-    canvas.translate(- canvas.getWidth() / 4, 0)
-    var tree1Done = drawBranch(tree1, 0, 4);
-    canvas.translate(canvas.getWidth() / 2, 0)
-    var tree2Done = drawBranch(tree2, 0, 4);
+    var treeDone = drawBranch(tree, 0, 6);
 
-    if (!treeDone || !tree1Done || !tree2Done || Math.abs(velocity) > 0.5) {
+    if (window.innerWidth >= 768) {
+      canvas.translate(- canvas.getWidth() / 4, 0)
+      var tree1Done = drawBranch(tree1, 0, 4);
+      canvas.translate(canvas.getWidth() / 2, 0)
+      var tree2Done = drawBranch(tree2, 0, 4);
+    }
+
+    if (!treeDone || (window.innerWidth >= 768 && (!tree1Done || !tree2Done)) || Math.abs(velocity) > 0.5) {
       raf = window.requestAnimationFrame(draw);
     }
 
