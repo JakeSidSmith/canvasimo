@@ -62,7 +62,7 @@
       treeDone = true;
     }
 
-    var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.5);
+    var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.1);
 
     canvas
       .save()
