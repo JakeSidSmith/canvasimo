@@ -60,6 +60,24 @@
     var treeDone;
     var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.1);
 
+    if (branch.length < branch.targetLength) {
+      branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
+    } else if (!branch.children && depth === maxBranchDepth && branch.length === branch.targetLength) {
+      treeDone = true;
+    } else if (!branch.children && depth < maxBranchDepth) {
+      branch.children = [];
+      var childCount = 2 + Math.floor(Math.random() * 2);
+
+      for (var c = 0; c < childCount; c += 1) {
+        branch.children.push({
+          length: 0,
+          targetLength: branch.targetLength * 0.75 + Math.random() * branch.targetLength * 0.25,
+          angle: canvas.getRadiansFromDegrees(Math.random() * 90 - 45),
+          children: null
+        });
+      }
+    }
+
     canvas
       .save()
       .rotate(branch.angle + canvas.getRadiansFromDegrees(velocity * 0.01))
@@ -76,31 +94,13 @@
       .closePath()
       .translate(branch.length, 0);
 
-    if (branch.length < branch.targetLength) {
-      branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
-    } else if (depth === maxBranchDepth && branch.length === branch.targetLength) {
-      treeDone = true;
-    } else if (!branch.children && depth < maxBranchDepth) {
-      branch.children = [];
-      var childCount = 2 + Math.floor(Math.random() * 2);
-
-      for (var c = 0; c < childCount; c += 1) {
-        branch.children.push({
-          length: 0,
-          targetLength: branch.targetLength * 0.75 + Math.random() * branch.targetLength * 0.25,
-          angle: canvas.getRadiansFromDegrees(Math.random() * 90 - 45),
-          children: null
-        });
-      }
-    }
-
     if (branch.children) {
       for (var i = 0; i < branch.children.length; i += 1) {
         var child = branch.children[i];
 
         var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
 
-        if (treeDone !== false) {
+        if (treeDone !== false || branchDone === false) {
           treeDone = branchDone;
         }
       }
