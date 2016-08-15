@@ -45,12 +45,12 @@
   var raf;
   var lastPos;
   var velocity = 0;
-  var tree;
+  var tree, tree1, tree2;
 
-  function createTree () {
+  function createTree (length) {
     return {
       length: 0,
-      targetLength: 30 + Math.random() * 5,
+      targetLength: length + Math.random() * 5,
       angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
       children: null
     };
@@ -121,8 +121,12 @@
       .translate(canvas.getWidth() / 2, canvas.getHeight());
 
     var treeDone = drawBranch(tree, 0, 7);
+    canvas.translate(- canvas.getWidth() / 4, 0)
+    var tree1Done = drawBranch(tree1, 0, 4);
+    canvas.translate(canvas.getWidth() / 2, 0)
+    var tree2Done = drawBranch(tree2, 0, 4);
 
-    if (!treeDone || Math.abs(velocity) > 0.5) {
+    if (!treeDone || !tree1Done || !tree2Done || Math.abs(velocity) > 0.5) {
       raf = window.requestAnimationFrame(draw);
     }
 
@@ -161,7 +165,9 @@
   }
 
   function reset () {
-    tree = createTree();
+    tree = createTree(30);
+    tree1 = createTree(20);
+    tree2 = createTree(20);
     window.requestAnimationFrame(draw);
   }
 
@@ -171,7 +177,9 @@
   element.addEventListener('touchend', touchEnd);
   window.addEventListener('resize', setCanvasSize);
 
-  tree = createTree();
+  tree = createTree(30);
+  tree1 = createTree(20);
+  tree2 = createTree(20);
   setCanvasSize();
 
 })();
