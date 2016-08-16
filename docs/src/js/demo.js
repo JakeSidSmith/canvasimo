@@ -43,56 +43,74 @@
   var canvas = new Canvasimo(element);
 
   var raf;
-  var treeDone = false;
   var lastPos;
   var velocity = 0;
+  var tree, tree1, tree2;
 
-  var tree = {
-    length: 0,
-    targetLength: 30 + Math.random() * 5,
-    angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
-    children: null
-  };
+  function createTree (length) {
+    return {
+      length: 0,
+      targetLength: length + Math.random() * 5,
+      angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
+      children: null
+    };
+  }
 
   function drawBranch (branch, depth, maxBranchDepth) {
-    if (depth > maxBranchDepth) {
-      treeDone = true;
-    }
-
-    canvas
-      .save()
-      .rotate(branch.angle + canvas.getRadiansFromDegrees(velocity * 0.01))
-      .setStrokeWidth(Math.max(maxBranchDepth / (depth + 1) / 2, 0.5))
-      .beginPath()
-      .strokeLine(0, 0, branch.length, 0, 'black')
-      .closePath()
-      .translate(branch.length, 0);
+    var treeDone;
+    var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.1);
 
     if (branch.length < branch.targetLength) {
-      branch.length += branch.targetLength / 20;
-    } else if (!branch.children && branch.targetLength > 10 && !treeDone) {
+      branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
+    } else if (!branch.children && depth === maxBranchDepth && branch.length === branch.targetLength) {
+      treeDone = true;
+    } else if (!branch.children && depth < maxBranchDepth) {
       branch.children = [];
       var childCount = 2 + Math.floor(Math.random() * 2);
+
+      var possibleRotation = depth < 1 ? 20 : 45;
 
       for (var c = 0; c < childCount; c += 1) {
         branch.children.push({
           length: 0,
           targetLength: branch.targetLength * 0.75 + Math.random() * branch.targetLength * 0.25,
-          angle: canvas.getRadiansFromDegrees(Math.random() * 90 - 45),
+          angle: canvas.getRadiansFromDegrees(Math.random() * possibleRotation * 2 - possibleRotation),
           children: null
         });
       }
     }
 
+    canvas
+      .save()
+      .rotate(branch.angle + canvas.getRadiansFromDegrees(velocity * 0.01))
+      .setStrokeWidth(strokeWidth)
+      .beginPath()
+      .plotClosedPath([
+        0, -strokeWidth / 4,
+        branch.length, 0,
+        branch.length, 0,
+        0, strokeWidth / 4
+      ])
+      .fill('black')
+      .stroke('black')
+      .closePath()
+      .translate(branch.length, 0);
+
     if (branch.children) {
       for (var i = 0; i < branch.children.length; i += 1) {
         var child = branch.children[i];
 
-        drawBranch(child, depth + 1, maxBranchDepth);
+        var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
+
+        if (treeDone !== false || branchDone === false) {
+          treeDone = branchDone;
+        }
       }
     }
 
     canvas.restore();
+
+    return treeDone;
   }
 
   function draw () {
@@ -101,11 +119,21 @@
     canvas
       .clearCanvas()
       .setStrokeCap('round')
+      .setStrokeJoin('round')
       .translate(canvas.getWidth() / 2, canvas.getHeight());
 
-    drawBranch(tree, 0, 7);
+    var treeDone = drawBranch(tree, 0, 6);
+    var tree1Done;
+    var tree2Done;
 
-    if (!treeDone || Math.abs(velocity) > 0.5) {
+    if (window.innerWidth >= 768) {
+      canvas.translate(-canvas.getWidth() / 4, 0);
+      tree1Done = drawBranch(tree1, 0, 4);
+      canvas.translate(canvas.getWidth() / 2, 0);
+      tree2Done = drawBranch(tree2, 0, 4);
+    }
+
+    if (!treeDone || (window.innerWidth >= 768 && (!tree1Done || !tree2Done)) || Math.abs(velocity) > 0.5) {
       raf = window.requestAnimationFrame(draw);
     }
 
@@ -143,11 +171,22 @@
     lastPos = undefined;
   }
 
+  function reset () {
+    tree = createTree(30);
+    tree1 = createTree(20);
+    tree2 = createTree(20);
+    window.requestAnimationFrame(draw);
+  }
+
+  element.addEventListener('click', reset);
   element.addEventListener('mousemove', mouseMove);
   element.addEventListener('touchmove', touchMove);
   element.addEventListener('touchend', touchEnd);
   window.addEventListener('resize', setCanvasSize);
 
+  tree = createTree(30);
+  tree1 = createTree(20);
+  tree2 = createTree(20);
   setCanvasSize();
 
 })();
