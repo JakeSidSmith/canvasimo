@@ -68,11 +68,13 @@
       branch.children = [];
       var childCount = 2 + Math.floor(Math.random() * 2);
 
+      var possibleRotation = depth < 1 ? 20 : 45;
+
       for (var c = 0; c < childCount; c += 1) {
         branch.children.push({
           length: 0,
           targetLength: branch.targetLength * 0.75 + Math.random() * branch.targetLength * 0.25,
-          angle: canvas.getRadiansFromDegrees(Math.random() * 90 - 45),
+          angle: canvas.getRadiansFromDegrees(Math.random() * possibleRotation * 2 - possibleRotation),
           children: null
         });
       }
