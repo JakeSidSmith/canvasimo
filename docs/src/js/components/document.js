@@ -51,6 +51,13 @@
                       <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
                     </a>
                     <a
+                      className="badge npm"
+                      href="https://www.npmjs.com/package/canvasimo"
+                      target="_blank"
+                    >
+                      NPM
+                    </a>
+                    <a
                       className="badge"
                       href="https://github.com/jakesidsmith/canvasimo"
                       target="_blank"
