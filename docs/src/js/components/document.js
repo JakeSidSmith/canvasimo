@@ -44,7 +44,7 @@
 
                   <p className="badges">
                     <a
-                      className="badge"
+                      className="badge circleci"
                       href="https://circleci.com/gh/JakeSidSmith/canvasimo"
                       target="_blank"
                     >

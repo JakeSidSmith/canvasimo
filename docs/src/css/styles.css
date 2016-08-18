@@ -417,6 +417,11 @@ canvas {
   line-height: 21px;
   border-radius: 4px;
   color: #fff;
+  background-color: #555;
+}
+
+.badge.circleci {
+  min-width: 73px;
 }
 
 .badge.npm {
