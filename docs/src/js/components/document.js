@@ -43,19 +43,26 @@
                   </h1>
 
                   <p className="badges">
-                    <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
                     <a
-                      className="github-button" href="https://github.com/jakesidsmith/canvasimo"
-                      aria-label="Canvasimo on GitHub"
+                      className="badge"
+                      href="https://circleci.com/gh/JakeSidSmith/canvasimo"
+                      target="_blank"
+                    >
+                      <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
+                    </a>
+                    <a
+                      className="badge"
+                      href="https://github.com/jakesidsmith/canvasimo"
+                      target="_blank"
                     >
                       GitHub
                     </a>
                     <a
-                      className="github-button" href="https://github.com/jakesidsmith/canvasimo/issues"
-                      data-icon="octicon-issue-opened"
-                      aria-label="Canvasimo issues on GitHub"
+                      className="badge"
+                      href="https://github.com/jakesidsmith/canvasimo/issues"
+                      target="_blank"
                     >
-                      Issue
+                      Issues
                     </a>
                   </p>
 
