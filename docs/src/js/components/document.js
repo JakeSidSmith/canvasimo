@@ -58,14 +58,14 @@
                       NPM
                     </a>
                     <a
-                      className="badge"
+                      className="badge github"
                       href="https://github.com/jakesidsmith/canvasimo"
                       target="_blank"
                     >
                       GitHub
                     </a>
                     <a
-                      className="badge"
+                      className="badge github"
                       href="https://github.com/jakesidsmith/canvasimo/issues"
                       target="_blank"
                     >

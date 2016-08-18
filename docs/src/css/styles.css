@@ -417,11 +417,14 @@ canvas {
   line-height: 21px;
   border-radius: 4px;
   color: #fff;
-  background-color: #4078c0;
 }
 
 .badge.npm {
   background-color: #cb3837;
+}
+
+.badge.github {
+  background-color: #4078c0;
 }
 
 .badge + .badge {
