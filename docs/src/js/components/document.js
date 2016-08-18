@@ -25,7 +25,6 @@
               title="no title"
               charSet="utf-8"
             />
-            <script async defer src="https://buttons.github.io/buttons.js" />
           </head>
           <body>
             <div className="wrapper">
@@ -44,19 +43,36 @@
                   </h1>
 
                   <p className="badges">
-                    <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
                     <a
-                      className="github-button" href="https://github.com/jakesidsmith/canvasimo"
-                      aria-label="Canvasimo on GitHub"
+                      className="badge circleci"
+                      href="https://circleci.com/gh/JakeSidSmith/canvasimo"
+                      target="_blank"
+                    >
+                      <img
+                        src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg"
+                        alt="Circle CI Status Badge"
+                      />
+                    </a>
+                    <a
+                      className="badge npm"
+                      href="https://www.npmjs.com/package/canvasimo"
+                      target="_blank"
+                    >
+                      NPM
+                    </a>
+                    <a
+                      className="badge github"
+                      href="https://github.com/jakesidsmith/canvasimo"
+                      target="_blank"
                     >
                       GitHub
                     </a>
                     <a
-                      className="github-button" href="https://github.com/jakesidsmith/canvasimo/issues"
-                      data-icon="octicon-issue-opened"
-                      aria-label="Canvasimo issues on GitHub"
+                      className="badge github"
+                      href="https://github.com/jakesidsmith/canvasimo/issues"
+                      target="_blank"
                     >
-                      Issue
+                      Issues
                     </a>
                   </p>
 
