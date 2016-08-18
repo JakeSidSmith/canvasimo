@@ -25,7 +25,6 @@
               title="no title"
               charSet="utf-8"
             />
-            <script async defer src="https://buttons.github.io/buttons.js" />
           </head>
           <body>
             <div className="wrapper">
