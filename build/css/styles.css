@@ -371,34 +371,67 @@ canvas {
   }
 }
 
-.github-button {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: bold;
-  text-shadow: 0 1px 0 rgba(255,255,255,.9);
-  background-color: #eee;
-  background-image: -webkit-linear-gradient(top,#fcfcfc,#eee);
-  background-image: -moz-linear-gradient(top,#fcfcfc,#eee);
-  background-image: linear-gradient(to bottom,#fcfcfc,#eee);
-  height: 18px;
-  padding: 0 5px;
-  color: #333;
-  vertical-align: middle;
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-}
-
 .badges::after {
   content: '';
   display: table;
   clear: both;
 }
 
-.badges > * {
+.badge,
+.badges img {
+  position: relative;
   float: left;
   height: 20px;
 }
 
-.badges > * + * {
+.badge:hover {
+  text-decoration: none;
+}
+
+.badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.badge:hover::after {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.badge:active::after {
+  box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.badge > img {
+  margin: 0 -5px;
+  z-index: 0;
+}
+
+.badge {
+  padding: 0 5px;
+  font-size: 11px;
+  line-height: 21px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #555;
+}
+
+.badge.circleci {
+  min-width: 73px;
+}
+
+.badge.npm {
+  background-color: #cb3837;
+}
+
+.badge.github {
+  background-color: #4078c0;
+}
+
+.badge + .badge {
   margin-left: 10px;
 }
