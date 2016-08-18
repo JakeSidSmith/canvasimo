@@ -48,7 +48,10 @@
                       href="https://circleci.com/gh/JakeSidSmith/canvasimo"
                       target="_blank"
                     >
-                      <img src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg" />
+                      <img
+                        src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg"
+                        alt="Circle CI Status Badge"
+                      />
                     </a>
                     <a
                       className="badge npm"
