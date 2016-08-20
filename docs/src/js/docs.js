@@ -1154,6 +1154,7 @@
     },
     {
       name: 'Converting Angles',
+      description: 'A collection of methods to help with calculating and converting angles',
       methods: [
         {
           name: 'getRadiansFromDegrees',
