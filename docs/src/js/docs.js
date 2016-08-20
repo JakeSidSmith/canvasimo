@@ -1060,6 +1060,7 @@
     },
     {
       name: 'Image Data',
+      description: 'A collection of methods for creating, putting, or getting image data about the canvas',
       methods: [
         {
           name: 'getDataURL',
