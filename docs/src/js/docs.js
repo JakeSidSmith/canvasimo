@@ -932,6 +932,8 @@
     },
     {
       name: 'Stroke Styles',
+      description: 'A collection of methods for getting and setting stroke styles, ' +
+        'and applying strokes to existing shapes',
       methods: [
         {
           name: 'stroke',
