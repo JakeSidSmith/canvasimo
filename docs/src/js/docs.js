@@ -482,15 +482,94 @@
         },
         {
           name: 'plotStar',
-          description: ''
+          description: 'Plot a star that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            }
+          ]
         },
         {
           name: 'strokeStar',
-          description: ''
+          description: 'Plot a star and apply a stoke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillStar',
-          description: ''
+          description: 'Plot a star and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotBurst',
