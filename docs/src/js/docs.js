@@ -878,6 +878,7 @@
     },
     {
       name: 'Fonts',
+      description: 'A collection of methods for getting and setting font styles and variations',
       methods: [
         {
           name: 'setFont',
