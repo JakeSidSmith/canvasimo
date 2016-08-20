@@ -38,20 +38,51 @@ describe('docs', function () {
   });
 
   it('should have descriptions for every method', function () {
+    var totalMethods = 0;
+    var documentedMethods = 0;
+    var firstUndocumentedMethod;
+
     each(docs, function (group) {
       each(group.methods, function (method) {
-        expect(method.description).to.exist;
-        expect(method.description).to.be.ok;
+        totalMethods += 1;
+
+        if (method.description) {
+          documentedMethods += 1;
+        } else if (!firstUndocumentedMethod) {
+          firstUndocumentedMethod = method.name;
+        }
       });
     });
+
+    console.log(documentedMethods + ' of ' + totalMethods + ' methods have descriptions');
+
+    if (firstUndocumentedMethod) {
+      throw new Error(firstUndocumentedMethod + ' method has no description');
+    }
   });
 
   it('should have arguments or returns for every method', function () {
+    var totalMethods = 0;
+    var documentedMethods = 0;
+    var firstUndocumentedMethod;
+
     each(docs, function (group) {
       each(group.methods, function (method) {
-        expect(method.arguments || method.returns).to.exist;
+        totalMethods += 1;
+
+        if (method.arguments || method.returns) {
+          documentedMethods += 1;
+        } else if (!firstUndocumentedMethod) {
+          firstUndocumentedMethod = method.name;
+        }
       });
     });
+
+    console.log(documentedMethods + ' of ' + totalMethods + ' methods have arguments or returns');
+
+    if (firstUndocumentedMethod) {
+      throw new Error(firstUndocumentedMethod + ' method has no arguments or returns');
+    }
   });
 
 });
