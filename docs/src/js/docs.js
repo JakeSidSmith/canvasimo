@@ -1090,6 +1090,7 @@
     },
     {
       name: 'Color Helpers',
+      description: 'A collection of methods to help with creating color strings',
       methods: [
         {
           name: 'createHSL',
