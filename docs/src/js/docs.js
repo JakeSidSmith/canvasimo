@@ -391,15 +391,94 @@
         },
         {
           name: 'plotPoly',
-          description: ''
+          description: 'Plot a polygon that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            }
+          ]
         },
         {
           name: 'strokePoly',
-          description: ''
+          description: 'Plot a polygon and apply a stoke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillPoly',
-          description: ''
+          description: 'Plot a polygon and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotStar',
