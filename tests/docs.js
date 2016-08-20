@@ -25,7 +25,7 @@ describe('docs', function () {
     });
   });
 
-  it('should contain all of the canvasimo methods (or aliases)', function () {
+  it('should contain all of the canvasimo methods and aliases', function () {
     each(canvas, function (value, key) {
       var anyGroupContainsTheMethod = any(docs, function (group) {
         return any(group.methods, function (method) {
@@ -34,6 +34,23 @@ describe('docs', function () {
       });
 
       expect(anyGroupContainsTheMethod).to.be.true;
+    });
+  });
+
+  it('should have descriptions for every method', function () {
+    each(docs, function (group) {
+      each(group.methods, function (method) {
+        expect(method.description).to.exist;
+        expect(method.description).to.be.ok;
+      });
+    });
+  });
+
+  it('should have arguments or returns for every method', function () {
+    each(docs, function (group) {
+      each(group.methods, function (method) {
+        expect(method.arguments || method.returns).to.exist;
+      });
     });
   });
 
