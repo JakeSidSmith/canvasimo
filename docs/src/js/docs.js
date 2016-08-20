@@ -728,15 +728,43 @@
         },
         {
           name: 'plotClosedPath',
-          description: ''
+          description: 'Plot a closed path that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'points',
+              type: types.array
+            }
+          ]
         },
         {
           name: 'strokeClosedPath',
-          description: ''
+          description: 'Plot a closed path and apply a stroke to it',
+          arguments: [
+            {
+              name: 'points',
+              type: types.array
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillClosedPath',
-          description: ''
+          description: 'Plot a closed path and apply a fill to it',
+          arguments: [
+            {
+              name: 'points',
+              type: types.array
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         }
       ]
     },
