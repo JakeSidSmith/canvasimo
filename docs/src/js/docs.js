@@ -809,6 +809,8 @@
     },
     {
       name: 'Paths',
+      description: 'A collection of methods for plotting or drawing paths - ' +
+        'shapes that can be connected to create more complex shapes',
       methods: [
         {
           name: 'plotArc',
