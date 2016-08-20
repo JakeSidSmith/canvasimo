@@ -842,6 +842,8 @@
     },
     {
       name: 'Text',
+      description: 'A collection of methods for drawing text, ' +
+        'and getting and setting properties related to text rendering',
       methods: [
         {
           name: 'strokeText',
