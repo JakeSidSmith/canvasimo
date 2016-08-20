@@ -16,6 +16,7 @@
   module.exports = [
     {
       name: 'Canvas element',
+      description: 'A collection of methods for getting and setting various properties of the canvas element',
       methods: [
         {
           name: 'getCanvas',
