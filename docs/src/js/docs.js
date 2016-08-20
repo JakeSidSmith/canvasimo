@@ -573,15 +573,106 @@
         },
         {
           name: 'plotBurst',
-          description: ''
+          description: 'Plot a burst that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'outerRadius',
+              type: types.number
+            },
+            {
+              name: 'innerRadius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            }
+          ]
         },
         {
           name: 'strokeBurst',
-          description: ''
+          description: 'Plot a burst and apply a stoke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'outerRadius',
+              type: types.number
+            },
+            {
+              name: 'innerRadius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillBurst',
-          description: ''
+          description: 'Plot a burst and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'outerRadius',
+              type: types.number
+            },
+            {
+              name: 'innerRadius',
+              type: types.number
+            },
+            {
+              name: 'sides',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotPixel',
