@@ -1120,6 +1120,7 @@
     },
     {
       name: 'Converting Sizes',
+      description: 'A collection of methods to help with calculating and converting sizes, and distances',
       methods: [
         {
           name: 'getFractionFromPercent',
