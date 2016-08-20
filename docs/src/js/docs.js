@@ -1172,6 +1172,7 @@
     },
     {
       name: 'Path Plotting',
+      description: 'A collection of methods for path drawing',
       methods: [
         {
           name: 'beginPath',
