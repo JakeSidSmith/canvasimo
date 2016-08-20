@@ -148,39 +148,246 @@
         {
           name: 'plotRect',
           alias: 'rect',
-          description: ''
+          description: 'Plot a rectangle that can then have a fill or stroke applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'strokeRect',
-          description: ''
+          description: 'Plot a rectangle and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillRect',
-          description: ''
+          description: 'Plot a rectangle and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotRoundedRect',
-          description: ''
+          description: 'Plot a rounded rectangle that can then have a fill or stroke applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'strokeRoundedRect',
-          description: ''
+          description: 'Plot a rounded rectangle and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillRoundedRect',
-          description: ''
+          description: 'Plot a rounded rectangle and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotCircle',
-          description: ''
+          description: 'Plot a circle that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            }
+          ]
         },
         {
           name: 'strokeCircle',
-          description: ''
+          description: 'Plot a circle and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillCircle',
-          description: ''
+          description: 'Plot a circle and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotPoly',
