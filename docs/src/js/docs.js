@@ -1308,6 +1308,7 @@
     },
     {
       name: 'Misc',
+      description: 'Miscellaneous methods',
       methods: [
         {
           name: 'drawFocusIfNeeded',
