@@ -97,6 +97,7 @@
     },
     {
       name: 'Context',
+      description: 'A collection of methods for retreiving a canvas context or information about the context',
       methods: [
         {
           name: 'getContext',
