@@ -1206,6 +1206,7 @@
     },
     {
       name: 'Canvas State',
+      description: 'A collection of methods to save, restore, or transform the canvas state',
       methods: [
         {
           name: 'save',
