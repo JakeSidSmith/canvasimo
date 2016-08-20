@@ -1011,6 +1011,8 @@
     },
     {
       name: 'Fill styles',
+      description: 'A collection of methods for getting and setting fill styles, ' +
+        'and applying fills to existing shapes',
       methods: [
         {
           name: 'fill',
