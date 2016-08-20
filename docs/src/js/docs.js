@@ -676,15 +676,55 @@
         },
         {
           name: 'plotPixel',
-          description: ''
+          description: 'Plot a single pixel that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'strokePixel',
-          description: ''
+          description: 'Plot a single pixel and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillPixel',
-          description: ''
+          description: 'Plot a single pixel and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'color',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotClosedPath',
