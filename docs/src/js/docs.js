@@ -774,6 +774,8 @@
     },
     {
       name: 'Open Shapes',
+      description: 'A collection of methods for plotting or drawing open shapes - ' +
+        'those that create a new shape when invoked, but are not self closing',
       methods: [
         {
           name: 'plotLine',
