@@ -189,7 +189,7 @@
               type: types.number
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -216,7 +216,7 @@
               type: types.number
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -273,7 +273,7 @@
               type: types.number
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -304,7 +304,7 @@
               type: types.number
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -355,7 +355,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -383,7 +383,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -442,7 +442,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -474,7 +474,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -533,7 +533,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -565,7 +565,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -632,7 +632,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -668,7 +668,7 @@
               optional: true
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -701,7 +701,7 @@
               type: types.number
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -720,7 +720,7 @@
               type: types.number
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
@@ -745,7 +745,7 @@
               type: types.array
             },
             {
-              name: 'color',
+              name: 'stroke',
               type: types.string,
               optional: true
             }
@@ -760,7 +760,7 @@
               type: types.array
             },
             {
-              name: 'color',
+              name: 'fill',
               type: types.string,
               optional: true
             }
