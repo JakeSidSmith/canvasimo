@@ -37,6 +37,28 @@ describe('docs', function () {
     });
   });
 
+  it('should have descriptions for every group', function () {
+    var totalGroups = 0;
+    var documentedGroups = 0;
+    var firstUndocumentedGroup;
+
+    each(docs, function (group) {
+      totalGroups += 1;
+
+      if (group.description) {
+        documentedGroups += 1;
+      } else if (!firstUndocumentedGroup) {
+        firstUndocumentedGroup = group.name;
+      }
+    });
+
+    console.log(documentedGroups + ' of ' + totalGroups + ' groups have descriptions');
+
+    if (firstUndocumentedGroup) {
+      throw new Error(firstUndocumentedGroup + ' group has no description');
+    }
+  });
+
   it('should have descriptions for every method', function () {
     var totalMethods = 0;
     var documentedMethods = 0;
