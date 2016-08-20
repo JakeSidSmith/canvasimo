@@ -146,6 +146,8 @@
     },
     {
       name: 'Solid Shapes',
+      description: 'A collection of methods for plotting or drawing solid shapes - ' +
+        'those that create a new shape when invoked, and are self closing',
       methods: [
         {
           name: 'plotRect',
