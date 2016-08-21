@@ -1386,27 +1386,54 @@
       methods: [
         {
           name: 'stroke',
-          description: ''
+          description: 'Apply a stroke to the current shape',
+          arguments: [
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'setStroke',
           alias: 'setStrokeStyle',
-          description: ''
+          description: 'Set the stroke style to use',
+          arguments: [
+            {
+              name: 'strokeStyle',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getStroke',
           alias: 'getStrokeStyle',
-          description: ''
+          description: 'Get the stroke style that is being used',
+          returns: {
+            name: 'strokeStyle',
+            type: types.string
+          }
         },
         {
           name: 'setStrokeCap',
           alias: 'setLineCap',
-          description: ''
+          description: 'Set the stroke cap to use',
+          arguments: [
+            {
+              name: 'strokeCap',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getStrokeCap',
           alias: 'getLineCap',
-          description: ''
+          description: 'Get the stroke cap that is being used',
+          returns: {
+            name: 'strokeCap',
+            type: types.string
+          }
         },
         {
           name: 'setStrokeDash',
