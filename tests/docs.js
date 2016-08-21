@@ -84,6 +84,7 @@ describe('docs', function () {
   });
 
   it('should have arguments or returns for every method', function () {
+    var exceptions = ['clearCanvas'];
     var totalMethods = 0;
     var documentedMethods = 0;
     var firstUndocumentedMethod;
@@ -91,6 +92,10 @@ describe('docs', function () {
     each(docs, function (group) {
       each(group.methods, function (method) {
         totalMethods += 1;
+
+        if (exceptions.indexOf(method.name) >= 0) {
+          return;
+        }
 
         if (method.arguments || method.returns) {
           documentedMethods += 1;

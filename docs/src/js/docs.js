@@ -12,7 +12,9 @@
     htmlElement: 'HTMLElement',
     rect: 'DOMRect',
     text: 'TextMetrics',
-    gradient: 'CanvasGradient'
+    gradient: 'CanvasGradient',
+    pattern: 'CanvasPattern',
+    image: 'Image'
   };
 
   module.exports = [
@@ -1543,45 +1545,199 @@
       methods: [
         {
           name: 'fill',
-          description: ''
+          description: 'Apply a fill to the current shape',
+          arguments: [
+            {
+              name: 'fill',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillCanvas',
-          description: ''
+          description: 'Apply a fill to the entire canvas area',
+          arguments: [
+            {
+              name: 'fill',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'clearRect',
-          description: ''
+          description: 'Clear a rectangular area of the canvas',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'clearCanvas',
-          description: ''
+          description: 'Clear the entire canvas area'
         },
         {
           name: 'setFill',
           alias: 'setFillStyle',
-          description: ''
+          description: 'Set the fill to use',
+          arguments: [
+            {
+              name: 'fill',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getFill',
           alias: 'getFillStyle',
-          description: ''
+          description: 'Get the fill that is being used',
+          returns: {
+            name: 'fill',
+            type: types.string
+          }
         },
         {
           name: 'createLinearGradient',
-          description: ''
+          description: 'Create a linear gradient to use as a fill',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'gradient',
+            type: types.gradient
+          }
         },
         {
           name: 'createRadialGradient',
-          description: ''
+          description: 'Create a radial gradient to use as a fill',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'radius1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            },
+            {
+              name: 'radius2',
+              type: types.number
+            },
+          ],
+          returns: {
+            name: 'gradient',
+            type: types.gradient
+          }
         },
         {
           name: 'createPattern',
-          description: ''
+          description: 'Create a pattern to be used as a fill',
+          arguments: [
+            {
+              name: 'image',
+              type: types.image
+            },
+            {
+              name: 'repetition',
+              type: types.string
+            }
+          ],
+          returns: {
+            name: 'pattern',
+            type: types.pattern
+          }
         },
         {
           name: 'drawImage',
-          description: ''
+          description: 'Draw an image to the canvas. ' +
+            'If the second position / size arguments are supplied, the first will be used for cropping the image, ' +
+            'and the second for the position and size it will be drawn',
+          arguments: [
+            {
+              name: 'image',
+              type: types.image
+            },
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'width1',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'height1',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'x2',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'y2',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'width2',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'height2',
+              type: types.number,
+              optional: true
+            }
+          ]
         }
       ]
     },
