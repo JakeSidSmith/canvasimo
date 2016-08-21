@@ -1478,30 +1478,60 @@
         {
           name: 'setStrokeJoin',
           alias: 'setLineJoin',
-          description: ''
+          description: 'Set the stroke join to use',
+          arguments: [
+            {
+              name: 'strokeJoin',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getStrokeJoin',
           alias: 'getLineJoin',
-          description: ''
+          description: 'Get the stroke join that is being used',
+          returns: {
+            name: 'strokeJoin',
+            type: types.string
+          }
         },
         {
           name: 'setStrokeWidth',
           alias: 'setLineWidth',
-          description: ''
+          description: 'Set the stroke width to use',
+          arguments: [
+            {
+              name: 'strokeWidth',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getStrokeWidth',
           alias: 'getLineWidth',
-          description: ''
+          description: 'Get the stroke width that is being used',
+          returns: {
+            name: 'strokeWidth',
+            type: types.number
+          }
         },
         {
           name: 'setMiterLimit',
-          description: ''
+          description: 'Set the miter limit to use',
+          arguments: [
+            {
+              name: 'miterLimit',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getMiterLimit',
-          description: ''
+          description: 'Get the miter limit that is being used',
+          returns: {
+            name: 'miterLimit',
+            type: types.number
+          }
         }
       ]
     },
