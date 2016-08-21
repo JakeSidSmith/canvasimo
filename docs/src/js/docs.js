@@ -11,7 +11,8 @@
     context: 'RenderingContext',
     htmlElement: 'HTMLElement',
     rect: 'DOMRect',
-    text: 'TextMetrics'
+    text: 'TextMetrics',
+    gradient: 'CanvasGradient'
   };
 
   module.exports = [
