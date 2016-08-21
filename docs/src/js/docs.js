@@ -1438,22 +1438,42 @@
         {
           name: 'setStrokeDash',
           alias: 'setLineDash',
-          description: ''
+          description: 'Set the stroke dash to use',
+          arguments: [
+            {
+              name: 'strokeDash',
+              type: types.array
+            }
+          ]
         },
         {
           name: 'getStrokeDash',
           alias: 'getLineDash',
-          description: ''
+          description: 'Get the stroke dash that is being used',
+          returns: {
+            name: 'strokeDash',
+            type: types.array
+          }
         },
         {
           name: 'setStrokeDashOffset',
           alias: 'setLineDashOffset',
-          description: ''
+          description: 'Set the stroke dash offset to use',
+          arguments: [
+            {
+              name: 'strokeDashOffset',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getStrokeDashOffset',
           alias: 'getLineDashOffset',
-          description: ''
+          description: 'Get the stroke dash offset that is being used',
+          returns: {
+            name: 'strokeDashOffset',
+            type: types.number
+          }
         },
         {
           name: 'setStrokeJoin',
