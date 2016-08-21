@@ -83,6 +83,16 @@ describe('docs', function () {
     }
   });
 
+  it('descriptions should have a full stop', function () {
+    each(docs, function (group) {
+      each(group.methods, function (method) {
+        if (method.description.lastIndexOf('.') < 0) {
+          throw new Error(method.name + ' description should have a full stop');
+        }
+      });
+    });
+  });
+
   it('should have arguments or returns for every method', function () {
     var exceptions = ['clearCanvas'];
     var totalMethods = 0;
