@@ -779,31 +779,141 @@
       methods: [
         {
           name: 'plotLine',
-          description: ''
+          description: 'Plot a line that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'strokeLine',
-          description: ''
+          description: 'Plot a line and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            },
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotLength',
-          description: ''
+          description: 'Plot a line, by length & angle, that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'length',
+              type: types.number
+            },
+            {
+              name: 'angle',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'strokeLength',
-          description: ''
+          description: 'Plot a line, by length & angle, and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'length',
+              type: types.number
+            },
+            {
+              name: 'angle',
+              type: types.number
+            },
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotPath',
-          description: ''
+          description: 'Plot a path, that is not self closing, that can have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'points',
+              type: types.array
+            }
+          ]
         },
         {
           name: 'strokePath',
-          description: ''
+          description: 'Plot a path, that is not self closing, and apply a stroke to it',
+          arguments: [
+            {
+              name: 'points',
+              type: types.array
+            },
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillPath',
-          description: ''
+          description: 'Plot a path, that is not self closing, and apply a fill to it',
+          arguments: [
+            {
+              name: 'points',
+              type: types.array
+            },
+            {
+              name: 'fill',
+              type: types.string,
+              optional: true
+            }
+          ]
         }
       ]
     },
