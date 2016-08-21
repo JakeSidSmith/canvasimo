@@ -10,7 +10,8 @@
     array: 'Array',
     context: 'RenderingContext',
     htmlElement: 'HTMLElement',
-    rect: 'DOMRect'
+    rect: 'DOMRect',
+    text: 'TextMetrics'
   };
 
   module.exports = [
@@ -1163,32 +1164,104 @@
       methods: [
         {
           name: 'strokeText',
-          description: ''
+          description: 'Draw a text with a stroke',
+          arguments: [
+            {
+              name: 'text',
+              type: types.string
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'maxWidth',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillText',
-          description: ''
+          description: 'Draw a text with a fill',
+          arguments: [
+            {
+              name: 'text',
+              type: types.string
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'maxWidth',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'fill',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'getTextSize',
           alias: 'measureText',
-          description: ''
+          description: 'Get information about the size text will be drawn',
+          returns: {
+            name: '{width}',
+            type: types.text
+          }
         },
         {
           name: 'setTextAlign',
-          description: ''
+          description: 'Set the horizontal text alignment',
+          arguments: [
+            {
+              name: 'alignment',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getTextAlign',
-          description: ''
+          description: 'Get the horizontal text alignment',
+          returns: {
+            name: 'alignment',
+            type: types.string
+          }
         },
         {
           name: 'setTextBaseline',
-          description: ''
+          description: 'Set the vertical text alignment',
+          arguments: [
+            {
+              name: 'alignment',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getTextBaseline',
-          description: ''
+          description: 'Get the vertical text alignment',
+          returns: {
+            name: 'alignment',
+            type: types.string
+          }
         }
       ]
     },
