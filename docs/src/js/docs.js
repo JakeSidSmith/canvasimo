@@ -1271,51 +1271,111 @@
       methods: [
         {
           name: 'setFont',
-          description: ''
+          description: 'Set the font to use',
+          arguments: [
+            {
+              name: 'font',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getFont',
-          description: ''
+          description: 'Get the font that is being used',
+          returns: {
+            name: 'font',
+            type: types.string
+          }
         },
         {
           name: 'setFontFamily',
-          description: ''
+          description: 'Set the font family to use',
+          arguments: [
+            {
+              name: 'fontFamily',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getFontFamily',
-          description: ''
+          description: 'Get the font that is being used',
+          returns: {
+            name: 'fontFamily',
+            type: types.string
+          }
         },
         {
           name: 'setFontSize',
-          description: ''
+          description: 'Set the font size to use',
+          arguments: [
+            {
+              name: 'fontSize',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getFontSize',
-          description: ''
+          description: 'Get the font size that is being used',
+          returns: {
+            name: 'fontSize',
+            type: [types.number, types.string]
+          }
         },
         {
           name: 'setFontStyle',
-          description: ''
+          description: 'Set the font style to use',
+          arguments: [
+            {
+              name: 'fontStyle',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getFontStyle',
-          description: ''
+          description: 'Get the font style that is being used',
+          returns: {
+            name: 'fontStyle',
+            type: types.string
+          }
         },
         {
           name: 'setFontVariant',
-          description: ''
+          description: 'Set the font variant to use',
+          arguments: [
+            {
+              name: 'fontVariant',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getFontVariant',
-          description: ''
+          description: 'Get the font variant that is being used',
+          returns: {
+            name: 'fontVariant',
+            type: types.string
+          }
         },
         {
           name: 'setFontWeight',
-          description: ''
+          description: 'Set the font weight to use',
+          arguments: [
+            {
+              name: 'fontWeight',
+              type: [types.number, types.string]
+            }
+          ]
         },
         {
           name: 'getFontWeight',
-          description: ''
+          description: 'Get the font weight that is being used',
+          returns: {
+            name: 'fontWeight',
+            type: types.string
+          }
         }
       ]
     },
