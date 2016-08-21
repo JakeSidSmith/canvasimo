@@ -925,28 +925,234 @@
         {
           name: 'plotArc',
           alias: 'arc',
-          description: ''
+          description: 'Plot an arc that can have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'startAngle',
+              type: types.number
+            },
+            {
+              name: 'endAngle',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            }
+          ]
         },
         {
           name: 'strokeArc',
-          description: ''
+          description: 'Plot an arc and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'startAngle',
+              type: types.number
+            },
+            {
+              name: 'endAngle',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillArc',
-          description: ''
+          description: 'Plot an arc and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            },
+            {
+              name: 'startAngle',
+              type: types.number
+            },
+            {
+              name: 'endAngle',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'fill',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'plotEllipse',
           alias: 'ellipse',
-          description: ''
+          description: 'Plot an ellipse that can then have a stroke or fill applied to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radiusX',
+              type: types.number
+            },
+            {
+              name: 'radiusY',
+              type: types.number
+            },
+            {
+              name: 'rotation',
+              type: types.number
+            },
+            {
+              name: 'startAngle',
+              type: types.number
+            },
+            {
+              name: 'endAngle',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            }
+          ]
         },
         {
           name: 'strokeEllipse',
-          description: ''
+          description: 'Plot an ellipse and apply a stroke to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radiusX',
+              type: types.number
+            },
+            {
+              name: 'radiusY',
+              type: types.number
+            },
+            {
+              name: 'rotation',
+              type: types.number
+            },
+            {
+              name: 'startAngle',
+              type: types.number
+            },
+            {
+              name: 'endAngle',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'stroke',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'fillEllipse',
-          description: ''
+          description: 'Plot an ellipse and apply a fill to it',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'radiusX',
+              type: types.number
+            },
+            {
+              name: 'radiusY',
+              type: types.number
+            },
+            {
+              name: 'rotation',
+              type: types.number
+            },
+            {
+              name: 'startAngle',
+              type: types.number
+            },
+            {
+              name: 'endAngle',
+              type: types.number
+            },
+            {
+              name: 'counterClockwise',
+              type: types.boolean,
+              optional: true
+            },
+            {
+              name: 'fill',
+              type: types.string,
+              optional: true
+            }
+          ]
         }
       ]
     },
