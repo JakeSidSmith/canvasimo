@@ -14,7 +14,9 @@
     text: 'TextMetrics',
     gradient: 'CanvasGradient',
     pattern: 'CanvasPattern',
-    image: 'Image'
+    image: 'Image',
+    imageData: 'ImageData',
+    dataUrl: 'Data URI'
   };
 
   module.exports = [
@@ -1747,27 +1749,142 @@
       methods: [
         {
           name: 'getDataURL',
-          description: ''
+          description: 'Get a data URL of the current canvas state',
+          arguments: [
+            {
+              name: 'type',
+              type: types.string,
+              optional: true
+            },
+            {
+              name: 'quality',
+              type: types.number,
+              optional: true
+            }
+          ],
+          returns: {
+            name: 'url',
+            type: types.dataUrl
+          }
         },
         {
           name: 'createImageData',
-          description: ''
+          description: 'Create image data with either the width and height specified, ' +
+            'or with the width and height of a the image data supplied',
+          arguments: [
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'imageData',
+            type: types.imageData
+          }
         },
         {
           name: 'getImageData',
-          description: ''
+          description: 'Get the image data from an area of the canvas',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'width',
+              type: types.number
+            },
+            {
+              name: 'height',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'imageData',
+            type: types.imageData
+          }
         },
         {
           name: 'putImageData',
-          description: ''
+          description: 'Draw image data onto the canvas',
+          arguments: [
+            {
+              name: 'imageData',
+              type: types.imageData
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'cropX',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'cropY',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'cropWidth',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'cropHeight',
+              type: types.number,
+              optional: true
+            }
+          ]
         },
         {
           name: 'getPixelData',
-          description: ''
+          description: 'Get image data about a specific pixel',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'imageData',
+            type: types.imageData
+          }
         },
         {
           name: 'getPixelColor',
-          description: ''
+          description: 'Get the color of a specific pixel',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         }
       ]
     },
