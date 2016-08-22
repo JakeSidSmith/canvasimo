@@ -85,9 +85,13 @@ describe('docs', function () {
 
   it('descriptions should have a full stop', function () {
     each(docs, function (group) {
+      if (group.description.lastIndexOf('.') < 0) {
+        throw new Error(group.name + ' group\'s description should have a full stop');
+      }
+
       each(group.methods, function (method) {
         if (method.description.lastIndexOf('.') < 0) {
-          throw new Error(method.name + ' description should have a full stop');
+          throw new Error(method.name + ' method\'s description should have a full stop');
         }
       });
     });
