@@ -1894,27 +1894,127 @@
       methods: [
         {
           name: 'createHSL',
-          description: ''
+          description: 'Create an HSL color string from the given values',
+          arguments: [
+            {
+              name: 'hue',
+              type: types.number
+            },
+            {
+              name: 'saturation',
+              type: types.number
+            },
+            {
+              name: 'lightness',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         },
         {
           name: 'createHSLA',
-          description: ''
+          description: 'Create an HSLA color string from the given values',
+          arguments: [
+            {
+              name: 'hue',
+              type: types.number
+            },
+            {
+              name: 'saturation',
+              type: types.number
+            },
+            {
+              name: 'lightness',
+              type: types.number
+            },
+            {
+              name: 'alpha',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         },
         {
           name: 'createRGB',
-          description: ''
+          description: 'Create an RGB color string from the given values',
+          arguments: [
+            {
+              name: 'red',
+              type: types.number
+            },
+            {
+              name: 'green',
+              type: types.number
+            },
+            {
+              name: 'blue',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         },
         {
           name: 'createRGBA',
-          description: ''
+          description: 'Create an RGBA color string from the given values',
+          arguments: [
+            {
+              name: 'red',
+              type: types.number
+            },
+            {
+              name: 'green',
+              type: types.number
+            },
+            {
+              name: 'blue',
+              type: types.number
+            },
+            {
+              name: 'alpha',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         },
         {
           name: 'getHSLFromHSLA',
-          description: ''
+          description: 'Return an HSL color string from the given HSLA color string',
+          arguments: [
+            {
+              name: 'color',
+              type: types.string
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         },
         {
           name: 'getRGBFromRGBA',
-          description: ''
+          description: 'Return an RGB color string from the given RGBA color string',
+          arguments: [
+            {
+              name: 'color',
+              type: types.string
+            }
+          ],
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         }
       ]
     },
