@@ -101,7 +101,10 @@ describe('docs', function () {
     var exceptions = [
       'clearCanvas',
       'beginPath',
-      'closePath'
+      'closePath',
+      'save',
+      'restore',
+      'resetTransform'
     ];
     var totalMethods = 0;
     var documentedMethods = 0;

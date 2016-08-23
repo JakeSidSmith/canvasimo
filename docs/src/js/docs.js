@@ -2334,35 +2334,109 @@
       methods: [
         {
           name: 'save',
-          description: ''
+          description: 'Push the current state of the canvas into a stack that can later be restored'
         },
         {
           name: 'restore',
-          description: ''
+          description: 'Restore the most recent state of the canvas that was saved'
         },
         {
           name: 'rotate',
-          description: ''
+          description: 'Add rotation (in radians) to the transform matrix so that shapes can be drawn at an angle',
+          arguments: [
+            {
+              name: 'angle',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'scale',
-          description: ''
+          description: 'Scale the transform matrix so that shapes can be drawn at the provided scale',
+          arguments: [
+            {
+              name: 'scale',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'translate',
-          description: ''
+          description: 'Move the canvas origin',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'transform',
-          description: ''
+          description: 'Multiply the current transformation with the provided matrix',
+          arguments: [
+            {
+              name: 'horizontalScale',
+              type: types.number
+            },
+            {
+              name: 'horizontalSkew',
+              type: types.number
+            },
+            {
+              name: 'verticalSkew',
+              type: types.number
+            },
+            {
+              name: 'verticalScale',
+              type: types.number
+            },
+            {
+              name: 'horizontalMove',
+              type: types.number
+            },
+            {
+              name: 'verticalMove',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'setTransform',
-          description: ''
+          description: 'Replace the current transformation with the provided matrix',
+          arguments: [
+            {
+              name: 'horizontalScale',
+              type: types.number
+            },
+            {
+              name: 'horizontalSkew',
+              type: types.number
+            },
+            {
+              name: 'verticalSkew',
+              type: types.number
+            },
+            {
+              name: 'verticalScale',
+              type: types.number
+            },
+            {
+              name: 'horizontalMove',
+              type: types.number
+            },
+            {
+              name: 'verticalMove',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'resetTransform',
-          description: ''
+          description: 'Replace the current transformation with the default matrix: [1, 0, 0, 1, 0, 0]'
         },
         {
           name: 'clip',
