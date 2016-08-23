@@ -2144,11 +2144,31 @@
       methods: [
         {
           name: 'getRadiansFromDegrees',
-          description: ''
+          description: 'Get a radian value from the provided degrees e.g. 90 returns 1.5708',
+          arguments: [
+            {
+              name: 'degrees',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'radians',
+            type: types.number
+          }
         },
         {
           name: 'getDegreesFromRadians',
-          description: ''
+          description: 'Get a degree value from the provided radians e.g. 3.14159 returns 180',
+          arguments: [
+            {
+              name: 'radians',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'degrees',
+            type: types.number
+          }
         },
         {
           name: 'getAngle',
