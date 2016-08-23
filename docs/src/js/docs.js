@@ -2593,15 +2593,67 @@
       methods: [
         {
           name: 'drawFocusIfNeeded',
-          description: ''
+          description: 'Draw a focus ring around the current path, or the path supplied, ' +
+            'if the element supplied has focus',
+          arguments: [
+            {
+              name: 'path',
+              type: types.path,
+              optional: true
+            },
+            {
+              name: 'element',
+              type: types.element
+            }
+          ]
         },
         {
           name: 'isPointInPath',
-          description: ''
+          description: 'Returns whether the given point is within the current or given path',
+          arguments: [
+            {
+              name: 'path',
+              type: types.path,
+              optional: true
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            },
+            {
+              name: 'fillRule',
+              type: types.string,
+              optional: true
+            }
+          ],
+          returns: {
+            name: 'isPointInPath',
+            type: types.boolean
+          }
         },
         {
           name: 'isPointInStroke',
-          description: ''
+          description: 'Returns whether the given point is within the area contained by applying ' +
+            'a stroke to the current or given path',
+          arguments: [
+            {
+              name: 'path',
+              type: types.path,
+              optional: true
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         }
       ]
     }
