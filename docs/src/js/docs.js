@@ -2024,31 +2024,117 @@
       methods: [
         {
           name: 'getFractionFromPercent',
-          description: ''
+          description: 'Get a fraction from the provided percent value e.g. 80 returns 0.8',
+          arguments: [
+            {
+              name: 'percent',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'fraction',
+            type: types.number
+          }
         },
         {
           name: 'getPercentFromFraction',
-          description: ''
+          description: 'Get a percent from the provided fraction value e.g. 0.7 returns 70',
+          arguments: [
+            {
+              name: 'fraction',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'percent',
+            type: types.number
+          }
         },
         {
           name: 'getFractionOfWidth',
-          description: ''
+          description: 'Returns the actual value of a fraction of the canvas width e.g. ' +
+            'a canvas with a width of 200 returns 100 if the provided value is 0.5',
+          arguments: [
+            {
+              name: 'fraction',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'width',
+            type: types.number
+          }
         },
         {
           name: 'getFractionOfHeight',
-          description: ''
+          description: 'Returns the actual value of a fraction of the canvas height e.g. ' +
+            'a canvas with a height of 100 returns 20 if the provided value is 0.2',
+          arguments: [
+            {
+              name: 'fraction',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'height',
+            type: types.number
+          }
         },
         {
           name: 'getPercentOfWidth',
-          description: ''
+          description: 'Returns the actual value of a percentage of the canvas width e.g. ' +
+            'a canvas with a width of 200 returns 100 if the provided value is 50',
+          arguments: [
+            {
+              name: 'percent',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'width',
+            type: types.number
+          }
         },
         {
           name: 'getPercentOfHeight',
-          description: ''
+          description: 'Returns the actual value of a percentage of the canvas height e.g. ' +
+            'a canvas with a height of 100 returns 20 if the provided value is 20',
+          arguments: [
+            {
+              name: 'percent',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'height',
+            type: types.number
+          }
         },
         {
           name: 'getDistance',
-          description: ''
+          description: 'Returns the distance between 2 points',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'distance',
+            type: types.number
+          }
         }
       ]
     },
