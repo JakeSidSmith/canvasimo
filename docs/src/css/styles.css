@@ -62,7 +62,11 @@ pre {
 
 .main-header,
 .group-header {
-  margin: 40px auto;
+  margin: 40px auto 10px auto;
+}
+
+.group-header + p {
+  margin: 10px auto 40px auto;
 }
 
 .group {

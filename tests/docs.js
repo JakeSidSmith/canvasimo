@@ -25,7 +25,7 @@ describe('docs', function () {
     });
   });
 
-  it('should contain all of the canvasimo methods (or aliases)', function () {
+  it('should contain all of the canvasimo methods and aliases', function () {
     each(canvas, function (value, key) {
       var anyGroupContainsTheMethod = any(docs, function (group) {
         return any(group.methods, function (method) {
@@ -35,6 +35,118 @@ describe('docs', function () {
 
       expect(anyGroupContainsTheMethod).to.be.true;
     });
+  });
+
+  it('should have descriptions for every group', function () {
+    var totalGroups = 0;
+    var documentedGroups = 0;
+    var firstUndocumentedGroup;
+
+    each(docs, function (group) {
+      totalGroups += 1;
+
+      if (group.description) {
+        documentedGroups += 1;
+      } else if (!firstUndocumentedGroup) {
+        firstUndocumentedGroup = group.name;
+      }
+    });
+
+    console.log(documentedGroups + ' of ' + totalGroups + ' groups have descriptions');
+
+    if (firstUndocumentedGroup) {
+      throw new Error(firstUndocumentedGroup + ' group has no description');
+    }
+  });
+
+  it('should have descriptions for every method', function () {
+    var totalMethods = 0;
+    var documentedMethods = 0;
+    var firstUndocumentedMethod;
+
+    each(docs, function (group) {
+      each(group.methods, function (method) {
+        totalMethods += 1;
+
+        if (method.description) {
+          documentedMethods += 1;
+        } else if (!firstUndocumentedMethod) {
+          firstUndocumentedMethod = method.name;
+        }
+      });
+    });
+
+    console.log(documentedMethods + ' of ' + totalMethods + ' methods have descriptions');
+
+    if (firstUndocumentedMethod) {
+      throw new Error(firstUndocumentedMethod + ' method has no description');
+    }
+  });
+
+  it('descriptions should begin with a capital letter', function () {
+    var beginsWithCapital = /^[A-Z]/;
+
+    each(docs, function (group) {
+      if (!beginsWithCapital.test(group.description)) {
+        throw new Error(group.name + ' group\'s description should have a capital letter');
+      }
+
+      each(group.methods, function (method) {
+        if (!beginsWithCapital.test(method.description)) {
+          throw new Error(method.name + ' method\'s description should have a capital letter');
+        }
+      });
+    });
+  });
+
+  it('descriptions should end with full stop', function () {
+    each(docs, function (group) {
+      if (group.description.lastIndexOf('.') < 0) {
+        throw new Error(group.name + ' group\'s description should have a full stop');
+      }
+
+      each(group.methods, function (method) {
+        if (method.description.lastIndexOf('.') < 0) {
+          throw new Error(method.name + ' method\'s description should have a full stop');
+        }
+      });
+    });
+  });
+
+  it('should have arguments or returns for every method', function () {
+    var exceptions = [
+      'clearCanvas',
+      'beginPath',
+      'closePath',
+      'save',
+      'restore',
+      'resetTransform'
+    ];
+    var totalMethods = 0;
+    var documentedMethods = 0;
+    var firstUndocumentedMethod;
+
+    each(docs, function (group) {
+      each(group.methods, function (method) {
+        totalMethods += 1;
+
+        if (exceptions.indexOf(method.name) >= 0) {
+          return;
+        }
+
+        if (method.arguments || method.returns) {
+          documentedMethods += 1;
+        } else if (!firstUndocumentedMethod) {
+          firstUndocumentedMethod = method.name;
+        }
+      });
+    });
+
+    console.log(documentedMethods + ' of ' + totalMethods + ' methods have arguments or returns');
+
+    if (firstUndocumentedMethod) {
+      throw new Error(firstUndocumentedMethod + ' method has no arguments or returns');
+    }
   });
 
 });
