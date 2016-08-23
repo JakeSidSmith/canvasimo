@@ -83,7 +83,23 @@ describe('docs', function () {
     }
   });
 
-  it('descriptions should have a full stop', function () {
+  it('descriptions should begin with a capital letter', function () {
+    var beginsWithCapital = /^[A-Z]/;
+
+    each(docs, function (group) {
+      if (!beginsWithCapital.test(group.description)) {
+        throw new Error(group.name + ' group\'s description should have a capital letter');
+      }
+
+      each(group.methods, function (method) {
+        if (!beginsWithCapital.test(method.description)) {
+          throw new Error(method.name + ' method\'s description should have a capital letter');
+        }
+      });
+    });
+  });
+
+  it('descriptions should end with full stop', function () {
     each(docs, function (group) {
       if (group.description.lastIndexOf('.') < 0) {
         throw new Error(group.name + ' group\'s description should have a full stop');
