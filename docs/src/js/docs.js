@@ -2214,31 +2214,117 @@
       methods: [
         {
           name: 'beginPath',
-          description: ''
+          description: 'Begin a new path (shape)'
         },
         {
           name: 'closePath',
-          description: ''
+          description: 'Close the current path (shape)'
         },
         {
           name: 'moveTo',
-          description: ''
+          description: 'Move the starting point of a the next sub-path',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'lineTo',
-          description: ''
+          description: 'Connect the last point to the provided coordinates',
+          arguments: [
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'arcTo',
-          description: ''
+          description: 'Arc from one point to another',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            },
+            {
+              name: 'radius',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'bezierCurveTo',
-          description: ''
+          description: 'Connect the last point to the provided coordinates with a bezier curve (2 control points)',
+          arguments: [
+            {
+              name: 'controlPoint1X',
+              type: types.number
+            },
+            {
+              name: 'controlPoint1Y',
+              type: types.number
+            },
+            {
+              name: 'controlPoint2X',
+              type: types.number
+            },
+            {
+              name: 'controlPoint2Y',
+              type: types.number
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'quadraticCurveTo',
-          description: ''
+          description: 'Connect the last point to the provided coordinates with a quadratic curve (1 control point)',
+          arguments: [
+            {
+              name: 'controlPointX',
+              type: types.number
+            },
+            {
+              name: 'controlPointY',
+              type: types.number
+            },
+            {
+              name: 'x',
+              type: types.number
+            },
+            {
+              name: 'y',
+              type: types.number
+            }
+          ]
         }
       ]
     },
