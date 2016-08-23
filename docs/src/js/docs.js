@@ -2458,62 +2458,132 @@
         {
           name: 'setOpacity',
           alias: 'setGlobalAlpha',
-          description: ''
+          description: 'Set the opacity to use for drawing',
+          arguments: [
+            {
+              name: 'opacity',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getOpacity',
           alias: 'getGlobalAlpha',
-          description: ''
+          description: 'Get the opacity that is being used',
+          returns: {
+            name: 'opacity',
+            type: types.number
+          }
         },
         {
           name: 'setCompositeOperation',
           alias: 'setGlobalCompositeOperation',
-          description: ''
+          description: 'Set the composite operation to use for drawing',
+          arguments: [
+            {
+              name: 'compositeOperation',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getCompositeOperation',
           alias: 'getGlobalCompositeOperation',
-          description: ''
+          description: 'Get the composite operation that is being used',
+          returns: {
+            name: 'compositeOperation',
+            type: types.string
+          }
         },
         {
           name: 'setImageSmoothingEnabled',
-          description: ''
+          description: 'Set whether image smoothing should be used',
+          arguments: [
+            {
+              name: 'imageSmoothingEnabled',
+              type: types.boolean
+            }
+          ]
         },
         {
           name: 'getImageSmoothingEnabled',
-          description: ''
+          description: 'Get whether image smoothing is being used',
+          returns: {
+            name: 'imageSmoothingEnabled',
+            type: types.boolean
+          }
         },
         {
           name: 'setShadowBlur',
-          description: ''
+          description: 'Set how blurry shadows are',
+          arguments: [
+            {
+              name: 'shadowBlur',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getShadowBlur',
-          description: ''
+          description: 'Get the value of how blurry shadows are',
+          returns: {
+            name: 'shadowBlur',
+            type: types.number
+          }
         },
         {
           name: 'setShadowColor',
-          description: ''
+          description: 'Set the color to be used for shadows',
+          arguments: [
+            {
+              name: 'color',
+              type: types.string
+            }
+          ]
         },
         {
           name: 'getShadowColor',
-          description: ''
+          description: 'Get the color being used for shadows',
+          returns: {
+            name: 'color',
+            type: types.string
+          }
         },
         {
           name: 'setShadowOffsetX',
-          description: ''
+          description: 'Set how horizontally offset shadows should be',
+          arguments: [
+            {
+              name: 'offset',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getShadowOffsetX',
-          description: ''
+          description: 'Get the value of how horizontally offset shadows should be',
+          returns: {
+            name: 'offset',
+            type: types.number
+          }
         },
         {
           name: 'setShadowOffsetY',
-          description: ''
+          description: 'Set how vertically offset shadows should be',
+          arguments: [
+            {
+              name: 'offset',
+              type: types.number
+            }
+          ]
         },
         {
           name: 'getShadowOffsetY',
-          description: ''
+          description: 'Get the value of how vertically offset shadows should be',
+          returns: {
+            name: 'offset',
+            type: types.number
+          }
         }
       ]
     },
