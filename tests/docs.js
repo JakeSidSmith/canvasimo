@@ -98,7 +98,11 @@ describe('docs', function () {
   });
 
   it('should have arguments or returns for every method', function () {
-    var exceptions = ['clearCanvas'];
+    var exceptions = [
+      'clearCanvas',
+      'beginPath',
+      'closePath'
+    ];
     var totalMethods = 0;
     var documentedMethods = 0;
     var firstUndocumentedMethod;
