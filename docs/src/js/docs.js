@@ -2172,7 +2172,39 @@
         },
         {
           name: 'getAngle',
-          description: ''
+          description: 'Get the angle (in radians) between 2 or 3 points',
+          arguments: [
+            {
+              name: 'x1',
+              type: types.number
+            },
+            {
+              name: 'y1',
+              type: types.number
+            },
+            {
+              name: 'x2',
+              type: types.number
+            },
+            {
+              name: 'y2',
+              type: types.number
+            },
+            {
+              name: 'x3',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'y3',
+              type: types.number,
+              optional: true
+            }
+          ],
+          returns: {
+            name: 'angle',
+            type: types.number
+          }
         }
       ]
     },
