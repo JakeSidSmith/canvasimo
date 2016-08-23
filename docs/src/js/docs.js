@@ -16,7 +16,8 @@
     pattern: 'CanvasPattern',
     image: 'Image',
     imageData: 'ImageData',
-    dataUrl: 'Data URI'
+    dataUrl: 'Data URI',
+    path: 'Path2D'
   };
 
   module.exports = [
@@ -2440,7 +2441,19 @@
         },
         {
           name: 'clip',
-          description: ''
+          description: 'Use the current path as a clipping path',
+          arguments: [
+            {
+              name: 'path',
+              type: types.path,
+              optional: true
+            },
+            {
+              name: 'fillRule',
+              type: types.string,
+              optional: true
+            }
+          ]
         },
         {
           name: 'setOpacity',
