@@ -8,6 +8,9 @@
   var Group = require('./group');
   var LinkHeader = require('./link-header');
 
+  var description = 'Canvasimo (canvas in my opinion) is a javascript library, ' +
+    'with a fluent interface, that extends the HTML5 canvas API';
+
   var Document = React.createClass({
     render: function () {
       return (
@@ -16,6 +19,7 @@
             <meta charSet="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <meta name="author" content="Jake 'Sid' Smith" />
+            <meta name="description" content={description} />
             <title>
               Canvasimo
             </title>
