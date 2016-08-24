@@ -33,7 +33,7 @@
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
             <title>
-              Canvasimo
+              Canvasimo - The fluent canvas API
             </title>
             <link
               rel="stylesheet"
