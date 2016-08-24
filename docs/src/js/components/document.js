@@ -8,6 +8,22 @@
   var Group = require('./group');
   var LinkHeader = require('./link-header');
 
+  var title = 'Canvasimo - The fluent canvas API';
+
+  var description = 'Canvasimo (canvas in my opinion) is a javascript library, ' +
+    'with a fluent interface, that extends the HTML5 canvas API';
+
+  var keywords = [
+    'Canvasimo',
+    'canvas',
+    'HTML5',
+    'fluent interface',
+    'API',
+    'jQuery',
+    'cross browser',
+    'compatibility'
+  ].join(',');
+
   var Document = React.createClass({
     render: function () {
       return (
@@ -15,8 +31,17 @@
           <head>
             <meta charSet="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+            <meta name="author" content="Jake 'Sid' Smith" />
+            <meta name="description" content={description} />
+            <meta name="keywords" content={keywords} />
+
+            <meta name="og:url" content="http://canvasimo.com" />
+            <meta name="og:type" content="website" />
+            <meta name="og:site_name" content="Canvasimo" />
+            <meta name="og:title" content={title} />
+            <meta name="og:description" content={description} />
             <title>
-              Canvasimo
+              {title}
             </title>
             <link
               rel="stylesheet"
@@ -41,6 +66,13 @@
                       (Version: {this.props.version})
                     </span>
                   </h1>
+
+                  <p>
+                    <strong>
+                      {description}, and fixes cross browser issues, making it a lot easier to work with canvas.
+                      You can think of Canvasimo as the jQuery of the canvas API.
+                    </strong>
+                  </p>
 
                   <p className="badges">
                     <a
