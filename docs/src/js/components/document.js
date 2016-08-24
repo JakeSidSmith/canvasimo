@@ -11,6 +11,17 @@
   var description = 'Canvasimo (canvas in my opinion) is a javascript library, ' +
     'with a fluent interface, that extends the HTML5 canvas API';
 
+  var keywords = [
+    'Canvasimo',
+    'canvas',
+    'HTML5',
+    'fluent interface',
+    'API',
+    'jQuery',
+    'cross browser',
+    'compatibility'
+  ].join(',');
+
   var Document = React.createClass({
     render: function () {
       return (
@@ -20,6 +31,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <meta name="author" content="Jake 'Sid' Smith" />
             <meta name="description" content={description} />
+            <meta name="keywords" content={keywords} />
             <title>
               Canvasimo
             </title>
