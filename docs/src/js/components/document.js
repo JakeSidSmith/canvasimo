@@ -59,6 +59,13 @@
                     </span>
                   </h1>
 
+                  <p>
+                    <strong>
+                      {description}, and fixes cross browser issues, making it a lot easier to work with canvas.
+                      You can think of Canvasimo as the jQuery of the canvas API.
+                    </strong>
+                  </p>
+
                   <p className="badges">
                     <a
                       className="badge circleci"
