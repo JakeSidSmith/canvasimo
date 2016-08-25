@@ -4,6 +4,8 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var spy = sinon.spy;
 var stub = sinon.stub;
+var utils = require('./helpers/utils');
+var each = utils.each;
 var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
 var ImageData = require('./helpers/image-data-stub');
@@ -66,7 +68,7 @@ describe('canvasimo', function () {
     isPointInPath: [0, 0]
   };
 
-  var isGetter = /^(get|create|is)/i;
+  var isGetter = /^(get|create|is|measure)/i;
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
@@ -78,14 +80,40 @@ describe('canvasimo', function () {
     expect(canvas).to.exist;
   });
 
+  it('should bind its methods to itself', function () {
+    Function.prototype._bind = Function.prototype.bind;
+
+    // Override bind
+    Function.prototype.bind = function () {
+      var fn = this;
+      var args = Array.prototype.slice.call(arguments);
+      var boundFunction = fn._bind.apply(fn, args);
+      boundFunction.boundTo = args[0];
+      return boundFunction;
+    };
+
+    canvas = new Canvas(element);
+
+    for (var key in canvas) {
+      expect(canvas[key].boundTo).to.equal(canvas);
+    }
+
+    // Restore bind
+    Function.prototype.bind = Function.prototype._bind;
+    delete Function.prototype._bind;
+
+    // Create canvas without bind override
+    canvas = new Canvas(element);
+  });
+
   describe('property getters', function () {
 
     it('should return the correct property values from the context', function () {
-      for (var key in getters) {
+      each(getters, function (expected, key) {
         var result = canvas[key]();
-        expect(result).to.equal(getters[key].value);
-        expect(typeof result).to.equal(getters[key].type);
-      }
+        expect(result).to.equal(expected.value);
+        expect(typeof result).to.equal(expected.type);
+      });
     });
 
   });
@@ -93,11 +121,14 @@ describe('canvasimo', function () {
   describe('context getters', function () {
 
     it('should return the actual canvas context', function () {
-      expect(canvas.getContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getContext('2d')).to.equal(element.getContext('2d'));
+      expect(canvas.getContext('someothercontext')).to.eql({});
+      expect(canvas.getContext(null)).to.eql({});
     });
 
-    it('should return the context type', function () {
-      expect(canvas.getContextType()).to.equal('2d');
+    it('should return the current context & context type', function () {
+      expect(canvas.getCurrentContext()).to.equal(element.getContext('2d'));
+      expect(canvas.getCurrentContextType()).to.equal('2d');
     });
 
   });
@@ -162,13 +193,13 @@ describe('canvasimo', function () {
   describe('image smoothing', function () {
 
     it('should return the first image smoothing value', function () {
-      expect(canvas.getImageSmoothing()).to.be.true;
+      expect(canvas.getImageSmoothingEnabled()).to.be.true;
     });
 
     it('should set the first image smoothing value', function () {
-      canvas.setImageSmoothing(false);
+      canvas.setImageSmoothingEnabled(false);
 
-      expect(canvas.getImageSmoothing()).to.be.false;
+      expect(canvas.getImageSmoothingEnabled()).to.be.false;
     });
 
     it('should return null if no image smoothing keys present', function () {
@@ -176,13 +207,13 @@ describe('canvasimo', function () {
       delete context.imageSmoothingEnabled;
       delete context.webkitImageSmoothingEnabled;
 
-      expect(canvas.getImageSmoothing()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
     it('should not set a value if no image smoothing keys present', function () {
-      canvas.setImageSmoothing(true);
+      canvas.setImageSmoothingEnabled(true);
 
-      expect(canvas.getImageSmoothing()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
   });
@@ -233,10 +264,10 @@ describe('canvasimo', function () {
     });
 
     it('should allow setting special font types', function () {
-      for (var i = 0; i < specialFontTypes.length; i += 1) {
-        canvas.setFont(specialFontTypes[i]);
-        expect(canvas.getFont()).to.equal(specialFontTypes[i]);
-      }
+      each(specialFontTypes, function (specialFontType) {
+        canvas.setFont(specialFontType);
+        expect(canvas.getFont()).to.equal(specialFontType);
+      });
     });
 
     it('should return null for individual properties when a special font is set', function () {
@@ -313,7 +344,7 @@ describe('canvasimo', function () {
   describe('plot path', function () {
 
     it('should accept but do nothing with empty and near empty point arrays', function () {
-      var context = canvas.getContext();
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
@@ -344,7 +375,7 @@ describe('canvasimo', function () {
     });
 
     it('should accept and plot valid point arrays', function () {
-      var context = canvas.getContext();
+      var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
 
@@ -372,11 +403,11 @@ describe('canvasimo', function () {
   describe('actions and setters', function () {
 
     it('should return the canvas', function () {
-      for (var key in canvas) {
+      each(canvas, function (method, key) {
         if (!isGetter.exec(key)) {
-          expect(canvas[key].apply(null, argumentMap[key])).to.equal(canvas);
+          expect(method.apply(null, argumentMap[key])).to.equal(canvas);
         }
-      }
+      });
     });
 
   });

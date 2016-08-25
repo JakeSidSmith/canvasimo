@@ -1,4 +1,8 @@
 node_modules/
 coverage/
+docs/build/
+
 .DS_Store
 npm-debug.log*
+
+docs/index.html
