@@ -8,6 +8,7 @@ var utils = require('./helpers/utils');
 var each = utils.each;
 var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
+var getBoundingClientRectStub = require('./helpers/get-bounding-client-rect-stub');
 var ImageData = require('./helpers/image-data-stub');
 
 describe('canvasimo', function () {
@@ -76,6 +77,7 @@ describe('canvasimo', function () {
     element = document.createElement('canvas');
 
     stub(element, 'getContext', getContextStub);
+    stub(element, 'getBoundingClientRect', getBoundingClientRectStub);
 
     canvas = new Canvas(element);
 
@@ -115,6 +117,26 @@ describe('canvasimo', function () {
         var result = canvas[key]();
         expect(result).to.equal(expected.value);
         expect(typeof result).to.equal(expected.type);
+      });
+    });
+
+  });
+
+  describe('element getters', function () {
+
+    it('should return the canvas element', function () {
+      expect(canvas.getCanvas()).to.equal(element);
+      expect(canvas.getElement()).to.equal(element);
+    });
+
+    it('should return the element\'s bounding client rect', function () {
+      expect(canvas.getBoundingClientRect()).to.eql({
+        top: 0,
+        left: 0,
+        right: 50,
+        bottom: 50,
+        width: 100,
+        height: 100
       });
     });
 
