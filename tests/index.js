@@ -562,7 +562,7 @@ describe('canvasimo', function () {
 
     it('should loop over the provided range', function () {
       var expected;
-      var callback = spy(function () {});
+      var callback = spy();
 
       canvas.repeat(null, callback);
       expect(callback).not.to.have.been.called;
@@ -648,6 +648,38 @@ describe('canvasimo', function () {
   });
 
   describe('forEach', function () {
+
+    it('should loop over the array, object, or string provided', function () {
+      var expected;
+      var callback = spy();
+
+      expected = [0, 1, 2];
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value, index]);
+      });
+      callback.reset();
+
+      expected = 'str';
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value, index]);
+      });
+      callback.reset();
+
+      var i = 0;
+
+      expected = {foo: 'bar', bar: 'foo', hello: 'world'};
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, key) {
+        expect(callback.getCall(i).args).to.eql([value, key]);
+        i += 1;
+      });
+      callback.reset();
+    });
 
     it('should error if wrong arguments provided', function () {
       var anError = /argument/i;
