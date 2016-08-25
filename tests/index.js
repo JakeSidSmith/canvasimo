@@ -537,6 +537,59 @@ describe('canvasimo', function () {
 
   describe('repeat', function () {
 
+    it('should loop over the provided range', function () {
+      var expected;
+      var callback = spy(function () {});
+
+      expected = [0, 1, 2];
+      canvas.repeat(3, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [1, 2, 3];
+      canvas.repeat(1, 4, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [-2, -3, -4];
+      canvas.repeat(-2, -5, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [2, 4, 6];
+      canvas.repeat(2, 8, 2, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [10, 5, 0];
+      canvas.repeat(10, -5, 5, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [1, 3, 5];
+      canvas.repeat(1, 6, 2, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+    });
+
     it('should error if wrong arguments provided', function () {
       var anError = /arguments/i;
 
