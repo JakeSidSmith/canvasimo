@@ -8,6 +8,7 @@
     string: 'String',
     object: 'Object',
     array: 'Array',
+    function: 'Function',
     context: 'RenderingContext',
     htmlElement: 'HTMLElement',
     rect: 'DOMRect',
@@ -2591,6 +2592,56 @@
       name: 'Misc',
       description: 'Miscellaneous methods.',
       methods: [
+        {
+          name: 'tap',
+          description: 'Break out of the method chain and execute a callback.',
+          arguments: [
+            {
+              name: 'callback',
+              type: types.function
+            }
+          ]
+        },
+        {
+          name: 'repeat',
+          description: 'Break out of the method chain and execute a callback with values between start and end, ' +
+            'incresing / decreasing by step (start defaults to 0, step defaults to 1).',
+          arguments: [
+            {
+              name: 'start',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'end',
+              type: types.number
+            },
+            {
+              name: 'step',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'callback',
+              type: types.function
+            }
+          ]
+        },
+        {
+          name: 'forEach',
+          description: 'Break out of the method chain and loop over the given array, object or string, ' +
+            'calling the callback with the value & key / index.',
+          arguments: [
+            {
+              name: 'iterable',
+              type: [types.array, types.object, types.string]
+            },
+            {
+              name: 'callback',
+              type: types.function
+            }
+          ]
+        },
         {
           name: 'drawFocusIfNeeded',
           description: 'Draw a focus ring around the current path, or the path supplied, ' +
