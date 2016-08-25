@@ -33,7 +33,9 @@ describe('docs', function () {
         });
       });
 
-      expect(anyGroupContainsTheMethod).to.be.true;
+      if (!anyGroupContainsTheMethod) {
+        throw new Error('The method ' + key + ' is not in the documentation');
+      }
     });
   });
 
