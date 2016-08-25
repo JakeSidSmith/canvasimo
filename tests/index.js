@@ -535,4 +535,24 @@ describe('canvasimo', function () {
 
   });
 
+  describe('repeat', function () {
+
+    it('should error if wrong arguments provided', function () {
+      var anError = /arguments/i;
+
+      expect(canvas.repeat).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 0, 0, 0, 0)).to.throw(anError);
+    });
+
+    it('should error if no callback is provided', function () {
+      var anError = /function/i;
+
+      expect(canvas.repeat.bind(null, 0, 1)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 0, 1)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 0, 0, 1)).to.throw(anError);
+    });
+
+  });
+
 });
