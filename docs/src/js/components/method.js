@@ -22,7 +22,9 @@
               return (
                 <span key={arg.name}>
                   <span className="code-argument">{arg.name}</span>
-                  <span className="code-type">{' <' + arg.type + '>'}</span>
+                  <span className="code-type">
+                    {' <' + (Array.isArray(arg.type) ? arg.type.join(', ') : arg.type) + '>'}
+                  </span>
                   {
                     arg.optional && (
                       <span className="code-optional"> (Optional)</span>

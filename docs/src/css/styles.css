@@ -62,7 +62,11 @@ pre {
 
 .main-header,
 .group-header {
-  margin: 40px auto;
+  margin: 40px auto 10px auto;
+}
+
+.group-header + p {
+  margin: 10px auto 40px auto;
 }
 
 .group {
@@ -138,18 +142,18 @@ canvas {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -240px;
+  right: -240px;
   width: 240px;
   height: 100%;
   background-color: #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   z-index: 20;
   overflow: hidden;
-  -webkit-transition: ease-in-out 0.1s left;
-  -moz-transition: ease-in-out 0.1s left;
-  -ms-transition: ease-in-out 0.1s left;
-  -o-transition: ease-in-out 0.1s left;
-  transition: ease-in-out 0.1s left;
+  -webkit-transition: ease-in-out 0.1s right;
+  -moz-transition: ease-in-out 0.1s right;
+  -ms-transition: ease-in-out 0.1s right;
+  -o-transition: ease-in-out 0.1s right;
+  transition: ease-in-out 0.1s right;
 }
 
 .sidebar.with-search {
@@ -167,7 +171,7 @@ canvas {
 
 .sidebar input {
   margin: 10px;
-  width: 180px;
+  width: 220px;
   height: 24px;
   border-radius: 2px;
   border: 1px solid #ccc;
@@ -176,7 +180,7 @@ canvas {
 }
 
 .sidebar.open {
-  left: 0;
+  right: 0;
 }
 
 .sidebar-overlay {
@@ -211,22 +215,19 @@ canvas {
   }
 }
 
-.sidebar-toggle {
+.sidebar-toggle,
+.back-to-top {
   display: block;
   position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 32px;
-  height: 32px;
+  bottom: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
   cursor: pointer;
   z-index: 10;
-}
-
-.sidebar-toggle:hover {
-  background-color: #eee;
   -webkit-transition: ease-in-out 0.1s background-color;
   -moz-transition: ease-in-out 0.1s background-color;
   -ms-transition: ease-in-out 0.1s background-color;
@@ -234,8 +235,18 @@ canvas {
   transition: ease-in-out 0.1s background-color;
 }
 
-.sidebar-toggle:active {
+.sidebar-toggle + .back-to-top {
+  bottom: 56px;
+}
+
+.sidebar-toggle:active,
+.back-to-top:active {
   background-color: #ddd;
+  -webkit-transition: ease-in-out 0s background-color;
+  -moz-transition: ease-in-out 0s background-color;
+  -ms-transition: ease-in-out 0s background-color;
+  -o-transition: ease-in-out 0s background-color;
+  transition: ease-in-out 0s background-color;
 }
 
 .sidebar-toggle span,
@@ -245,11 +256,11 @@ canvas {
   display: block;
   box-sizing: border-box;
   position: absolute;
-  width: 60%;
+  width: 50%;
   height: 2px;
-  left: 20%;
-  margin-top: -1px;
+  left: 25%;
   background-color: #555;
+  margin-top: -1px;
 }
 
 .sidebar-toggle span {
@@ -257,14 +268,66 @@ canvas {
 }
 
 .sidebar-toggle::before {
-  top: 30%;
+  top: 35%;
 }
 
 .sidebar-toggle::after {
-  top: 70%;
+  top: 65%;
+}
+
+.back-to-top span,
+.back-to-top::before,
+.back-to-top::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  height: 50%;
+  width: 2px;
+  top: 25%;
+  left: 50%;
+  margin-left: -1px;
+  background-color: #555;
+}
+
+.back-to-top::before,
+.back-to-top::after {
+  height: 25%;
+  margin-top: 1px;
+  -webkit-transform-origin: 50% 0;
+  -moz-transform-origin: 50% 0;
+  -ms-transform-origin: 50% 0;
+  -o-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+}
+
+.back-to-top::before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.back-to-top::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 @media all and (min-width: 768px) {
+  .sidebar-toggle,
+  .back-to-top {
+    right: 250px;
+  }
+
+  .back-to-top,
+  .sidebar-toggle + .back-to-top {
+    bottom: 10px;
+  }
+
   .sidebar-toggle {
     display: none;
   }
@@ -304,10 +367,75 @@ canvas {
 
 @media all and (min-width: 768px) {
   .sidebar {
-    left: 0;
+    right: 0;
   }
 
   .wrapper {
-    padding-left: 240px;
+    padding-right: 240px;
   }
+}
+
+.badges::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.badge,
+.badges img {
+  position: relative;
+  float: left;
+  height: 20px;
+}
+
+.badge:hover {
+  text-decoration: none;
+}
+
+.badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.badge:hover::after {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.badge:active::after {
+  box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.badge > img {
+  margin: 0 -5px;
+  z-index: 0;
+}
+
+.badge {
+  padding: 0 5px;
+  font-size: 11px;
+  line-height: 21px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #555;
+}
+
+.badge.circleci {
+  min-width: 73px;
+}
+
+.badge.npm {
+  background-color: #cb3837;
+}
+
+.badge.github {
+  background-color: #4078c0;
+}
+
+.badge + .badge {
+  margin-left: 10px;
 }

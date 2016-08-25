@@ -13,6 +13,9 @@
       return (
         <div className="group">
           <LinkHeader type="h2" header={group.name} className="group-header" />
+          <p>
+            {group.description}
+          </p>
           {
             group.methods.map(function (method) {
               return (

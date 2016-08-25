@@ -27,18 +27,22 @@
         (this.state.open ? ' open' : '');
     },
 
-    toggleSidebar: function () {
+    onSidebarToggleClick: function () {
       this.setState({
-        open: !this.state.open
+        open: true
       });
     },
 
-    onSidebarToggleClick: function () {
-      this.toggleSidebar();
+    onSidebarOverlayClick: function () {
+      this.setState({
+        open: false
+      });
     },
 
-    onSidebarOverlayClick: function () {
-      this.toggleSidebar();
+    onMethodOrGroupClick: function () {
+      this.setState({
+        open: false
+      });
     },
 
     render: function () {
@@ -48,19 +52,22 @@
         <span id="sidebar">
           {
             javascript && (
-              <div className="sidebar-toggle" onClick={this.onSidebarToggleClick}>
-                <span />
-              </div>
-            )
-          }
-          {
-            javascript && (
               <div
                 className={'sidebar-overlay' + (this.state.open ? ' open' : '')}
                 onClick={this.onSidebarOverlayClick}
               />
             )
           }
+          {
+            javascript && (
+              <div className="sidebar-toggle" onClick={this.onSidebarToggleClick}>
+                <span />
+              </div>
+            )
+          }
+          <a href="#" className="back-to-top">
+            <span />
+          </a>
           <div className={this.getClassName()}>
             {
               javascript && (
@@ -99,6 +106,7 @@
                       type="li"
                       header={group.name}
                       key={group.name}
+                      onClick={this.onMethodOrGroupClick}
                     >
                       <ul>
                         {
@@ -109,6 +117,7 @@
                                 type="li"
                                 header={method.name}
                                 key={method.name}
+                                onClick={this.onMethodOrGroupClick}
                               >
                               {method.alias && (' / ' + method.alias)}
                               </LinkHeader>

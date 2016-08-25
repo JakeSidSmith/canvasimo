@@ -8,6 +8,22 @@
   var Group = require('./group');
   var LinkHeader = require('./link-header');
 
+  var title = 'Canvasimo - The fluent canvas API';
+
+  var description = 'Canvasimo (canvas in my opinion) is a javascript library, ' +
+    'with a fluent interface, that extends the HTML5 canvas API';
+
+  var keywords = [
+    'Canvasimo',
+    'canvas',
+    'HTML5',
+    'fluent interface',
+    'API',
+    'jQuery',
+    'cross browser',
+    'compatibility'
+  ].join(',');
+
   var Document = React.createClass({
     render: function () {
       return (
@@ -15,8 +31,17 @@
           <head>
             <meta charSet="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+            <meta name="author" content="Jake 'Sid' Smith" />
+            <meta name="description" content={description} />
+            <meta name="keywords" content={keywords} />
+
+            <meta name="og:url" content="http://canvasimo.com" />
+            <meta name="og:type" content="website" />
+            <meta name="og:site_name" content="Canvasimo" />
+            <meta name="og:title" content={title} />
+            <meta name="og:description" content={description} />
             <title>
-              Canvasimo
+              {title}
             </title>
             <link
               rel="stylesheet"
@@ -41,6 +66,58 @@
                       (Version: {this.props.version})
                     </span>
                   </h1>
+
+                  <p>
+                    <strong>
+                      {description}, and fixes cross browser issues, making it a lot easier to work with canvas.
+                      You can think of Canvasimo as the jQuery of the canvas API.
+                    </strong>
+                  </p>
+
+                  <p className="badges">
+                    <a
+                      className="badge circleci"
+                      href="https://circleci.com/gh/JakeSidSmith/canvasimo"
+                      target="_blank"
+                    >
+                      <img
+                        src="https://circleci.com/gh/JakeSidSmith/canvasimo.svg?style=svg"
+                        alt="Circle CI Status Badge"
+                      />
+                    </a>
+                    <a
+                      className="badge npm"
+                      href="https://www.npmjs.com/package/canvasimo"
+                      target="_blank"
+                    >
+                      NPM
+                    </a>
+                    <a
+                      className="badge github"
+                      href="https://github.com/jakesidsmith/canvasimo"
+                      target="_blank"
+                    >
+                      GitHub
+                    </a>
+                    <a
+                      className="badge github"
+                      href="https://github.com/jakesidsmith/canvasimo/issues"
+                      target="_blank"
+                    >
+                      Issues
+                    </a>
+                  </p>
+
+                  <LinkHeader type="h2" header="Demo" />
+
+                  <canvas id="canvas" width="400" height="200">
+                    Looks like this browser doesn't support the canvas element, or you have javascript disabled.
+                  </canvas>
+                  <noscript>
+                    You must have javascript enabled for this demo.
+                  </noscript>
+                  <script type="text/javascript" src="build/js/canvasimo.js" />
+                  <script type="text/javascript" src="build/js/demo.js" />
 
                   <LinkHeader type="h2" header="Features" />
 
@@ -99,16 +176,6 @@
                   </p>
 
                   {/* eslint-enable max-len */}
-
-                  {
-                    false && (
-                      <div>
-                        <canvas id="canvas" width="400" height="200" />
-                        <script type="text/javascript" src="build/js/canvasimo.js" />
-                        <script type="text/javascript" src="build/js/demo.js" />
-                      </div>
-                    )
-                  }
 
                   <LinkHeader type="h1" header="Documentation" className="main-header" />
 

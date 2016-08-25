@@ -24,11 +24,14 @@
       cache: {}
     }
   )
-  .plugin('minifyify', {
-    map: 'build/js/sidebar.map.json',
-    output: cwd + '/docs/build/js/sidebar.map.json'
-  })
   .transform('babelify', {presets: ['react']});
+
+  if (process.env.NODE_ENV === 'production') {
+    b.plugin('minifyify', {
+      map: 'build/js/sidebar.map.json',
+      output: cwd + '/docs/build/js/sidebar.map.json'
+    });
+  }
 
   var bundle = function () {
     b.bundle(function () {
