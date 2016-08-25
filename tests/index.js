@@ -68,7 +68,8 @@ describe('canvasimo', function () {
     setStrokeDash: [[]],
     isPointInPath: [0, 0],
     tap: [function () {}],
-    repeat: [0, 0, 0, function () {}]
+    repeat: [0, 0, 0, function () {}],
+    forEach: [[], function () {}]
   };
 
   var isGetter = /^(get|create|is|measure)/i;
