@@ -505,6 +505,10 @@ describe('canvasimo', function () {
       expect(canvas.getAngle(0, 0, -10, 10, 0, 10)).to.equal(-Math.PI * 0.25);
     });
 
+  });
+
+  describe('tap', function () {
+
     it('should allow a function to be run during a chain', function () {
       var result = false;
 
@@ -519,6 +523,14 @@ describe('canvasimo', function () {
       ).to.equal('red');
 
       expect(result).to.be.true;
+    });
+
+    it('should error if no callback is provided', function () {
+      var anError = /function/i;
+
+      expect(canvas.tap).to.throw(anError);
+      expect(canvas.tap.bind(null, 1)).to.throw(anError);
+      expect(canvas.tap.bind(null, function () {})).not.to.throw(anError);
     });
 
   });
