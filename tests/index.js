@@ -647,4 +647,23 @@ describe('canvasimo', function () {
 
   });
 
+  describe('forEach', function () {
+
+    it('should error if wrong arguments provided', function () {
+      var anError = /argument/i;
+
+      expect(canvas.forEach.bind(null, 0, function () {})).to.throw(anError);
+      expect(canvas.forEach.bind(null, function () {}, function () {})).to.throw(anError);
+    });
+
+    it('should error if no callback is provided', function () {
+      var anError = /function/i;
+
+      expect(canvas.forEach).to.throw(anError);
+      expect(canvas.forEach.bind(null, [])).to.throw(anError);
+      expect(canvas.forEach.bind(null, [], 1)).to.throw(anError);
+    });
+
+  });
+
 });
