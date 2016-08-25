@@ -180,7 +180,9 @@
       return element;
     }.bind(this);
 
-    this.getBoundingClientRect = element.getBoundingClientRect;
+    this.getBoundingClientRect = function () {
+      return element.getBoundingClientRect();
+    }.bind(this);
 
     this.getContext = function (type, contextAttributes) {
       return element.getContext(type, contextAttributes);
