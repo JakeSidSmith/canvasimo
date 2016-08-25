@@ -505,6 +505,22 @@ describe('canvasimo', function () {
       expect(canvas.getAngle(0, 0, -10, 10, 0, 10)).to.equal(-Math.PI * 0.25);
     });
 
+    it('should allow a function to be run during a chain', function () {
+      var result = false;
+
+      expect(
+        canvas
+          .setFill('black')
+          .tap(function () {
+            result = true;
+            this.setFill('red');
+          })
+          .getFill()
+      ).to.equal('red');
+
+      expect(result).to.be.true;
+    });
+
   });
 
 });
