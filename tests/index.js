@@ -80,6 +80,27 @@ describe('canvasimo', function () {
     expect(canvas).to.exist;
   });
 
+  it('should bind its methods to itself', function () {
+    Function.prototype._bind = Function.prototype.bind;
+
+    Function.prototype.bind = function () {
+      var fn = this;
+      var args = Array.prototype.slice.call(arguments);
+      var boundFunction = fn._bind.apply(fn, args);
+      boundFunction.boundTo = args[0];
+      return boundFunction;
+    };
+
+    canvas = new Canvas(element);
+
+    for (var key in canvas) {
+      expect(canvas[key].boundTo).to.equal(canvas);
+    }
+
+    Function.prototype.bind = Function.prototype._bind;
+    delete Function.prototype._bind;
+  });
+
   describe('property getters', function () {
 
     it('should return the correct property values from the context', function () {
