@@ -83,6 +83,7 @@ describe('canvasimo', function () {
   it('should bind its methods to itself', function () {
     Function.prototype._bind = Function.prototype.bind;
 
+    // Override bind
     Function.prototype.bind = function () {
       var fn = this;
       var args = Array.prototype.slice.call(arguments);
@@ -97,9 +98,11 @@ describe('canvasimo', function () {
       expect(canvas[key].boundTo).to.equal(canvas);
     }
 
+    // Restore bind
     Function.prototype.bind = Function.prototype._bind;
     delete Function.prototype._bind;
 
+    // Create canvas without bind override
     canvas = new Canvas(element);
   });
 
