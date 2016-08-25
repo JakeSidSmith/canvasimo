@@ -99,6 +99,8 @@ describe('canvasimo', function () {
 
     Function.prototype.bind = Function.prototype._bind;
     delete Function.prototype._bind;
+
+    canvas = new Canvas(element);
   });
 
   describe('property getters', function () {
