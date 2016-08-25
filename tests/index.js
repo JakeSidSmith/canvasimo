@@ -65,7 +65,9 @@ describe('canvasimo', function () {
     plotArc: [0, 0, 0, 0, 0],
     plotEllipse: [0, 0, 0, 0, 0, 0, 0],
     setStrokeDash: [[]],
-    isPointInPath: [0, 0]
+    isPointInPath: [0, 0],
+    tap: [function () {}],
+    repeat: [0, 0, 0, function () {}]
   };
 
   var isGetter = /^(get|create|is|measure)/i;
