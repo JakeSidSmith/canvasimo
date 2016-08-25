@@ -437,6 +437,34 @@ describe('canvasimo', function () {
 
   });
 
+  describe('fill and strong', function () {
+
+    it('should set the fill if it is not a special fill', function () {
+      var fillSpy = spy(canvas, 'setFill');
+
+      canvas.fill('nonzero');
+      expect(fillSpy).not.to.have.been.called;
+
+      canvas.fill('red');
+      expect(fillSpy).to.have.been.called.once;
+
+      canvas.setFill.restore();
+    });
+
+    it('should set the stroke if it is a string', function () {
+      var strokeSpy = spy(canvas, 'setStroke');
+
+      canvas.stroke(0);
+      expect(strokeSpy).not.to.have.been.called;
+
+      canvas.stroke('red');
+      expect(strokeSpy).to.have.been.called.once;
+
+      canvas.setStroke.restore();
+    });
+
+  });
+
   describe('helper methods', function () {
 
     it('should create color values', function () {
