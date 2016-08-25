@@ -465,6 +465,32 @@ describe('canvasimo', function () {
 
   });
 
+  describe('resetTransform', function () {
+
+    it('should use setTransform if resetTransform is unavailable', function () {
+      var ctx = canvas.getCurrentContext();
+      var _resetTransform = ctx.resetTransform;
+      delete ctx.resetTransform;
+
+      var setTransformSpy = spy(canvas, 'setTransform');
+
+      canvas.resetTransform();
+
+      expect(setTransformSpy).to.have.been.called.once;
+
+      ctx.resetTransform = _resetTransform;
+
+      setTransformSpy.reset();
+
+      canvas.resetTransform();
+
+      expect(setTransformSpy).not.to.have.been.called;
+
+      canvas.setTransform.restore();
+    });
+
+  });
+
   describe('helper methods', function () {
 
     it('should create color values', function () {
