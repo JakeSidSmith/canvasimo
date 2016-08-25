@@ -2643,6 +2643,28 @@
           ]
         },
         {
+          name: 'constrain',
+          description: 'Constrain a number between a minimum and maximum value.',
+          arguments: [
+            {
+              name: 'value',
+              type: types.number
+            },
+            {
+              name: 'minimum',
+              type: types.number
+            },
+            {
+              name: 'maximum',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'value',
+            type: types.number
+          }
+        },
+        {
           name: 'drawFocusIfNeeded',
           description: 'Draw a focus ring around the current path, or the path supplied, ' +
             'if the element supplied has focus.',

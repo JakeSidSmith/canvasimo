@@ -72,7 +72,7 @@ describe('canvasimo', function () {
     forEach: [[], function () {}]
   };
 
-  var isGetter = /^(get|create|is|measure)/i;
+  var isGetter = /^(get|create|is|measure|constrain)/i;
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
@@ -694,6 +694,17 @@ describe('canvasimo', function () {
       expect(canvas.forEach).to.throw(anError);
       expect(canvas.forEach.bind(null, [])).to.throw(anError);
       expect(canvas.forEach.bind(null, [], 1)).to.throw(anError);
+    });
+
+  });
+
+  describe('constrain', function () {
+
+    it('should constrain a number between 2 other numbers', function () {
+      expect(canvas.constrain(0.5, 0, 1)).to.equal(0.5);
+      expect(canvas.constrain(2, 0, 1)).to.equal(1);
+      expect(canvas.constrain(-2, 0, 1)).to.equal(0);
+      expect(canvas.constrain(10, 1, 1)).to.equal(1);
     });
 
   });
