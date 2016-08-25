@@ -541,6 +541,22 @@ describe('canvasimo', function () {
       var expected;
       var callback = spy(function () {});
 
+      canvas.repeat(null, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      canvas.repeat(0, null, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      canvas.repeat(0, 1, null, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      canvas.repeat(0, 0, 1, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
       expected = [0, 1, 2];
       canvas.repeat(3, callback);
       expect(callback).to.have.been.called.thrice;
@@ -602,8 +618,8 @@ describe('canvasimo', function () {
       var anError = /function/i;
 
       expect(canvas.repeat.bind(null, 0, 1)).to.throw(anError);
-      expect(canvas.repeat.bind(null, 0, 0, 1)).to.throw(anError);
-      expect(canvas.repeat.bind(null, 0, 0, 0, 1)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 1, 1)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 1, 1, 1)).to.throw(anError);
     });
 
   });
