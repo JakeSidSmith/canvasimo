@@ -31,6 +31,9 @@
           <head>
             <meta charSet="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+            <meta name="google-site-verification" content="v7dZv2Lwh9l9qnCqp1ZMPSKqSGV5MhSTtn7zh_Y-JkA" />
+
             <meta name="author" content="Jake 'Sid' Smith" />
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
