@@ -8,6 +8,7 @@ var utils = require('./helpers/utils');
 var each = utils.each;
 var Canvas = require('../lib/index.js');
 var getContextStub = require('./helpers/get-context-stub');
+var getBoundingClientRectStub = require('./helpers/get-bounding-client-rect-stub');
 var ImageData = require('./helpers/image-data-stub');
 
 describe('canvasimo', function () {
@@ -65,15 +66,19 @@ describe('canvasimo', function () {
     plotArc: [0, 0, 0, 0, 0],
     plotEllipse: [0, 0, 0, 0, 0, 0, 0],
     setStrokeDash: [[]],
-    isPointInPath: [0, 0]
+    isPointInPath: [0, 0],
+    tap: [function () {}],
+    repeat: [0, 0, 0, function () {}],
+    forEach: [[], function () {}]
   };
 
-  var isGetter = /^(get|create|is|measure)/i;
+  var isGetter = /^(get|create|is|measure|constrain|map)/i;
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
 
     stub(element, 'getContext', getContextStub);
+    stub(element, 'getBoundingClientRect', getBoundingClientRectStub);
 
     canvas = new Canvas(element);
 
@@ -113,6 +118,26 @@ describe('canvasimo', function () {
         var result = canvas[key]();
         expect(result).to.equal(expected.value);
         expect(typeof result).to.equal(expected.type);
+      });
+    });
+
+  });
+
+  describe('element getters', function () {
+
+    it('should return the canvas element', function () {
+      expect(canvas.getCanvas()).to.equal(element);
+      expect(canvas.getElement()).to.equal(element);
+    });
+
+    it('should return the element\'s bounding client rect', function () {
+      expect(canvas.getBoundingClientRect()).to.eql({
+        top: 0,
+        left: 0,
+        right: 50,
+        bottom: 50,
+        width: 100,
+        height: 100
       });
     });
 
@@ -412,6 +437,60 @@ describe('canvasimo', function () {
 
   });
 
+  describe('fill and strong', function () {
+
+    it('should set the fill if it is not a special fill', function () {
+      var fillSpy = spy(canvas, 'setFill');
+
+      canvas.fill('nonzero');
+      expect(fillSpy).not.to.have.been.called;
+
+      canvas.fill('red');
+      expect(fillSpy).to.have.been.called.once;
+
+      canvas.setFill.restore();
+    });
+
+    it('should set the stroke if it is a string', function () {
+      var strokeSpy = spy(canvas, 'setStroke');
+
+      canvas.stroke(0);
+      expect(strokeSpy).not.to.have.been.called;
+
+      canvas.stroke('red');
+      expect(strokeSpy).to.have.been.called.once;
+
+      canvas.setStroke.restore();
+    });
+
+  });
+
+  describe('resetTransform', function () {
+
+    it('should use setTransform if resetTransform is unavailable', function () {
+      var ctx = canvas.getCurrentContext();
+      var _resetTransform = ctx.resetTransform;
+      delete ctx.resetTransform;
+
+      var setTransformSpy = spy(canvas, 'setTransform');
+
+      canvas.resetTransform();
+
+      expect(setTransformSpy).to.have.been.called.once;
+
+      ctx.resetTransform = _resetTransform;
+
+      setTransformSpy.reset();
+
+      canvas.resetTransform();
+
+      expect(setTransformSpy).not.to.have.been.called;
+
+      canvas.setTransform.restore();
+    });
+
+  });
+
   describe('helper methods', function () {
 
     it('should create color values', function () {
@@ -501,6 +580,198 @@ describe('canvasimo', function () {
       expect(canvas.getAngle(0, 0, 10, 0, 0, 0)).to.equal(0);
       expect(canvas.getAngle(0, 0, -10, 10, -10, 0)).to.equal(Math.PI * 0.25);
       expect(canvas.getAngle(0, 0, -10, 10, 0, 10)).to.equal(-Math.PI * 0.25);
+    });
+
+  });
+
+  describe('tap', function () {
+
+    it('should allow a function to be run during a chain', function () {
+      var result = false;
+
+      expect(
+        canvas
+          .setFill('black')
+          .tap(function () {
+            result = true;
+            this.setFill('red');
+          })
+          .getFill()
+      ).to.equal('red');
+
+      expect(result).to.be.true;
+    });
+
+    it('should error if no callback is provided', function () {
+      var anError = /function/i;
+
+      expect(canvas.tap).to.throw(anError);
+      expect(canvas.tap.bind(null, 1)).to.throw(anError);
+      expect(canvas.tap.bind(null, function () {})).not.to.throw(anError);
+    });
+
+  });
+
+  describe('repeat', function () {
+
+    it('should loop over the provided range', function () {
+      var expected;
+      var callback = spy();
+
+      canvas.repeat(null, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      canvas.repeat(0, null, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      canvas.repeat(0, 1, null, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      canvas.repeat(0, 0, 1, callback);
+      expect(callback).not.to.have.been.called;
+      callback.reset();
+
+      expected = [0, 1, 2];
+      canvas.repeat(3, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [1, 2, 3];
+      canvas.repeat(1, 4, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [-2, -3, -4];
+      canvas.repeat(-2, -5, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [2, 4, 6];
+      canvas.repeat(2, 8, 2, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [10, 5, 0];
+      canvas.repeat(10, -5, 5, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+
+      expected = [1, 3, 5];
+      canvas.repeat(1, 6, 2, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value]);
+      });
+      callback.reset();
+    });
+
+    it('should error if wrong arguments provided', function () {
+      var anError = /arguments/i;
+
+      expect(canvas.repeat).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 0, 0, 0, 0)).to.throw(anError);
+    });
+
+    it('should error if no callback is provided', function () {
+      var anError = /function/i;
+
+      expect(canvas.repeat.bind(null, 0, 1)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 1, 1)).to.throw(anError);
+      expect(canvas.repeat.bind(null, 0, 1, 1, 1)).to.throw(anError);
+    });
+
+  });
+
+  describe('forEach', function () {
+
+    it('should loop over the array, object, or string provided', function () {
+      var expected;
+      var callback = spy();
+
+      expected = [0, 1, 2];
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value, index]);
+      });
+      callback.reset();
+
+      expected = 'str';
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, index) {
+        expect(callback.getCall(index).args).to.eql([value, index]);
+      });
+      callback.reset();
+
+      var i = 0;
+
+      expected = {foo: 'bar', bar: 'foo', hello: 'world'};
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.thrice;
+      each(expected, function (value, key) {
+        expect(callback.getCall(i).args).to.eql([value, key]);
+        i += 1;
+      });
+      callback.reset();
+    });
+
+    it('should error if wrong arguments provided', function () {
+      var anError = /argument/i;
+
+      expect(canvas.forEach.bind(null, 0, function () {})).to.throw(anError);
+      expect(canvas.forEach.bind(null, function () {}, function () {})).to.throw(anError);
+    });
+
+    it('should error if no callback is provided', function () {
+      var anError = /function/i;
+
+      expect(canvas.forEach).to.throw(anError);
+      expect(canvas.forEach.bind(null, [])).to.throw(anError);
+      expect(canvas.forEach.bind(null, [], 1)).to.throw(anError);
+    });
+
+  });
+
+  describe('constrain', function () {
+
+    it('should constrain a number between 2 other numbers', function () {
+      expect(canvas.constrain(0.5, 0, 1)).to.equal(0.5);
+      expect(canvas.constrain(2, 0, 1)).to.equal(1);
+      expect(canvas.constrain(2, 1, 0)).to.equal(1);
+      expect(canvas.constrain(-2, 0, 1)).to.equal(0);
+      expect(canvas.constrain(10, 1, 1)).to.equal(1);
+    });
+
+  });
+
+  describe('map', function () {
+
+    it('should map a number from a given range to another range', function () {
+      expect(canvas.map(0.5, 0, 1, 0, 10)).to.equal(5);
+      expect(canvas.map(0.5, 0, 1, 1, 0)).to.equal(0.5);
+      expect(canvas.map(0.5, 0, 1, 0, -1)).to.equal(-0.5);
+      expect(canvas.map(6, 2, 4, 4, 10)).to.equal(16);
+      expect(canvas.map(3, 2, 4, 4, 10)).to.equal(7);
     });
 
   });

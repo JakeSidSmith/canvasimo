@@ -8,6 +8,7 @@
     string: 'String',
     object: 'Object',
     array: 'Array',
+    function: 'Function',
     context: 'RenderingContext',
     htmlElement: 'HTMLElement',
     rect: 'DOMRect',
@@ -2591,6 +2592,109 @@
       name: 'Misc',
       description: 'Miscellaneous methods.',
       methods: [
+        {
+          name: 'tap',
+          description: 'Break out of the method chain and execute a callback.',
+          arguments: [
+            {
+              name: 'callback',
+              type: types.function
+            }
+          ]
+        },
+        {
+          name: 'repeat',
+          description: 'Break out of the method chain and execute a callback with values between start and end, ' +
+            'incresing / decreasing by step (start defaults to 0, step defaults to 1).',
+          arguments: [
+            {
+              name: 'start',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'end',
+              type: types.number
+            },
+            {
+              name: 'step',
+              type: types.number,
+              optional: true
+            },
+            {
+              name: 'callback',
+              type: types.function
+            }
+          ]
+        },
+        {
+          name: 'forEach',
+          description: 'Break out of the method chain and loop over the given array, object or string, ' +
+            'calling the callback with the value & key / index.',
+          arguments: [
+            {
+              name: 'iterable',
+              type: [types.array, types.object, types.string]
+            },
+            {
+              name: 'callback',
+              type: types.function
+            }
+          ]
+        },
+        {
+          name: 'constrain',
+          description: 'Constrain a number between a minimum and maximum value.',
+          arguments: [
+            {
+              name: 'value',
+              type: types.number
+            },
+            {
+              name: 'minimum',
+              type: types.number
+            },
+            {
+              name: 'maximum',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'value',
+            type: types.number
+          }
+        },
+        {
+          name: 'map',
+          description: 'Map a value from one range to another e.g. ' +
+            'mapping 0.5 from 0-1 to 0-10 returns 5.',
+          arguments: [
+            {
+              name: 'value',
+              type: types.number
+            },
+            {
+              name: 'fromStart',
+              type: types.number
+            },
+            {
+              name: 'fromEnd',
+              type: types.number
+            },
+            {
+              name: 'toStart',
+              type: types.number
+            },
+            {
+              name: 'toEnd',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'value',
+            type: types.number
+          }
+        },
         {
           name: 'drawFocusIfNeeded',
           description: 'Draw a focus ring around the current path, or the path supplied, ' +

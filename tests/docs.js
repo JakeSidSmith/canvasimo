@@ -33,7 +33,9 @@ describe('docs', function () {
         });
       });
 
-      expect(anyGroupContainsTheMethod).to.be.true;
+      if (!anyGroupContainsTheMethod) {
+        throw new Error('No documentation for method / alias ' + key);
+      }
     });
   });
 
