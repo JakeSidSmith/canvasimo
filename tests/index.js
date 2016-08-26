@@ -72,7 +72,7 @@ describe('canvasimo', function () {
     forEach: [[], function () {}]
   };
 
-  var isGetter = /^(get|create|is|measure|constrain)/i;
+  var isGetter = /^(get|create|is|measure|constrain|map)/i;
 
   it('should return an interface', function () {
     element = document.createElement('canvas');
@@ -760,6 +760,18 @@ describe('canvasimo', function () {
       expect(canvas.constrain(2, 1, 0)).to.equal(1);
       expect(canvas.constrain(-2, 0, 1)).to.equal(0);
       expect(canvas.constrain(10, 1, 1)).to.equal(1);
+    });
+
+  });
+
+  describe('map', function () {
+
+    it('should map a number from a given range to another range', function () {
+      expect(canvas.map(0.5, 0, 1, 0, 10)).to.equal(5);
+      expect(canvas.map(0.5, 0, 1, 1, 0)).to.equal(0.5);
+      expect(canvas.map(0.5, 0, 1, 0, -1)).to.equal(-0.5);
+      expect(canvas.map(6, 2, 4, 4, 10)).to.equal(16);
+      expect(canvas.map(3, 2, 4, 4, 10)).to.equal(7);
     });
 
   });

@@ -2665,6 +2665,37 @@
           }
         },
         {
+          name: 'map',
+          description: 'Map a value from one range to another e.g. ' +
+            'mapping 0.5 from 0-1 to 0-10 returns 5.',
+          arguments: [
+            {
+              name: 'value',
+              type: types.number
+            },
+            {
+              name: 'fromStart',
+              type: types.number
+            },
+            {
+              name: 'fromEnd',
+              type: types.number
+            },
+            {
+              name: 'toStart',
+              type: types.number
+            },
+            {
+              name: 'toEnd',
+              type: types.number
+            }
+          ],
+          returns: {
+            name: 'value',
+            type: types.number
+          }
+        },
+        {
           name: 'drawFocusIfNeeded',
           description: 'Draw a focus ring around the current path, or the path supplied, ' +
             'if the element supplied has focus.',
