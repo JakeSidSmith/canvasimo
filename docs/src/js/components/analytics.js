@@ -14,9 +14,7 @@
   var Analytics = React.createClass({
     render: function () {
       return (
-        <script type="text/javascript">
-          {analyticsScript}
-        </script>
+        <script type="text/javascript" dangerouslySetInnerHTML={{__html: analyticsScript}} />
       );
     }
   });
