@@ -1,3 +1,5 @@
+/* global ga */
+
 'use strict';
 
 (function () {
@@ -28,18 +30,52 @@
     },
 
     onSidebarToggleClick: function () {
+      if (typeof ga === 'function') {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'sidebar',
+          eventAction: 'click',
+          eventLabel: 'Sidebar toggled',
+          eventValue: 'opened'
+        });
+      }
+
       this.setState({
         open: true
       });
     },
 
     onSidebarOverlayClick: function () {
+      if (typeof ga === 'function') {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'sidebar',
+          eventAction: 'click',
+          eventLabel: 'Sidebar toggled',
+          eventValue: 'closed'
+        });
+      }
+
       this.setState({
         open: false
       });
     },
 
-    onMethodOrGroupClick: function () {
+    onMethodOrGroupClick: function (event) {
+      if (typeof ga === 'function') {
+        var href = event.target.href || '';
+        var indexOfHash = href.lastIndexOf('#');
+        href = href.substring(indexOfHash);
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'link',
+          eventAction: 'click',
+          eventLabel: 'Sidebar method',
+          eventValue: href
+        });
+      }
+
       this.setState({
         open: false
       });
