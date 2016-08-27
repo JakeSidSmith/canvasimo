@@ -2,21 +2,30 @@
 
 (function () {
 
+  var isInternalLink = /^#/;
   var links = document.getElementsByTagName('a');
 
   var trackLinkClick = function trackLinkClick (event) {
     if (typeof ga === 'function') {
-      var href = event.target.href || '';
-      var indexOfHash = href.lastIndexOf('#');
-      href = href.substring(indexOfHash);
+      var href = event.target && event.target.getAttribute('href') || 'unknown';
 
-      ga('send', {
-        hitType: 'event',
-        eventCategory: 'link',
-        eventAction: 'click',
-        eventLabel: 'Content link clicked',
-        eventValue: href
-      });
+      if (isInternalLink.test(href)) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'link',
+          eventAction: 'click',
+          eventLabel: 'Internal link clicked',
+          eventValue: href
+        });
+      } else {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'link',
+          eventAction: 'click',
+          eventLabel: 'External link clicked',
+          eventValue: href
+        });
+      }
     }
   };
 

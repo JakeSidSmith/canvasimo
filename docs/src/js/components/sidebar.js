@@ -63,9 +63,7 @@
 
     onMethodOrGroupClick: function (event) {
       if (typeof ga === 'function') {
-        var href = event.target.href || '';
-        var indexOfHash = href.lastIndexOf('#');
-        href = href.substring(indexOfHash);
+        var href = event.target && event.target.getAttribute('href') || 'unknown';
 
         ga('send', {
           hitType: 'event',
