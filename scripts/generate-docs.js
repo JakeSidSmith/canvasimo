@@ -82,7 +82,6 @@
     copy(cwd + '/docs/src/css/styles.css', cwd + '/docs/build/css/styles.css');
     copy(cwd + '/lib/index.js', cwd + '/docs/build/js/canvasimo.js');
     copy(cwd + '/docs/src/js/demo.js', cwd + '/docs/build/js/demo.js');
-    copy(cwd + '/docs/src/js/analytics.js', cwd + '/docs/build/js/analytics.js');
     verbose && console.log('Static files copied.');
   };
 

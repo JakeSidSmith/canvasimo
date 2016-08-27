@@ -4,6 +4,7 @@
 
   var React = require('react');
   var docs = require('../docs');
+  var Analytics = require('./analytics');
   var Sidebar = require('./sidebar');
   var Group = require('./group');
   var LinkHeader = require('./link-header');
@@ -194,7 +195,7 @@
 
             </div>
 
-            <script type="text/javascript" src="build/js/analytics.js" />
+            <Analytics />
             <script type="text/javascript" src="build/js/sidebar.js" />
           </body>
         </html>
