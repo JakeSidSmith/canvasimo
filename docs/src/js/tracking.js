@@ -11,7 +11,15 @@
     if (typeof ga === 'function') {
       var href = event.target && event.target.getAttribute('href') || 'unknown';
 
-      if (isInternalLink.test(href)) {
+      if (href === 'unknown') {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'link',
+          eventAction: 'click',
+          eventLabel: 'Missing link clicked',
+          eventValue: href
+        });
+      } else if (isInternalLink.test(href)) {
         ga('send', {
           hitType: 'event',
           eventCategory: 'link',
