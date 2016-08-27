@@ -71,7 +71,7 @@
           hitType: 'event',
           eventCategory: 'link',
           eventAction: 'click',
-          eventLabel: 'Sidebar method',
+          eventLabel: 'Sidebar link clicked',
           eventValue: href
         });
       }
