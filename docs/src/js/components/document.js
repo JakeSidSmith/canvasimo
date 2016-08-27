@@ -194,6 +194,7 @@
 
             </div>
 
+            <script type="text/javascript" src="build/js/analytics.js" />
             <script type="text/javascript" src="build/js/sidebar.js" />
           </body>
         </html>
