@@ -1,3 +1,5 @@
+/* global ga */
+
 'use strict';
 
 (function () {
@@ -28,18 +30,61 @@
     },
 
     onSidebarToggleClick: function () {
+      if (typeof ga === 'function') {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'sidebar',
+          eventAction: 'click',
+          eventLabel: 'Sidebar toggled',
+          eventValue: 'opened'
+        });
+      }
+
       this.setState({
         open: true
       });
     },
 
     onSidebarOverlayClick: function () {
+      if (typeof ga === 'function') {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'sidebar',
+          eventAction: 'click',
+          eventLabel: 'Sidebar toggled',
+          eventValue: 'closed'
+        });
+      }
+
       this.setState({
         open: false
       });
     },
 
-    onMethodOrGroupClick: function () {
+    onMethodOrGroupClick: function (event) {
+      if (typeof ga === 'function') {
+        var searchTerm = this.refs.search.value;
+        var href = event.target && event.target.getAttribute('href') || 'unknown';
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'link',
+          eventAction: 'click',
+          eventLabel: 'Sidebar link clicked',
+          eventValue: href
+        });
+
+        if (searchTerm) {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'search',
+            eventAction: 'click',
+            eventLabel: 'Sidebar link clicked with search term',
+            eventValue: searchTerm
+          });
+        }
+      }
+
       this.setState({
         open: false
       });
@@ -73,6 +118,7 @@
               javascript && (
                 <div className="input-wrapper">
                   <input
+                    ref="search"
                     type="text"
                     placeholder="Search for a method..."
                     value={this.state.query}

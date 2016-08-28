@@ -196,6 +196,7 @@
             </div>
 
             <Analytics />
+            <script type="text/javascript" src="build/js/tracking.js" />
             <script type="text/javascript" src="build/js/sidebar.js" />
           </body>
         </html>
