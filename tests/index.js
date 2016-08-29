@@ -683,6 +683,21 @@ describe('canvasimo', function () {
       callback.reset();
     });
 
+    it('should stop iteration if false is returned', function () {
+      var i = 0;
+      var callback = spy(function () {
+        if (i === 1) {
+          return false;
+        }
+
+        i += 1;
+      });
+
+      canvas.repeat(1, 4, callback);
+      expect(callback).to.have.been.called.thrice;
+      callback.reset();
+    });
+
     it('should error if wrong arguments provided', function () {
       var anError = /arguments/i;
 
