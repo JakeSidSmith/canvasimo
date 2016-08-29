@@ -117,24 +117,15 @@
       .fill('black')
       .stroke('black')
       .closePath()
-      .translate(branch.length, 0);
-
-    if (branch.children) {
-      for (var i = 0; i < branch.children.length; i += 1) {
-        var child = branch.children[i];
-
+      .translate(branch.length, 0)
+      .forEach(branch.children, function(child) {
         var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
 
         if (treeDone !== false || branchDone === false) {
           treeDone = branchDone;
         }
-      }
-    }
-
-    if (branch.blossoms) {
-      for (var i = 0; i < branch.blossoms.length; i += 1) {
-        var blossom = branch.blossoms[i];
-
+      })
+      .forEach(branch.blossoms, function(blossom) {
         canvas
           .save()
           .translate(blossom.offset - branch.length, 0)
@@ -147,10 +138,8 @@
         if (blossom.opacity < 1) {
           blossom.opacity = Math.min(blossom.opacity + 0.1, 1);
         }
-      }
-    }
-
-    canvas.restore();
+      })
+      .restore();
 
     return treeDone;
   }
