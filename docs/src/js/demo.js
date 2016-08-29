@@ -63,7 +63,12 @@
 
     if (branch.length < branch.targetLength) {
       branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
-    } else if (!branch.children && depth === maxBranchDepth && branch.length === branch.targetLength) {
+    } else if (
+      !branch.children &&
+      depth === maxBranchDepth &&
+      branch.length === branch.targetLength &&
+      branch.blossoms && branch.blossoms.length && branch.blossoms[branch.blossoms.length - 1].opacity === 1
+    ) {
       treeDone = true;
     } else if (!branch.children && depth < maxBranchDepth) {
       branch.children = [];
