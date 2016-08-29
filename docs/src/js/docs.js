@@ -2605,7 +2605,8 @@
         {
           name: 'repeat',
           description: 'Break out of the method chain and execute a callback with values between start and end, ' +
-            'incresing / decreasing by step (start defaults to 0, step defaults to 1).',
+            'incresing / decreasing by step (start defaults to 0, step defaults to 1). ' +
+            'You may return false from the callback at any point to stop at the current iteration.',
           arguments: [
             {
               name: 'start',
@@ -2630,7 +2631,8 @@
         {
           name: 'forEach',
           description: 'Break out of the method chain and loop over the given array, object or string, ' +
-            'calling the callback with the value & key / index.',
+            'calling the callback with the value & key / index. ' +
+            'You may return false from the callback at any point to stop at the current iteration.',
           arguments: [
             {
               name: 'iterable',
