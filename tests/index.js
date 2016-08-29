@@ -446,7 +446,7 @@ describe('canvasimo', function () {
       expect(fillSpy).not.to.have.been.called;
 
       canvas.fill('red');
-      expect(fillSpy).to.have.been.called.once;
+      expect(fillSpy).to.have.been.calledOnce;
 
       canvas.setFill.restore();
     });
@@ -458,7 +458,7 @@ describe('canvasimo', function () {
       expect(strokeSpy).not.to.have.been.called;
 
       canvas.stroke('red');
-      expect(strokeSpy).to.have.been.called.once;
+      expect(strokeSpy).to.have.been.calledOnce;
 
       canvas.setStroke.restore();
     });
@@ -476,7 +476,7 @@ describe('canvasimo', function () {
 
       canvas.resetTransform();
 
-      expect(setTransformSpy).to.have.been.called.once;
+      expect(setTransformSpy).to.have.been.calledOnce;
 
       ctx.resetTransform = _resetTransform;
 
@@ -636,7 +636,7 @@ describe('canvasimo', function () {
 
       expected = [0, 1, 2];
       canvas.repeat(3, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value]);
       });
@@ -644,7 +644,7 @@ describe('canvasimo', function () {
 
       expected = [1, 2, 3];
       canvas.repeat(1, 4, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value]);
       });
@@ -652,7 +652,7 @@ describe('canvasimo', function () {
 
       expected = [-2, -3, -4];
       canvas.repeat(-2, -5, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value]);
       });
@@ -660,7 +660,7 @@ describe('canvasimo', function () {
 
       expected = [2, 4, 6];
       canvas.repeat(2, 8, 2, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value]);
       });
@@ -668,7 +668,7 @@ describe('canvasimo', function () {
 
       expected = [10, 5, 0];
       canvas.repeat(10, -5, 5, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value]);
       });
@@ -676,7 +676,7 @@ describe('canvasimo', function () {
 
       expected = [1, 3, 5];
       canvas.repeat(1, 6, 2, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value]);
       });
@@ -684,17 +684,14 @@ describe('canvasimo', function () {
     });
 
     it('should stop iteration if false is returned', function () {
-      var i = 0;
-      var callback = spy(function () {
-        if (i === 1) {
+      var callback = spy(function (index) {
+        if (index === 1) {
           return false;
         }
-
-        i += 1;
       });
 
-      canvas.repeat(1, 4, callback);
-      expect(callback).to.have.been.called.thrice;
+      canvas.repeat(3, callback);
+      expect(callback).to.have.been.calledTwice;
       callback.reset();
     });
 
@@ -724,7 +721,7 @@ describe('canvasimo', function () {
 
       expected = [0, 1, 2];
       canvas.forEach(expected, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value, index]);
       });
@@ -732,7 +729,7 @@ describe('canvasimo', function () {
 
       expected = 'str';
       canvas.forEach(expected, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, index) {
         expect(callback.getCall(index).args).to.eql([value, index]);
       });
@@ -742,7 +739,7 @@ describe('canvasimo', function () {
 
       expected = {foo: 'bar', bar: 'foo', hello: 'world'};
       canvas.forEach(expected, callback);
-      expect(callback).to.have.been.called.thrice;
+      expect(callback).to.have.been.calledThrice;
       each(expected, function (value, key) {
         expect(callback.getCall(i).args).to.eql([value, key]);
         i += 1;
@@ -766,14 +763,14 @@ describe('canvasimo', function () {
 
       expected = [0, 1, 2];
       canvas.forEach(expected, callback);
-      expect(callback).to.have.been.called.twice;
+      expect(callback).to.have.been.calledTwice;
       callback.reset();
 
       i = 0;
 
       expected = {foo: 'bar', bar: 'foo', hello: 'world'};
       canvas.forEach(expected, callback);
-      expect(callback).to.have.been.called.twice;
+      expect(callback).to.have.been.calledTwice;
       callback.reset();
     });
 
