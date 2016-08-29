@@ -144,7 +144,10 @@ describe('docs', function () {
       });
     });
 
-    console.log(documentedMethods + ' of ' + totalMethods + ' methods have arguments or returns');
+    console.log(
+      documentedMethods + ' of ' + totalMethods + ' methods have arguments or returns (excluding ' +
+      exceptions.length + ' exceptions)'
+    );
 
     if (firstUndocumentedMethod) {
       throw new Error(firstUndocumentedMethod + ' method has no arguments or returns');
