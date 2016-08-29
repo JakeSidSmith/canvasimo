@@ -92,7 +92,8 @@
           offset: branch.length,
           rotation: Math.random() * Math.PI + Math.PI / 4 - (Math.random() > 0.5 ? Math.PI : 0),
           size: 0.5 + Math.random() * 2,
-          color: canvas.createHSL(0, 60 + Math.random() * 20, 70 + Math.random() * 20)
+          color: canvas.createHSL(0, 60 + Math.random() * 20, 75 + Math.random() * 20),
+          opacity: 0
         });
       }
     }
@@ -134,8 +135,13 @@
           .translate(blossom.offset - branch.length, 0)
           .rotate(blossom.rotation)
           .translate(blossom.size + strokeWidth / 2, 0)
+          .setOpacity(blossom.opacity)
           .fillCircle(0, 0, blossom.size, false, blossom.color)
           .restore();
+
+        if (blossom.opacity < 1) {
+          blossom.opacity = Math.min(blossom.opacity + 0.1, 1);
+        }
       }
     }
 
