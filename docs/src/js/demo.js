@@ -118,14 +118,14 @@
       .stroke('black')
       .closePath()
       .translate(branch.length, 0)
-      .forEach(branch.children, function(child) {
+      .forEach(branch.children, function (child) {
         var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
 
         if (treeDone !== false || branchDone === false) {
           treeDone = branchDone;
         }
       })
-      .forEach(branch.blossoms, function(blossom) {
+      .forEach(branch.blossoms, function (blossom) {
         canvas
           .save()
           .translate(blossom.offset - branch.length, 0)
