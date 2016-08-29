@@ -146,7 +146,6 @@ canvas {
   width: 240px;
   height: 100%;
   background-color: #fff;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   z-index: 20;
   overflow: hidden;
   -webkit-transition: ease-in-out 0.1s right;
@@ -181,6 +180,7 @@ canvas {
 
 .sidebar.open {
   right: 0;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
 
 .sidebar-overlay {
@@ -368,6 +368,7 @@ canvas {
 @media all and (min-width: 768px) {
   .sidebar {
     right: 0;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   }
 
   .wrapper {
