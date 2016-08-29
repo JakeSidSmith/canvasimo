@@ -735,6 +735,33 @@ describe('canvasimo', function () {
       callback.reset();
     });
 
+    it('should stop iteration if false is returned', function () {
+      var expected;
+      var i;
+
+      var callback = spy(function () {
+        if (i === 1) {
+          return false;
+        }
+
+        i += 1;
+      });
+
+      i = 0;
+
+      expected = [0, 1, 2];
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.twice;
+      callback.reset();
+
+      i = 0;
+
+      expected = {foo: 'bar', bar: 'foo', hello: 'world'};
+      canvas.forEach(expected, callback);
+      expect(callback).to.have.been.called.twice;
+      callback.reset();
+    });
+
     it('should error if wrong arguments provided', function () {
       var anError = /argument/i;
 
