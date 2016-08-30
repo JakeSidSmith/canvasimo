@@ -161,7 +161,7 @@
                   {/* eslint-disable max-len */}
 
                   <p>
-                    Canvasimo (Canvas in my opinion) started off as a simple concept - create wrappers for the standard canvas API to create a fluent interface, and allow access to canvas attributes with getters and setters.
+                    Canvasimo (canvas in my opinion) started off as a simple concept - create wrappers for the standard canvas API to create a fluent interface, and allow access to canvas attributes with getters and setters.
                   </p>
 
                   <p>
