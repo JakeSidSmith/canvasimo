@@ -1,3 +1,3 @@
 # Canvasimo [![CircleCI](https://circleci.com/gh/JakeSidSmith/canvasimo/tree/master.svg?style=svg)](https://circleci.com/gh/JakeSidSmith/canvasimo/tree/master)
 
-Canvasimo (canvas in my opinion) is a simple, fluent interface that extends, and standardizes the HTML5 Canvas API
+A HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, and cross-browser compatibility enhancements.
