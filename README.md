@@ -64,7 +64,8 @@ var data = [
 canvas
   // Set the canvas size
   .setSize(width, height)
-  // Set some initial stroke styles
+  // Set some initial fill and stroke styles
+  .setFill('black')
   .setStroke('black')
   .setStrokeWidth(1)
   // Setup fonts for the axis labels
