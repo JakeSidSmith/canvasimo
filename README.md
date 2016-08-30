@@ -34,7 +34,7 @@ Now Canvasimo is accessible globally
 var Canvasimo = require('canvasimo');
 ```
 
-## Creating a Canvasimo instance
+## Create a Canvasimo instance
 
 ```javascript
 // Get your canvas element
