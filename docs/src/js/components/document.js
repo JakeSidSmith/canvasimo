@@ -9,12 +9,7 @@
   var Group = require('./group');
   var LinkHeader = require('./link-header');
 
-  // ~55 Characters
   var title = 'Canvasimo | The fluent HTML5 canvas drawing library';
-
-  // ~140 Characters
-  var description = 'A HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, ' +
-    'and cross-browser compatibility enhancements';
 
   var keywords = [
     'jquery',
@@ -43,14 +38,14 @@
             <meta name="google-site-verification" content="v7dZv2Lwh9l9qnCqp1ZMPSKqSGV5MhSTtn7zh_Y-JkA" />
 
             <meta name="author" content="Jake 'Sid' Smith" />
-            <meta name="description" content={description} />
+            <meta name="description" content={this.props.description} />
             <meta name="keywords" content={keywords} />
 
             <meta name="og:url" content="http://canvasimo.com" />
             <meta name="og:type" content="website" />
             <meta name="og:site_name" content="Canvasimo" />
             <meta name="og:title" content={title} />
-            <meta name="og:description" content={description + '.'} />
+            <meta name="og:description" content={this.props.description} />
             <title>
               {title}
             </title>
@@ -80,7 +75,7 @@
 
                   <p>
                     <strong>
-                      {description} to make your life easier.
+                      {this.props.description.replace(/\.$/, ' to make your life easier. ')}
                       Includes methods for drawing shapes not supported by the standard canvas API,
                       loops, intuitive font control,
                       and a host of helper methods for creating colors, calculating distances,
