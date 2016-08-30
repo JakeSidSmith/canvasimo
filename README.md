@@ -62,34 +62,45 @@ var data = [
 ];
 
 canvas
+  // Set the canvas size
   .setSize(width, height)
-  .tap(function () {
-    canvas
-      .beginPath()
-      .strokeLine(margin, margin, margin, height - margin)
-      .beginPath()
-      .strokeLine(margin, height - margin, width - margin, height - margin)
-  })
+  // Set some initial fill and stroke styles
+  .setFill('black')
+  .setStrokeWidth(1)
+  // Setup fonts for the axis labels
   .setTextAlign('center')
   .setTextBaseline('middle')
+  .setFontFamily('arial')
+  .setFontSize(10)
+  // Draw the axis lines
+  .beginPath()
+  .strokeLine(margin, margin, margin, height - margin)
+  .beginPath()
+  .strokeLine(margin, height - margin, width - margin, height - margin)
+  // Draw the x axis labels
   .repeat(min, max + 1, function (index) {
     canvas
       .fillText(index, margin / 2, height - margin - (height - margin * 2) / 10 * index)
   })
+  // Loop over our data
   .forEach(data, function (dataSet, index) {
+    var verticalScale = (height - margin * 2) / max;
+    var horizontalScale = (width - margin * 2) / (dataSet.length - 1);
 
-    var verticalScale = (canvas.getHeight() - margin * 2) / max;
-    var horizontalScale = (canvas.getWidth() - margin * 2) / (dataSet.length - 1);
-
+    // Map our values to our canvas area
     var values = dataSet.map(function (value, index) {
       return [index * horizontalScale, -value * verticalScale];
     });
 
     canvas
+      // Save the current canvas state
       .save()
+      // Move to the bottom left corner of the chart area
       .translate(margin, height - margin)
+      // Draw a data set as a path
       .beginPath()
       .strokePath(values, colors[index])
+      // Restore canvas to its previous state
       .restore()
   });
 ```
