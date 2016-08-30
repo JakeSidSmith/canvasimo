@@ -80,8 +80,11 @@
 
                   <p>
                     <strong>
-                      {description}, and fixes cross browser issues, making it a lot easier to work with canvas.
-                      You can think of Canvasimo as the jQuery of the canvas API.
+                      {description} to make your life easier.
+                      Includes methods for drawing shapes not supported by the standard canvas API,
+                      loops, intuitive font control,
+                      and a host of helper methods for creating colors, calculating distances,
+                      converting angles, and much more.
                     </strong>
                   </p>
 
