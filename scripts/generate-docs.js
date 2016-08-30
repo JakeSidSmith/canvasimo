@@ -92,7 +92,7 @@
     fs.writeFile(
       cwd + '/docs/index.html',
       '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(
-        <Document version={packageJSON.version} />
+        <Document version={packageJSON.version} description={packageJSON.description} />
       ),
       function (error) {
         if (error) {

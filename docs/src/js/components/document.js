@@ -9,20 +9,22 @@
   var Group = require('./group');
   var LinkHeader = require('./link-header');
 
-  var title = 'Canvasimo - The fluent canvas API';
-
-  var description = 'Canvasimo (canvas in my opinion) is a javascript library, ' +
-    'with a fluent interface, that extends the HTML5 canvas API';
+  var title = 'Canvasimo | The fluent HTML5 canvas drawing library';
 
   var keywords = [
-    'Canvasimo',
+    'jquery',
     'canvas',
-    'HTML5',
-    'fluent interface',
-    'API',
-    'jQuery',
-    'cross browser',
-    'compatibility'
+    'html5',
+    'drawing',
+    'fluent',
+    'api',
+    'cross-browser',
+    'compatibility',
+    'compatible',
+    'javascript',
+    'documentation',
+    'docs',
+    'canvasimo'
   ].join(',');
 
   var Document = React.createClass({
@@ -36,14 +38,14 @@
             <meta name="google-site-verification" content="v7dZv2Lwh9l9qnCqp1ZMPSKqSGV5MhSTtn7zh_Y-JkA" />
 
             <meta name="author" content="Jake 'Sid' Smith" />
-            <meta name="description" content={description} />
+            <meta name="description" content={this.props.description} />
             <meta name="keywords" content={keywords} />
 
             <meta name="og:url" content="http://canvasimo.com" />
             <meta name="og:type" content="website" />
             <meta name="og:site_name" content="Canvasimo" />
             <meta name="og:title" content={title} />
-            <meta name="og:description" content={description} />
+            <meta name="og:description" content={this.props.description} />
             <title>
               {title}
             </title>
@@ -73,8 +75,11 @@
 
                   <p>
                     <strong>
-                      {description}, and fixes cross browser issues, making it a lot easier to work with canvas.
-                      You can think of Canvasimo as the jQuery of the canvas API.
+                      {this.props.description.replace(/\.$/, ' to make your life easier. ')}
+                      Includes methods for drawing shapes not supported by the standard canvas API,
+                      loops, intuitive font control,
+                      and a host of helper methods for creating colors, calculating distances,
+                      converting angles, and much more.
                     </strong>
                   </p>
 
@@ -151,7 +156,7 @@
                   {/* eslint-disable max-len */}
 
                   <p>
-                    Canvasimo (Canvas in my opinion) started off as a simple concept - create wrappers for the standard canvas API to create a fluent interface, and allow access to canvas attributes with getters and setters.
+                    Canvasimo (canvas in my opinion) started off as a simple concept - create wrappers for the standard canvas API to create a fluent interface, and allow access to canvas attributes with getters and setters.
                   </p>
 
                   <p>
