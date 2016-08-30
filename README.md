@@ -87,7 +87,7 @@ canvas
     var verticalScale = (height - margin * 2) / (max - 1);
     var horizontalScale = (width - margin * 2) / (dataSet.length - 1);
 
-    // Map our values to our canvas area
+    // Map our values to our chart area
     var values = dataSet.map(function (value, index) {
       return [index * horizontalScale, -value * verticalScale];
     });
