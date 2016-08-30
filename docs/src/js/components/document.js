@@ -9,10 +9,12 @@
   var Group = require('./group');
   var LinkHeader = require('./link-header');
 
-  var title = 'Canvasimo - The fluent canvas API';
+  // ~55 Characters
+  var title = 'Canvasimo | The fluent HTML5 canvas drawing library';
 
-  var description = 'Canvasimo (canvas in my opinion) is a javascript library, ' +
-    'with a fluent interface, that extends the HTML5 canvas API';
+  // ~140 Characters
+  var description = 'A HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, ' +
+    'and cross-browser compatibility enhancements';
 
   var keywords = [
     'Canvasimo',
@@ -43,7 +45,7 @@
             <meta name="og:type" content="website" />
             <meta name="og:site_name" content="Canvasimo" />
             <meta name="og:title" content={title} />
-            <meta name="og:description" content={description} />
+            <meta name="og:description" content={description + '.'} />
             <title>
               {title}
             </title>
