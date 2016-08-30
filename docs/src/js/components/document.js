@@ -17,14 +17,19 @@
     'and cross-browser compatibility enhancements';
 
   var keywords = [
-    'Canvasimo',
+    'jquery',
     'canvas',
-    'HTML5',
-    'fluent interface',
-    'API',
-    'jQuery',
-    'cross browser',
-    'compatibility'
+    'html5',
+    'drawing',
+    'fluent',
+    'api',
+    'cross-browser',
+    'compatibility',
+    'compatible',
+    'javascript',
+    'documentation',
+    'docs',
+    'canvasimo'
   ].join(',');
 
   var Document = React.createClass({
