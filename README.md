@@ -43,3 +43,53 @@ var element = document.getElementById('canvas');
 // Create Canvasimo instance
 var canvas = new Canvasimo(element);
 ```
+
+## Begin drawing
+
+Here's a simple chart example
+
+```javascript
+var margin = 20;
+var width = 600;
+var height = 200;
+var min = 0;
+var max = 10;
+var colors = ['red', 'green', 'blue'];
+var data = [
+  [3, 7, 2, 8, 3, 8, 5, 4, 4, 7],
+  [7, 5, 6, 7, 8, 4, 5, 3, 2, 3],
+  [9, 8, 7, 5, 3, 6, 4, 5, 2, 5]
+];
+
+canvas
+  .setSize(width, height)
+  .tap(function () {
+    canvas
+      .beginPath()
+      .strokeLine(margin, margin, margin, height - margin)
+      .beginPath()
+      .strokeLine(margin, height - margin, width - margin, height - margin)
+  })
+  .setTextAlign('center')
+  .setTextBaseline('middle')
+  .repeat(min, max + 1, function (index) {
+    canvas
+      .fillText(index, margin / 2, height - margin - (height - margin * 2) / 10 * index)
+  })
+  .forEach(data, function (dataSet, index) {
+
+    var verticalScale = (canvas.getHeight() - margin * 2) / max;
+    var horizontalScale = (canvas.getWidth() - margin * 2) / (dataSet.length - 1);
+
+    var values = dataSet.map(function (value, index) {
+      return [index * horizontalScale, -value * verticalScale];
+    });
+
+    canvas
+      .save()
+      .translate(margin, height - margin)
+      .beginPath()
+      .strokePath(values, colors[index])
+      .restore()
+  });
+```
