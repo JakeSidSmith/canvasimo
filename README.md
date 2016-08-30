@@ -53,7 +53,7 @@ var margin = 20;
 var width = 600;
 var height = 200;
 var min = 0;
-var max = 10;
+var max = 11;
 var colors = ['red', 'green', 'blue'];
 var data = [
   [3, 7, 2, 8, 3, 8, 5, 4, 4, 7],
@@ -78,13 +78,13 @@ canvas
   .beginPath()
   .strokeLine(margin, height - margin, width - margin, height - margin)
   // Draw the x axis labels
-  .repeat(min, max + 1, function (index) {
+  .repeat(min, max, function (index) {
     canvas
       .fillText(index, margin / 2, height - margin - (height - margin * 2) / 10 * index)
   })
   // Loop over our data
   .forEach(data, function (dataSet, index) {
-    var verticalScale = (height - margin * 2) / max;
+    var verticalScale = (height - margin * 2) / (max - 1);
     var horizontalScale = (width - margin * 2) / (dataSet.length - 1);
 
     // Map our values to our canvas area
