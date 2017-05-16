@@ -10,11 +10,10 @@
     "start": "http-server docs -c-0 -o",
     "build": "babel-node scripts/generate-docs.js",
     "watch": "babel-node scripts/generate-docs.js watch",
-    "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
-    "mocha-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
-    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5-react lib/index.js docs/src/ tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
-    "test-no-coverage": "npm run eslint && npm run mocha-no-coverage",
-    "test": "npm run eslint && npm run mocha"
+    "tests": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
+    "tests-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
+    "lint": "eslint src/ && eslint -c .eslintrc-docs.json docs/src/ tests/helpers/ && eslint -c .eslintrc-tests.json tests/",
+    "test": "npm run lint && npm run tests"
   },
   "repository": {
     "type": "git",
