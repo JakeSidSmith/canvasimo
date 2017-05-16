@@ -1,5 +1,6 @@
 {
   "extends": [
-    "jakesidsmith/mocha"
+    "jakesidsmith/mocha",
+    "jakesidsmith/commonjs"
   ]
 }
