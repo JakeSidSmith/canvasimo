@@ -165,7 +165,7 @@
                                 key={method.name}
                                 onClick={this.onMethodOrGroupClick}
                               >
-                              {method.alias && (' / ' + method.alias)}
+                                {method.alias && (' / ' + method.alias)}
                               </LinkHeader>
                             );
                           }, this)

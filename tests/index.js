@@ -60,7 +60,7 @@ describe('canvasimo', function () {
     arcTo: [0, 0, 0, 0, 0],
     fillText: ['', 0, 0],
     strokeText: ['', 0, 0],
-    drawImage: [new Image(), 0, 0],
+    drawImage: [new Image(), 0, 0], // eslint-disable-line no-undef
     putImageData: [new ImageData(1, 1), 0, 0],
     plotRect: [0, 0, 0, 0],
     plotArc: [0, 0, 0, 0, 0],
