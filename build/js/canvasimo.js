@@ -258,11 +258,11 @@
     function setCanvasProperty (attribute, value) {
       ctx[attribute] = value;
       return this;
-    };
+    }
 
     function getCanvasProperty (attribute) {
       return ctx[attribute];
-    };
+    }
 
     // Map all properties except image smoothing
     var mapPropertyGettersAndSetters = function () {
@@ -287,7 +287,7 @@
     function canvasAction (method) {
       ctx[method].apply(ctx, Array.prototype.slice.call(arguments, 1));
       return this;
-    };
+    }
 
     var unchangedCanvasMethods = [
       'save',
@@ -1148,7 +1148,7 @@
 
   // Export for commonjs / browserify
   if (typeof exports === 'object' && typeof module !== 'undefined') {
-    module.exports = Canvasimo;
+    module.exports = Canvasimo; // eslint-disable-line no-undef
   // Export for amd / require
   } else if (typeof define === 'function' && define.amd) { // eslint-disable-line no-undef
     define([], function () { // eslint-disable-line no-undef
@@ -1161,9 +1161,9 @@
     if (typeof window !== 'undefined') {
       root = window;
     } else if (typeof global !== 'undefined') {
-      root = global;
+      root = global; // eslint-disable-line no-undef
     } else if (typeof self !== 'undefined') {
-      root = self;
+      root = self; // eslint-disable-line no-undef
     } else {
       root = this;
     }
