@@ -1668,7 +1668,7 @@
             {
               name: 'radius2',
               type: types.number
-            },
+            }
           ],
           returns: {
             name: 'gradient',
