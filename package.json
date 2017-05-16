@@ -10,8 +10,7 @@
     "start": "http-server docs -c-0 -o",
     "build": "babel-node scripts/generate-docs.js",
     "watch": "babel-node scripts/generate-docs.js watch",
-    "tests": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
-    "tests-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
+    "tests": "mocha --opts .mocha.opts tests/",
     "lint": "eslint src/ && eslint -c .eslintrc-docs.json docs/src/ tests/helpers/ && eslint -c .eslintrc-tests.json tests/",
     "test": "npm run lint && npm run tests"
   },
@@ -45,7 +44,6 @@
     "eslint": "3.19.0",
     "eslint-config-jakesidsmith": "github:jakesidsmith/eslint-config-jakesidsmith#v2.2.0",
     "http-server": "=0.9.0",
-    "istanbul": "=1.1.0-alpha.1",
     "jsdom": "=8.4.1",
     "minifyify": "=7.3.3",
     "mkdirp": "=0.5.1",
