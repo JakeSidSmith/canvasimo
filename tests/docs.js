@@ -8,7 +8,7 @@ var utils = require('./helpers/utils');
 var each = utils.each;
 var any = utils.any;
 var getContextStub = require('./helpers/get-context-stub');
-var Canvas = require('../src/index.js');
+var Canvas = require('../src/');
 
 describe('docs', function () {
 
