@@ -1,8 +1,8 @@
 {
   "name": "canvasimo",
-  "version": "0.5.1",
-  "description": "A simple, fluent interface that extends, and standardizes the HTML5 Canvas API",
-  "main": "lib/index.js",
+  "version": "0.5.3",
+  "description": "An HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, and cross-browser compatibility enhancements.",
+  "main": "src/index.js",
   "directories": {
     "example": "examples"
   },
@@ -10,11 +10,9 @@
     "start": "http-server docs -c-0 -o",
     "build": "babel-node scripts/generate-docs.js",
     "watch": "babel-node scripts/generate-docs.js watch",
-    "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- --require tests/helpers/test-setup.js --bail --recursive tests",
-    "mocha-no-coverage": "mocha --require tests/helpers/test-setup.js --bail --recursive tests",
-    "eslint": "eslint -c node_modules/eslintrc/.eslintrc-es5-react lib/index.js docs/src/ tests/helpers && eslint -c node_modules/eslintrc/.eslintrc-es5-mocha tests",
-    "test-no-coverage": "npm run eslint && npm run mocha-no-coverage",
-    "test": "npm run eslint && npm run mocha"
+    "tests": "mocha --opts .mocha.opts tests/",
+    "lint": "eslint src/ && eslint -c .eslintrc-docs.json docs/src/ tests/helpers/ && eslint -c .eslintrc-tests.json tests/",
+    "test": "npm run lint && npm run tests"
   },
   "repository": {
     "type": "git",
@@ -43,9 +41,9 @@
     "babelify": "=7.3.0",
     "browserify": "=13.1.0",
     "chai": "=3.5.0",
-    "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.2",
+    "eslint": "3.19.0",
+    "eslint-config-jakesidsmith": "github:jakesidsmith/eslint-config-jakesidsmith#v2.2.0",
     "http-server": "=0.9.0",
-    "istanbul": "=1.1.0-alpha.1",
     "jsdom": "=8.4.1",
     "minifyify": "=7.3.3",
     "mkdirp": "=0.5.1",
@@ -57,8 +55,5 @@
     "sinon-chai": "=2.8.0",
     "underscore": "=1.8.3",
     "watch": "=0.19.1"
-  },
-  "engines": {
-    "node": "6.2.2"
   }
 }

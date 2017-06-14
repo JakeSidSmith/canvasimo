@@ -26,12 +26,10 @@
   )
   .transform('babelify', {presets: ['react']});
 
-  if (process.env.NODE_ENV === 'production') {
-    b.plugin('minifyify', {
-      map: 'build/js/sidebar.map.json',
-      output: cwd + '/docs/build/js/sidebar.map.json'
-    });
-  }
+  b.plugin('minifyify', {
+    map: 'build/js/sidebar.map.json',
+    output: cwd + '/docs/build/js/sidebar.map.json'
+  });
 
   var bundle = function () {
     b.bundle(function () {
@@ -80,7 +78,7 @@
 
   var copyFilesToBuildDirectory = function (verbose) {
     copy(cwd + '/docs/src/css/styles.css', cwd + '/docs/build/css/styles.css');
-    copy(cwd + '/lib/index.js', cwd + '/docs/build/js/canvasimo.js');
+    copy(cwd + '/src/index.js', cwd + '/docs/build/js/canvasimo.js');
     copy(cwd + '/docs/src/js/demo.js', cwd + '/docs/build/js/demo.js');
     copy(cwd + '/docs/src/js/tracking.js', cwd + '/docs/build/js/tracking.js');
     verbose && console.log('Static files copied.');
@@ -92,7 +90,7 @@
     fs.writeFile(
       cwd + '/docs/index.html',
       '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(
-        <Document version={packageJSON.version} />
+        <Document version={packageJSON.version} description={packageJSON.description} />
       ),
       function (error) {
         if (error) {

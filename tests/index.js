@@ -6,7 +6,7 @@ var spy = sinon.spy;
 var stub = sinon.stub;
 var utils = require('./helpers/utils');
 var each = utils.each;
-var Canvas = require('../lib/index.js');
+var Canvas = require('../src/');
 var getContextStub = require('./helpers/get-context-stub');
 var getBoundingClientRectStub = require('./helpers/get-bounding-client-rect-stub');
 var ImageData = require('./helpers/image-data-stub');
@@ -60,7 +60,7 @@ describe('canvasimo', function () {
     arcTo: [0, 0, 0, 0, 0],
     fillText: ['', 0, 0],
     strokeText: ['', 0, 0],
-    drawImage: [new Image(), 0, 0],
+    drawImage: [new Image(), 0, 0], // eslint-disable-line no-undef
     putImageData: [new ImageData(1, 1), 0, 0],
     plotRect: [0, 0, 0, 0],
     plotArc: [0, 0, 0, 0, 0],

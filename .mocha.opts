@@ -1,0 +1,3 @@
+--require tests/helpers/test-setup.js
+--bail
+--recursive
