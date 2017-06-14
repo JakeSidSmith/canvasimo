@@ -52,7 +52,8 @@
       length: 0,
       targetLength: length + Math.random() * 5,
       angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
-      children: null
+      children: null,
+      blossoms: null
     };
   }
 
@@ -62,7 +63,12 @@
 
     if (branch.length < branch.targetLength) {
       branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
-    } else if (!branch.children && depth === maxBranchDepth && branch.length === branch.targetLength) {
+    } else if (
+      !branch.children &&
+      depth === maxBranchDepth &&
+      branch.length === branch.targetLength &&
+      branch.blossoms && branch.blossoms.length && branch.blossoms[branch.blossoms.length - 1].opacity === 1
+    ) {
       treeDone = true;
     } else if (!branch.children && depth < maxBranchDepth) {
       branch.children = [];
@@ -75,7 +81,24 @@
           length: 0,
           targetLength: branch.targetLength * 0.75 + Math.random() * branch.targetLength * 0.25,
           angle: canvas.getRadiansFromDegrees(Math.random() * possibleRotation * 2 - possibleRotation),
-          children: null
+          children: null,
+          blossoms: null
+        });
+      }
+    }
+
+    if (branch.length < branch.targetLength && Math.floor(branch.length) % 4 === 0) {
+      if (!branch.blossoms) {
+        branch.blossoms = [];
+      }
+
+      if (Math.random() > maxBranchDepth / depth / maxBranchDepth * 2) {
+        branch.blossoms.push({
+          offset: branch.length,
+          rotation: Math.random() * Math.PI + Math.PI / 4 - (Math.random() > 0.5 ? Math.PI : 0),
+          size: 0.5 + Math.random() * 2,
+          color: canvas.createHSL(0, 60 + Math.random() * 20, 75 + Math.random() * 20),
+          opacity: 0
         });
       }
     }
@@ -94,21 +117,29 @@
       .fill('black')
       .stroke('black')
       .closePath()
-      .translate(branch.length, 0);
-
-    if (branch.children) {
-      for (var i = 0; i < branch.children.length; i += 1) {
-        var child = branch.children[i];
-
+      .translate(branch.length, 0)
+      .forEach(branch.children, function (child) {
         var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
 
         if (treeDone !== false || branchDone === false) {
           treeDone = branchDone;
         }
-      }
-    }
+      })
+      .forEach(branch.blossoms, function (blossom) {
+        canvas
+          .save()
+          .translate(blossom.offset - branch.length, 0)
+          .rotate(blossom.rotation)
+          .translate(blossom.size + strokeWidth / 2, 0)
+          .setOpacity(blossom.opacity)
+          .fillCircle(0, 0, blossom.size, false, blossom.color)
+          .restore();
 
-    canvas.restore();
+        if (blossom.opacity < 1) {
+          blossom.opacity = Math.min(blossom.opacity + 0.1, 1);
+        }
+      })
+      .restore();
 
     return treeDone;
   }
