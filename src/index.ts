@@ -14,7 +14,7 @@ import {
 export default class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  private ctxType: string = CONTEXT_TYPE;
+  private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
 
   public constructor (element: HTMLCanvasElement) {
     this.element = element;
@@ -44,7 +44,7 @@ export default class Canvasimo {
     return this.ctx;
   }
 
-  public getCurrentContextType = (): string => {
+  public getCurrentContextType = (): typeof CONTEXT_TYPE => {
     return this.ctxType;
   }
 
