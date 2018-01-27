@@ -1,0 +1,69 @@
+{
+  "extends": ["tslint:recommended", "tslint-eslint-rules"],
+  "rules": {
+    "quotemark": [true, "single", "jsx-double", "avoid-template"],
+    "linebreak-style": [true, "LF"],
+    "semicolon": [true, "always", "ignore-interfaces"],
+    "max-line-length": [true, 120],
+    "indent": [true, "spaces"],
+    "align": [
+      true,
+      "arguments",
+      "elements",
+      "members",
+      "parameters",
+      "statements"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "arrays": "always",
+          "objects": "always",
+          "functions": "never",
+          "imports": "always",
+          "exports": "always",
+          "typeLiterals": "always"
+        },
+        "singleline": {
+          "arrays": "never",
+          "objects": "never",
+          "functions": "never",
+          "imports": "never",
+          "exports": "never",
+          "typeLiterals": "never"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "space-before-function-paren": [2, "always"],
+    "strict-type-predicates": true,
+
+    "object-literal-sort-keys": false,
+    "interface-name": false,
+
+    "triple-equals": true,
+    "no-constant-condition": true,
+    "no-console": true,
+    "no-debugger": true,
+    "no-extra-boolean-cast": true,
+    "no-irregular-whitespace": true,
+    "no-multi-spaces": true,
+    "no-consecutive-blank-lines": true,
+    "no-eval": true,
+    "no-shadowed-variable": true,
+    "no-trailing-whitespace": true,
+    "no-extra-semi": true,
+
+    "radix": true,
+    "curly": true,
+    "no-switch-case-fall-through": true,
+    "switch-default": true,
+    "eofline": true,
+
+    "no-var-keyword": true,
+    "no-unused-expression": true,
+    "no-unused-variable": true,
+    "no-use-before-declare": true
+  }
+}
