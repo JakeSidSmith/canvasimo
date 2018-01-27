@@ -1,22 +1,15 @@
-'use strict';
+import * as docs from '../docs/src/js/docs';
+import { any, each } from './helpers/utils';
+import getContextStub from './helpers/get-context-stub';
+import Canvasimo from '../src/';
 
-var docs = require('../docs/src/js/docs');
-var expect = require('chai').expect;
-var sinon = require('sinon');
-var stub = sinon.stub;
-var utils = require('./helpers/utils');
-var each = utils.each;
-var any = utils.any;
-var getContextStub = require('./helpers/get-context-stub');
-var Canvas = require('../src/');
-
-describe('docs', function () {
+describe('docs', () => {
 
   var element = document.createElement('canvas');
   stub(element, 'getContext', getContextStub);
-  var canvas = new Canvas(element);
+  var canvas = new Canvasimo(element);
 
-  it('is a list of groups', function () {
+  it('is a list of groups', () => {
     expect(docs.length).to.be.above(1);
 
     each(docs, function (value) {
@@ -25,7 +18,7 @@ describe('docs', function () {
     });
   });
 
-  it('should contain all of the canvasimo methods and aliases', function () {
+  it('should contain all of the canvasimo methods and aliases', () => {
     each(canvas, function (value, key) {
       var anyGroupContainsTheMethod = any(docs, function (group) {
         return any(group.methods, function (method) {
@@ -39,7 +32,7 @@ describe('docs', function () {
     });
   });
 
-  it('should have descriptions for every group', function () {
+  it('should have descriptions for every group', () => {
     var totalGroups = 0;
     var documentedGroups = 0;
     var firstUndocumentedGroup;
@@ -61,7 +54,7 @@ describe('docs', function () {
     }
   });
 
-  it('should have descriptions for every method', function () {
+  it('should have descriptions for every method', () => {
     var totalMethods = 0;
     var documentedMethods = 0;
     var firstUndocumentedMethod;
@@ -85,7 +78,7 @@ describe('docs', function () {
     }
   });
 
-  it('descriptions should begin with a capital letter', function () {
+  it('descriptions should begin with a capital letter', () => {
     var beginsWithCapital = /^[A-Z]/;
 
     each(docs, function (group) {
@@ -101,7 +94,7 @@ describe('docs', function () {
     });
   });
 
-  it('descriptions should end with full stop', function () {
+  it('descriptions should end with full stop', () => {
     each(docs, function (group) {
       if (group.description.lastIndexOf('.') < 0) {
         throw new Error(group.name + ' group\'s description should have a full stop');
@@ -115,7 +108,7 @@ describe('docs', function () {
     });
   });
 
-  it('should have arguments or returns for every method', function () {
+  it('should have arguments or returns for every method', () => {
     var exceptions = [
       'clearCanvas',
       'beginPath',

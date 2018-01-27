@@ -1,15 +1,10 @@
-'use strict';
+import { any, each } from './helpers/utils';
 
-var expect = require('chai').expect;
-var utils = require('./helpers/utils');
-var each = utils.each;
-var any = utils.any;
+describe('utils', () => {
 
-describe('utils', function () {
+  describe('each', () => {
 
-  describe('each', function () {
-
-    it('should loop over an array', function () {
+    it('should loop over an array', () => {
       var expectedIndex = 0;
       var arr = ['a', 'b', 'c'];
 
@@ -23,7 +18,7 @@ describe('utils', function () {
       expect(expectedIndex).to.equal(3);
     });
 
-    it('should loop over an object', function () {
+    it('should loop over an object', () => {
       var expectedIndex = 0;
       var expectedKeys = ['a', 'b', 'c'];
       var obj = {
@@ -44,9 +39,9 @@ describe('utils', function () {
 
   });
 
-  describe('any', function () {
+  describe('any', () => {
 
-    it('should return true if predicate is truthy', function () {
+    it('should return true if predicate is truthy', () => {
       var items = ['a', 'b', 'c'];
 
       var anyAreA = any(items, function (value) {
@@ -68,7 +63,7 @@ describe('utils', function () {
       expect(anyAreBB).to.be.true;
     });
 
-    it('should return false if predicate is falsey', function () {
+    it('should return false if predicate is falsey', () => {
       var items = ['a', 'b', 'c'];
 
       var anyAreOne = any(items, function (value) {

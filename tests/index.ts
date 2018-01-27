@@ -1,30 +1,24 @@
-'use strict';
+import { each } from './helpers/utils';
+import Canvasimo from '../src/';
+import getContextStub from './helpers/get-context-stub';
+import getBoundingClientRectStub from './helpers/get-bounding-client-rect-stub';
+import ImageData from './helpers/image-data-stub';
 
-var expect = require('chai').expect;
-var sinon = require('sinon');
-var spy = sinon.spy;
-var stub = sinon.stub;
-var utils = require('./helpers/utils');
-var each = utils.each;
-var Canvas = require('../src/');
-var getContextStub = require('./helpers/get-context-stub');
-var getBoundingClientRectStub = require('./helpers/get-bounding-client-rect-stub');
-var ImageData = require('./helpers/image-data-stub');
+describe('canvasimo', () => {
 
-describe('canvasimo', function () {
+  let canvas: Canvasimo;
+  let element: HTMLCanvasElement;
 
-  var canvas, element;
-
-  var specialFontTypes = [
+  const specialFontTypes = [
     'caption',
     'icon',
     'menu',
     'message-box',
     'small-caption',
-    'status-bar'
+    'status-bar',
   ];
 
-  var getters = {
+  const getters = {
     getOpacity: {value: 1, type: 'number'},
     getCompositeOperation: {value: 'source-over', type: 'string'},
     getFill: {value: '#000000', type: 'string'},
@@ -42,7 +36,7 @@ describe('canvasimo', function () {
     getTextBaseline: {value: 'alphabetic', type: 'string'}
   };
 
-  var argumentMap = {
+  const argumentMap = {
     setWidth: [0],
     setHeight: [0],
     setSize: [0, 0],
@@ -72,9 +66,9 @@ describe('canvasimo', function () {
     forEach: [[], function () {}]
   };
 
-  var isGetter = /^(get|create|is|measure|constrain|map)/i;
+  const isGetter = /^(get|create|is|measure|constrain|map)/i;
 
-  it('should return an interface', function () {
+  it('should return an interface', () => {
     element = document.createElement('canvas');
 
     stub(element, 'getContext', getContextStub);
@@ -85,7 +79,7 @@ describe('canvasimo', function () {
     expect(canvas).to.exist;
   });
 
-  it('should bind its methods to itself', function () {
+  it('should bind its methods to itself', () => {
     Function.prototype._bind = Function.prototype.bind;
 
     // Override bind
@@ -111,9 +105,9 @@ describe('canvasimo', function () {
     canvas = new Canvas(element);
   });
 
-  describe('property getters', function () {
+  describe('property getters', () => {
 
-    it('should return the correct property values from the context', function () {
+    it('should return the correct property values from the context', () => {
       each(getters, function (expected, key) {
         var result = canvas[key]();
         expect(result).to.equal(expected.value);
@@ -123,14 +117,14 @@ describe('canvasimo', function () {
 
   });
 
-  describe('element getters', function () {
+  describe('element getters', () => {
 
-    it('should return the canvas element', function () {
+    it('should return the canvas element', () => {
       expect(canvas.getCanvas()).to.equal(element);
       expect(canvas.getElement()).to.equal(element);
     });
 
-    it('should return the element\'s bounding client rect', function () {
+    it('should return the element\'s bounding client rect', () => {
       expect(canvas.getBoundingClientRect()).to.eql({
         top: 0,
         left: 0,
@@ -143,25 +137,25 @@ describe('canvasimo', function () {
 
   });
 
-  describe('context getters', function () {
+  describe('context getters', () => {
 
-    it('should return the actual canvas context', function () {
+    it('should return the actual canvas context', () => {
       expect(canvas.getContext('2d')).to.equal(element.getContext('2d'));
       expect(canvas.getContext('someothercontext')).to.eql({});
       expect(canvas.getContext(null)).to.eql({});
     });
 
-    it('should return the current context & context type', function () {
+    it('should return the current context & context type', () => {
       expect(canvas.getCurrentContext()).to.equal(element.getContext('2d'));
       expect(canvas.getCurrentContextType()).to.equal('2d');
     });
 
   });
 
-  describe('get data url', function () {
+  describe('get data url', () => {
 
-    it('should return a data url of the canvas', function () {
-      stub(element, 'toDataURL', function () {
+    it('should return a data url of the canvas', () => {
+      stub(element, 'toDataURL', () => {
         return 'url';
       });
 
@@ -170,9 +164,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('canvas sizes', function () {
+  describe('canvas sizes', () => {
 
-    it('should return the canvas width and height as an integer', function () {
+    it('should return the canvas width and height as an integer', () => {
       element.setAttribute('width', 123);
       element.setAttribute('height', 456);
 
@@ -194,7 +188,7 @@ describe('canvasimo', function () {
       expect(canvas.getSize()).to.eql({width: 12, height: 45});
     });
 
-    it('should set the canvas width and height as integers', function () {
+    it('should set the canvas width and height as integers', () => {
       canvas.setWidth(456);
       canvas.setHeight(123);
 
@@ -215,19 +209,19 @@ describe('canvasimo', function () {
 
   });
 
-  describe('image smoothing', function () {
+  describe('image smoothing', () => {
 
-    it('should return the first image smoothing value', function () {
+    it('should return the first image smoothing value', () => {
       expect(canvas.getImageSmoothingEnabled()).to.be.true;
     });
 
-    it('should set the first image smoothing value', function () {
+    it('should set the first image smoothing value', () => {
       canvas.setImageSmoothingEnabled(false);
 
       expect(canvas.getImageSmoothingEnabled()).to.be.false;
     });
 
-    it('should return null if no image smoothing keys present', function () {
+    it('should return null if no image smoothing keys present', () => {
       var context = element.getContext('2d');
       delete context.imageSmoothingEnabled;
       delete context.webkitImageSmoothingEnabled;
@@ -235,7 +229,7 @@ describe('canvasimo', function () {
       expect(canvas.getImageSmoothingEnabled()).to.be.null;
     });
 
-    it('should not set a value if no image smoothing keys present', function () {
+    it('should not set a value if no image smoothing keys present', () => {
       canvas.setImageSmoothingEnabled(true);
 
       expect(canvas.getImageSmoothingEnabled()).to.be.null;
@@ -243,13 +237,13 @@ describe('canvasimo', function () {
 
   });
 
-  describe('font methods', function () {
+  describe('font methods', () => {
 
-    it('should return a formatted font value', function () {
+    it('should return a formatted font value', () => {
       expect(canvas.getFont()).to.equal('normal normal normal 10px sans-serif');
     });
 
-    it('should set the font', function () {
+    it('should set the font', () => {
       canvas.setFont('20.2px times');
       expect(canvas.getFont()).to.equal('normal normal normal 20.2px times');
 
@@ -263,7 +257,7 @@ describe('canvasimo', function () {
       expect(canvas.getFont()).to.equal('normal small-caps bold 20px arial');
     });
 
-    it('should return individual font properties', function () {
+    it('should return individual font properties', () => {
       expect(canvas.getFontStyle()).to.equal('normal');
       expect(canvas.getFontVariant()).to.equal('small-caps');
       expect(canvas.getFontWeight()).to.equal('bold');
@@ -271,7 +265,7 @@ describe('canvasimo', function () {
       expect(canvas.getFontFamily()).to.equal('arial');
     });
 
-    it('should set individual font properties', function () {
+    it('should set individual font properties', () => {
       canvas.setFontStyle('italic');
       expect(canvas.getFont()).to.equal('italic small-caps bold 20px arial');
 
@@ -288,14 +282,14 @@ describe('canvasimo', function () {
       expect(canvas.getFont()).to.equal('italic normal normal 15px times');
     });
 
-    it('should allow setting special font types', function () {
-      each(specialFontTypes, function (specialFontType) {
+    it('should allow setting special font types', () => {
+      each(specialFontTypes, (s =>pecialFontType) {
         canvas.setFont(specialFontType);
         expect(canvas.getFont()).to.equal(specialFontType);
       });
     });
 
-    it('should return null for individual properties when a special font is set', function () {
+    it('should return null for individual properties when a special font is set', () => {
       expect(canvas.getFontStyle()).to.be.null;
       expect(canvas.getFontVariant()).to.be.null;
       expect(canvas.getFontWeight()).to.be.null;
@@ -303,7 +297,7 @@ describe('canvasimo', function () {
       expect(canvas.getFontFamily()).to.be.null;
     });
 
-    it('should set the default font if properties are set when a special font is set', function () {
+    it('should set the default font if properties are set when a special font is set', () => {
       // Set to special font type
       canvas.setFont(specialFontTypes[0]);
       expect(canvas.getFont()).to.equal(specialFontTypes[0]);
@@ -341,7 +335,7 @@ describe('canvasimo', function () {
 
     });
 
-    it('should set the default font if a font value is incorrect', function () {
+    it('should set the default font if a font value is incorrect', () => {
       // Set to something correct
       canvas.setFont('20px times');
       expect(canvas.getFont()).to.equal('normal normal normal 20px times');
@@ -366,9 +360,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('plot path', function () {
+  describe('plot path', () => {
 
-    it('should accept but do nothing with empty and near empty point arrays', function () {
+    it('should accept but do nothing with empty and near empty point arrays', () => {
       var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
@@ -387,7 +381,7 @@ describe('canvasimo', function () {
       lineToSpy.restore();
     });
 
-    it('should throw an error if provided incorrect points arrays', function () {
+    it('should throw an error if provided incorrect points arrays', () => {
       var anError = /must be an array of/;
 
       expect(canvas.plotPath.bind(null, {})).to.throw(anError);
@@ -399,7 +393,7 @@ describe('canvasimo', function () {
       expect(canvas.plotPath.bind(null, ['wat'])).to.throw(anError);
     });
 
-    it('should accept and plot valid point arrays', function () {
+    it('should accept and plot valid point arrays', () => {
       var context = canvas.getCurrentContext();
       var moveToSpy = spy(context, 'moveTo');
       var lineToSpy = spy(context, 'lineTo');
@@ -425,10 +419,10 @@ describe('canvasimo', function () {
 
   });
 
-  describe('actions and setters', function () {
+  describe('actions and setters', () => {
 
-    it('should return the canvas', function () {
-      each(canvas, function (method, key) {
+    it('should return the canvas', () => {
+      each(canvas, (method, key) => {
         if (!isGetter.exec(key)) {
           expect(method.apply(null, argumentMap[key])).to.equal(canvas);
         }
@@ -437,9 +431,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('fill and strong', function () {
+  describe('fill and strong', () => {
 
-    it('should set the fill if it is not a special fill', function () {
+    it('should set the fill if it is not a special fill', () => {
       var fillSpy = spy(canvas, 'setFill');
 
       canvas.fill('nonzero');
@@ -451,7 +445,7 @@ describe('canvasimo', function () {
       canvas.setFill.restore();
     });
 
-    it('should set the stroke if it is a string', function () {
+    it('should set the stroke if it is a string', () => {
       var strokeSpy = spy(canvas, 'setStroke');
 
       canvas.stroke(0);
@@ -465,9 +459,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('resetTransform', function () {
+  describe('resetTransform', () => {
 
-    it('should use setTransform if resetTransform is unavailable', function () {
+    it('should use setTransform if resetTransform is unavailable', () => {
       var ctx = canvas.getCurrentContext();
       var _resetTransform = ctx.resetTransform;
       delete ctx.resetTransform;
@@ -491,21 +485,21 @@ describe('canvasimo', function () {
 
   });
 
-  describe('helper methods', function () {
+  describe('helper methods', () => {
 
-    it('should create color values', function () {
+    it('should create color values', () => {
       expect(canvas.createHSL(123, 40, 50)).to.equal('hsl(123,40%,50%)');
       expect(canvas.createHSLA(123, 40, 50, 0.5)).to.equal('hsla(123,40%,50%,0.5)');
       expect(canvas.createRGB(111, 222, 333)).to.equal('rgb(111,222,333)');
       expect(canvas.createRGBA(111, 222, 333, 0.5)).to.equal('rgba(111,222,333,0.5)');
     });
 
-    it('should remove alpha values from colors', function () {
+    it('should remove alpha values from colors', () => {
       expect(canvas.getHSLFromHSLA(canvas.createHSLA(123, 40, 50, 0.5))).to.equal('hsl(123,40%,50%)');
       expect(canvas.getRGBFromRGBA(canvas.createRGBA(111, 222, 333, 0.5))).to.equal('rgb(111,222,333)');
     });
 
-    it('should convert angles', function () {
+    it('should convert angles', () => {
       expect(canvas.getRadiansFromDegrees(0)).to.equal(0);
       expect(canvas.getRadiansFromDegrees(180)).to.equal(Math.PI);
       expect(canvas.getRadiansFromDegrees(360)).to.equal(Math.PI * 2);
@@ -515,12 +509,12 @@ describe('canvasimo', function () {
       expect(canvas.getDegreesFromRadians(Math.PI * 2)).to.equal(360);
     });
 
-    it('should convert fractions & percentages', function () {
+    it('should convert fractions & percentages', () => {
       expect(canvas.getPercentFromFraction(0.75)).to.equal(75);
       expect(canvas.getFractionFromPercent(25)).to.equal(0.25);
     });
 
-    it('should get fractions & percentages of the canvas size', function () {
+    it('should get fractions & percentages of the canvas size', () => {
       canvas.setSize(400, 200);
 
       expect(canvas.getPercentOfWidth(75)).to.equal(300);
@@ -530,14 +524,14 @@ describe('canvasimo', function () {
       expect(canvas.getFractionOfHeight(0.25)).to.equal(50);
     });
 
-    it('should return information about a pixel', function () {
+    it('should return information about a pixel', () => {
       canvas.setSize(5, 5);
 
       expect(canvas.getPixelData(2, 2)).to.eql([0, 0, 0, 0]);
       expect(canvas.getPixelColor(2, 2)).to.equal('rgba(0,0,0,0)');
     });
 
-    it('should calculate the distance between 2 points', function () {
+    it('should calculate the distance between 2 points', () => {
       expect(canvas.getDistance()).to.be.NaN;
       expect(canvas.getDistance(0, 0, 0, 10)).to.equal(10);
       expect(canvas.getDistance(0, 0, 0, -10)).to.equal(10);
@@ -547,7 +541,7 @@ describe('canvasimo', function () {
       expect(canvas.getDistance(-4, 0, 0, -3)).to.equal(5);
     });
 
-    it('should error when calculating angles with wrong arguments', function () {
+    it('should error when calculating angles with wrong arguments', () => {
       var anError = /Incorrect number of arguments/;
 
       expect(canvas.getAngle.bind(null, 0, 0, 0, 0)).not.to.throw(anError);
@@ -560,7 +554,7 @@ describe('canvasimo', function () {
       expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0, 0, 0, 0, 0)).to.throw(anError);
     });
 
-    it('should calculate the angle between 2 points', function () {
+    it('should calculate the angle between 2 points', () => {
       expect(canvas.getAngle(0, 0, 10, 0)).to.equal(0);
       expect(canvas.getAngle(0, 0, 0, 10)).to.equal(Math.PI * 0.5);
       expect(canvas.getAngle(0, 0, 0, -10)).to.equal(-Math.PI * 0.5);
@@ -570,7 +564,7 @@ describe('canvasimo', function () {
       expect(canvas.getAngle(0, 0, -10, -10)).to.equal(-Math.PI * 0.75);
     });
 
-    it('should calculate the angle between 3 points', function () {
+    it('should calculate the angle between 3 points', () => {
       expect(canvas.getAngle(0, 0, 10, 0, 20, 0)).to.equal(Math.PI);
       expect(canvas.getAngle(20, 0, 10, 0, 0, 0)).to.equal(Math.PI);
       expect(canvas.getAngle(0, 0, 10, 0, 10, 10)).to.equal(Math.PI * 0.5);
@@ -584,9 +578,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('tap', function () {
+  describe('tap', () => {
 
-    it('should allow a function to be run during a chain', function () {
+    it('should allow a function to be run during a chain', () => {
       var result = false;
 
       expect(
@@ -602,7 +596,7 @@ describe('canvasimo', function () {
       expect(result).to.be.true;
     });
 
-    it('should error if no callback is provided', function () {
+    it('should error if no callback is provided', () => {
       var anError = /function/i;
 
       expect(canvas.tap).to.throw(anError);
@@ -612,9 +606,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('repeat', function () {
+  describe('repeat', () => {
 
-    it('should loop over the provided range', function () {
+    it('should loop over the provided range', () => {
       var expected;
       var callback = spy();
 
@@ -683,7 +677,7 @@ describe('canvasimo', function () {
       callback.reset();
     });
 
-    it('should stop iteration if false is returned', function () {
+    it('should stop iteration if false is returned', () => {
       var callback = spy(function (index) {
         if (index === 1) {
           return false;
@@ -695,7 +689,7 @@ describe('canvasimo', function () {
       callback.reset();
     });
 
-    it('should error if wrong arguments provided', function () {
+    it('should error if wrong arguments provided', () => {
       var anError = /arguments/i;
 
       expect(canvas.repeat).to.throw(anError);
@@ -703,7 +697,7 @@ describe('canvasimo', function () {
       expect(canvas.repeat.bind(null, 0, 0, 0, 0, 0)).to.throw(anError);
     });
 
-    it('should error if no callback is provided', function () {
+    it('should error if no callback is provided', () => {
       var anError = /function/i;
 
       expect(canvas.repeat.bind(null, 0, 1)).to.throw(anError);
@@ -713,9 +707,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('forEach', function () {
+  describe('forEach', () => {
 
-    it('should loop over the array, object, or string provided', function () {
+    it('should loop over the array, object, or string provided', () => {
       var expected;
       var callback = spy();
 
@@ -747,7 +741,7 @@ describe('canvasimo', function () {
       callback.reset();
     });
 
-    it('should stop iteration if false is returned', function () {
+    it('should stop iteration if false is returned', () => {
       var expected;
       var i;
 
@@ -774,14 +768,14 @@ describe('canvasimo', function () {
       callback.reset();
     });
 
-    it('should error if wrong arguments provided', function () {
+    it('should error if wrong arguments provided', () => {
       var anError = /argument/i;
 
       expect(canvas.forEach.bind(null, 0, function () {})).to.throw(anError);
       expect(canvas.forEach.bind(null, function () {}, function () {})).to.throw(anError);
     });
 
-    it('should error if no callback is provided', function () {
+    it('should error if no callback is provided', () => {
       var anError = /function/i;
 
       expect(canvas.forEach).to.throw(anError);
@@ -791,9 +785,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('constrain', function () {
+  describe('constrain', () => {
 
-    it('should constrain a number between 2 other numbers', function () {
+    it('should constrain a number between 2 other numbers', () => {
       expect(canvas.constrain(0.5, 0, 1)).to.equal(0.5);
       expect(canvas.constrain(2, 0, 1)).to.equal(1);
       expect(canvas.constrain(2, 1, 0)).to.equal(1);
@@ -803,9 +797,9 @@ describe('canvasimo', function () {
 
   });
 
-  describe('map', function () {
+  describe('map', () => {
 
-    it('should map a number from a given range to another range', function () {
+    it('should map a number from a given range to another range', () => {
       expect(canvas.map(0.5, 0, 1, 0, 10)).to.equal(5);
       expect(canvas.map(0.5, 0, 1, 1, 0)).to.equal(0.5);
       expect(canvas.map(0.5, 0, 1, 0, -1)).to.equal(-0.5);
