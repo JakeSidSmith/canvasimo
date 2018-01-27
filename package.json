@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "http-server docs -c-0 -o",
+    "dist": "rm -rf dist && mkdir -p dist && browserify -p [ tsify --project src/tsconfig.json ] --standalone canvasimo src/index.ts > dist/index.js",
     "build": "babel-node scripts/generate-docs.js",
     "watch": "babel-node scripts/generate-docs.js watch",
     "lint-js": "tslint --project tsconfig.json '@(src|tests|types|docs)/**/*.@(ts|tsx)'",
@@ -41,7 +42,7 @@
   },
   "devDependencies": {
     "@types/jest": "22.1.0",
-    "browserify": "=13.1.0",
+    "browserify": "15.2.0",
     "http-server": "=0.9.0",
     "jest": "22.1.4",
     "mkdirp": "=0.5.1",
@@ -49,6 +50,7 @@
     "react-dom": "=15.3.0",
     "rimraf": "=2.5.4",
     "ts-jest": "22.0.1",
+    "tsify": "3.0.4",
     "tslint": "5.9.1",
     "tslint-eslint-rules": "4.1.1",
     "typescript": "2.3.4",
