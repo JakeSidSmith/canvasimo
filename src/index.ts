@@ -11,10 +11,6 @@ import {
   titleCase,
 } from './utils';
 
-if (!Function.prototype || !Function.prototype.apply || !Function.prototype.call || !Array.prototype.slice) {
-  throw new Error('Sorry, this browser does not support some of the features needed to use canvasimo.');
-}
-
 export default class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
