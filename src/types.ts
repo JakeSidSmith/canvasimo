@@ -11,3 +11,6 @@ export type NumberArray = [number, number];
 
 export type AnyPoint = Point | TuplePoint | number;
 export type Points = PointArray | TuplePointArray | NumberArray;
+
+export type AnyCanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
+export type AnyCanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;

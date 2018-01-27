@@ -1,6 +1,10 @@
 import {
-  CONTEXT_TYPE,
+  CONTEXT_TYPE, DEFAULT_FONT,
 } from './constants';
+import {
+  AnyCanvasContext,
+  AnyCanvasContextAttributes,
+} from './types';
 import {
   formatFont,
   getFontParts,
@@ -9,6 +13,48 @@ import {
 
 if (!Function.prototype || !Function.prototype.apply || !Function.prototype.call || !Array.prototype.slice) {
   throw new Error('Sorry, this browser does not support some of the features needed to use canvasimo.');
+}
+
+export default class Canvasimo {
+  private element: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
+  private ctxType: string = CONTEXT_TYPE;
+
+  public constructor (element: HTMLCanvasElement) {
+    this.element = element;
+    const ctx = this.element.getContext(CONTEXT_TYPE);
+
+    if (!ctx) {
+      throw new Error('Could not get a canvas context from the provided element');
+    }
+
+    this.ctx = ctx;
+    this.ctx.font = formatFont(ctx.font);
+  }
+
+  public getCanvas = (): HTMLCanvasElement => {
+    return this.element;
+  }
+
+  public getBoundingClientRect = (): ClientRect => {
+    return this.element.getBoundingClientRect();
+  }
+
+  public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
+    return this.element.getContext(type, contextAttributes);
+  }
+
+  public getCurrentContext = (): AnyCanvasContext => {
+    return this.ctx;
+  }
+
+  public getCurrentContextType = (): string => {
+    return this.ctxType;
+  }
+
+  public getDataURL = (type: string, ...args: any[]) => {
+    return this.element.toDataURL(type, ...args);
+  }
 }
 
 function Canvasimo (input: HTMLCanvasElement) {
