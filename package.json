@@ -10,9 +10,10 @@
     "start": "http-server docs -c-0 -o",
     "build": "babel-node scripts/generate-docs.js",
     "watch": "babel-node scripts/generate-docs.js watch",
-    "tests": "mocha --opts .mocha.opts tests/",
-    "lint": "eslint src/ && eslint -c .eslintrc-docs.json docs/src/ tests/helpers/ && eslint -c .eslintrc-tests.json tests/",
-    "test": "npm run lint && npm run tests"
+    "lint-js": "tslint --project tsconfig.json '@(src|tests|types|docs)/**/*.@(ts|tsx)'",
+    "lint": "npm run lint-js",
+    "tests": "jest",
+    "test": "npm run lint && npm run tests -- --coverage --runInBand"
   },
   "repository": {
     "type": "git",
@@ -35,25 +36,42 @@
     "url": "https://github.com/jakesidsmith/canvasimo/issues"
   },
   "homepage": "https://github.com/jakesidsmith/canvasimo#readme",
+  "dependencies": {
+    "typescript": ">= 2.3 < 3"
+  },
   "devDependencies": {
-    "babel-cli": "=6.11.4",
-    "babel-preset-react": "=6.11.1",
-    "babelify": "=7.3.0",
+    "@types/jest": "22.1.0",
     "browserify": "=13.1.0",
-    "chai": "=3.5.0",
-    "eslint": "3.19.0",
-    "eslint-config-jakesidsmith": "github:jakesidsmith/eslint-config-jakesidsmith#v2.2.0",
     "http-server": "=0.9.0",
-    "jsdom": "=8.4.1",
-    "minifyify": "=7.3.3",
+    "jest": "22.1.4",
     "mkdirp": "=0.5.1",
-    "mocha": "=2.4.5",
     "react": "=15.3.0",
     "react-dom": "=15.3.0",
     "rimraf": "=2.5.4",
-    "sinon": "=1.17.3",
-    "sinon-chai": "=2.8.0",
+    "ts-jest": "22.0.1",
+    "tslint": "5.9.1",
+    "tslint-eslint-rules": "4.1.1",
+    "typescript": "2.3.4",
     "underscore": "=1.8.3",
     "watch": "=0.19.1"
+  },
+  "jest": {
+    "mapCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
+    "testPathIgnorePatterns": [
+      "tests/mocks/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
   }
 }
