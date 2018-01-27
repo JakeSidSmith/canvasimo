@@ -1,163 +1,23 @@
+import {
+  CONTEXT_TYPE,
+} from './constants';
+import {
+  formatFont,
+  getFontParts,
+  titleCase,
+} from './utils';
+
 if (!Function.prototype || !Function.prototype.apply || !Function.prototype.call || !Array.prototype.slice) {
   throw new Error('Sorry, this browser does not support some of the features needed to use canvasimo.');
 }
 
-const propertyMap = {
-  globalAlpha: 'opacity',
-  globalCompositeOperation: 'compositeOperation',
-  fillStyle: 'fill',
-  strokeStyle: 'stroke',
-  lineWidth: 'strokeWidth',
-  lineCap: 'strokeCap',
-  lineJoin: 'strokeJoin',
-  lineDashOffset: 'strokeDashOffset',
-  miterLimit: 'miterLimit',
-  shadowColor: 'shadowColor',
-  shadowBlur: 'shadowBlur',
-  shadowOffsetX: 'shadowOffsetX',
-  shadowOffsetY: 'shadowOffsetY',
-  textAlign: 'textAlign',
-  textBaseline: 'textBaseline',
-};
+function Canvasimo (input: HTMLCanvasElement) {
+  const element = input;
+  const ctx = element.getContext(CONTEXT_TYPE);
 
-const imageSmoothingKeys = [
-  'imageSmoothingEnabled',
-  'msImageSmoothingEnabled',
-  'mozImageSmoothingEnabled',
-  'webkitImageSmoothingEnabled',
-];
-
-const isSpecialFill = /^(nonzero|evenodd)$/i;
-const isNormal = /^(normal)$/i;
-const isFontStyle = /^(italic|oblique)$/i;
-const isFontVariant = /^(small-caps)$/i;
-const isFontWeight = /^(bold|bolder|lighter|\d00)$/i;
-const isSpecialFont = /^(caption|icon|menu|message-box|small-caption|status-bar)$/i;
-const leadingAndTrailingSpace = /^\s+|\s+$/g;
-const oneOrMoreSpaces = /\s+/g;
-const defaultFont = ['normal', 'normal', 'normal', '10px', 'sans-serif'];
-
-const contextType = '2d';
-
-function getFontParts (input: string) {
-  if (!input) {
-    return defaultFont;
+  if (!ctx) {
+    throw new Error('Could not get a canvas context from the provided element');
   }
-
-  const font = input.replace(leadingAndTrailingSpace, '');
-
-  if (isSpecialFont.test(font)) {
-    return [font];
-  }
-
-  const matchFontSize = /(^|\s+)\d*\.?\d+([a-z]+|%)\s/i.exec(font);
-
-  if (!matchFontSize) {
-    return defaultFont;
-  }
-
-  const numberOfLeadingSpaces = matchFontSize[1].length;
-  const indexOfFontSize = matchFontSize.index;
-
-  const requiredParts = font.substring(indexOfFontSize + numberOfLeadingSpaces).split(oneOrMoreSpaces);
-
-  const optional = font.substring(0, indexOfFontSize);
-  const optionalParts = optional ? optional.split(oneOrMoreSpaces) : null;
-
-  let fontStyle;
-  let fontVariant;
-  let fontWeight;
-
-  if (optionalParts) {
-    while (optionalParts.length) {
-      if (isFontStyle.test(optionalParts[0])) {
-        fontStyle = optionalParts.splice(0, 1)[0];
-      } else if (isFontVariant.test(optionalParts[0])) {
-        fontVariant = optionalParts.splice(0, 1)[0];
-      } else if (isFontWeight.test(optionalParts[0])) {
-        fontWeight = optionalParts.splice(0, 1)[0];
-      } else if (isNormal.test(optionalParts[0])) {
-        optionalParts.splice(0, 1);
-      } else {
-        return defaultFont;
-      }
-    }
-  }
-
-  return [
-    fontStyle || defaultFont[0],
-    fontVariant || defaultFont[1],
-    fontWeight || defaultFont[2],
-    requiredParts.splice(0, 1)[0],
-    requiredParts.join(' '),
-  ];
-}
-
-function formatFont (input: string) {
-  return getFontParts(input).join(' ');
-}
-
-function titleCase (text: string) {
-  return text.charAt(0).toUpperCase() + text.substring(1);
-}
-
-const incorrectPointFormat = 'Path points must be an array of:\n' +
-  'numbers [x, y, x, y], pairs [[x, y], [x, y]], or objects [{x, y}, {x, y}].';
-
-function transformPoints (points) {
-  if (!points || points.length === 0) {
-    return;
-  }
-
-  if (!Array.isArray(points)) {
-    throw new Error(incorrectPointFormat);
-  }
-
-  if (typeof points[0] === 'object') {
-    if (Array.isArray(points[0])) {
-      if (points[0].length !== 2) {
-        throw new Error(incorrectPointFormat);
-      }
-
-      return points;
-    } else if (!('x' in points[0] && 'y' in points[0])) {
-      throw new Error(incorrectPointFormat);
-    }
-
-    return points.map(function (point) {
-      return [point.x, point.y];
-    });
-  } else if (typeof points[0] === 'number') {
-    return points;
-  }
-
-  throw new Error(incorrectPointFormat);
-}
-
-function forPoints (points, fn) {
-  if (!points || points.length <= 1 ||
-    (typeof points[0] === 'number' && points.length <= 2)) {
-    return;
-  }
-
-  var increment = 1;
-
-  if (typeof points[0] === 'number') {
-    increment = 2;
-  }
-
-  for (var i = 0; i < points.length; i += increment) {
-    if (increment === 2) {
-      fn(points[i], points[i + 1], i / 2, increment);
-    } else {
-      fn(points[i][0], points[i][1], i, increment);
-    }
-  }
-}
-
-function Canvasimo (input) {
-  var element = input;
-  var ctx = element.getContext(contextType);
 
   ctx.font = formatFont(ctx.font);
 
@@ -178,7 +38,7 @@ function Canvasimo (input) {
   }.bind(this);
 
   this.getCurrentContextType = function () {
-    return contextType;
+    return CONTEXT_TYPE;
   }.bind(this);
 
   this.getDataURL = function (type, encoderOptions) {
@@ -272,7 +132,7 @@ function Canvasimo (input) {
     return this;
   }
 
-  var unchangedCanvasMethods = [
+  const unchangedCanvasMethods = [
     'save',
     'restore',
     'scale',
@@ -294,7 +154,7 @@ function Canvasimo (input) {
     'putImageData',
     'rect',
     'arc',
-    'setLineDash'
+    'setLineDash',
   ];
 
   // Standard actions
