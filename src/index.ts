@@ -5,7 +5,14 @@ import {
 import {
   AnyCanvasContext,
   AnyCanvasContextAttributes,
+  Color,
+  FillAndStrokeStyles,
+  GlobalCompositeOperations,
+  LineCaps,
+  LineJoins,
   Size,
+  TextAligns,
+  TextBaselines,
 } from './types';
 import {
   formatFont,
@@ -29,7 +36,7 @@ export default class Canvasimo {
     const ctx = this.element.getContext(CONTEXT_TYPE);
 
     if (!ctx) {
-      throw new Error('Could not get a canvas context from the provided element');
+      throw new Error('Could not get a CanvasRenderingContext from the provided element');
     }
 
     this.ctx = ctx;
@@ -50,6 +57,7 @@ export default class Canvasimo {
 
   public getDataURL = (type: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
+  // Canvas size
   public setWidth = (width: number): Canvasimo => {
     this.element.width = width * this.density;
     return this;
@@ -81,6 +89,7 @@ export default class Canvasimo {
     height: this.element.height,
   })
 
+  // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
       if (key in this.ctx) {
@@ -101,11 +110,47 @@ export default class Canvasimo {
     return null;
   }
 
-  private setCanvasProperty = (attribute: string, value: any) => {
+  // Context property getter and setters
+  public setGlobalAlpha = (value: number) => this.setCanvasProperty('globalAlpha', value);
+  public getGlobalAlpha = () => this.getCanvasProperty('globalAlpha');
+  public setGlobalCompositeOperation = (value: GlobalCompositeOperations) => {
+    return this.setCanvasProperty('globalCompositeOperation', value);
+  }
+  public getGlobalCompositeOperation = () => {
+    return this.getCanvasProperty('globalCompositeOperation');
+  }
+  public setFillStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('fillStyle', value);
+  public getFillStyle = () => this.getCanvasProperty('fillStyle');
+  public setStrokeStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('strokeStyle', value);
+  public getStrokeStyle = () => this.getCanvasProperty('strokeStyle');
+  public setLineWidth = (value: number) => this.setCanvasProperty('lineWidth', value);
+  public getLineWidth = () => this.getCanvasProperty('lineWidth');
+  public setLineCap = (value: LineCaps) => this.setCanvasProperty('lineCap', value);
+  public getLineCap = () => this.getCanvasProperty('lineCap');
+  public setLineJoin = (value: LineJoins) => this.setCanvasProperty('lineJoin', value);
+  public getLineJoin = () => this.getCanvasProperty('lineJoin');
+  public setLineDashOffset = (value: number) => this.setCanvasProperty('lineDashOffset', value);
+  public getLineDashOffset = () => this.getCanvasProperty('lineDashOffset');
+  public setMiterLimit = (value: number) => this.setCanvasProperty('miterLimit', value);
+  public getMiterLimit = () => this.getCanvasProperty('miterLimit');
+  public setShadowColor = (value: Color) => this.setCanvasProperty('shadowColor', value);
+  public getShadowColor = () => this.getCanvasProperty('shadowColor');
+  public setShadowBlur = (value: number) => this.setCanvasProperty('shadowBlur', value);
+  public getShadowBlur = () => this.getCanvasProperty('shadowBlur');
+  public setShadowOffsetX = (value: number) => this.setCanvasProperty('shadowOffsetX', value);
+  public getShadowOffsetX = () => this.getCanvasProperty('shadowOffsetX');
+  public setShadowOffsetY = (value: number) => this.setCanvasProperty('shadowOffsetY', value);
+  public getShadowOffsetY = () => this.getCanvasProperty('shadowOffsetY');
+  public setTextAlign = (value: TextAligns) => this.setCanvasProperty('textAlign', value);
+  public getTextAlign = () => this.getCanvasProperty('textAlign');
+  public setTextBaseline = (value: TextBaselines) => this.setCanvasProperty('textBaseline', value);
+  public getTextBaseline = () => this.getCanvasProperty('textBaseline');
+
+  private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     const key = attribute as keyof CanvasRenderingContext2D;
 
     if (key === 'canvas') {
-      throw new Error('Cannot set readonly property canvas on context');
+      throw new Error('Cannot set readonly property canvas of CanvasRenderingContext');
     } else {
       this.ctx[key] = value;
     }
@@ -113,13 +158,10 @@ export default class Canvasimo {
     return this;
   }
 
-  private getCanvasProperty = (attribute: string) => {
-    const key = attribute as keyof CanvasRenderingContext2D;
-
-    return this.ctx[key];
-  }
+  private getCanvasProperty = (attribute: string) => this.ctx[attribute as keyof CanvasRenderingContext2D];
 }
 
+/*
 function CanvasimoOld (input: HTMLCanvasElement) {
   const element = input;
   const ctx = element.getContext(CONTEXT_TYPE);
@@ -1095,3 +1137,4 @@ function CanvasimoOld (input: HTMLCanvasElement) {
   }.bind(this);
 
 }
+*/

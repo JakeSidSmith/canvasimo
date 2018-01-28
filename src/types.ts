@@ -19,3 +19,42 @@ export interface Size {
   width: number;
   height: number;
 }
+
+export type GlobalCompositeOperations = 'source-over' |
+  'source-in' |
+  'source-out' |
+  'source-atop' |
+  'destination-over' |
+  'destination-in' |
+  'destination-out' |
+  'destination-atop' |
+  'lighter' |
+  'copy' |
+  'xor' |
+  'multiply' |
+  'screen' |
+  'overlay' |
+  'darken' |
+  'lighten' |
+  'color-dodge' |
+  'color-burn' |
+  'hard-light' |
+  'soft-light' |
+  'difference' |
+  'exclusion' |
+  'hue' |
+  'saturation' |
+  'color' |
+  'luminosity';
+
+export type Color = string;
+
+export type FillAndStrokeStyles = Color | CanvasGradient | CanvasPattern;
+
+export type LineCaps = 'butt' | 'round' | 'square';
+
+export type LineJoins = 'bevel' | 'round' | 'miter';
+
+export type TextAligns = 'left' | 'right' | 'center' | 'start' | 'end';
+
+export type TextBaselines = 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom';
