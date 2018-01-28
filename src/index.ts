@@ -211,7 +211,7 @@ export default class Canvasimo {
     return this;
   }
   public translate = (x: number, y: number): Canvasimo => {
-    this.ctx.translate(x, y);
+    this.ctx.translate(x * this.density, y * this.density);
     return this;
   }
   public transform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
@@ -231,27 +231,34 @@ export default class Canvasimo {
     return this;
   }
   public clearRect = (x: number, y: number, width: number, height: number): Canvasimo => {
-    this.ctx.clearRect(x, y, width, height);
+    this.ctx.clearRect(x * this.density, y * this.density, width * this.density, height * this.density);
     return this;
   }
   public moveTo = (x: number, y: number): Canvasimo => {
-    this.ctx.moveTo(x, y);
+    this.ctx.moveTo(x * this.density, y * this.density);
     return this;
   }
   public lineTo = (x: number, y: number): Canvasimo => {
-    this.ctx.lineTo(x, y);
+    this.ctx.lineTo(x * this.density, y * this.density);
     return this;
   }
   public quadraticCurveTo = (cpx: number, cpy: number, x: number, y: number): Canvasimo => {
-    this.ctx.quadraticCurveTo(cpx, cpy, x, y);
+    this.ctx.quadraticCurveTo(cpx * this.density, cpy * this.density, x * this.density, y * this.density);
     return this;
   }
   public bezierCurveTo = (cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): Canvasimo => {
-    this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    this.ctx.bezierCurveTo(
+      cp1x * this.density,
+      cp1y * this.density,
+      cp2x * this.density,
+      cp2y * this.density,
+      x * this.density,
+      y * this.density
+    );
     return this;
   }
   public arcTo = (x1: number, y1: number, x2: number, y2: number, radius: number): Canvasimo => {
-    this.ctx.arcTo(x1, y1, x2, y2, radius);
+    this.ctx.arcTo(x1 * this.density, y1 * this.density, x2 * this.density, y2 * this.density, radius * this.density);
     return this;
   }
   public beginPath = (): Canvasimo => {
@@ -283,12 +290,22 @@ export default class Canvasimo {
         typeof dstW !== 'undefined' &&
         typeof dstH !== 'undefined'
       ) {
-        this.ctx.drawImage(image, srcX, srcY, srcW, srcH, dstX, dstY, dstW, dstH);
+        this.ctx.drawImage(
+          image,
+          srcX * this.density,
+          srcY * this.density,
+          srcW * this.density,
+          srcH * this.density,
+          dstX * this.density,
+          dstY * this.density,
+          dstW * this.density,
+          dstH * this.density
+        );
       } else {
-        this.ctx.drawImage(image, srcX, srcY, srcW, srcH);
+        this.ctx.drawImage(image, srcX * this.density, srcY * this.density, srcW * this.density, srcH * this.density);
       }
     } else {
-      this.ctx.drawImage(image, srcX, srcY);
+      this.ctx.drawImage(image, srcX * this.density, srcY * this.density);
     }
     return this;
   }
@@ -301,11 +318,19 @@ export default class Canvasimo {
     dirtyWidth?: number,
     dirtyHeight?: number
   ): Canvasimo => {
-    this.ctx.putImageData(imagedata, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
+    this.ctx.putImageData(
+      imagedata,
+      dx * this.density,
+      dy * this.density,
+      typeof dirtyX === 'number' ? dirtyX * this.density : dirtyX,
+      typeof dirtyY === 'number' ? dirtyY * this.density : dirtyY,
+      typeof dirtyWidth === 'number' ? dirtyWidth * this.density : dirtyWidth,
+      typeof dirtyHeight === 'number' ? dirtyHeight * this.density : dirtyHeight
+    );
     return this;
   }
   public rect = (x: number, y: number, width: number, height: number): Canvasimo => {
-    this.ctx.rect(x, y, width, height);
+    this.ctx.rect(x * this.density, y * this.density, width * this.density, height * this.density);
     return this;
   }
   public arc = (
@@ -316,11 +341,18 @@ export default class Canvasimo {
     endAngle: number,
     anticlockwise?: boolean
   ): Canvasimo => {
-    this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise || false);
+    this.ctx.arc(
+      x * this.density,
+      y * this.density,
+      radius * this.density,
+      startAngle,
+      endAngle,
+      anticlockwise || false
+    );
     return this;
   }
   public setLineDash = (segments: Segments): Canvasimo => {
-    this.ctx.setLineDash(segments);
+    this.ctx.setLineDash(segments.map((segment) => segment * this.density));
     return this;
   }
 
@@ -387,7 +419,16 @@ export default class Canvasimo {
     anticlockwise?: boolean
   ): Canvasimo => {
     if (typeof this.ctx.ellipse === 'function') {
-      this.ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+      this.ctx.ellipse(
+        x * this.density,
+        y * this.density,
+        radiusX * this.density,
+        radiusY * this.density,
+        rotation,
+        startAngle,
+        endAngle,
+        anticlockwise || false
+      );
       return this;
     }
 
