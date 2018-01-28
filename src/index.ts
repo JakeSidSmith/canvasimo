@@ -400,6 +400,20 @@ export default class Canvasimo {
       .restore();
   }
 
+  // Renamed compatibility methods
+  public plotEllipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    return this.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+  }
+
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     (this.ctx as any)[attribute] = value;
