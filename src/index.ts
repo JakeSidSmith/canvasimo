@@ -367,6 +367,39 @@ export default class Canvasimo {
     return this;
   }
 
+  // Cross compatibility methods
+  public resetTransform = (): Canvasimo => {
+    if (typeof (this.ctx as any).resetTransform === 'function') {
+      (this.ctx as any).resetTransform();
+      return this;
+    }
+
+    return this.setTransform(1, 0, 0, 1, 0, 0);
+  }
+  public ellipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    if (typeof this.ctx.ellipse === 'function') {
+      this.ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+      return this;
+    }
+
+    return this
+      .save()
+      .translate(x, y)
+      .rotate(rotation)
+      .scale(1, radiusY / radiusX)
+      .plotArc(0, 0, radiusX, startAngle, endAngle, anticlockwise)
+      .restore();
+  }
+
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     (this.ctx as any)[attribute] = value;
