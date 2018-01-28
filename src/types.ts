@@ -14,3 +14,8 @@ export type Points = PointArray | TuplePointArray | NumberArray;
 
 export type AnyCanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
 export type AnyCanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;
+
+export interface Size {
+  width: number;
+  height: number;
+}

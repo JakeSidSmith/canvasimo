@@ -4,12 +4,18 @@ import {
 import {
   AnyCanvasContext,
   AnyCanvasContextAttributes,
+  Size,
 } from './types';
 import {
   formatFont,
   getFontParts,
   titleCase,
 } from './utils';
+
+interface SetSize {
+  (size: Size): Canvasimo;
+  (width: number, height: number): Canvasimo;
+}
 
 export default class Canvasimo {
   private element: HTMLCanvasElement;
@@ -69,6 +75,25 @@ export default class Canvasimo {
 
   public getHeight = (): number => {
     return this.element.height / this.density;
+  }
+
+  public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
+    if (typeof width === 'object') {
+      this.element.width = width.width;
+      this.element.height = width.height;
+    } else if (typeof width === 'number' && typeof height === 'number') {
+      this.element.width = width;
+      this.element.height = height;
+    }
+
+    return this;
+  }
+
+  public getSize = (): Size => {
+    return {
+      width: this.element.width,
+      height: this.element.height,
+    };
   }
 }
 
