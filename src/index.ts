@@ -455,6 +455,46 @@ export default class Canvasimo {
     return this.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
   }
 
+  // Standard context getters
+  // FIXME: Needs implementation for IE
+  // public getContextAttributes = () => this.ctx.getContextAttributes();
+  public getImageData = (sx: number, sy: number, sw: number, sh: number): ImageData => {
+    return this.ctx.getImageData(sx, sy, sw, sh);
+  }
+  public createLinearGradient = (x0: number, y0: number, x1: number, y1: number): CanvasGradient => {
+    return this.ctx.createLinearGradient(x0, y0, x1, y1);
+  }
+  public createRadialGradient = (
+    x0: number,
+    y0: number,
+    r0: number,
+    x1: number,
+    y1: number,
+    r1: number
+  ): CanvasGradient => {
+    return this.ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+  }
+  public createPattern = (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
+    repetition: string
+  ): CanvasPattern => {
+    return this.ctx.createPattern(image, repetition);
+  }
+  public createImageData = (imageDataOrSw: number | ImageData, sh?: number): ImageData => {
+    return this.ctx.createImageData(imageDataOrSw, sh);
+  }
+  public isPointInPath = (x: number, y: number, fillRule?: FillRules): boolean => {
+    return this.ctx.isPointInPath(x, y, fillRule);
+  }
+  // FIXME: Needs implementation for IE
+  // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
+  public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
+  public getLineDash = (): Segments => this.ctx.getLineDash();
+
+  // Renamed context getters
+  public getTextSize = (text: string) => this.measureText(text);
+  public getStrokeDash = () => this.getLineDash();
+
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     (this.ctx as any)[attribute] = value;
