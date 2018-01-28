@@ -53,6 +53,16 @@ interface DrawImage {
   ): Canvasimo;
 }
 
+interface Fill {
+  (color?: string | FillRules): Canvasimo;
+  (color: string, fillRule: FillRules): Canvasimo;
+}
+
+interface Stroke {
+  (color?: string | Path2D): Canvasimo;
+  (color: string, path: Path2D): Canvasimo;
+}
+
 export default class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -326,6 +336,38 @@ export default class Canvasimo {
     return this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
   }
   public setStrokeDash = (segments: Segments) => this.setLineDash(segments);
+
+  // Expanded context methods
+  public fill: Fill = (color?: string, fillRule?: FillRules): Canvasimo => {
+    if (typeof color === 'string') {
+      if (color !== 'nonzero' && color !== 'evenodd') {
+        this.setFill(color);
+        this.ctx.fill(fillRule);
+      } else {
+        this.ctx.fill(color);
+      }
+    } else {
+      this.ctx.fill(fillRule);
+    }
+
+    this.ctx.fill(fillRule);
+    return this;
+  }
+  public stroke: Stroke = (color?: string, path?: Path2D): Canvasimo => {
+    if (typeof color === 'string') {
+      this.setStroke(color);
+      this.ctx.stroke(path);
+    } else if (typeof color === 'object') {
+      this.ctx.stroke(color);
+    } else if (typeof color !== 'undefined') {
+      this.setStroke(color);
+      this.ctx.stroke(path);
+    } else {
+      this.ctx.stroke(path);
+    }
+
+    return this;
+  }
 
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
