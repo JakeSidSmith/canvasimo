@@ -100,6 +100,23 @@ export default class Canvasimo {
 
     return null;
   }
+
+  private setCanvasProperty = (attribute: string, value: any) => {
+    const key = attribute as keyof CanvasRenderingContext2D;
+
+    if (key === 'canvas') {
+      throw new Error('Cannot set readonly property canvas on context');
+    } else {
+      this.ctx[key] = value;
+    }
+
+    return this;
+  }
+
+  private getCanvasProperty = (attribute: string) => {
+    const key = attribute as keyof CanvasRenderingContext2D;
+
+    return this.ctx[key];
   }
 }
 
