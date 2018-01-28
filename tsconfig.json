@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "strictNullChecks": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
     "pretty": true,
+    "strict": true,
     "moduleResolution": "node",
     "jsx": "react",
     "target": "es5",
