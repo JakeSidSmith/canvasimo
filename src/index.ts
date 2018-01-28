@@ -1,5 +1,5 @@
 import {
-  CONTEXT_TYPE, DEFAULT_FONT,
+  CONTEXT_TYPE,
 } from './constants';
 import {
   AnyCanvasContext,
@@ -15,6 +15,7 @@ export default class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
+  private density: number = 1;
 
   public constructor (element: HTMLCanvasElement) {
     this.element = element;
@@ -48,12 +49,30 @@ export default class Canvasimo {
     return this.ctxType;
   }
 
-  public getDataURL = (type: string, ...args: any[]) => {
+  public getDataURL = (type: string, ...args: any[]): string => {
     return this.element.toDataURL(type, ...args);
+  }
+
+  public setWidth = (width: number): Canvasimo => {
+    this.element.width = width * this.density;
+    return this;
+  }
+
+  public setHeight = (height: number): Canvasimo => {
+    this.element.height = height * this.density;
+    return this;
+  }
+
+  public getWidth = (): number => {
+    return this.element.width / this.density;
+  }
+
+  public getHeight = (): number => {
+    return this.element.height / this.density;
   }
 }
 
-function Canvasimo (input: HTMLCanvasElement) {
+function CanvasimoOld (input: HTMLCanvasElement) {
   const element = input;
   const ctx = element.getContext(CONTEXT_TYPE);
 
