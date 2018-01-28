@@ -54,6 +54,11 @@ interface DrawImage {
   ): Canvasimo;
 }
 
+interface CreateImageData {
+  (width: number, height: number): ImageData;
+  (ImageData: ImageData): ImageData;
+}
+
 interface Fill {
   (color?: string | FillRules): Canvasimo;
   (color: string, fillRule: FillRules): Canvasimo;
@@ -459,10 +464,10 @@ export default class Canvasimo {
   // FIXME: Needs implementation for IE
   // public getContextAttributes = () => this.ctx.getContextAttributes();
   public getImageData = (sx: number, sy: number, sw: number, sh: number): ImageData => {
-    return this.ctx.getImageData(sx, sy, sw, sh);
+    return this.ctx.getImageData(sx * this.density, sy * this.density, sw * this.density, sh * this.density);
   }
   public createLinearGradient = (x0: number, y0: number, x1: number, y1: number): CanvasGradient => {
-    return this.ctx.createLinearGradient(x0, y0, x1, y1);
+    return this.ctx.createLinearGradient(x0 * this.density, y0 * this.density, x1 * this.density, y1 * this.density);
   }
   public createRadialGradient = (
     x0: number,
@@ -472,7 +477,14 @@ export default class Canvasimo {
     y1: number,
     r1: number
   ): CanvasGradient => {
-    return this.ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+    return this.ctx.createRadialGradient(
+      x0 * this.density,
+      y0 * this.density,
+      r0 * this.density,
+      x1 * this.density,
+      y1 * this.density,
+      r1 * this.density
+    );
   }
   public createPattern = (
     image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
@@ -480,11 +492,11 @@ export default class Canvasimo {
   ): CanvasPattern => {
     return this.ctx.createPattern(image, repetition);
   }
-  public createImageData = (imageDataOrSw: number | ImageData, sh?: number): ImageData => {
-    return this.ctx.createImageData(imageDataOrSw, sh);
+  public createImageData: CreateImageData = (width: number | ImageData, height?: number): ImageData => {
+    return this.ctx.createImageData(width, height);
   }
   public isPointInPath = (x: number, y: number, fillRule?: FillRules): boolean => {
-    return this.ctx.isPointInPath(x, y, fillRule);
+    return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
   }
   // FIXME: Needs implementation for IE
   // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
