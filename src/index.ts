@@ -146,6 +146,24 @@ export default class Canvasimo {
   public setTextBaseline = (value: TextBaselines) => this.setCanvasProperty('textBaseline', value);
   public getTextBaseline = () => this.getCanvasProperty('textBaseline');
 
+  // Renamed property getter and setters
+  public setOpacity = (value: number) => this.setGlobalAlpha(value);
+  public getOpacity = () => this.getGlobalAlpha();
+  public setCompositeOperation = (value: GlobalCompositeOperations) => this.setGlobalCompositeOperation(value);
+  public getCompositeOperation = () => this.getGlobalCompositeOperation();
+  public setFill = (value: FillAndStrokeStyles) => this.setFillStyle(value);
+  public getFill = () => this.getFillStyle();
+  public setStroke = (value: FillAndStrokeStyles) => this.setStrokeStyle(value);
+  public getStroke = () => this.getStrokeStyle();
+  public setStrokeWidth = (value: number) => this.setLineWidth(value);
+  public getStrokeWidth = () => this.getLineWidth();
+  public setStrokeCap = (value: LineCaps) => this.setLineCap(value);
+  public getStrokeCap = () => this.getLineCap();
+  public setStrokeJoin = (value: LineJoins) => this.setLineJoin(value);
+  public getStrokeJoin = () => this.getLineJoin();
+  public setStrokeDashOffset = (value: number) => this.setLineDashOffset(value);
+  public getStrokeDashOffset = () => this.getLineDashOffset();
+
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     const key = attribute as keyof CanvasRenderingContext2D;
 
