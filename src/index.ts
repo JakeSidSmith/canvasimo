@@ -1,5 +1,6 @@
 import {
   CONTEXT_TYPE,
+  IMAGE_SMOOTHING_KEYS,
 } from './constants';
 import {
   AnyCanvasContext,
@@ -35,29 +36,19 @@ export default class Canvasimo {
     this.ctx.font = formatFont(ctx.font);
   }
 
-  public getCanvas = (): HTMLCanvasElement => {
-    return this.element;
-  }
+  public getCanvas = (): HTMLCanvasElement => this.element;
 
-  public getBoundingClientRect = (): ClientRect => {
-    return this.element.getBoundingClientRect();
-  }
+  public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
 
   public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
     return this.element.getContext(type, contextAttributes);
   }
 
-  public getCurrentContext = (): AnyCanvasContext => {
-    return this.ctx;
-  }
+  public getCurrentContext = (): AnyCanvasContext => this.ctx;
 
-  public getCurrentContextType = (): typeof CONTEXT_TYPE => {
-    return this.ctxType;
-  }
+  public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
 
-  public getDataURL = (type: string, ...args: any[]): string => {
-    return this.element.toDataURL(type, ...args);
-  }
+  public getDataURL = (type: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   public setWidth = (width: number): Canvasimo => {
     this.element.width = width * this.density;
@@ -69,13 +60,9 @@ export default class Canvasimo {
     return this;
   }
 
-  public getWidth = (): number => {
-    return this.element.width / this.density;
-  }
+  public getWidth = (): number => this.element.width / this.density;
 
-  public getHeight = (): number => {
-    return this.element.height / this.density;
-  }
+  public getHeight = (): number => this.element.height / this.density;
 
   public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
     if (typeof width === 'object') {
@@ -89,11 +76,30 @@ export default class Canvasimo {
     return this;
   }
 
-  public getSize = (): Size => {
-    return {
-      width: this.element.width,
-      height: this.element.height,
-    };
+  public getSize = (): Size => ({
+    width: this.element.width,
+    height: this.element.height,
+  })
+
+  public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
+    for (const key of IMAGE_SMOOTHING_KEYS) {
+      if (key in this.ctx) {
+        this.ctx[key] = value;
+        return this;
+      }
+    }
+    return this;
+  }
+
+  public getImageSmoothingEnabled = () => {
+    for (const key of IMAGE_SMOOTHING_KEYS) {
+      if (key in this.ctx) {
+        return this.ctx[key];
+      }
+    }
+
+    return null;
+  }
   }
 }
 

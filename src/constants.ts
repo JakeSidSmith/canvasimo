@@ -21,7 +21,7 @@ export const IMAGE_SMOOTHING_KEYS = [
   'msImageSmoothingEnabled',
   'mozImageSmoothingEnabled',
   'webkitImageSmoothingEnabled',
-];
+] as Array<'imageSmoothingEnabled'>;
 
 export const CONTEXT_TYPE = '2d';
 
