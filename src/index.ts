@@ -44,17 +44,12 @@ export default class Canvasimo {
   }
 
   public getCanvas = (): HTMLCanvasElement => this.element;
-
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
-
   public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
     return this.element.getContext(type, contextAttributes);
   }
-
   public getCurrentContext = (): AnyCanvasContext => this.ctx;
-
   public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
-
   public getDataURL = (type: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Canvas size
@@ -62,31 +57,26 @@ export default class Canvasimo {
     this.element.width = width * this.density;
     return this;
   }
-
   public setHeight = (height: number): Canvasimo => {
     this.element.height = height * this.density;
     return this;
   }
-
   public getWidth = (): number => this.element.width / this.density;
-
   public getHeight = (): number => this.element.height / this.density;
-
   public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
     if (typeof width === 'object') {
-      this.element.width = width.width;
-      this.element.height = width.height;
+      this.element.width = width.width * this.density;
+      this.element.height = width.height * this.density;
     } else if (typeof width === 'number' && typeof height === 'number') {
-      this.element.width = width;
-      this.element.height = height;
+      this.element.width = width * this.density;
+      this.element.height = height * this.density;
     }
 
     return this;
   }
-
   public getSize = (): Size => ({
-    width: this.element.width,
-    height: this.element.height,
+    width: this.element.width / this.density,
+    height: this.element.height / this.density,
   })
 
   // Image smoothing
@@ -99,7 +89,6 @@ export default class Canvasimo {
     }
     return this;
   }
-
   public getImageSmoothingEnabled = () => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
       if (key in this.ctx) {
@@ -123,24 +112,24 @@ export default class Canvasimo {
   public getFillStyle = () => this.getCanvasProperty('fillStyle');
   public setStrokeStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('strokeStyle', value);
   public getStrokeStyle = () => this.getCanvasProperty('strokeStyle');
-  public setLineWidth = (value: number) => this.setCanvasProperty('lineWidth', value);
-  public getLineWidth = () => this.getCanvasProperty('lineWidth');
+  public setLineWidth = (value: number) => this.setCanvasProperty('lineWidth', value * this.density);
+  public getLineWidth = () => this.getCanvasProperty('lineWidth') / this.density;
   public setLineCap = (value: LineCaps) => this.setCanvasProperty('lineCap', value);
   public getLineCap = () => this.getCanvasProperty('lineCap');
   public setLineJoin = (value: LineJoins) => this.setCanvasProperty('lineJoin', value);
   public getLineJoin = () => this.getCanvasProperty('lineJoin');
-  public setLineDashOffset = (value: number) => this.setCanvasProperty('lineDashOffset', value);
-  public getLineDashOffset = () => this.getCanvasProperty('lineDashOffset');
-  public setMiterLimit = (value: number) => this.setCanvasProperty('miterLimit', value);
-  public getMiterLimit = () => this.getCanvasProperty('miterLimit');
+  public setLineDashOffset = (value: number) => this.setCanvasProperty('lineDashOffset', value * this.density);
+  public getLineDashOffset = () => this.getCanvasProperty('lineDashOffset') / this.density;
+  public setMiterLimit = (value: number) => this.setCanvasProperty('miterLimit', value * this.density);
+  public getMiterLimit = () => this.getCanvasProperty('miterLimit') / this.density;
   public setShadowColor = (value: Color) => this.setCanvasProperty('shadowColor', value);
   public getShadowColor = () => this.getCanvasProperty('shadowColor');
-  public setShadowBlur = (value: number) => this.setCanvasProperty('shadowBlur', value);
-  public getShadowBlur = () => this.getCanvasProperty('shadowBlur');
-  public setShadowOffsetX = (value: number) => this.setCanvasProperty('shadowOffsetX', value);
-  public getShadowOffsetX = () => this.getCanvasProperty('shadowOffsetX');
-  public setShadowOffsetY = (value: number) => this.setCanvasProperty('shadowOffsetY', value);
-  public getShadowOffsetY = () => this.getCanvasProperty('shadowOffsetY');
+  public setShadowBlur = (value: number) => this.setCanvasProperty('shadowBlur', value * this.density);
+  public getShadowBlur = () => this.getCanvasProperty('shadowBlur') / this.density;
+  public setShadowOffsetX = (value: number) => this.setCanvasProperty('shadowOffsetX', value * this.density);
+  public getShadowOffsetX = () => this.getCanvasProperty('shadowOffsetX') / this.density;
+  public setShadowOffsetY = (value: number) => this.setCanvasProperty('shadowOffsetY', value * this.density);
+  public getShadowOffsetY = () => this.getCanvasProperty('shadowOffsetY') / this.density;
   public setTextAlign = (value: TextAligns) => this.setCanvasProperty('textAlign', value);
   public getTextAlign = () => this.getCanvasProperty('textAlign');
   public setTextBaseline = (value: TextBaselines) => this.setCanvasProperty('textBaseline', value);
@@ -164,19 +153,12 @@ export default class Canvasimo {
   public setStrokeDashOffset = (value: number) => this.setLineDashOffset(value);
   public getStrokeDashOffset = () => this.getLineDashOffset();
 
+  // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
-    const key = attribute as keyof CanvasRenderingContext2D;
-
-    if (key === 'canvas') {
-      throw new Error('Cannot set readonly property canvas of CanvasRenderingContext');
-    } else {
-      this.ctx[key] = value;
-    }
-
+    (this.ctx as any)[attribute] = value;
     return this;
   }
-
-  private getCanvasProperty = (attribute: string) => this.ctx[attribute as keyof CanvasRenderingContext2D];
+  private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
 }
 
 /*
