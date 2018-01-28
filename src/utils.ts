@@ -1,6 +1,7 @@
 import {
   DEFAULT_FONT,
   INCORRECT_POINT_FORMAT,
+  MATCHES_FILL_RULE,
   MATCHES_FONT_STYLE,
   MATCHES_FONT_VARIANT,
   MATCHES_FONT_WEIGHT,
@@ -10,6 +11,7 @@ import {
 } from './constants';
 import {
   AnyPoint,
+  FillRules,
   Point,
   PointArray,
   Points,
@@ -123,3 +125,5 @@ export const forPoints = (points: Points, callback: (x: number, y: number, index
     throw new Error(INCORRECT_POINT_FORMAT);
   }
 };
+
+export const isFillRule = (value: any): value is FillRules => typeof value === 'string' && MATCHES_FILL_RULE.test(value);

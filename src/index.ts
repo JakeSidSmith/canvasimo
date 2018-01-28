@@ -19,6 +19,7 @@ import {
 import {
   formatFont,
   getFontParts,
+  isFillRule,
   titleCase,
 } from './utils';
 
@@ -339,18 +340,15 @@ export default class Canvasimo {
 
   // Expanded context methods
   public fill: Fill = (color?: string, fillRule?: FillRules): Canvasimo => {
-    if (typeof color === 'string') {
-      if (color !== 'nonzero' && color !== 'evenodd') {
-        this.setFill(color);
-        this.ctx.fill(fillRule);
-      } else {
-        this.ctx.fill(color);
-      }
+    if (isFillRule(color)) {
+      this.ctx.fill(color);
+    } else if (typeof color === 'string') {
+      this.setFill(color);
+      this.ctx.fill(fillRule);
     } else {
       this.ctx.fill(fillRule);
     }
 
-    this.ctx.fill(fillRule);
     return this;
   }
   public stroke: Stroke = (color?: string, path?: Path2D): Canvasimo => {

@@ -37,3 +37,4 @@ export const MATCHES_FONT_VARIANT = /^(small-caps)$/i;
 export const MATCHES_FONT_WEIGHT = /^(bold|bolder|lighter|\d00)$/i;
 export const MATCHES_SPECIAL_FONT = /^(caption|icon|menu|message-box|small-caption|status-bar)$/i;
 export const MATCHES_WHITESPACE = /\s+/g;
+export const MATCHES_FILL_RULE = /^(nonzero|evenodd)$/;
