@@ -7,9 +7,11 @@ import {
   AnyCanvasContextAttributes,
   Color,
   FillAndStrokeStyles,
+  FillRules,
   GlobalCompositeOperations,
   LineCaps,
   LineJoins,
+  Segments,
   Size,
   TextAligns,
   TextBaselines,
@@ -23,6 +25,32 @@ import {
 interface SetSize {
   (size: Size): Canvasimo;
   (width: number, height: number): Canvasimo;
+}
+
+interface DrawImage {
+  (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    dstX: number,
+    dstY: number
+  ): Canvasimo;
+  (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    dstX: number,
+    dstY: number,
+    dstW: number,
+    dstH: number
+  ): Canvasimo;
+  (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    srcX: number,
+    srcY: number,
+    srcW: number,
+    srcH: number,
+    dstX: number,
+    dstY: number,
+    dstW: number,
+    dstH: number
+  ): Canvasimo;
 }
 
 export default class Canvasimo {
@@ -87,16 +115,17 @@ export default class Canvasimo {
         return this;
       }
     }
+
     return this;
   }
-  public getImageSmoothingEnabled = () => {
+  public getImageSmoothingEnabled = (): boolean => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
       if (key in this.ctx) {
         return this.ctx[key];
       }
     }
 
-    return null;
+    return false;
   }
 
   // Context property getter and setters
@@ -152,6 +181,137 @@ export default class Canvasimo {
   public getStrokeJoin = () => this.getLineJoin();
   public setStrokeDashOffset = (value: number) => this.setLineDashOffset(value);
   public getStrokeDashOffset = () => this.getLineDashOffset();
+
+  // Standard context methods
+  public save = (): Canvasimo => {
+    this.ctx.save();
+    return this;
+  }
+  public restore = (): Canvasimo => {
+    this.ctx.restore();
+    return this;
+  }
+  public scale = (x: number, y: number): Canvasimo => {
+    this.ctx.scale(x, y);
+    return this;
+  }
+  public rotate = (angle: number): Canvasimo => {
+    this.ctx.rotate(angle);
+    return this;
+  }
+  public translate = (x: number, y: number): Canvasimo => {
+    this.ctx.translate(x, y);
+    return this;
+  }
+  public transform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
+    this.ctx.transform(m11, m12, m21, m22, dx, dy);
+    return this;
+  }
+  public setTransform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
+    this.ctx.setTransform(m11, m12, m21, m22, dx, dy);
+    return this;
+  }
+  public drawFocusIfNeeded = (element: Element): Canvasimo => {
+    this.ctx.drawFocusIfNeeded(element);
+    return this;
+  }
+  public clip = (fillRules?: FillRules): Canvasimo => {
+    this.ctx.clip(fillRules);
+    return this;
+  }
+  public clearRect = (x: number, y: number, width: number, height: number): Canvasimo => {
+    this.ctx.clearRect(x, y, width, height);
+    return this;
+  }
+  public moveTo = (x: number, y: number): Canvasimo => {
+    this.ctx.moveTo(x, y);
+    return this;
+  }
+  public lineTo = (x: number, y: number): Canvasimo => {
+    this.ctx.lineTo(x, y);
+    return this;
+  }
+  public quadraticCurveTo = (cpx: number, cpy: number, x: number, y: number): Canvasimo => {
+    this.ctx.quadraticCurveTo(cpx, cpy, x, y);
+    return this;
+  }
+  public bezierCurveTo = (cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): Canvasimo => {
+    this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    return this;
+  }
+  public arcTo = (x1: number, y1: number, x2: number, y2: number, radius: number): Canvasimo => {
+    this.ctx.arcTo(x1, y1, x2, y2, radius);
+    return this;
+  }
+  public beginPath = (): Canvasimo => {
+    this.ctx.beginPath();
+    return this;
+  }
+  public closePath = (): Canvasimo => {
+    this.ctx.closePath();
+    return this;
+  }
+  public drawImage: DrawImage = (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    srcX: number,
+    srcY: number,
+    srcW?: number,
+    srcH?: number,
+    dstX?: number,
+    dstY?: number,
+    dstW?: number,
+    dstH?: number
+  ): Canvasimo => {
+    if (
+      typeof srcW !== 'undefined' &&
+      typeof srcH !== 'undefined'
+    ) {
+      if (
+        typeof dstX !== 'undefined' &&
+        typeof dstY !== 'undefined' &&
+        typeof dstW !== 'undefined' &&
+        typeof dstH !== 'undefined'
+      ) {
+        this.ctx.drawImage(image, srcX, srcY, srcW, srcH, dstX, dstY, dstW, dstH);
+      } else {
+        this.ctx.drawImage(image, srcX, srcY, srcW, srcH);
+      }
+    } else {
+      this.ctx.drawImage(image, srcX, srcY);
+    }
+    return this;
+  }
+  public putImageData = (
+    imagedata: ImageData,
+    dx: number,
+    dy: number,
+    dirtyX?: number,
+    dirtyY?: number,
+    dirtyWidth?: number,
+    dirtyHeight?: number
+  ): Canvasimo => {
+    this.ctx.putImageData(imagedata, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
+    return this;
+  }
+  public rect = (x: number, y: number, width: number, height: number): Canvasimo => {
+    this.ctx.rect(x, y, width, height);
+    return this;
+  }
+  public arc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise || false);
+    return this;
+  }
+  public setLineDash = (segments: Segments): Canvasimo => {
+    this.ctx.setLineDash(segments);
+    return this;
+  }
 
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {

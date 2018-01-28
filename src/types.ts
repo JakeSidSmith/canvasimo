@@ -58,3 +58,7 @@ export type LineJoins = 'bevel' | 'round' | 'miter';
 export type TextAligns = 'left' | 'right' | 'center' | 'start' | 'end';
 
 export type TextBaselines = 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom';
+
+export type Segments = number[];
+
+export type FillRules = 'nonzero' | 'evenodd';
