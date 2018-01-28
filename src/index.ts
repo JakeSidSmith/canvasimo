@@ -313,6 +313,20 @@ export default class Canvasimo {
     return this;
   }
 
+  // Renamed context methods
+  public plotRect = (x: number, y: number, width: number, height: number) => this.rect(x, y, width, height);
+  public plotArc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ) => {
+    return this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+  }
+  public setStrokeDash = (segments: Segments) => this.setLineDash(segments);
+
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     (this.ctx as any)[attribute] = value;
