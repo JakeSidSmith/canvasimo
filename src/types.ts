@@ -110,3 +110,14 @@ export interface Stroke {
   (color?: string | Path2D): Canvasimo;
   (color: string, path: Path2D): Canvasimo;
 }
+
+export interface Repeat {
+  (end: number, callback: (i: number) => any): Canvasimo;
+  (start: number, end: number, callback: (i: number) => any): Canvasimo;
+  (start: number, end: number, step: number, callback: (i: number) => any): Canvasimo;
+}
+
+export interface ForEach {
+  (obj: any[], callback: (value: any, index: number) => any): Canvasimo;
+  (obj: {[i: string]: any}, callback: (value: any, key: string) => any): Canvasimo;
+}

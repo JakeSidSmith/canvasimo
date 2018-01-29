@@ -2,6 +2,7 @@ import {
   CONTEXT_TYPE,
   DEFAULT_FONT,
   IMAGE_SMOOTHING_KEYS,
+  INCORRECT_GET_ANGLE_ARGUMENTS,
 } from './constants';
 import {
   AnyCanvasContext,
@@ -12,10 +13,12 @@ import {
   Fill,
   FillAndStrokeStyles,
   FillRules,
+  ForEach,
   GlobalCompositeOperations,
   LineCaps,
   LineJoins,
   Points,
+  Repeat,
   Segments,
   SetSize,
   Size,
@@ -611,7 +614,7 @@ export default class Canvasimo {
     radius1: number,
     sides: number,
     anticlockwise?: boolean,
-    color: Color
+    color?: Color
   ) => {
     sides = Math.round(sides);
 
@@ -630,7 +633,7 @@ export default class Canvasimo {
     radius1: number,
     sides: number,
     anticlockwise?: boolean,
-    color: Color
+    color?: Color
   ) => {
     sides = Math.round(sides);
 
@@ -1024,105 +1027,105 @@ export default class Canvasimo {
   }
 
   // Helper methods
-  public createHSL = (h, s, l) => {
+  public createHSL = (h: number, s: number, l: number) => {
     return 'hsl(' + h + ',' + s + '%,' + l + '%)';
-  }.bind(this);
+  }
 
-  public createHSLA = (h, s, l, a) => {
+  public createHSLA = (h: number, s: number, l: number, a: number) => {
     return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
-  }.bind(this);
+  }
 
-  public createRGB = (r, g, b) => {
+  public createRGB = (r: number, g: number, b: number) => {
     return 'rgb(' + r + ',' + g + ',' + b + ')';
-  }.bind(this);
+  }
 
-  public createRGBA = (r, g, b, a) => {
+  public createRGBA = (r: number, g: number, b: number, a: number) => {
     return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
-  }.bind(this);
+  }
 
-  public getDistance = (x1, y1, x2, y2) => {
+  public getDistance = (x1: number, y1: number, x2: number, y2: number) => {
     return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-  }.bind(this);
+  }
 
-  public getAngle = () => {
-    var args = Array.prototype.slice.call(arguments);
-
+  public getAngle = (...args: number[]): number => {
     if (!args.length || !(args.length === 4 || args.length === 6)) {
       throw new Error(INCORRECT_GET_ANGLE_ARGUMENTS);
     }
 
-    var x1 = args[0];
-    var y1 = args[1];
-    var x2 = args[2];
-    var y2 = args[3];
+    const x1 = args[0];
+    const y1 = args[1];
+    const x2 = args[2];
+    const y2 = args[3];
 
     if (args.length === 4) {
       return Math.atan2(y2 - y1, x2 - x1);
     }
 
-    var x3 = args[4];
-    var y3 = args[5];
+    const x3 = args[4];
+    const y3 = args[5];
 
-    var a = this.getAngle(x1, y1, x2, y2);
-    var b = this.getAngle(x2, y2, x3, y3);
-    var c = b - a;
+    const a = this.getAngle(x1, y1, x2, y2);
+    const b = this.getAngle(x2, y2, x3, y3);
+    const c = b - a;
 
     if (c >= 0) {
       return Math.PI - c;
     }
 
     return -Math.PI - c;
-  }.bind(this);
+  }
 
-  public getWithoutAlpha = (color) => {
-    var lastCommaIndex = color.lastIndexOf(',');
+  public getRGBFromRGBA = (color: Color) => {
+    const lastCommaIndex = color.lastIndexOf(',');
     return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
-  }.bind(this);
+  }
+
+  public getHSLFromHSLA = (color: Color) => this.getRGBFromRGBA(color);
 
   // FIXME: Methods to adjust r, g, b, and a
 
-  public getRadiansFromDegrees = (degrees) => {
+  public getRadiansFromDegrees = (degrees: number) => {
     return degrees * Math.PI / 180;
-  }.bind(this);
+  }
 
-  public getDegreesFromRadians = (radians) => {
+  public getDegreesFromRadians = (radians: number) => {
     return radians * 180 / Math.PI;
-  }.bind(this);
+  }
 
-  public getPercentFromFraction = (fraction) => {
+  public getPercentFromFraction = (fraction: number) => {
     return (fraction * 100);
-  }.bind(this);
+  }
 
-  public getFractionFromPercent = (percent) => {
+  public getFractionFromPercent = (percent: number) => {
     return (percent / 100);
-  }.bind(this);
+  }
 
-  public getPercentOfWidth = (percent) => {
+  public getPercentOfWidth = (percent: number) => {
     return this.getWidth() / 100 * percent;
-  }.bind(this);
+  }
 
-  public getFractionOfWidth = (fraction) => {
+  public getFractionOfWidth = (fraction: number) => {
     return this.getWidth() * fraction;
-  }.bind(this);
+  }
 
-  public getPercentOfHeight = (percent) => {
+  public getPercentOfHeight = (percent: number) => {
     return this.getHeight() / 100 * percent;
-  }.bind(this);
+  }
 
-  public getFractionOfHeight = (fraction) => {
+  public getFractionOfHeight = (fraction: number) => {
     return this.getHeight() * fraction;
-  }.bind(this);
+  }
 
-  public getPixelColor = (x, y) => {
-    var data = this.getImageData(x, y, 1, 1).data;
+  public getPixelColor = (x: number, y: number) => {
+    const data = this.getImageData(x, y, 1, 1).data;
     return this.createRGBA(data[0], data[1], data[2], data[3]);
-  }.bind(this);
+  }
 
-  public getPixelData = (x, y) => {
+  public getPixelData = (x: number, y: number) => {
     return this.getImageData(x, y, 1, 1).data;
-  }.bind(this);
+  }
 
-  public tap = (callback) => {
+  public tap = (callback: () => any) => {
     if (typeof callback !== 'function') {
       throw new Error(
         'Callback must be a function. Instead got ' +
@@ -1136,30 +1139,34 @@ export default class Canvasimo {
     callback.call(this);
 
     return this;
-  }.bind(this);
+  }
 
-  public repeat = () => {
-    var args = Array.prototype.slice.call(arguments);
-    var start, end, step, callback;
+  public repeat: Repeat = (...args: Array<number | ((i: number) => any)>) => {
+    let start: number;
+    let end: number;
+    let step: number;
+    let callback: undefined | ((i: number) => any);
+
+    const [first, second, third, fourth] = args;
 
     switch (args.length) {
       case 2:
         start = 0;
-        end = (typeof args[0] === 'number' ? args[0] || 0 : 0);
+        end = (typeof first === 'number' ? first || 0 : 0);
         step = 1;
-        callback = args[1];
+        callback = typeof second === 'function' ? second : undefined;
         break;
       case 3:
-        start = (typeof args[0] === 'number' ? args[0] || 0 : 0);
-        end = (typeof args[1] === 'number' ? args[1] || 0 : 0);
+        start = (typeof first === 'number' ? first || 0 : 0);
+        end = (typeof second === 'number' ? second || 0 : 0);
         step = 1;
-        callback = args[2];
+        callback = typeof third === 'function' ? third : undefined;
         break;
       case 4:
-        start = (typeof args[0] === 'number' ? args[0] || 0 : 0);
-        end = (typeof args[1] === 'number' ? args[1] || 0 : 0);
-        step = Math.abs(typeof args[2] === 'number' ? args[2] || 0 : 0);
-        callback = args[3];
+        start = (typeof first === 'number' ? first || 0 : 0);
+        end = (typeof second === 'number' ? second || 0 : 0);
+        step = Math.abs(typeof third === 'number' ? third || 0 : 0);
+        callback = typeof fourth === 'function' ? fourth : undefined;
         break;
       default:
         throw new Error(
@@ -1174,30 +1181,22 @@ export default class Canvasimo {
     }
 
     if (typeof callback !== 'function') {
-      throw new Error(
-        'Callback must be a function. Instead got ' +
-        callback +
-        ' (' +
-        (typeof callback) +
-        ')'
-      );
+      return this;
     }
 
-    callback = callback.bind(this);
-
-    var positive = end > start;
+    const positive = end > start;
     step = positive ? step : -step;
 
-    for (var i = start; (positive ? i < end : i > end); i += step) {
+    for (let i = start; (positive ? i < end : i > end); i += step) {
       if (callback(i) === false) {
         return this;
       }
     }
 
     return this;
-  }.bind(this);
+  }
 
-  public forEach = (obj, callback) => {
+  public forEach: ForEach = (obj: any[] | {[i: string]: any}, callback: (value: any, key: string | number) => any) => {
     if (typeof callback !== 'function') {
       throw new Error(
         'Callback must be a function. Instead got ' +
@@ -1212,16 +1211,14 @@ export default class Canvasimo {
       throw new Error('First argument of forEach must me an array, object, or string');
     }
 
-    callback = callback.bind(this);
-
     if (Array.isArray(obj) || typeof obj === 'string') {
-      for (var i = 0; i < obj.length; i += 1) {
+      for (let i = 0; i < obj.length; i += 1) {
         if (callback(obj[i], i) === false) {
           return this;
         }
       }
     } else {
-      for (var key in obj) {
+      for (const key in obj) {
         if (callback(obj[key], key) === false) {
           return this;
         }
@@ -1229,23 +1226,23 @@ export default class Canvasimo {
     }
 
     return this;
-  }.bind(this);
+  }
 
-  public constrain = (value, min, max) => {
+  public constrain = (value: number, min: number, max: number) => {
     if (min > max) {
-      var temp = min;
+      const temp = min;
       min = max;
       max = temp;
     }
 
     return Math.max(Math.min(value, max), min);
-  }.bind(this);
+  }
 
-  public map = (value, fromStart, fromEnd, toStart, toEnd) => {
-    var fromDiff = fromEnd - fromStart;
-    var toDiff = toEnd - toStart;
+  public map = (value: number, fromStart: number, fromEnd: number, toStart: number, toEnd: number) => {
+    const fromDiff = fromEnd - fromStart;
+    const toDiff = toEnd - toStart;
     return toStart + toDiff * (value - fromStart) / fromDiff;
-  }.bind(this);
+  }
 
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
