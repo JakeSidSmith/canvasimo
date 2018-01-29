@@ -471,6 +471,718 @@ export default class Canvasimo {
   public getTextSize = (text: string) => this.measureText(text);
   public getStrokeDash = () => this.getLineDash();
 
+  // Additional methods
+  public clearCanvas = () => {
+    return this
+      .setWidth(this.getWidth());
+  }.bind(this);
+
+  public fillCanvas = (color) => {
+    return this
+      .resetTransform()
+      .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
+  }.bind(this);
+
+  public plotLine = (x1, y1, x2, y2) => {
+    return this
+      .moveTo(x1, y1)
+      .lineTo(x2, y2);
+  }.bind(this);
+
+  public strokeLine = (x1, y1, x2, y2, color) => {
+    return this
+      .plotLine(x1, y1, x2, y2)
+      .setStroke(color)
+      .stroke();
+  }.bind(this);
+
+  public plotLength = (x1, y1, length, r) => {
+    var x2 = x1 + length * Math.cos(r);
+    var y2 = y1 + length * Math.sin(r);
+
+    return this
+      .moveTo(x1, y1)
+      .lineTo(x2, y2);
+  }.bind(this);
+
+  public strokeLength = (x1, y1, length, r, color) => {
+    return this
+      .plotLength(x1, y1, length, r)
+      .setStroke(color)
+      .stroke();
+  }.bind(this);
+
+  public plotPoly = (x, y, r, sides, counterClockwise) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    var direction = counterClockwise ? -1 : 1;
+
+    function beforeEnd (i) {
+      return counterClockwise ? i > -sides : i < sides;
+    }
+
+    this
+      .beginPath()
+      .moveTo(x + r, y);
+
+    for (var i = 0; beforeEnd(i); i += direction) {
+      var angle = Math.PI * 2 / sides * i;
+      this.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    }
+
+    return this
+      .closePath();
+  }.bind(this);
+
+  public strokePoly = (x, y, r, sides, counterClockwise, color) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotPoly(x, y, r, sides, counterClockwise)
+      .setStroke(color)
+      .stroke();
+  }.bind(this);
+
+  public fillPoly = (x, y, r, sides, counterClockwise, color) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotPoly(x, y, r, sides, counterClockwise)
+      .setFill(color)
+      .fill();
+  }.bind(this);
+
+  public plotStar = (x, y, r1, sides, counterClockwise) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    } else if (sides === 3 || sides === 4) {
+      return this.plotPoly(x, y, r1, sides);
+    }
+
+    sides = sides * 2;
+
+    var direction = counterClockwise ? -1 : 1;
+    var offset = Math.PI * 2 / sides;
+    var cross = Math.cos(offset * 2) * r1;
+    var r2 = cross / Math.cos(offset);
+
+    function beforeEnd (i) {
+      return counterClockwise ? i > -sides : i < sides;
+    }
+
+    this
+      .beginPath()
+      .moveTo(x + r1, y);
+
+    for (var i = 0; beforeEnd(i); i += direction) {
+      var angle = offset * i;
+      var r = i % 2 ? r2 : r1;
+      this.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    }
+
+    return this
+      .closePath();
+  }.bind(this);
+
+  public strokeStar = (x, y, r1, sides, counterClockwise, color) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotStar(x, y, r1, sides, counterClockwise)
+      .setStroke(color)
+      .stroke();
+  }.bind(this);
+
+  public fillStar = (x, y, r1, sides, counterClockwise, color) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotStar(x, y, r1, sides, counterClockwise)
+      .setFill(color)
+      .fill();
+  }.bind(this);
+
+  public plotBurst = (x, y, r1, r2, sides, counterClockwise) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    sides = sides * 2;
+
+    var direction = counterClockwise ? -1 : 1;
+    var offset = Math.PI * 2 / sides;
+
+    function beforeEnd (i) {
+      return counterClockwise ? i > -sides : i < sides;
+    }
+
+    this
+      .beginPath()
+      .moveTo(x + r1, y);
+
+    for (var i = 0; beforeEnd(i); i += direction) {
+      var angle = offset * i;
+      var r = i % 2 ? r2 : r1;
+      this.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    }
+
+    return this
+      .closePath();
+  }.bind(this);
+
+  public strokeBurst = (x, y, r1, r2, sides, counterClockwise, color) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotBurst(x, y, r1, r2, sides, counterClockwise)
+      .setStroke(color)
+      .stroke();
+  }.bind(this);
+
+  public fillBurst = (x, y, r1, r2, sides, counterClockwise, color) => {
+    sides = Math.round(parseFloat(sides));
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotBurst(x, y, r1, r2, sides, counterClockwise)
+      .setFill(color)
+      .fill();
+  }.bind(this);
+
+  public plotPath = (points) => {
+    var transformedPoints = transformPoints(points);
+
+    forPoints(transformedPoints, function (x, y, i) {
+      if (i === 0) {
+        this.moveTo(x, y);
+      } else {
+        this.lineTo(x, y);
+      }
+    }.bind(this));
+
+    return this;
+  }.bind(this);
+
+  public fillPath = (points, color) => {
+    var transformedPoints = transformPoints(points);
+
+    return this
+      .setFill(color)
+      .plotPath(transformedPoints)
+      .fill();
+  }.bind(this);
+
+  public strokePath = (points, color) => {
+    var transformedPoints = transformPoints(points);
+
+    return this
+      .setStroke(color)
+      .plotPath(transformedPoints)
+      .stroke();
+  }.bind(this);
+
+  public plotClosedPath = (points) => {
+    return this
+      .beginPath()
+      .plotPath(points)
+      .closePath();
+  }.bind(this);
+
+  public fillClosedPath = (points, color) => {
+    return this
+      .setFill(color)
+      .plotClosedPath(points)
+      .fill();
+  }.bind(this);
+
+  public strokeClosedPath = (points, color) => {
+    return this
+      .setStroke(color)
+      .plotClosedPath(points)
+      .stroke();
+  }.bind(this);
+
+  public fillText = (text, x, y, maxWidth, color) => {
+    this.setFill(color);
+    // If max width is not a number (e.g. undefined) then iOS does not draw anything
+    if (!maxWidth && maxWidth !== 0) {
+      ctx.fillText(text, x, y);
+    } else {
+      ctx.fillText(text, x, y, maxWidth);
+    }
+    return this;
+  }.bind(this);
+
+  public strokeText = (text, x, y, maxWidth, color) => {
+    this.setStroke(color);
+    ctx.strokeText(text, x, y, maxWidth);
+    return this;
+  }.bind(this);
+
+  public fillRect = (x, y, width, height, color) => {
+    this.setFill(color);
+    ctx.fillRect(x, y, width, height);
+    return this;
+  }.bind(this);
+
+  public strokeRect = (x, y, width, height, color) => {
+    this.setStroke(color);
+    ctx.strokeRect(x, y, width, height);
+    return this;
+  }.bind(this);
+
+  public fillArc = (x, y, radius, startAngle, endAngle, counterClockwise, color) => {
+    return this
+      .setFill(color)
+      .plotArc(x, y, radius, startAngle, endAngle, counterClockwise)
+      .fill();
+  }.bind(this);
+
+  public strokeArc = (x, y, radius, startAngle, endAngle, counterClockwise, color) => {
+    return this
+      .setStroke(color)
+      .plotArc(x, y, radius, startAngle, endAngle, counterClockwise)
+      .stroke();
+  }.bind(this);
+
+  public fillEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise, color) => {
+    return this
+      .setFill(color)
+      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise)
+      .fill();
+  }.bind(this);
+
+  public strokeEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise, color) => {
+    return this
+      .setStroke(color)
+      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise)
+      .stroke();
+  }.bind(this);
+
+  public plotCircle = (x, y, radius, counterClockwise) => {
+    return this
+      .beginPath()
+      .plotArc(x, y, radius, 0, Math.PI * 2, counterClockwise)
+      .closePath();
+  }.bind(this);
+
+  public fillCircle = (x, y, radius, counterClockwise, color) => {
+    return this
+      .setFill(color)
+      .plotCircle(x, y, radius, counterClockwise)
+      .fill();
+  }.bind(this);
+
+  public strokeCircle = (x, y, radius, counterClockwise, color) => {
+    return this
+      .setStroke(color)
+      .plotCircle(x, y, radius, counterClockwise)
+      .stroke();
+  }.bind(this);
+
+  public plotRoundedRect = (x, y, width, height, radius) => {
+    var minRadius = Math.min(width / 2, height / 2, radius);
+
+    return this
+      .beginPath()
+      .moveTo(x + minRadius, y)
+      .lineTo(x + width - minRadius, y)
+      .arcTo(x + width, y, x + width, y + minRadius, minRadius)
+      .lineTo(x + width, y + height - minRadius)
+      .arcTo(x + width, y + height, x + width - minRadius, y + height, minRadius)
+      .lineTo(x + minRadius, y + height)
+      .arcTo(x, y + height, x, y + height - minRadius, minRadius)
+      .lineTo(x, y + minRadius)
+      .arcTo(x, y, x + minRadius, y, minRadius)
+      .closePath();
+  }.bind(this);
+
+  public fillRoundedRect = (x, y, width, height, radius, color) => {
+    return this
+      .setFill(color)
+      .plotRoundedRect(x, y, width, height, radius)
+      .fill();
+  }.bind(this);
+
+  public strokeRoundedRect = (x, y, width, height, radius, color) => {
+    return this
+      .setStroke(color)
+      .plotRoundedRect(x, y, width, height, radius)
+      .stroke();
+  }.bind(this);
+
+  public plotPixel = (x, y) => {
+    return this
+      .plotRect(x, y, 1, 1);
+  }.bind(this);
+
+  public fillPixel = (x, y, color) => {
+    return this
+      .fillRect(x, y, 1, 1, color);
+  }.bind(this);
+
+  public strokePixel = (x, y, color) => {
+    return this
+      .strokeRect(x, y, 1, 1, color);
+  }.bind(this);
+
+  // Font methods
+  public setFont = (font) => {
+    ctx.font = formatFont(font);
+    return this;
+  }.bind(this);
+
+  public getFont = () => {
+    return formatFont(ctx.font);
+  }.bind(this);
+
+  // Font property setters
+  public setFontStyle = (style) => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return this.setFont(null);
+    }
+    parts[0] = style || defaultFont[0];
+    ctx.font = formatFont(parts.join(' '));
+    return this;
+  }.bind(this);
+
+  public setFontVariant = (variant) => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return this.setFont(null);
+    }
+    parts[1] = variant || defaultFont[1];
+    ctx.font = formatFont(parts.join(' '));
+    return this;
+  }.bind(this);
+
+  public setFontWeight = (weight) => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return this.setFont(null);
+    }
+    parts[2] = weight || defaultFont[2];
+    ctx.font = formatFont(parts.join(' '));
+    return this;
+  }.bind(this);
+
+  public setFontSize = (size) => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return this.setFont(null);
+    }
+    parts[3] = (typeof size === 'number' ? size + 'px' : size) || defaultFont[3];
+    ctx.font = formatFont(parts.join(' '));
+    return this;
+  }.bind(this);
+
+  public setFontFamily = (family) => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return this.setFont(null);
+    }
+    parts[4] = family || defaultFont[4];
+    ctx.font = formatFont(parts.join(' '));
+    return this;
+  }.bind(this);
+
+  // Font property getters
+  public getFontStyle = () => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[0];
+  }.bind(this);
+
+  public getFontVariant = () => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[1];
+  }.bind(this);
+
+  public getFontWeight = () => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[2];
+  }.bind(this);
+
+  public getFontSize = () => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parseFloat(parts[3]);
+  }.bind(this);
+
+  public getFontFamily = () => {
+    var parts = getFontParts(ctx.font);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[4];
+  }.bind(this);
+
+  // Helper methods
+  public createHSL = (h, s, l) => {
+    return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+  }.bind(this);
+
+  public createHSLA = (h, s, l, a) => {
+    return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
+  }.bind(this);
+
+  public createRGB = (r, g, b) => {
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }.bind(this);
+
+  public createRGBA = (r, g, b, a) => {
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+  }.bind(this);
+
+  public getDistance = (x1, y1, x2, y2) => {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  }.bind(this);
+
+  public getAngle = () => {
+    var args = Array.prototype.slice.call(arguments);
+
+    if (!args.length || !(args.length === 4 || args.length === 6)) {
+      throw new Error(INCORRECT_GET_ANGLE_ARGUMENTS);
+    }
+
+    var x1 = args[0];
+    var y1 = args[1];
+    var x2 = args[2];
+    var y2 = args[3];
+
+    if (args.length === 4) {
+      return Math.atan2(y2 - y1, x2 - x1);
+    }
+
+    var x3 = args[4];
+    var y3 = args[5];
+
+    var a = this.getAngle(x1, y1, x2, y2);
+    var b = this.getAngle(x2, y2, x3, y3);
+    var c = b - a;
+
+    if (c >= 0) {
+      return Math.PI - c;
+    }
+
+    return -Math.PI - c;
+  }.bind(this);
+
+  public getWithoutAlpha = (color) => {
+    var lastCommaIndex = color.lastIndexOf(',');
+    return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
+  }.bind(this);
+
+  // FIXME: Methods to adjust r, g, b, and a
+
+  public getRadiansFromDegrees = (degrees) => {
+    return degrees * Math.PI / 180;
+  }.bind(this);
+
+  public getDegreesFromRadians = (radians) => {
+    return radians * 180 / Math.PI;
+  }.bind(this);
+
+  public getPercentFromFraction = (fraction) => {
+    return (fraction * 100);
+  }.bind(this);
+
+  public getFractionFromPercent = (percent) => {
+    return (percent / 100);
+  }.bind(this);
+
+  public getPercentOfWidth = (percent) => {
+    return this.getWidth() / 100 * percent;
+  }.bind(this);
+
+  public getFractionOfWidth = (fraction) => {
+    return this.getWidth() * fraction;
+  }.bind(this);
+
+  public getPercentOfHeight = (percent) => {
+    return this.getHeight() / 100 * percent;
+  }.bind(this);
+
+  public getFractionOfHeight = (fraction) => {
+    return this.getHeight() * fraction;
+  }.bind(this);
+
+  public getPixelColor = (x, y) => {
+    var data = this.getImageData(x, y, 1, 1).data;
+    return this.createRGBA(data[0], data[1], data[2], data[3]);
+  }.bind(this);
+
+  public getPixelData = (x, y) => {
+    return this.getImageData(x, y, 1, 1).data;
+  }.bind(this);
+
+  public tap = (callback) => {
+    if (typeof callback !== 'function') {
+      throw new Error(
+        'Callback must be a function. Instead got ' +
+        callback +
+        ' (' +
+        (typeof callback) +
+        ')'
+      );
+    }
+
+    callback.call(this);
+
+    return this;
+  }.bind(this);
+
+  public repeat = () => {
+    var args = Array.prototype.slice.call(arguments);
+    var start, end, step, callback;
+
+    switch (args.length) {
+      case 2:
+        start = 0;
+        end = (typeof args[0] === 'number' ? args[0] || 0 : 0);
+        step = 1;
+        callback = args[1];
+        break;
+      case 3:
+        start = (typeof args[0] === 'number' ? args[0] || 0 : 0);
+        end = (typeof args[1] === 'number' ? args[1] || 0 : 0);
+        step = 1;
+        callback = args[2];
+        break;
+      case 4:
+        start = (typeof args[0] === 'number' ? args[0] || 0 : 0);
+        end = (typeof args[1] === 'number' ? args[1] || 0 : 0);
+        step = Math.abs(typeof args[2] === 'number' ? args[2] || 0 : 0);
+        callback = args[3];
+        break;
+      default:
+        throw new Error(
+          'Incorrect number of arguments supplied for repeat. ' +
+          'Arguments must be [end, callback], [start, end, callback], ' +
+          'or [start, end, step, callback].'
+        );
+    }
+
+    if (step === 0) {
+      return this;
+    }
+
+    if (typeof callback !== 'function') {
+      throw new Error(
+        'Callback must be a function. Instead got ' +
+        callback +
+        ' (' +
+        (typeof callback) +
+        ')'
+      );
+    }
+
+    callback = callback.bind(this);
+
+    var positive = end > start;
+    step = positive ? step : -step;
+
+    for (var i = start; (positive ? i < end : i > end); i += step) {
+      if (callback(i) === false) {
+        return this;
+      }
+    }
+
+    return this;
+  }.bind(this);
+
+  public forEach = (obj, callback) => {
+    if (typeof callback !== 'function') {
+      throw new Error(
+        'Callback must be a function. Instead got ' +
+        callback +
+        ' (' +
+        (typeof callback) +
+        ')'
+      );
+    }
+
+    if (typeof obj !== 'object' && typeof obj !== 'string') {
+      throw new Error('First argument of forEach must me an array, object, or string');
+    }
+
+    callback = callback.bind(this);
+
+    if (Array.isArray(obj) || typeof obj === 'string') {
+      for (var i = 0; i < obj.length; i += 1) {
+        if (callback(obj[i], i) === false) {
+          return this;
+        }
+      }
+    } else {
+      for (var key in obj) {
+        if (callback(obj[key], key) === false) {
+          return this;
+        }
+      }
+    }
+
+    return this;
+  }.bind(this);
+
+  public constrain = (value, min, max) => {
+    if (min > max) {
+      var temp = min;
+      min = max;
+      max = temp;
+    }
+
+    return Math.max(Math.min(value, max), min);
+  }.bind(this);
+
+  public map = (value, fromStart, fromEnd, toStart, toEnd) => {
+    var fromDiff = fromEnd - fromStart;
+    var toDiff = toEnd - toStart;
+    return toStart + toDiff * (value - fromStart) / fromDiff;
+  }.bind(this);
+
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     (this.ctx as any)[attribute] = value;

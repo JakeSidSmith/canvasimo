@@ -28,6 +28,9 @@ export const CONTEXT_TYPE = '2d';
 export const INCORRECT_POINT_FORMAT = `Path points must be an array of:\n
  numbers [x, y, x, y], pairs [[x, y], [x, y]], or objects [{x, y}, {x, y}].`;
 
+export const INCORRECT_GET_ANGLE_ARGUMENTS = 'Incorrect number of arguments supplied for getAngle. ' +
+ 'Arguments must be [x1, y1, x2, y2] or [x1, y1, x2, y2, x3, y3].';
+
 export const DEFAULT_FONT = ['normal', 'normal', 'normal', '10px', 'sans-serif'];
 
 export const MATCHES_SPECIAL_FILL = /^(nonzero|evenodd)$/i;
