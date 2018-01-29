@@ -61,10 +61,12 @@ const ctx = {
   strokeRect: () => undefined,
 };
 
-export const getContext = (type: string) => {
+const getContext = (type: string) => {
   if (type === '2d') {
     return ctx;
   }
 
   return {};
 };
+
+export default getContext;
