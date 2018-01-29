@@ -1,6 +1,6 @@
 {
   "name": "canvasimo",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "An HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, and cross-browser compatibility enhancements.",
   "main": "dist/index.js",
   "directories": {
