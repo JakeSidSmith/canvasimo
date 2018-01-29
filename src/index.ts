@@ -97,15 +97,20 @@ export default class Canvasimo {
   public getDataURL = (type: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Canvas size
+  public setDensity = (density: number): Canvasimo => {
+    this.density = density;
+    return this;
+  }
+  public getDensity = () => this.density;
   public setWidth = (width: number): Canvasimo => {
     this.element.width = width * this.density;
     return this;
   }
+  public getWidth = (): number => this.element.width / this.density;
   public setHeight = (height: number): Canvasimo => {
     this.element.height = height * this.density;
     return this;
   }
-  public getWidth = (): number => this.element.width / this.density;
   public getHeight = (): number => this.element.height / this.density;
   public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
     if (typeof width === 'object') {
