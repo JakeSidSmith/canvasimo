@@ -1,5 +1,6 @@
 import {
   CONTEXT_TYPE,
+  DEFAULT_FONT,
   IMAGE_SMOOTHING_KEYS,
 } from './constants';
 import {
@@ -14,6 +15,7 @@ import {
   GlobalCompositeOperations,
   LineCaps,
   LineJoins,
+  Points,
   Segments,
   SetSize,
   Size,
@@ -23,6 +25,7 @@ import {
 } from './types';
 import {
   formatFont,
+  forPoints,
   getFontParts,
   isFillRule,
   titleCase,
@@ -715,139 +718,167 @@ export default class Canvasimo {
       .fill(color);
   }
 
-  public plotPath = (points) => {
-    var transformedPoints = transformPoints(points);
-
-    forPoints(transformedPoints, function (x, y, i) {
+  public plotPath = (points: Points) => {
+    forPoints(points, (x: number, y: number, i: number) => {
       if (i === 0) {
         this.moveTo(x, y);
       } else {
         this.lineTo(x, y);
       }
-    }.bind(this));
+    });
 
     return this;
-  }.bind(this);
+  }
 
-  public fillPath = (points, color) => {
-    var transformedPoints = transformPoints(points);
-
+  public fillPath = (points: Points, color?: Color) => {
     return this
-      .setFill(color)
-      .plotPath(transformedPoints)
-      .fill();
-  }.bind(this);
+      .plotPath(points)
+      .fill(color);
+  }
 
-  public strokePath = (points, color) => {
-    var transformedPoints = transformPoints(points);
-
+  public strokePath = (points: Points, color?: Color) => {
     return this
-      .setStroke(color)
-      .plotPath(transformedPoints)
-      .stroke();
-  }.bind(this);
+      .plotPath(points)
+      .stroke(color);
+  }
 
-  public plotClosedPath = (points) => {
+  public plotClosedPath = (points: Points) => {
     return this
       .beginPath()
       .plotPath(points)
       .closePath();
-  }.bind(this);
+  }
 
-  public fillClosedPath = (points, color) => {
+  public fillClosedPath = (points: Points, color?: Color) => {
     return this
-      .setFill(color)
       .plotClosedPath(points)
-      .fill();
-  }.bind(this);
+      .fill(color);
+  }
 
-  public strokeClosedPath = (points, color) => {
+  public strokeClosedPath = (points: Points, color?: Color) => {
     return this
-      .setStroke(color)
       .plotClosedPath(points)
-      .stroke();
-  }.bind(this);
+      .stroke(color);
+  }
 
-  public fillText = (text, x, y, maxWidth, color) => {
-    this.setFill(color);
+  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: Color) => {
+    if (typeof color !== 'undefined') {
+      this.setFill(color);
+    }
     // If max width is not a number (e.g. undefined) then iOS does not draw anything
     if (!maxWidth && maxWidth !== 0) {
-      ctx.fillText(text, x, y);
+      this.ctx.fillText(text, x, y);
     } else {
-      ctx.fillText(text, x, y, maxWidth);
+      this.ctx.fillText(text, x, y, maxWidth);
     }
     return this;
-  }.bind(this);
+  }
 
-  public strokeText = (text, x, y, maxWidth, color) => {
-    this.setStroke(color);
-    ctx.strokeText(text, x, y, maxWidth);
+  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: Color) => {
+    if (typeof color !== 'undefined') {
+      this.setStroke(color);
+    }
+    this.ctx.strokeText(text, x, y, maxWidth);
     return this;
-  }.bind(this);
+  }
 
-  public fillRect = (x, y, width, height, color) => {
-    this.setFill(color);
-    ctx.fillRect(x, y, width, height);
+  public fillRect = (x: number, y: number, width: number, height: number, color?: Color) => {
+    if (typeof color !== 'undefined') {
+      this.setFill(color);
+    }
+    this.ctx.fillRect(x, y, width, height);
     return this;
-  }.bind(this);
+  }
 
-  public strokeRect = (x, y, width, height, color) => {
-    this.setStroke(color);
-    ctx.strokeRect(x, y, width, height);
+  public strokeRect = (x: number, y: number, width: number, height: number, color?: Color) => {
+    if (typeof color !== 'undefined') {
+      this.setStroke(color);
+    }
+    this.ctx.strokeRect(x, y, width, height);
     return this;
-  }.bind(this);
+  }
 
-  public fillArc = (x, y, radius, startAngle, endAngle, anticlockwise, color) => {
+  public fillArc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
     return this
-      .setFill(color)
       .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
-      .fill();
-  }.bind(this);
+      .fill(color);
+  }
 
-  public strokeArc = (x, y, radius, startAngle, endAngle, anticlockwise, color) => {
+  public strokeArc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
     return this
-      .setStroke(color)
       .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
-      .stroke();
-  }.bind(this);
+      .stroke(color);
+  }
 
-  public fillEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise, color) => {
+  public fillEllipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
     return this
-      .setFill(color)
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
-      .fill();
-  }.bind(this);
+      .fill(color);
+  }
 
-  public strokeEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise, color) => {
+  public strokeEllipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
     return this
-      .setStroke(color)
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
-      .stroke();
-  }.bind(this);
+      .stroke(color);
+  }
 
-  public plotCircle = (x, y, radius, anticlockwise) => {
+  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: boolean) => {
     return this
       .beginPath()
       .plotArc(x, y, radius, 0, Math.PI * 2, anticlockwise)
       .closePath();
-  }.bind(this);
+  }
 
-  public fillCircle = (x, y, radius, anticlockwise, color) => {
+  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color) => {
     return this
-      .setFill(color)
       .plotCircle(x, y, radius, anticlockwise)
-      .fill();
-  }.bind(this);
+      .fill(color);
+  }
 
-  public strokeCircle = (x, y, radius, anticlockwise, color) => {
+  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color) => {
     return this
-      .setStroke(color)
       .plotCircle(x, y, radius, anticlockwise)
-      .stroke();
-  }.bind(this);
+      .stroke(color);
+  }
 
-  public plotRoundedRect = (x, y, width, height, radius) => {
-    var minRadius = Math.min(width / 2, height / 2, radius);
+  public plotRoundedRect = (x: number, y: number, width: number, height: number, radius: number) => {
+    const minRadius = Math.min(width / 2, height / 2, radius);
 
     return this
       .beginPath()
@@ -861,138 +892,136 @@ export default class Canvasimo {
       .lineTo(x, y + minRadius)
       .arcTo(x, y, x + minRadius, y, minRadius)
       .closePath();
-  }.bind(this);
+  }
 
-  public fillRoundedRect = (x, y, width, height, radius, color) => {
+  public fillRoundedRect = (x: number, y: number, width: number, height: number, radius: number, color?: Color) => {
     return this
-      .setFill(color)
       .plotRoundedRect(x, y, width, height, radius)
-      .fill();
-  }.bind(this);
+      .fill(color);
+  }
 
-  public strokeRoundedRect = (x, y, width, height, radius, color) => {
+  public strokeRoundedRect = (x: number, y: number, width: number, height: number, radius: number, color?: Color) => {
     return this
-      .setStroke(color)
       .plotRoundedRect(x, y, width, height, radius)
-      .stroke();
-  }.bind(this);
+      .stroke(color);
+  }
 
-  public plotPixel = (x, y) => {
+  public plotPixel = (x: number, y: number) => {
     return this
       .plotRect(x, y, 1, 1);
-  }.bind(this);
+  }
 
-  public fillPixel = (x, y, color) => {
+  public fillPixel = (x: number, y: number, color?: Color) => {
     return this
       .fillRect(x, y, 1, 1, color);
-  }.bind(this);
+  }
 
-  public strokePixel = (x, y, color) => {
+  public strokePixel = (x: number, y: number, color?: Color) => {
     return this
       .strokeRect(x, y, 1, 1, color);
-  }.bind(this);
+  }
 
   // Font methods
-  public setFont = (font) => {
-    ctx.font = formatFont(font);
+  public setFont = (font: string) => {
+    this.ctx.font = formatFont(font);
     return this;
-  }.bind(this);
+  }
 
   public getFont = () => {
-    return formatFont(ctx.font);
-  }.bind(this);
+    return formatFont(this.ctx.font);
+  }
 
   // Font property setters
-  public setFontStyle = (style) => {
-    var parts = getFontParts(ctx.font);
+  public setFontStyle = (style: string) => {
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
-      return this.setFont(null);
+      return this.setFont('');
     }
-    parts[0] = style || defaultFont[0];
-    ctx.font = formatFont(parts.join(' '));
+    parts[0] = style || DEFAULT_FONT[0];
+    this.ctx.font = formatFont(parts.join(' '));
     return this;
-  }.bind(this);
+  }
 
-  public setFontVariant = (variant) => {
-    var parts = getFontParts(ctx.font);
+  public setFontVariant = (variant: string) => {
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
-      return this.setFont(null);
+      return this.setFont('');
     }
-    parts[1] = variant || defaultFont[1];
-    ctx.font = formatFont(parts.join(' '));
+    parts[1] = variant || DEFAULT_FONT[1];
+    this.ctx.font = formatFont(parts.join(' '));
     return this;
-  }.bind(this);
+  }
 
-  public setFontWeight = (weight) => {
-    var parts = getFontParts(ctx.font);
+  public setFontWeight = (weight: string | number) => {
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
-      return this.setFont(null);
+      return this.setFont('');
     }
-    parts[2] = weight || defaultFont[2];
-    ctx.font = formatFont(parts.join(' '));
+    parts[2] = weight.toString() || DEFAULT_FONT[2];
+    this.ctx.font = formatFont(parts.join(' '));
     return this;
-  }.bind(this);
+  }
 
-  public setFontSize = (size) => {
-    var parts = getFontParts(ctx.font);
+  public setFontSize = (size: string | number) => {
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
-      return this.setFont(null);
+      return this.setFont('');
     }
-    parts[3] = (typeof size === 'number' ? size + 'px' : size) || defaultFont[3];
-    ctx.font = formatFont(parts.join(' '));
+    parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
+    this.ctx.font = formatFont(parts.join(' '));
     return this;
-  }.bind(this);
+  }
 
-  public setFontFamily = (family) => {
-    var parts = getFontParts(ctx.font);
+  public setFontFamily = (family: string) => {
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
-      return this.setFont(null);
+      return this.setFont('');
     }
-    parts[4] = family || defaultFont[4];
-    ctx.font = formatFont(parts.join(' '));
+    parts[4] = family || DEFAULT_FONT[4];
+    this.ctx.font = formatFont(parts.join(' '));
     return this;
-  }.bind(this);
+  }
 
   // Font property getters
   public getFontStyle = () => {
-    var parts = getFontParts(ctx.font);
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
       return null;
     }
     return parts[0];
-  }.bind(this);
+  }
 
   public getFontVariant = () => {
-    var parts = getFontParts(ctx.font);
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
       return null;
     }
     return parts[1];
-  }.bind(this);
+  }
 
   public getFontWeight = () => {
-    var parts = getFontParts(ctx.font);
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
       return null;
     }
     return parts[2];
-  }.bind(this);
+  }
 
   public getFontSize = () => {
-    var parts = getFontParts(ctx.font);
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
       return null;
     }
     return parseFloat(parts[3]);
-  }.bind(this);
+  }
 
   public getFontFamily = () => {
-    var parts = getFontParts(ctx.font);
+    const parts = getFontParts(this.ctx.font);
     if (parts.length < 5) {
       return null;
     }
     return parts[4];
-  }.bind(this);
+  }
 
   // Helper methods
   public createHSL = (h, s, l) => {
