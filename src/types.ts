@@ -1,3 +1,5 @@
+import Canvasimo from './';
+
 export interface Point {
   x: number;
   y: number;
@@ -62,3 +64,49 @@ export type TextBaselines = 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideog
 export type Segments = number[];
 
 export type FillRules = 'nonzero' | 'evenodd';
+
+export interface SetSize {
+  (size: Size): Canvasimo;
+  (width: number, height: number): Canvasimo;
+}
+
+export interface DrawImage {
+  (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    dstX: number,
+    dstY: number
+  ): Canvasimo;
+  (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    dstX: number,
+    dstY: number,
+    dstW: number,
+    dstH: number
+  ): Canvasimo;
+  (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
+    srcX: number,
+    srcY: number,
+    srcW: number,
+    srcH: number,
+    dstX: number,
+    dstY: number,
+    dstW: number,
+    dstH: number
+  ): Canvasimo;
+}
+
+export interface CreateImageData {
+  (width: number, height: number): ImageData;
+  (ImageData: ImageData): ImageData;
+}
+
+export interface Fill {
+  (color?: string | FillRules): Canvasimo;
+  (color: string, fillRule: FillRules): Canvasimo;
+}
+
+export interface Stroke {
+  (color?: string | Path2D): Canvasimo;
+  (color: string, path: Path2D): Canvasimo;
+}

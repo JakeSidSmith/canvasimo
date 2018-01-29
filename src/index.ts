@@ -6,13 +6,18 @@ import {
   AnyCanvasContext,
   AnyCanvasContextAttributes,
   Color,
+  CreateImageData,
+  DrawImage,
+  Fill,
   FillAndStrokeStyles,
   FillRules,
   GlobalCompositeOperations,
   LineCaps,
   LineJoins,
   Segments,
+  SetSize,
   Size,
+  Stroke,
   TextAligns,
   TextBaselines,
 } from './types';
@@ -22,52 +27,6 @@ import {
   isFillRule,
   titleCase,
 } from './utils';
-
-interface SetSize {
-  (size: Size): Canvasimo;
-  (width: number, height: number): Canvasimo;
-}
-
-interface DrawImage {
-  (
-    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
-    dstX: number,
-    dstY: number
-  ): Canvasimo;
-  (
-    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
-    dstX: number,
-    dstY: number,
-    dstW: number,
-    dstH: number
-  ): Canvasimo;
-  (
-    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
-    srcX: number,
-    srcY: number,
-    srcW: number,
-    srcH: number,
-    dstX: number,
-    dstY: number,
-    dstW: number,
-    dstH: number
-  ): Canvasimo;
-}
-
-interface CreateImageData {
-  (width: number, height: number): ImageData;
-  (ImageData: ImageData): ImageData;
-}
-
-interface Fill {
-  (color?: string | FillRules): Canvasimo;
-  (color: string, fillRule: FillRules): Canvasimo;
-}
-
-interface Stroke {
-  (color?: string | Path2D): Canvasimo;
-  (color: string, path: Path2D): Canvasimo;
-}
 
 export default class Canvasimo {
   private element: HTMLCanvasElement;
