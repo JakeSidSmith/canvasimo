@@ -475,157 +475,180 @@ export default class Canvasimo {
   public clearCanvas = () => {
     return this
       .setWidth(this.getWidth());
-  }.bind(this);
+  }
 
-  public fillCanvas = (color) => {
+  public fillCanvas = (color: Color) => {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
-  }.bind(this);
+  }
 
-  public plotLine = (x1, y1, x2, y2) => {
+  public plotLine = (x1: number, y1: number, x2: number, y2: number) => {
     return this
       .moveTo(x1, y1)
       .lineTo(x2, y2);
-  }.bind(this);
+  }
 
-  public strokeLine = (x1, y1, x2, y2, color) => {
+  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: Color) => {
     return this
       .plotLine(x1, y1, x2, y2)
-      .setStroke(color)
-      .stroke();
-  }.bind(this);
+      .stroke(color);
+  }
 
-  public plotLength = (x1, y1, length, r) => {
-    var x2 = x1 + length * Math.cos(r);
-    var y2 = y1 + length * Math.sin(r);
+  public plotLength = (x1: number, y1: number, length: number, angle: number) => {
+    const x2 = x1 + length * Math.cos(angle);
+    const y2 = y1 + length * Math.sin(angle);
 
     return this
       .moveTo(x1, y1)
       .lineTo(x2, y2);
-  }.bind(this);
+  }
 
-  public strokeLength = (x1, y1, length, r, color) => {
+  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: Color) => {
     return this
-      .plotLength(x1, y1, length, r)
-      .setStroke(color)
-      .stroke();
-  }.bind(this);
+      .plotLength(x1, y1, length, angle)
+      .stroke(color);
+  }
 
-  public plotPoly = (x, y, r, sides, counterClockwise) => {
-    sides = Math.round(parseFloat(sides));
+  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: boolean) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     }
 
-    var direction = counterClockwise ? -1 : 1;
+    const direction = anticlockwise ? -1 : 1;
 
-    function beforeEnd (i) {
-      return counterClockwise ? i > -sides : i < sides;
-    }
+    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
 
     this
       .beginPath()
-      .moveTo(x + r, y);
+      .moveTo(x + radius, y);
 
-    for (var i = 0; beforeEnd(i); i += direction) {
-      var angle = Math.PI * 2 / sides * i;
-      this.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    for (let i = 0; beforeEnd(i); i += direction) {
+      const angle = Math.PI * 2 / sides * i;
+      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
     }
 
-    return this
-      .closePath();
-  }.bind(this);
+    return this.closePath();
+  }
 
-  public strokePoly = (x, y, r, sides, counterClockwise, color) => {
-    sides = Math.round(parseFloat(sides));
+  public strokePoly = (
+    x: number,
+    y: number,
+    radius: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     }
 
     return this
-      .plotPoly(x, y, r, sides, counterClockwise)
-      .setStroke(color)
-      .stroke();
-  }.bind(this);
+      .plotPoly(x, y, radius, sides, anticlockwise)
+      .stroke(color);
+  }
 
-  public fillPoly = (x, y, r, sides, counterClockwise, color) => {
-    sides = Math.round(parseFloat(sides));
+  public fillPoly = (
+    x: number,
+    y: number,
+    radius: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     }
 
     return this
-      .plotPoly(x, y, r, sides, counterClockwise)
-      .setFill(color)
-      .fill();
-  }.bind(this);
+      .plotPoly(x, y, radius, sides, anticlockwise)
+      .fill(color);
+  }
 
-  public plotStar = (x, y, r1, sides, counterClockwise) => {
-    sides = Math.round(parseFloat(sides));
+  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: boolean) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     } else if (sides === 3 || sides === 4) {
-      return this.plotPoly(x, y, r1, sides);
+      return this.plotPoly(x, y, radius1, sides);
     }
 
     sides = sides * 2;
 
-    var direction = counterClockwise ? -1 : 1;
-    var offset = Math.PI * 2 / sides;
-    var cross = Math.cos(offset * 2) * r1;
-    var r2 = cross / Math.cos(offset);
+    const direction = anticlockwise ? -1 : 1;
+    const offset = Math.PI * 2 / sides;
+    const cross = Math.cos(offset * 2) * radius1;
+    const radius2 = cross / Math.cos(offset);
 
-    function beforeEnd (i) {
-      return counterClockwise ? i > -sides : i < sides;
-    }
+    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
 
     this
       .beginPath()
-      .moveTo(x + r1, y);
+      .moveTo(x + radius1, y);
 
-    for (var i = 0; beforeEnd(i); i += direction) {
-      var angle = offset * i;
-      var r = i % 2 ? r2 : r1;
-      this.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    for (let i = 0; beforeEnd(i); i += direction) {
+      const angle = offset * i;
+      const radius = i % 2 ? radius2 : radius1;
+      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
     }
 
-    return this
-      .closePath();
-  }.bind(this);
+    return this.closePath();
+  }
 
-  public strokeStar = (x, y, r1, sides, counterClockwise, color) => {
-    sides = Math.round(parseFloat(sides));
+  public strokeStar = (
+    x: number,
+    y: number,
+    radius1: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color: Color
+  ) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     }
 
     return this
-      .plotStar(x, y, r1, sides, counterClockwise)
-      .setStroke(color)
-      .stroke();
-  }.bind(this);
+      .plotStar(x, y, radius1, sides, anticlockwise)
+      .stroke(color);
+  }
 
-  public fillStar = (x, y, r1, sides, counterClockwise, color) => {
-    sides = Math.round(parseFloat(sides));
+  public fillStar = (
+    x: number,
+    y: number,
+    radius1: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color: Color
+  ) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     }
 
     return this
-      .plotStar(x, y, r1, sides, counterClockwise)
-      .setFill(color)
-      .fill();
-  }.bind(this);
+      .plotStar(x, y, radius1, sides, anticlockwise)
+      .fill(color);
+  }
 
-  public plotBurst = (x, y, r1, r2, sides, counterClockwise) => {
-    sides = Math.round(parseFloat(sides));
+  public plotBurst = (
+    x: number,
+    y: number,
+    radius1: number,
+    radius2: number,
+    sides: number,
+    anticlockwise?: boolean
+  ) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
@@ -633,52 +656,64 @@ export default class Canvasimo {
 
     sides = sides * 2;
 
-    var direction = counterClockwise ? -1 : 1;
-    var offset = Math.PI * 2 / sides;
+    const direction = anticlockwise ? -1 : 1;
+    const offset = Math.PI * 2 / sides;
 
-    function beforeEnd (i) {
-      return counterClockwise ? i > -sides : i < sides;
-    }
+    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
 
     this
       .beginPath()
-      .moveTo(x + r1, y);
+      .moveTo(x + radius1, y);
 
-    for (var i = 0; beforeEnd(i); i += direction) {
-      var angle = offset * i;
-      var r = i % 2 ? r2 : r1;
-      this.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    for (let i = 0; beforeEnd(i); i += direction) {
+      const angle = offset * i;
+      const radius = i % 2 ? radius2 : radius1;
+      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
     }
 
     return this
       .closePath();
-  }.bind(this);
+  }
 
-  public strokeBurst = (x, y, r1, r2, sides, counterClockwise, color) => {
-    sides = Math.round(parseFloat(sides));
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotBurst(x, y, r1, r2, sides, counterClockwise)
-      .setStroke(color)
-      .stroke();
-  }.bind(this);
-
-  public fillBurst = (x, y, r1, r2, sides, counterClockwise, color) => {
-    sides = Math.round(parseFloat(sides));
+  public strokeBurst = (
+    x: number,
+    y: number,
+    radius1: number,
+    radius2: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
+    sides = Math.round(sides);
 
     if (!sides || sides < 3) {
       return this;
     }
 
     return this
-      .plotBurst(x, y, r1, r2, sides, counterClockwise)
-      .setFill(color)
-      .fill();
-  }.bind(this);
+      .plotBurst(x, y, radius1, radius2, sides, anticlockwise)
+      .stroke(color);
+  }
+
+  public fillBurst = (
+    x: number,
+    y: number,
+    radius1: number,
+    radius2: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: Color
+  ) => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotBurst(x, y, radius1, radius2, sides, anticlockwise)
+      .fill(color);
+  }
 
   public plotPath = (points) => {
     var transformedPoints = transformPoints(points);
@@ -762,52 +797,52 @@ export default class Canvasimo {
     return this;
   }.bind(this);
 
-  public fillArc = (x, y, radius, startAngle, endAngle, counterClockwise, color) => {
+  public fillArc = (x, y, radius, startAngle, endAngle, anticlockwise, color) => {
     return this
       .setFill(color)
-      .plotArc(x, y, radius, startAngle, endAngle, counterClockwise)
+      .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
       .fill();
   }.bind(this);
 
-  public strokeArc = (x, y, radius, startAngle, endAngle, counterClockwise, color) => {
+  public strokeArc = (x, y, radius, startAngle, endAngle, anticlockwise, color) => {
     return this
       .setStroke(color)
-      .plotArc(x, y, radius, startAngle, endAngle, counterClockwise)
+      .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
       .stroke();
   }.bind(this);
 
-  public fillEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise, color) => {
+  public fillEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise, color) => {
     return this
       .setFill(color)
-      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise)
+      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
       .fill();
   }.bind(this);
 
-  public strokeEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise, color) => {
+  public strokeEllipse = (x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise, color) => {
     return this
       .setStroke(color)
-      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterClockwise)
+      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
       .stroke();
   }.bind(this);
 
-  public plotCircle = (x, y, radius, counterClockwise) => {
+  public plotCircle = (x, y, radius, anticlockwise) => {
     return this
       .beginPath()
-      .plotArc(x, y, radius, 0, Math.PI * 2, counterClockwise)
+      .plotArc(x, y, radius, 0, Math.PI * 2, anticlockwise)
       .closePath();
   }.bind(this);
 
-  public fillCircle = (x, y, radius, counterClockwise, color) => {
+  public fillCircle = (x, y, radius, anticlockwise, color) => {
     return this
       .setFill(color)
-      .plotCircle(x, y, radius, counterClockwise)
+      .plotCircle(x, y, radius, anticlockwise)
       .fill();
   }.bind(this);
 
-  public strokeCircle = (x, y, radius, counterClockwise, color) => {
+  public strokeCircle = (x, y, radius, anticlockwise, color) => {
     return this
       .setStroke(color)
-      .plotCircle(x, y, radius, counterClockwise)
+      .plotCircle(x, y, radius, anticlockwise)
       .stroke();
   }.bind(this);
 
