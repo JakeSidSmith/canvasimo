@@ -96,7 +96,7 @@ export default class Canvasimo {
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
-      if (key in this.ctx) {
+      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
         this.ctx[key] = value;
         return this;
       }
@@ -106,7 +106,7 @@ export default class Canvasimo {
   }
   public getImageSmoothingEnabled = (): boolean => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
-      if (key in this.ctx) {
+      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
         return this.ctx[key];
       }
     }
@@ -1219,8 +1219,10 @@ export default class Canvasimo {
       }
     } else {
       for (const key in obj) {
-        if (callback(obj[key], key) === false) {
-          return this;
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          if (callback(obj[key], key) === false) {
+            return this;
+          }
         }
       }
     }
