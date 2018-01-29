@@ -1,88 +1,88 @@
-import { any, each } from './helpers/utils';
+import { each, some } from './helpers/utils';
 
 describe('utils', () => {
 
   describe('each', () => {
 
     it('should loop over an array', () => {
-      var expectedIndex = 0;
-      var arr = ['a', 'b', 'c'];
+      let expectedIndex = 0;
+      const arr = ['a', 'b', 'c'];
 
-      each(arr, function (value, index) {
-        expect(value).to.equal(arr[index]);
-        expect(index).to.equal(expectedIndex);
+      each(arr, (value, index: number) => {
+        expect(value).toEqual(arr[index]);
+        expect(index).toEqual(expectedIndex);
 
         expectedIndex += 1;
       });
 
-      expect(expectedIndex).to.equal(3);
+      expect(expectedIndex).toEqual(3);
     });
 
     it('should loop over an object', () => {
-      var expectedIndex = 0;
-      var expectedKeys = ['a', 'b', 'c'];
-      var obj = {
+      let expectedIndex = 0;
+      const expectedKeys = ['a', 'b', 'c'];
+      const obj: {[i: string]: string} = {
         a: 'aa',
         b: 'bb',
-        c: 'cc'
+        c: 'cc',
       };
 
-      each(obj, function (value, key) {
-        expect(value).to.equal(obj[key]);
-        expect(key).to.equal(expectedKeys[expectedIndex]);
+      each(obj, (value, key) => {
+        expect(value).toEqual(obj[key]);
+        expect(key).toEqual(expectedKeys[expectedIndex]);
 
         expectedIndex += 1;
       });
 
-      expect(expectedIndex).to.equal(3);
+      expect(expectedIndex).toEqual(3);
     });
 
   });
 
-  describe('any', () => {
+  describe('some', () => {
 
     it('should return true if predicate is truthy', () => {
-      var items = ['a', 'b', 'c'];
+      const itemsArray = ['a', 'b', 'c'];
 
-      var anyAreA = any(items, function (value) {
+      const anyAreA = some(itemsArray, (value) => {
         return value === 'a';
       });
 
-      expect(anyAreA).to.be.true;
+      expect(anyAreA).toBe(true);
 
-      items = {
+      const itemsObject = {
         a: 'aa',
         b: 'bb',
-        c: 'cc'
+        c: 'cc',
       };
 
-      var anyAreBB = any(items, function (value) {
+      const anyAreBB = some(itemsObject, (value) => {
         return value === 'bb';
       });
 
-      expect(anyAreBB).to.be.true;
+      expect(anyAreBB).toBe(true);
     });
 
     it('should return false if predicate is falsey', () => {
-      var items = ['a', 'b', 'c'];
+      const itemsArray = ['a', 'b', 'c'];
 
-      var anyAreOne = any(items, function (value) {
+      const anyAreOne = some(itemsArray, (value) => {
         return value === 'one';
       });
 
-      expect(anyAreOne).to.be.false;
+      expect(anyAreOne).toBe(false);
 
-      items = {
+      const itemsObject = {
         a: 'aa',
         b: 'bb',
-        c: 'cc'
+        c: 'cc',
       };
 
-      var anyAreTwo = any(items, function (value) {
+      const anyAreTwo = some(itemsObject, (value) => {
         return value === 'two';
       });
 
-      expect(anyAreTwo).to.be.false;
+      expect(anyAreTwo).toBe(false);
     });
 
   });
