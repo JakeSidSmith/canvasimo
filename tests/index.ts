@@ -33,7 +33,7 @@ describe('canvasimo', () => {
     getShadowOffsetX: {value: 0, type: 'number'},
     getShadowOffsetY: {value: 0, type: 'number'},
     getTextAlign: {value: 'start', type: 'string'},
-    getTextBaseline: {value: 'alphabetic', type: 'string'}
+    getTextBaseline: {value: 'alphabetic', type: 'string'},
   };
 
   const argumentMap = {
@@ -61,9 +61,9 @@ describe('canvasimo', () => {
     plotEllipse: [0, 0, 0, 0, 0, 0, 0],
     setStrokeDash: [[]],
     isPointInPath: [0, 0],
-    tap: [function () {}],
-    repeat: [0, 0, 0, function () {}],
-    forEach: [[], function () {}]
+    tap: [() => undefined],
+    repeat: [0, 0, 0, () => undefined],
+    forEach: [[], () => undefined],
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
