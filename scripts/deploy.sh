@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 BRANCH=gh-pages # Branch to deploy to, probably gh-pages
 DIST_DIR=docs  # Location of build static files to deploy

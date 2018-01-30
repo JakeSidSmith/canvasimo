@@ -5,6 +5,6 @@
     "sourceMap": true,
     "listFiles": true,
     "rootDir": "./",
-    "outDir": "../dist/"
+    "outDir": "../build/"
   }
 }
