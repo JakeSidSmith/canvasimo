@@ -107,7 +107,7 @@ export const forPoints = (points: Points, callback: (x: number, y: number, index
 
       callback(point[0], point[1], index);
     });
-  } else if (typeof firstPoint === 'number' && typeof secondPoint === 'number') {
+  } else if (typeof secondPoint === 'number') {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < points.length; i += 2) {
       const pointX = points[i];
