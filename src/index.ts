@@ -31,7 +31,6 @@ import {
   forPoints,
   getFontParts,
   isFillRule,
-  titleCase,
 } from './utils';
 
 export default class Canvasimo {
