@@ -52,6 +52,7 @@ export default class Canvasimo {
   }
 
   public getCanvas = (): HTMLCanvasElement => this.element;
+  public getElement = () => this.getCanvas();
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
   public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
     return this.element.getContext(type, contextAttributes);
