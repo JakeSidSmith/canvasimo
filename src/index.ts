@@ -59,7 +59,7 @@ export default class Canvasimo {
   }
   public getCurrentContext = (): AnyCanvasContext => this.ctx;
   public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
-  public getDataURL = (type: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
+  public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Canvas size
   public setDensity = (density: number): Canvasimo => {
