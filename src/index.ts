@@ -80,7 +80,7 @@ export default class Canvasimo {
     if (typeof width === 'object') {
       this.element.width = width.width * this.density;
       this.element.height = width.height * this.density;
-    } else if (typeof width === 'number' && typeof height === 'number') {
+    } else if (typeof height === 'number') {
       this.element.width = width * this.density;
       this.element.height = height * this.density;
     }
@@ -357,15 +357,12 @@ export default class Canvasimo {
 
     return this;
   }
-  public stroke: Stroke = (color?: string, path?: Path2D): Canvasimo => {
+  public stroke: Stroke = (color?: string | Path2D, path?: Path2D): Canvasimo => {
     if (typeof color === 'string') {
       this.setStroke(color);
       this.ctx.stroke(path);
     } else if (typeof color === 'object') {
       this.ctx.stroke(color);
-    } else if (typeof color !== 'undefined') {
-      this.setStroke(color);
-      this.ctx.stroke(path);
     } else {
       this.ctx.stroke(path);
     }
@@ -392,6 +389,7 @@ export default class Canvasimo {
     endAngle: number,
     anticlockwise?: boolean
   ): Canvasimo => {
+    // tslint:disable-next-line:strict-type-predicates
     if (typeof this.ctx.ellipse === 'function') {
       this.ctx.ellipse(
         x * this.density,
@@ -1124,23 +1122,12 @@ export default class Canvasimo {
     return this.getImageData(x, y, 1, 1).data;
   }
 
-  public tap = (callback: () => any) => {
-    if (typeof callback !== 'function') {
-      throw new Error(
-        'Callback must be a function. Instead got ' +
-        callback +
-        ' (' +
-        (typeof callback) +
-        ')'
-      );
-    }
-
+  public tap = (callback: () => any): Canvasimo => {
     callback.call(this);
-
     return this;
   }
 
-  public repeat: Repeat = (...args: Array<number | ((i: number) => any)>) => {
+  public repeat: Repeat = (...args: Array<number | ((i: number) => any)>): Canvasimo => {
     let start: number;
     let end: number;
     let step: number;
@@ -1195,21 +1182,10 @@ export default class Canvasimo {
     return this;
   }
 
-  public forEach: ForEach = (obj: any[] | {[i: string]: any}, callback: (value: any, key: string | number) => any) => {
-    if (typeof callback !== 'function') {
-      throw new Error(
-        'Callback must be a function. Instead got ' +
-        callback +
-        ' (' +
-        (typeof callback) +
-        ')'
-      );
-    }
-
-    if (typeof obj !== 'object' && typeof obj !== 'string') {
-      throw new Error('First argument of forEach must me an array, object, or string');
-    }
-
+  public forEach: ForEach = (
+    obj: any[] | string | {[i: string]: any},
+    callback: (value: any, key: string | number) => any
+  ): Canvasimo => {
     if (Array.isArray(obj) || typeof obj === 'string') {
       for (let i = 0; i < obj.length; i += 1) {
         if (callback(obj[i], i) === false) {
@@ -1229,7 +1205,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public constrain = (value: number, min: number, max: number) => {
+  public constrain = (value: number, min: number, max: number): number => {
     if (min > max) {
       const temp = min;
       min = max;
@@ -1239,7 +1215,7 @@ export default class Canvasimo {
     return Math.max(Math.min(value, max), min);
   }
 
-  public map = (value: number, fromStart: number, fromEnd: number, toStart: number, toEnd: number) => {
+  public map = (value: number, fromStart: number, fromEnd: number, toStart: number, toEnd: number): number => {
     const fromDiff = fromEnd - fromStart;
     const toDiff = toEnd - toStart;
     return toStart + toDiff * (value - fromStart) / fromDiff;
