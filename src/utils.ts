@@ -83,8 +83,6 @@ export const getFontParts = (input?: string) => {
 
 export const formatFont = (input?: string): string => getFontParts(input).join(' ');
 
-export const titleCase = (text?: string): string => text && text.charAt(0).toUpperCase() + text.substring(1) || '';
-
 export const forPoints = (points: Points, callback: (x: number, y: number, index: number) => any): void => {
   if (!points || !points.length || (typeof points[0] === 'number' && points.length < 2)) {
     return;
