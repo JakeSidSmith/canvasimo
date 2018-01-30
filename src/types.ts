@@ -118,6 +118,6 @@ export interface Repeat {
 }
 
 export interface ForEach {
-  (obj: any[], callback: (value: any, index: number) => any): Canvasimo;
+  (obj: any[] | string, callback: (value: any, index: number) => any): Canvasimo;
   (obj: {[i: string]: any}, callback: (value: any, key: string) => any): Canvasimo;
 }
