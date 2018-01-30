@@ -7,7 +7,7 @@ import { each } from './helpers/utils';
 describe('canvasimo', () => {
 
   let canvas: Canvasimo;
-  let element: HTMLCanvasElement;
+  const element = document.createElement('canvas');
 
   const specialFontTypes = [
     'caption',
@@ -69,14 +69,12 @@ describe('canvasimo', () => {
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
 
   it('should return an interface', () => {
-    element = document.createElement('canvas');
-
     stub(element, 'getContext', getContextStub);
     stub(element, 'getBoundingClientRect', getBoundingClientRectStub);
 
-    canvas = new Canvas(element);
+    canvas = new Canvasimo(element);
 
-    expect(canvas).to.exist;
+    expect(Boolean(canvas)).toBe(true);
   });
 
   it('should bind its methods to itself', () => {
@@ -91,7 +89,7 @@ describe('canvasimo', () => {
       return boundFunction;
     };
 
-    canvas = new Canvas(element);
+    canvas = new Canvasimo(element);
 
     for (const key in canvas) {
       expect(canvas[key].boundTo).to.equal(canvas);
@@ -102,7 +100,7 @@ describe('canvasimo', () => {
     delete Function.prototype._bind;
 
     // Create canvas without bind override
-    canvas = new Canvas(element);
+    canvas = new Canvasimo(element);
   });
 
   describe('property getters', () => {
