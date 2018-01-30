@@ -1,10 +1,12 @@
 interface Each {
-  (obj: any[] | string, callback: (value: any, index: number) => any): void;
+  (str: string, callback: (value: string, index: number) => any): void;
+  (obj: any[], callback: (value: any, index: number) => any): void;
   (obj: {[i: string]: any}, callback: (value: any, key: string) => any): void;
 }
 
 interface Some {
-  (obj: any[] | string, callback: (value: any, index: number) => any): void;
+  (str: string, callback: (value: string, index: number) => any): void;
+  (obj: any[], callback: (value: any, index: number) => any): void;
   (obj: {[i: string]: any}, callback: (value: any, key: string) => any): void;
 }
 
