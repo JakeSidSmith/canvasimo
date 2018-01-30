@@ -84,16 +84,16 @@ describe('canvasimo', () => {
 
     // Override bind
     Function.prototype.bind = function () {
-      var fn = this;
-      var args = Array.prototype.slice.call(arguments);
-      var boundFunction = fn._bind.apply(fn, args);
+      const fn = this;
+      const args = Array.prototype.slice.call(arguments);
+      const boundFunction = fn._bind.apply(fn, args);
       boundFunction.boundTo = args[0];
       return boundFunction;
     };
 
     canvas = new Canvas(element);
 
-    for (var key in canvas) {
+    for (const key in canvas) {
       expect(canvas[key].boundTo).to.equal(canvas);
     }
 
@@ -109,7 +109,7 @@ describe('canvasimo', () => {
 
     it('should return the correct property values from the context', () => {
       each(getters, function (expected, key) {
-        var result = canvas[key]();
+        const result = canvas[key]();
         expect(result).to.equal(expected.value);
         expect(typeof result).to.equal(expected.type);
       });
@@ -222,7 +222,7 @@ describe('canvasimo', () => {
     });
 
     it('should return null if no image smoothing keys present', () => {
-      var context = element.getContext('2d');
+      const context = element.getContext('2d');
       delete context.imageSmoothingEnabled;
       delete context.webkitImageSmoothingEnabled;
 
@@ -363,9 +363,9 @@ describe('canvasimo', () => {
   describe('plot path', () => {
 
     it('should accept but do nothing with empty and near empty point arrays', () => {
-      var context = canvas.getCurrentContext();
-      var moveToSpy = spy(context, 'moveTo');
-      var lineToSpy = spy(context, 'lineTo');
+      const context = canvas.getCurrentContext();
+      const moveToSpy = spy(context, 'moveTo');
+      const lineToSpy = spy(context, 'lineTo');
 
       canvas.plotPath(null);
       canvas.plotPath(undefined);
@@ -382,7 +382,7 @@ describe('canvasimo', () => {
     });
 
     it('should throw an error if provided incorrect points arrays', () => {
-      var anError = /must be an array of/;
+      const anError = /must be an array of/;
 
       expect(canvas.plotPath.bind(null, {})).to.throw(anError);
       expect(canvas.plotPath.bind(null, [[0]])).to.throw(anError);
@@ -394,9 +394,9 @@ describe('canvasimo', () => {
     });
 
     it('should accept and plot valid point arrays', () => {
-      var context = canvas.getCurrentContext();
-      var moveToSpy = spy(context, 'moveTo');
-      var lineToSpy = spy(context, 'lineTo');
+      const context = canvas.getCurrentContext();
+      const moveToSpy = spy(context, 'moveTo');
+      const lineToSpy = spy(context, 'lineTo');
 
       canvas.plotPath([0, 1, 2, 3]);
 
@@ -434,7 +434,7 @@ describe('canvasimo', () => {
   describe('fill and strong', () => {
 
     it('should set the fill if it is not a special fill', () => {
-      var fillSpy = spy(canvas, 'setFill');
+      const fillSpy = spy(canvas, 'setFill');
 
       canvas.fill('nonzero');
       expect(fillSpy).not.to.have.been.called;
@@ -446,7 +446,7 @@ describe('canvasimo', () => {
     });
 
     it('should set the stroke if it is a string', () => {
-      var strokeSpy = spy(canvas, 'setStroke');
+      const strokeSpy = spy(canvas, 'setStroke');
 
       canvas.stroke(0);
       expect(strokeSpy).not.to.have.been.called;
@@ -462,11 +462,11 @@ describe('canvasimo', () => {
   describe('resetTransform', () => {
 
     it('should use setTransform if resetTransform is unavailable', () => {
-      var ctx = canvas.getCurrentContext();
-      var _resetTransform = ctx.resetTransform;
+      const ctx = canvas.getCurrentContext();
+      const _resetTransform = ctx.resetTransform;
       delete ctx.resetTransform;
 
-      var setTransformSpy = spy(canvas, 'setTransform');
+      const setTransformSpy = spy(canvas, 'setTransform');
 
       canvas.resetTransform();
 
@@ -542,7 +542,7 @@ describe('canvasimo', () => {
     });
 
     it('should error when calculating angles with wrong arguments', () => {
-      var anError = /Incorrect number of arguments/;
+      const anError = /Incorrect number of arguments/;
 
       expect(canvas.getAngle.bind(null, 0, 0, 0, 0)).not.to.throw(anError);
       expect(canvas.getAngle.bind(null, 0, 0, 0, 0, 0, 0)).not.to.throw(anError);
@@ -581,7 +581,7 @@ describe('canvasimo', () => {
   describe('tap', () => {
 
     it('should allow a function to be run during a chain', () => {
-      var result = false;
+      const result = false;
 
       expect(
         canvas
@@ -597,7 +597,7 @@ describe('canvasimo', () => {
     });
 
     it('should error if no callback is provided', () => {
-      var anError = /function/i;
+      const anError = /function/i;
 
       expect(canvas.tap).to.throw(anError);
       expect(canvas.tap.bind(null, 1)).to.throw(anError);
@@ -609,8 +609,8 @@ describe('canvasimo', () => {
   describe('repeat', () => {
 
     it('should loop over the provided range', () => {
-      var expected;
-      var callback = spy();
+      const expected;
+      const callback = spy();
 
       canvas.repeat(null, callback);
       expect(callback).not.to.have.been.called;
@@ -678,7 +678,7 @@ describe('canvasimo', () => {
     });
 
     it('should stop iteration if false is returned', () => {
-      var callback = spy(function (index) {
+      const callback = spy(function (index) {
         if (index === 1) {
           return false;
         }
@@ -690,7 +690,7 @@ describe('canvasimo', () => {
     });
 
     it('should error if wrong arguments provided', () => {
-      var anError = /arguments/i;
+      const anError = /arguments/i;
 
       expect(canvas.repeat).to.throw(anError);
       expect(canvas.repeat.bind(null, 0)).to.throw(anError);
@@ -698,7 +698,7 @@ describe('canvasimo', () => {
     });
 
     it('should error if no callback is provided', () => {
-      var anError = /function/i;
+      const anError = /function/i;
 
       expect(canvas.repeat.bind(null, 0, 1)).to.throw(anError);
       expect(canvas.repeat.bind(null, 0, 1, 1)).to.throw(anError);
@@ -710,8 +710,8 @@ describe('canvasimo', () => {
   describe('forEach', () => {
 
     it('should loop over the array, object, or string provided', () => {
-      var expected;
-      var callback = spy();
+      const expected;
+      const callback = spy();
 
       expected = [0, 1, 2];
       canvas.forEach(expected, callback);
@@ -729,7 +729,7 @@ describe('canvasimo', () => {
       });
       callback.reset();
 
-      var i = 0;
+      const i = 0;
 
       expected = {foo: 'bar', bar: 'foo', hello: 'world'};
       canvas.forEach(expected, callback);
@@ -742,10 +742,10 @@ describe('canvasimo', () => {
     });
 
     it('should stop iteration if false is returned', () => {
-      var expected;
-      var i;
+      const expected;
+      const i;
 
-      var callback = spy(function () {
+      const callback = spy(function () {
         if (i === 1) {
           return false;
         }
@@ -769,14 +769,14 @@ describe('canvasimo', () => {
     });
 
     it('should error if wrong arguments provided', () => {
-      var anError = /argument/i;
+      const anError = /argument/i;
 
       expect(canvas.forEach.bind(null, 0, function () {})).to.throw(anError);
       expect(canvas.forEach.bind(null, function () {}, function () {})).to.throw(anError);
     });
 
     it('should error if no callback is provided', () => {
-      var anError = /function/i;
+      const anError = /function/i;
 
       expect(canvas.forEach).to.throw(anError);
       expect(canvas.forEach.bind(null, [])).to.throw(anError);
