@@ -1,7 +1,7 @@
 import * as docs from '../docs/src/js/docs';
-import { any, each } from './helpers/utils';
-import getContextStub from './helpers/get-context-stub';
 import Canvasimo from '../src/';
+import getContextStub from './helpers/get-context-stub';
+import { any, each } from './helpers/utils';
 
 describe('docs', () => {
 
