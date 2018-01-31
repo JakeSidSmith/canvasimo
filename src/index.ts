@@ -473,7 +473,7 @@ export default class Canvasimo {
   // FIXME: Needs implementation for IE
   // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
   public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
-  public getLineDash = (): Segments => this.ctx.getLineDash().map((value) => value / this.density);
+  public getLineDash = (): Segments => (this.ctx.getLineDash() || []).map((value) => value / this.density);
 
   // Renamed context getters
   public getTextSize = (text: string) => this.measureText(text);

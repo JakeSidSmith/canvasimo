@@ -64,43 +64,19 @@ describe('canvasimo', () => {
     tap: [() => undefined],
     repeat: [0, 0, 0, () => undefined],
     forEach: [[], () => undefined],
+    setLineDash: [[]],
+    setFontWeight: ['normal'],
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
 
   it('should return an interface', () => {
-    stub(element, 'getContext', getContextStub);
-    stub(element, 'getBoundingClientRect', getBoundingClientRectStub);
+    jest.spyOn(element, 'getContext').mockImplementation(getContextStub);
+    jest.spyOn(element, 'getBoundingClientRect').mockImplementation(getBoundingClientRectStub);
 
     canvas = new Canvasimo(element);
 
     expect(Boolean(canvas)).toBe(true);
-  });
-
-  it('should bind its methods to itself', () => {
-    Function.prototype._bind = Function.prototype.bind;
-
-    // Override bind
-    Function.prototype.bind = function () {
-      const fn = this;
-      const args = Array.prototype.slice.call(arguments);
-      const boundFunction = fn._bind.apply(fn, args);
-      boundFunction.boundTo = args[0];
-      return boundFunction;
-    };
-
-    canvas = new Canvasimo(element);
-
-    for (const key in canvas) {
-      expect(canvas[key].boundTo).toBe(canvas);
-    }
-
-    // Restore bind
-    Function.prototype.bind = Function.prototype._bind;
-    delete Function.prototype._bind;
-
-    // Create canvas without bind override
-    canvas = new Canvasimo(element);
   });
 
   describe('property getters', () => {
@@ -153,7 +129,7 @@ describe('canvasimo', () => {
   describe('get data url', () => {
 
     it('should return a data url of the canvas', () => {
-      stub(element, 'toDataURL', () => {
+      jest.spyOn(element, 'toDataURL').mockImplementation(() => {
         return 'url';
       });
 
@@ -216,21 +192,21 @@ describe('canvasimo', () => {
     it('should set the first image smoothing value', () => {
       canvas.setImageSmoothingEnabled(false);
 
-      expect(canvas.getImageSmoothingEnabled()).to.be.false;
+      expect(canvas.getImageSmoothingEnabled()).toBe(false);
     });
 
-    it('should return null if no image smoothing keys present', () => {
-      const context = element.getContext('2d');
+    it('should return false if no image smoothing keys present', () => {
+      const context = element.getContext('2d') as CanvasRenderingContext2D;
       delete context.imageSmoothingEnabled;
       delete context.webkitImageSmoothingEnabled;
 
-      expect(canvas.getImageSmoothingEnabled()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).toBe(false);
     });
 
     it('should not set a value if no image smoothing keys present', () => {
       canvas.setImageSmoothingEnabled(true);
 
-      expect(canvas.getImageSmoothingEnabled()).to.be.null;
+      expect(canvas.getImageSmoothingEnabled()).toBe(false);
     });
 
   });
@@ -281,18 +257,18 @@ describe('canvasimo', () => {
     });
 
     it('should allow setting special font types', () => {
-      each(specialFontTypes, (s =>pecialFontType) {
+      each(specialFontTypes, (specialFontType) => {
         canvas.setFont(specialFontType);
         expect(canvas.getFont()).toBe(specialFontType);
       });
     });
 
     it('should return null for individual properties when a special font is set', () => {
-      expect(canvas.getFontStyle()).to.be.null;
-      expect(canvas.getFontVariant()).to.be.null;
-      expect(canvas.getFontWeight()).to.be.null;
-      expect(canvas.getFontSize()).to.be.null;
-      expect(canvas.getFontFamily()).to.be.null;
+      expect(canvas.getFontStyle()).toBe(null);
+      expect(canvas.getFontVariant()).toBe(null);
+      expect(canvas.getFontWeight()).toBe(null);
+      expect(canvas.getFontSize()).toBe(null);
+      expect(canvas.getFontFamily()).toBe(null);
     });
 
     it('should set the default font if properties are set when a special font is set', () => {
@@ -300,35 +276,35 @@ describe('canvasimo', () => {
       canvas.setFont(specialFontTypes[0]);
       expect(canvas.getFont()).toBe(specialFontTypes[0]);
 
-      canvas.setFontStyle();
+      canvas.setFontStyle('');
       expect(canvas.getFont()).toBe('normal normal normal 10px sans-serif');
 
       // Set to special font type
       canvas.setFont(specialFontTypes[0]);
       expect(canvas.getFont()).toBe(specialFontTypes[0]);
 
-      canvas.setFontVariant();
+      canvas.setFontVariant('');
       expect(canvas.getFont()).toBe('normal normal normal 10px sans-serif');
 
       // Set to special font type
       canvas.setFont(specialFontTypes[0]);
       expect(canvas.getFont()).toBe(specialFontTypes[0]);
 
-      canvas.setFontWeight();
+      canvas.setFontWeight('');
       expect(canvas.getFont()).toBe('normal normal normal 10px sans-serif');
 
       // Set to special font type
       canvas.setFont(specialFontTypes[0]);
       expect(canvas.getFont()).toBe(specialFontTypes[0]);
 
-      canvas.setFontSize();
+      canvas.setFontSize('');
       expect(canvas.getFont()).toBe('normal normal normal 10px sans-serif');
 
       // Set to special font type
       canvas.setFont(specialFontTypes[0]);
       expect(canvas.getFont()).toBe(specialFontTypes[0]);
 
-      canvas.setFontFamily();
+      canvas.setFontFamily('');
       expect(canvas.getFont()).toBe('normal normal normal 10px sans-serif');
 
     });
@@ -361,22 +337,17 @@ describe('canvasimo', () => {
   describe('plot path', () => {
 
     it('should accept but do nothing with empty and near empty point arrays', () => {
-      const context = canvas.getCurrentContext();
-      const moveToSpy = spy(context, 'moveTo');
-      const lineToSpy = spy(context, 'lineTo');
+      const context = canvas.getCurrentContext() as CanvasRenderingContext2D;
+      const moveToSpy = jest.spyOn(context, 'moveTo');
+      const lineToSpy = jest.spyOn(context, 'lineTo');
 
-      canvas.plotPath(null);
-      canvas.plotPath(undefined);
       canvas.plotPath([]);
-      canvas.plotPath([0]);
+      canvas.plotPath([0, 1]);
       canvas.plotPath([[0, 1]]);
       canvas.plotPath([{x: 0, y: 0}]);
 
       expect(moveToSpy).not.toHaveBeenCalled();
       expect(lineToSpy).not.toHaveBeenCalled();
-
-      moveToSpy.restore();
-      lineToSpy.restore();
     });
 
     it('should throw an error if provided incorrect points arrays', () => {
@@ -392,27 +363,24 @@ describe('canvasimo', () => {
     });
 
     it('should accept and plot valid point arrays', () => {
-      const context = canvas.getCurrentContext();
-      const moveToSpy = spy(context, 'moveTo');
-      const lineToSpy = spy(context, 'lineTo');
+      const context = canvas.getCurrentContext() as CanvasRenderingContext2D;
+      const moveToSpy = jest.spyOn(context, 'moveTo');
+      const lineToSpy = jest.spyOn(context, 'lineTo');
 
       canvas.plotPath([0, 1, 2, 3]);
 
-      expect(moveToSpy).to.have.been.calledWith(0, 1);
-      expect(lineToSpy).to.have.been.calledWith(2, 3);
+      expect(moveToSpy).toHaveBeenCalledWith(0, 1);
+      expect(lineToSpy).toHaveBeenCalledWith(2, 3);
 
       canvas.plotPath([[4, 5], [6, 7]]);
 
-      expect(moveToSpy).to.have.been.calledWith(4, 5);
-      expect(lineToSpy).to.have.been.calledWith(6, 7);
+      expect(moveToSpy).toHaveBeenCalledWith(4, 5);
+      expect(lineToSpy).toHaveBeenCalledWith(6, 7);
 
       canvas.plotPath([{x: 8, y: 9}, {x: 10, y: 11}]);
 
-      expect(moveToSpy).to.have.been.calledWith(8, 9);
-      expect(lineToSpy).to.have.been.calledWith(10, 11);
-
-      moveToSpy.restore();
-      lineToSpy.restore();
+      expect(moveToSpy).toHaveBeenCalledWith(8, 9);
+      expect(lineToSpy).toHaveBeenCalledWith(10, 11);
     });
 
   });
@@ -420,8 +388,8 @@ describe('canvasimo', () => {
   describe('actions and setters', () => {
 
     it('should return the canvas', () => {
-      each(canvas, (method, key) => {
-        if (!isGetter.exec(key)) {
+      each(canvas, (method, key: keyof typeof argumentMap) => {
+        if (typeof method === 'function' && !isGetter.exec(key)) {
           expect(method.apply(null, argumentMap[key])).toBe(canvas);
         }
       });
@@ -432,27 +400,20 @@ describe('canvasimo', () => {
   describe('fill and strong', () => {
 
     it('should set the fill if it is not a special fill', () => {
-      const fillSpy = spy(canvas, 'setFill');
+      const fillSpy = jest.spyOn(canvas, 'setFill');
 
       canvas.fill('nonzero');
       expect(fillSpy).not.toHaveBeenCalled();
 
       canvas.fill('red');
       expect(fillSpy).toHaveBeenCalledTimes(1);
-
-      canvas.setFill.restore();
     });
 
     it('should set the stroke if it is a string', () => {
-      const strokeSpy = spy(canvas, 'setStroke');
-
-      canvas.stroke(0);
-      expect(strokeSpy).not.toHaveBeenCalled();
+      const strokeSpy = jest.spyOn(canvas, 'setStroke');
 
       canvas.stroke('red');
       expect(strokeSpy).toHaveBeenCalledTimes(1);
-
-      canvas.setStroke.restore();
     });
 
   });
@@ -461,24 +422,23 @@ describe('canvasimo', () => {
 
     it('should use setTransform if resetTransform is unavailable', () => {
       const ctx = canvas.getCurrentContext();
-      const _resetTransform = ctx.resetTransform;
-      delete ctx.resetTransform;
+      // tslint:disable-next-line:variable-name
+      const _resetTransform = (ctx as any).resetTransform;
+      delete (ctx as any).resetTransform;
 
-      const setTransformSpy = spy(canvas, 'setTransform');
+      const setTransformSpy = jest.spyOn(canvas, 'setTransform').mockImplementation(() => null);
 
       canvas.resetTransform();
 
       expect(setTransformSpy).toHaveBeenCalledTimes(1);
 
-      ctx.resetTransform = _resetTransform;
+      (ctx as any).resetTransform = _resetTransform;
 
-      setTransformSpy.reset();
+      (setTransformSpy as jest.Mock<any>).mockClear();
 
       canvas.resetTransform();
 
       expect(setTransformSpy).not.toHaveBeenCalled();
-
-      canvas.setTransform.restore();
     });
 
   });
@@ -530,7 +490,6 @@ describe('canvasimo', () => {
     });
 
     it('should calculate the distance between 2 points', () => {
-      expect(canvas.getDistance()).toBe(NaN);
       expect(canvas.getDistance(0, 0, 0, 10)).toBe(10);
       expect(canvas.getDistance(0, 0, 0, -10)).toBe(10);
       expect(canvas.getDistance(0, 0, 10, 0)).toBe(10);
@@ -584,9 +543,9 @@ describe('canvasimo', () => {
       expect(
         canvas
           .setFill('black')
-          .tap(function () {
+          .tap(() => {
             result = true;
-            this.setFill('red');
+            canvas.setFill('red');
           })
           .getFill()
       ).toBe('red');
@@ -594,89 +553,80 @@ describe('canvasimo', () => {
       expect(result).toBe(true);
     });
 
-    it('should error if no callback is provided', () => {
-      const anError = /function/i;
-
-      expect(canvas.tap).toThrow(anError);
-      expect(canvas.tap.bind(null, 1)).toThrow(anError);
-      expect(canvas.tap.bind(null, function () {})).not.toThrow(anError);
-    });
-
   });
 
   describe('repeat', () => {
 
     it('should loop over the provided range', () => {
-      const expected;
-      const callback = spy();
+      let expected;
+      const callback = jest.fn();
 
-      canvas.repeat(null, callback);
+      canvas.repeat(0, callback);
       expect(callback).not.toHaveBeenCalled();
-      callback.reset();
+      callback.mockClear();
 
-      canvas.repeat(0, null, callback);
+      canvas.repeat(0, 0, callback);
       expect(callback).not.toHaveBeenCalled();
-      callback.reset();
+      callback.mockClear();
 
-      canvas.repeat(0, 1, null, callback);
+      canvas.repeat(0, 1, 0, callback);
       expect(callback).not.toHaveBeenCalled();
-      callback.reset();
+      callback.mockClear();
 
       canvas.repeat(0, 0, 1, callback);
       expect(callback).not.toHaveBeenCalled();
-      callback.reset();
+      callback.mockClear();
 
       expected = [0, 1, 2];
       canvas.repeat(3, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value]);
       });
-      callback.reset();
+      callback.mockClear();
 
       expected = [1, 2, 3];
       canvas.repeat(1, 4, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value]);
       });
-      callback.reset();
+      callback.mockClear();
 
       expected = [-2, -3, -4];
       canvas.repeat(-2, -5, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value]);
       });
-      callback.reset();
+      callback.mockClear();
 
       expected = [2, 4, 6];
       canvas.repeat(2, 8, 2, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value]);
       });
-      callback.reset();
+      callback.mockClear();
 
       expected = [10, 5, 0];
       canvas.repeat(10, -5, 5, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value]);
       });
-      callback.reset();
+      callback.mockClear();
 
       expected = [1, 3, 5];
       canvas.repeat(1, 6, 2, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value]);
       });
-      callback.reset();
     });
 
     it('should stop iteration if false is returned', () => {
-      const callback = spy(function (index) {
+      const callback = jest.fn().mockImplementation((index) => {
         if (index === 1) {
           return false;
         }
@@ -684,7 +634,6 @@ describe('canvasimo', () => {
 
       canvas.repeat(3, callback);
       expect(callback).toHaveBeenCalledTimes(2);
-      callback.reset();
     });
 
     it('should error if wrong arguments provided', () => {
@@ -695,55 +644,46 @@ describe('canvasimo', () => {
       expect(canvas.repeat.bind(null, 0, 0, 0, 0, 0)).toThrow(anError);
     });
 
-    it('should error if no callback is provided', () => {
-      const anError = /function/i;
-
-      expect(canvas.repeat.bind(null, 0, 1)).toThrow(anError);
-      expect(canvas.repeat.bind(null, 0, 1, 1)).toThrow(anError);
-      expect(canvas.repeat.bind(null, 0, 1, 1, 1)).toThrow(anError);
-    });
-
   });
 
   describe('forEach', () => {
 
     it('should loop over the array, object, or string provided', () => {
-      const expected;
-      const callback = spy();
+      let expected;
+      const callback = jest.fn();
 
       expected = [0, 1, 2];
       canvas.forEach(expected, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value, index]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value, index]);
       });
-      callback.reset();
+      callback.mockClear();
 
       expected = 'str';
       canvas.forEach(expected, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, index) {
-        expect(callback.getCall(index).args).toEqual([value, index]);
+      each(expected, (value, index) => {
+        expect(callback.mock.calls[index]).toEqual([value, index]);
       });
-      callback.reset();
+      callback.mockClear();
 
-      const i = 0;
+      let i = 0;
 
       expected = {foo: 'bar', bar: 'foo', hello: 'world'};
       canvas.forEach(expected, callback);
       expect(callback).toHaveBeenCalledTimes(3);
-      each(expected, function (value, key) {
-        expect(callback.getCall(i).args).toEqual([value, key]);
+      each(expected, (value, key) => {
+        expect(callback.mock.calls[i]).toEqual([value, key]);
         i += 1;
       });
-      callback.reset();
     });
 
     it('should stop iteration if false is returned', () => {
-      const expected;
-      const i;
+      let expected;
+      let i: number = 0;
 
-      const callback = spy(function () {
+      const callback = jest.fn().mockImplementation(() => {
         if (i === 1) {
           return false;
         }
@@ -756,29 +696,13 @@ describe('canvasimo', () => {
       expected = [0, 1, 2];
       canvas.forEach(expected, callback);
       expect(callback).toHaveBeenCalledTimes(2);
-      callback.reset();
+      callback.mockClear();
 
       i = 0;
 
       expected = {foo: 'bar', bar: 'foo', hello: 'world'};
       canvas.forEach(expected, callback);
       expect(callback).toHaveBeenCalledTimes(2);
-      callback.reset();
-    });
-
-    it('should error if wrong arguments provided', () => {
-      const anError = /argument/i;
-
-      expect(canvas.forEach.bind(null, 0, function () {})).toThrow(anError);
-      expect(canvas.forEach.bind(null, function () {}, function () {})).toThrow(anError);
-    });
-
-    it('should error if no callback is provided', () => {
-      const anError = /function/i;
-
-      expect(canvas.forEach).toThrow(anError);
-      expect(canvas.forEach.bind(null, [])).toThrow(anError);
-      expect(canvas.forEach.bind(null, [], 1)).toThrow(anError);
     });
 
   });

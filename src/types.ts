@@ -5,7 +5,7 @@ export interface Point {
   y: number;
 }
 
-export type TuplePoint = [number, number];
+export type TuplePoint = number[];
 
 export type PointArray = Point[];
 export type TuplePointArray = TuplePoint[];
