@@ -57,7 +57,7 @@ export default class Canvasimo {
   public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
     return this.element.getContext(type, contextAttributes);
   }
-  public getCurrentContext = (): AnyCanvasContext => this.ctx;
+  public getCurrentContext = (): CanvasRenderingContext2D => this.ctx;
   public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
