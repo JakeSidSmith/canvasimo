@@ -1,6 +1,35 @@
+import { forPoints } from '../src/utils';
 import { each, some } from './helpers/utils';
 
 describe('utils', () => {
+
+  describe('forPoints', () => {
+
+    it('should accept but do nothing with empty and near empty point arrays', () => {
+      const spy = jest.fn();
+
+      forPoints([], spy);
+      forPoints([0, 1], spy);
+      forPoints([[0, 1]], spy);
+      forPoints([{x: 0, y: 0}], spy);
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should throw an error if provided incorrect points arrays', () => {
+      const anError = /must be an array of/;
+      const spy = jest.fn();
+
+      expect(forPoints.bind(null, {}, spy)).toThrow(anError);
+      expect(forPoints.bind(null, [[0]], spy)).toThrow(anError);
+      expect(forPoints.bind(null, [{x: 0}], spy)).toThrow(anError);
+      expect(forPoints.bind(null, [{y: 0}], spy)).toThrow(anError);
+      expect(forPoints.bind(null, [{}], spy)).toThrow(anError);
+      expect(forPoints.bind(null, [[0, 1, 2]], spy)).toThrow(anError);
+      expect(forPoints.bind(null, ['wat'], spy)).toThrow(anError);
+    });
+
+  });
 
   describe('each', () => {
 

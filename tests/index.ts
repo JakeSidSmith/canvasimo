@@ -337,31 +337,6 @@ describe('canvasimo', () => {
 
   describe('plot path', () => {
 
-    it('should accept but do nothing with empty and near empty point arrays', () => {
-      const context = canvas.getCurrentContext() as CanvasRenderingContext2D;
-      const moveToSpy = jest.spyOn(context, 'moveTo');
-      const lineToSpy = jest.spyOn(context, 'lineTo');
-
-      canvas.plotPath([]);
-      canvas.plotPath([0, 1]);
-      canvas.plotPath([[0, 1]]);
-      canvas.plotPath([{x: 0, y: 0}]);
-
-      expect(moveToSpy).not.toHaveBeenCalled();
-      expect(lineToSpy).not.toHaveBeenCalled();
-    });
-
-    it('should throw an error if provided incorrect points arrays', () => {
-      const anError = /must be an array of/;
-
-      expect(canvas.plotPath.bind(null, [[0]])).toThrow(anError);
-      expect(canvas.plotPath.bind(null, [{x: 0}])).toThrow(anError);
-      expect(canvas.plotPath.bind(null, [{y: 0}])).toThrow(anError);
-      expect(canvas.plotPath.bind(null, [{}])).toThrow(anError);
-      expect(canvas.plotPath.bind(null, [[0, 1, 2]])).toThrow(anError);
-      expect(canvas.plotPath.bind(null, ['wat'])).toThrow(anError);
-    });
-
     it('should accept and plot valid point arrays', () => {
       const context = canvas.getCurrentContext() as CanvasRenderingContext2D;
       const moveToSpy = jest.spyOn(context, 'moveTo');
