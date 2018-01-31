@@ -1,6 +1,7 @@
 import {
   DEFAULT_FONT,
   INCORRECT_POINT_FORMAT,
+  MATCHES_FONT_SIZE,
   MATCHES_FONT_STYLE,
   MATCHES_FONT_VARIANT,
   MATCHES_FONT_WEIGHT,
@@ -27,7 +28,7 @@ export const isTuplePoint = (point?: AnyPoint): point is TuplePoint => {
   return typeof point === 'object' && Array.isArray(point) && point.length === 2;
 };
 
-export const getFontParts = (input?: string) => {
+export const getFontParts = (input: string | undefined, density: number) => {
   if (!input) {
     return DEFAULT_FONT;
   }
@@ -38,18 +39,22 @@ export const getFontParts = (input?: string) => {
     return [font];
   }
 
-  const matchFontSize = /(^|\s+)\d*\.?\d+([a-z]+|%)\s/i.exec(font);
+  const matchFontSize = MATCHES_FONT_SIZE.exec(font);
 
   if (!matchFontSize) {
     return DEFAULT_FONT;
   }
 
-  const numberOfLeadingSpaces = matchFontSize[1].length;
-  const indexOfFontSize = matchFontSize.index;
+  const leadingSpaces = matchFontSize[1].length;
+  const size = matchFontSize[2];
+  const unit = matchFontSize[3];
 
-  const requiredParts = font.substring(indexOfFontSize + numberOfLeadingSpaces).split(MATCHES_WHITESPACE);
+  const fontSize = (unit !== '%' ? parseFloat(size) * density : size) + unit;
 
-  const optional = font.substring(0, indexOfFontSize);
+  const parts = font.substring(matchFontSize.index + leadingSpaces).split(MATCHES_WHITESPACE);
+  const fontFamily = parts[parts.length - 1];
+
+  const optional = font.substring(0, matchFontSize.index);
   const optionalParts = optional ? optional.split(MATCHES_WHITESPACE) : null;
 
   let fontStyle;
@@ -76,8 +81,8 @@ export const getFontParts = (input?: string) => {
     fontStyle || DEFAULT_FONT[0],
     fontVariant || DEFAULT_FONT[1],
     fontWeight || DEFAULT_FONT[2],
-    requiredParts.splice(0, 1)[0],
-    requiredParts.join(' '),
+    fontSize,
+    fontFamily,
   ];
 };
 

@@ -942,7 +942,7 @@ export default class Canvasimo {
 
   // Font property setters
   public setFontStyle = (style: string) => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
     }
@@ -952,7 +952,7 @@ export default class Canvasimo {
   }
 
   public setFontVariant = (variant: string) => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
     }
@@ -962,7 +962,7 @@ export default class Canvasimo {
   }
 
   public setFontWeight = (weight: string | number) => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
     }
@@ -972,7 +972,7 @@ export default class Canvasimo {
   }
 
   public setFontSize = (size: string | number) => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
     }
@@ -982,7 +982,7 @@ export default class Canvasimo {
   }
 
   public setFontFamily = (family: string) => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
     }
@@ -993,7 +993,7 @@ export default class Canvasimo {
 
   // Font property getters
   public getFontStyle = () => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return null;
     }
@@ -1001,7 +1001,7 @@ export default class Canvasimo {
   }
 
   public getFontVariant = () => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return null;
     }
@@ -1009,7 +1009,7 @@ export default class Canvasimo {
   }
 
   public getFontWeight = () => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return null;
     }
@@ -1017,7 +1017,7 @@ export default class Canvasimo {
   }
 
   public getFontSize = () => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return null;
     }
@@ -1025,7 +1025,7 @@ export default class Canvasimo {
   }
 
   public getFontFamily = () => {
-    const parts = getFontParts(this.ctx.font);
+    const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return null;
     }
