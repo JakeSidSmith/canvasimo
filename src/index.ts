@@ -48,7 +48,7 @@ export default class Canvasimo {
     }
 
     this.ctx = ctx;
-    this.ctx.font = formatFont(ctx.font);
+    this.ctx.font = formatFont(ctx.font, this.density);
   }
 
   public getCanvas = (): HTMLCanvasElement => this.element;
@@ -932,12 +932,12 @@ export default class Canvasimo {
 
   // Font methods
   public setFont = (font: string) => {
-    this.ctx.font = formatFont(font);
+    this.ctx.font = formatFont(font, this.density);
     return this;
   }
 
   public getFont = () => {
-    return formatFont(this.ctx.font);
+    return formatFont(this.ctx.font, this.density);
   }
 
   // Font property setters
@@ -947,7 +947,7 @@ export default class Canvasimo {
       return this.setFont('');
     }
     parts[0] = style || DEFAULT_FONT[0];
-    this.ctx.font = formatFont(parts.join(' '));
+    this.ctx.font = formatFont(parts.join(' '), this.density);
     return this;
   }
 
@@ -957,7 +957,7 @@ export default class Canvasimo {
       return this.setFont('');
     }
     parts[1] = variant || DEFAULT_FONT[1];
-    this.ctx.font = formatFont(parts.join(' '));
+    this.ctx.font = formatFont(parts.join(' '), this.density);
     return this;
   }
 
@@ -967,7 +967,7 @@ export default class Canvasimo {
       return this.setFont('');
     }
     parts[2] = weight.toString() || DEFAULT_FONT[2];
-    this.ctx.font = formatFont(parts.join(' '));
+    this.ctx.font = formatFont(parts.join(' '), this.density);
     return this;
   }
 
@@ -977,7 +977,7 @@ export default class Canvasimo {
       return this.setFont('');
     }
     parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
-    this.ctx.font = formatFont(parts.join(' '));
+    this.ctx.font = formatFont(parts.join(' '), this.density);
     return this;
   }
 
@@ -987,7 +987,7 @@ export default class Canvasimo {
       return this.setFont('');
     }
     parts[4] = family || DEFAULT_FONT[4];
-    this.ctx.font = formatFont(parts.join(' '));
+    this.ctx.font = formatFont(parts.join(' '), this.density);
     return this;
   }
 
