@@ -30,6 +30,7 @@ describe('utils', () => {
       expect(() => forPoints([{x: 0, y: 0}, {}] as any, spy)).toThrow(pointError);
       expect(() => forPoints([0, 1, 2, 3, 4], spy)).toThrow(anError);
       expect(() => forPoints([0, 1, 2, 'wat'] as any, spy)).toThrow(numberError);
+      expect(() => forPoints([{}, {}] as any, spy)).toThrow(anError);
     });
 
   });
