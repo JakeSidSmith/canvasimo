@@ -429,8 +429,6 @@ export default class Canvasimo {
   }
 
   // Standard context getters
-  // FIXME: Needs implementation for IE
-  // public getContextAttributes = () => this.ctx.getContextAttributes();
   public getImageData = (sx: number, sy: number, sw: number, sh: number): ImageData => {
     return this.ctx.getImageData(sx * this.density, sy * this.density, sw * this.density, sh * this.density);
   }
