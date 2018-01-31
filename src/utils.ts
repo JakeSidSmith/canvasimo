@@ -89,7 +89,11 @@ export const getFontParts = (input: string | undefined, density: number) => {
 export const formatFont = (input: string, density: number): string => getFontParts(input, density).join(' ');
 
 export const forPoints = (points: Points, callback: (x: number, y: number, index: number) => any): void => {
-  if (!points || !points.length || points.length === 1 || (typeof points[0] === 'number' && points.length < 4)) {
+  if (!Array.isArray(points) || (typeof points[0] === 'number' && (points.length % 2) !== 0)) {
+    throw new Error(INCORRECT_POINT_FORMAT);
+  }
+
+  if (!points.length || points.length === 1 || (typeof points[0] === 'number' && points.length < 4)) {
     return;
   }
 

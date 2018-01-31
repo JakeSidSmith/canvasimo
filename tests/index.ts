@@ -54,7 +54,7 @@ describe('canvasimo', () => {
     arcTo: [0, 0, 0, 0, 0],
     fillText: ['', 0, 0],
     strokeText: ['', 0, 0],
-    drawImage: [new Image(), 0, 0], // eslint-disable-line no-undef
+    drawImage: [new Image(), 0, 0],
     putImageData: [new ImageData(1, 1), 0, 0],
     plotRect: [0, 0, 0, 0],
     plotArc: [0, 0, 0, 0, 0],
@@ -67,6 +67,12 @@ describe('canvasimo', () => {
     setLineDash: [[]],
     setFontWeight: ['normal'],
     setDensity: [1],
+    plotPath: [[]],
+    fillPath: [[]],
+    strokePath: [[]],
+    plotClosedPath: [[]],
+    fillClosedPath: [[]],
+    strokeClosedPath: [[]],
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
@@ -365,7 +371,15 @@ describe('canvasimo', () => {
     it('should return the canvas', () => {
       each(canvas, (method, key: keyof typeof argumentMap) => {
         if (typeof method === 'function' && !isGetter.exec(key)) {
-          expect(method.apply(null, argumentMap[key])).toBe(canvas);
+          let result;
+
+          try {
+            result = method.apply(null, argumentMap[key]);
+          } catch (error) {
+            throw new Error(`Method ${key} threw an error: ${error}`);
+          }
+
+          expect(result).toBe(canvas);
         }
       });
     });

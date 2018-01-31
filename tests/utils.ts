@@ -18,15 +18,18 @@ describe('utils', () => {
 
     it('should throw an error if provided incorrect points arrays', () => {
       const anError = /must be an array of/;
+      const tupleError = /point with format \[x, y\]/;
+      const pointError = /point with format {x, y}/;
+      const numberError = /points to be an array of numbers/;
       const spy = jest.fn();
 
-      expect(forPoints.bind(null, {}, spy)).toThrow(anError);
-      expect(forPoints.bind(null, [[0]], spy)).toThrow(anError);
-      expect(forPoints.bind(null, [{x: 0}], spy)).toThrow(anError);
-      expect(forPoints.bind(null, [{y: 0}], spy)).toThrow(anError);
-      expect(forPoints.bind(null, [{}], spy)).toThrow(anError);
-      expect(forPoints.bind(null, [[0, 1, 2]], spy)).toThrow(anError);
-      expect(forPoints.bind(null, ['wat'], spy)).toThrow(anError);
+      expect(() => forPoints({} as any, spy)).toThrow(anError);
+      expect(() => forPoints([[0, 0], [0]], spy)).toThrow(tupleError);
+      expect(() => forPoints([{x: 0, y: 0}, {x: 0}] as any, spy)).toThrow(pointError);
+      expect(() => forPoints([{x: 0, y: 0}, {y: 0}] as any, spy)).toThrow(pointError);
+      expect(() => forPoints([{x: 0, y: 0}, {}] as any, spy)).toThrow(pointError);
+      expect(() => forPoints([0, 1, 2, 3, 4], spy)).toThrow(anError);
+      expect(() => forPoints([0, 1, 2, 'wat'] as any, spy)).toThrow(numberError);
     });
 
   });
