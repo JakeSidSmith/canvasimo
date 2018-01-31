@@ -66,6 +66,7 @@ describe('canvasimo', () => {
     forEach: [[], () => undefined],
     setLineDash: [[]],
     setFontWeight: ['normal'],
+    setDensity: [1],
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
@@ -353,7 +354,6 @@ describe('canvasimo', () => {
     it('should throw an error if provided incorrect points arrays', () => {
       const anError = /must be an array of/;
 
-      expect(canvas.plotPath.bind(null, {})).toThrow(anError);
       expect(canvas.plotPath.bind(null, [[0]])).toThrow(anError);
       expect(canvas.plotPath.bind(null, [{x: 0}])).toThrow(anError);
       expect(canvas.plotPath.bind(null, [{y: 0}])).toThrow(anError);

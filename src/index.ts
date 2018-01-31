@@ -724,6 +724,9 @@ export default class Canvasimo {
   }
 
   public plotPath = (points: Points) => {
+    if (points && (points.length === 1 || (points.length === 2 && typeof points[0] === 'number'))) {
+      return this;
+    }
     forPoints(points, (x: number, y: number, i: number) => {
       if (i === 0) {
         this.moveTo(x, y);
