@@ -461,6 +461,10 @@ export default class Canvasimo {
     return this.ctx.createPattern(image, repetition);
   }
   public createImageData: CreateImageData = (width: number | ImageData, height?: number): ImageData => {
+    if (typeof width === 'number' && typeof height === 'number') {
+      return this.ctx.createImageData(width * this.density, height * this.density);
+    }
+
     return this.ctx.createImageData(width, height);
   }
   public isPointInPath = (x: number, y: number, fillRule?: FillRules): boolean => {
@@ -469,7 +473,7 @@ export default class Canvasimo {
   // FIXME: Needs implementation for IE
   // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
   public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
-  public getLineDash = (): Segments => this.ctx.getLineDash();
+  public getLineDash = (): Segments => this.ctx.getLineDash().map((value) => value / this.density);
 
   // Renamed context getters
   public getTextSize = (text: string) => this.measureText(text);
@@ -767,10 +771,10 @@ export default class Canvasimo {
       this.setFill(color);
     }
     // If max width is not a number (e.g. undefined) then iOS does not draw anything
-    if (!maxWidth && maxWidth !== 0) {
-      this.ctx.fillText(text, x, y);
+    if (typeof maxWidth !== 'number') {
+      this.ctx.fillText(text, x * this.density, y * this.density);
     } else {
-      this.ctx.fillText(text, x, y, maxWidth);
+      this.ctx.fillText(text, x * this.density, y * this.density, maxWidth * this.density);
     }
     return this;
   }
@@ -779,7 +783,11 @@ export default class Canvasimo {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
-    this.ctx.strokeText(text, x, y, maxWidth);
+    if (typeof maxWidth !== 'number') {
+      this.ctx.strokeText(text, x * this.density, y * this.density);
+    } else {
+      this.ctx.strokeText(text, x * this.density, y * this.density, maxWidth * this.density);
+    }
     return this;
   }
 
@@ -787,7 +795,7 @@ export default class Canvasimo {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
-    this.ctx.fillRect(x, y, width, height);
+    this.ctx.fillRect(x * this.density, y * this.density, width * this.density, height * this.density);
     return this;
   }
 
@@ -795,7 +803,7 @@ export default class Canvasimo {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
-    this.ctx.strokeRect(x, y, width, height);
+    this.ctx.strokeRect(x * this.density, y * this.density, width * this.density, height * this.density);
     return this;
   }
 
