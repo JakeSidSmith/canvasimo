@@ -186,6 +186,17 @@ describe('canvasimo', () => {
 
       expect(element.getAttribute('width')).toBe('32');
       expect(element.getAttribute('height')).toBe('65');
+
+      canvas.setSize({width: 353.4, height: 735.3});
+
+      expect(element.getAttribute('width')).toBe('353');
+      expect(element.getAttribute('height')).toBe('735');
+
+      // Invalid: should not change the size
+      canvas.setSize('' as any, null as any);
+
+      expect(element.getAttribute('width')).toBe('353');
+      expect(element.getAttribute('height')).toBe('735');
     });
 
   });
