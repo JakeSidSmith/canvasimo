@@ -116,39 +116,39 @@ export default class Canvasimo {
 
   // Context property getter and setters
   public setGlobalAlpha = (value: number) => this.setCanvasProperty('globalAlpha', value);
-  public getGlobalAlpha = () => this.getCanvasProperty('globalAlpha');
+  public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
   public setGlobalCompositeOperation = (value: GlobalCompositeOperations) => {
     return this.setCanvasProperty('globalCompositeOperation', value);
   }
-  public getGlobalCompositeOperation = () => {
+  public getGlobalCompositeOperation = (): GlobalCompositeOperations => {
     return this.getCanvasProperty('globalCompositeOperation');
   }
   public setFillStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('fillStyle', value);
-  public getFillStyle = () => this.getCanvasProperty('fillStyle');
+  public getFillStyle = (): string => this.getCanvasProperty('fillStyle');
   public setStrokeStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('strokeStyle', value);
-  public getStrokeStyle = () => this.getCanvasProperty('strokeStyle');
+  public getStrokeStyle = (): string => this.getCanvasProperty('strokeStyle');
   public setLineWidth = (value: number) => this.setCanvasProperty('lineWidth', value * this.density);
-  public getLineWidth = () => this.getCanvasProperty('lineWidth') / this.density;
+  public getLineWidth = (): number => this.getCanvasProperty('lineWidth') / this.density;
   public setLineCap = (value: LineCaps) => this.setCanvasProperty('lineCap', value);
-  public getLineCap = () => this.getCanvasProperty('lineCap');
+  public getLineCap = (): LineCaps => this.getCanvasProperty('lineCap');
   public setLineJoin = (value: LineJoins) => this.setCanvasProperty('lineJoin', value);
-  public getLineJoin = () => this.getCanvasProperty('lineJoin');
+  public getLineJoin = (): LineJoins => this.getCanvasProperty('lineJoin');
   public setLineDashOffset = (value: number) => this.setCanvasProperty('lineDashOffset', value * this.density);
-  public getLineDashOffset = () => this.getCanvasProperty('lineDashOffset') / this.density;
+  public getLineDashOffset = (): number => this.getCanvasProperty('lineDashOffset') / this.density;
   public setMiterLimit = (value: number) => this.setCanvasProperty('miterLimit', value * this.density);
-  public getMiterLimit = () => this.getCanvasProperty('miterLimit') / this.density;
+  public getMiterLimit = (): number => this.getCanvasProperty('miterLimit') / this.density;
   public setShadowColor = (value: Color) => this.setCanvasProperty('shadowColor', value);
-  public getShadowColor = () => this.getCanvasProperty('shadowColor');
+  public getShadowColor = (): Color => this.getCanvasProperty('shadowColor');
   public setShadowBlur = (value: number) => this.setCanvasProperty('shadowBlur', value * this.density);
-  public getShadowBlur = () => this.getCanvasProperty('shadowBlur') / this.density;
+  public getShadowBlur = (): number => this.getCanvasProperty('shadowBlur') / this.density;
   public setShadowOffsetX = (value: number) => this.setCanvasProperty('shadowOffsetX', value * this.density);
-  public getShadowOffsetX = () => this.getCanvasProperty('shadowOffsetX') / this.density;
+  public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
   public setShadowOffsetY = (value: number) => this.setCanvasProperty('shadowOffsetY', value * this.density);
-  public getShadowOffsetY = () => this.getCanvasProperty('shadowOffsetY') / this.density;
+  public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
   public setTextAlign = (value: TextAligns) => this.setCanvasProperty('textAlign', value);
-  public getTextAlign = () => this.getCanvasProperty('textAlign');
+  public getTextAlign = (): TextAligns => this.getCanvasProperty('textAlign');
   public setTextBaseline = (value: TextBaselines) => this.setCanvasProperty('textBaseline', value);
-  public getTextBaseline = () => this.getCanvasProperty('textBaseline');
+  public getTextBaseline = (): TextBaselines => this.getCanvasProperty('textBaseline');
 
   // Renamed property getter and setters
   public setOpacity = (value: number) => this.setGlobalAlpha(value);
