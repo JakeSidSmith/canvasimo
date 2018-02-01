@@ -1086,8 +1086,6 @@ export default class Canvasimo {
 
   public getHSLFromHSLA = (color: Color) => this.getRGBFromRGBA(color);
 
-  // FIXME: Methods to adjust r, g, b, and a
-
   public getRadiansFromDegrees = (degrees: number) => {
     return degrees * Math.PI / 180;
   }
