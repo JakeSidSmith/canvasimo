@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+concurrently --kill-others \
+  --prefix='name' \
+  --names='watch-js     ,generate-docs' \
+  --prefix-colors='red,green' \
+  'ts-node scripts/generate-docs.tsx watch' \
+  'http-server -c-0 docs/ -o'

@@ -1,4 +1,4 @@
-import * as docs from '../docs/src/js/docs';
+import * as docs from '../docs/src/ts/docs';
 import Canvasimo from '../src/';
 import getContextStub from './helpers/get-context-stub';
 import { any, each } from './helpers/utils';
