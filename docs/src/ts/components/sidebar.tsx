@@ -47,6 +47,7 @@ export default class Sidebar extends Component<Props, State> {
   }
 
   public onSidebarToggleClick () {
+    // tslint:disable-next-line:strict-type-predicates
     if (typeof ga === 'function') {
       ga('send', {
         hitType: 'event',
@@ -63,6 +64,7 @@ export default class Sidebar extends Component<Props, State> {
   }
 
   public onSidebarOverlayClick () {
+    // tslint:disable-next-line:strict-type-predicates
     if (typeof ga === 'function') {
       ga('send', {
         hitType: 'event',
@@ -79,6 +81,7 @@ export default class Sidebar extends Component<Props, State> {
   }
 
   public onMethodOrGroupClick (event: React.MouseEvent<HTMLElement>) {
+    // tslint:disable-next-line:strict-type-predicates
     if (typeof ga === 'function') {
       const searchTerm = (this.refs.search as HTMLInputElement).value;
       const href = (event.target instanceof HTMLAnchorElement ?

@@ -4,6 +4,7 @@ const MATCHES_INTERNAL_LINK = /^#/;
 const LINKS: HTMLAnchorElement[] = Array.prototype.slice.call(document.getElementsByTagName('a'));
 
 const trackLinkClick = (event: MouseEvent) => {
+  // tslint:disable-next-line:strict-type-predicates
   if (typeof ga === 'function' && event.target instanceof HTMLAnchorElement) {
     const href = (event.target ? event.target.getAttribute('href') : 'unknown') || 'unknown';
 
