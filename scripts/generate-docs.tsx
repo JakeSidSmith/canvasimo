@@ -19,28 +19,31 @@ const packageJSON = JSON.parse(fs.readFileSync(path.join(CWD, 'package.json'), U
 
 const b = browserify(
   {
-    entries: [path.join(CWD, 'docs/src/ts/sidebar.tsx')],
-    extensions: ['.js', '.jsx'],
+    entries: [
+      path.join(CWD, 'docs/src/ts/sidebar.tsx'),
+      path.join(CWD, 'docs/src/ts/demo.ts'),
+      path.join(CWD, 'docs/src/ts/tracking.ts'),
+    ],
     paths: ['node_modules'],
     debug: true,
     cache: {},
   }
 )
-.plugin('tsify');
+.plugin('tsify'); // tslint:disable-line:no-var-requires
 
 b.plugin('minifyify', {
-  map: 'build/js/sidebar.map.json',
-  output: CWD + '/docs/build/js/sidebar.map.json',
+  map: 'build/js/bundle.map.json',
+  output: path.join(CWD, '/docs/build/js/bundle.map.json'),
 });
 
 const bundle = () => {
   b.bundle(() => {
-    console.log('Sidebar compiled.', new Date().toString());
+    console.log('Sidebar, analytics, and demo compiled.', new Date().toString());
   })
   .on('error', (error) => {
     console.log(error);
   })
-  .pipe(fs.createWriteStream(CWD + '/docs/build/js/sidebar.js'));
+  .pipe(fs.createWriteStream(path.join(CWD, 'docs/build/js/bundle.js')));
 };
 
 const clearModuleCache = (modulePath: string) => {
@@ -122,9 +125,11 @@ const buildEverything = (verbose: boolean) => {
 };
 
 if (SHOULD_WATCH) {
-  const watcher = chokidar.watch('docs/src/**/*.@(j|t)s?(x)', {ignored: /(^|[\/\\])\../});
+  const watcher = chokidar.watch('{docs/src,src}/**/*.@(j|t)s?(x)', {ignored: /(^|[\/\\])\../});
 
-  watcher.on('all', (event: string, modulePath: string) => {
+  buildEverything(true);
+
+  watcher.on('change', (modulePath: string) => {
     console.log(`${modulePath} changed`);
 
     clearAllModuleCache();

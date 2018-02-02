@@ -1,11 +1,11 @@
 declare function ga(event: string, options: {[i: string]: string}): void;
 
 const MATCHES_INTERNAL_LINK = /^#/;
-const LINKS = document.getElementsByTagName('a');
+const LINKS: HTMLAnchorElement[] = Array.prototype.slice.call(document.getElementsByTagName('a'));
 
 const trackLinkClick = (event: MouseEvent) => {
   if (typeof ga === 'function' && event.target instanceof HTMLAnchorElement) {
-    const href = event.target ? event.target.getAttribute('href') : 'unknown';
+    const href = (event.target ? event.target.getAttribute('href') : 'unknown') || 'unknown';
 
     if (href === 'unknown') {
       ga('send', {

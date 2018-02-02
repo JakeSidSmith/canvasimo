@@ -1,75 +1,60 @@
-function setupRequestAnimationFrame () {
-  var lastTime = 0;
-  var vendors = ['webkit', 'moz', 'ms', 'o'];
+import { polyfill } from 'raf';
+import Canvasimo from '../../../src';
 
-  for (var i = 0; !window.requestAnimationFrame && i < vendors.length; i += 1) {
-    var vendor = vendors[i];
-    window.requestAnimationFrame = window[vendor + 'RequestAnimationFrame'];
-    window.cancelAnimationFrame = window[vendor + 'CancelAnimationFrame'] ||
-      window[vendor + 'CancelRequestAnimationFrame'];
-  }
+polyfill();
 
-  if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame = function (callback) {
-      var now = new Date().getTime();
-      var nextTime = Math.max(0, 16 - (now - lastTime));
+const element = document.getElementById('canvas');
 
-      var id = window.setTimeout(function () {
-        callback(now + nextTime);
-      }, nextTime);
-
-      lastTime = now + nextTime;
-      return id;
-    };
-  }
-
-  if (!window.cancelAnimationFrame) {
-    window.cancelAnimationFrame = function (id) {
-      clearTimeout(id);
-    };
-  }
+if (!element) {
+  throw new Error('Could not find canvas element for demo');
 }
 
-setupRequestAnimationFrame();
+const parentElement = element.parentElement;
+const canvas = new Canvasimo(element as HTMLCanvasElement);
 
-var element = document.getElementById('canvas');
-var parent = element.parentNode;
-var canvas = new Canvasimo(element);
+interface Tree {
+  length: number;
+  targetLength: number;
+  angle: number;
+  children: null | Tree[];
+}
 
-var raf;
-var lastPos;
-var velocity = 0;
-var tree, tree1, tree2;
+let raf: number;
+let lastPos: undefined | number;
+let velocity = 0;
+let tree: Tree;
+let tree1: Tree;
+let tree2: Tree;
 
-function createTree (length) {
+const createTree = (length: number): Tree => {
   return {
     length: 0,
     targetLength: length + Math.random() * 5,
     angle: canvas.getRadiansFromDegrees(-90 + Math.random() * 10 - 5),
-    children: null
+    children: null,
   };
-}
+};
 
-function drawBranch (branch, depth, maxBranchDepth) {
-  var treeDone;
-  var strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.1);
+const drawBranch = (branch: Tree, depth: number, maxBranchDepth: number): boolean => {
+  let treeDone;
+  const strokeWidth = Math.max(maxBranchDepth / (depth + 1) / 2, 0.1);
 
   if (branch.length < branch.targetLength) {
     branch.length = Math.min(branch.length + branch.targetLength / 20, branch.targetLength);
   } else if (!branch.children && depth === maxBranchDepth && branch.length === branch.targetLength) {
     treeDone = true;
   } else if (!branch.children && depth < maxBranchDepth) {
-    branch.children = [];
-    var childCount = 2 + Math.floor(Math.random() * 2);
+    branch.children = [] as Tree[];
+    const childCount = 2 + Math.floor(Math.random() * 2);
 
-    var possibleRotation = depth < 1 ? 20 : 45;
+    const possibleRotation = depth < 1 ? 20 : 45;
 
-    for (var c = 0; c < childCount; c += 1) {
+    for (let c = 0; c < childCount; c += 1) {
       branch.children.push({
         length: 0,
         targetLength: branch.targetLength * 0.75 + Math.random() * branch.targetLength * 0.25,
         angle: canvas.getRadiansFromDegrees(Math.random() * possibleRotation * 2 - possibleRotation),
-        children: null
+        children: null,
       });
     }
   }
@@ -83,7 +68,7 @@ function drawBranch (branch, depth, maxBranchDepth) {
       0, -strokeWidth / 4,
       branch.length, 0,
       branch.length, 0,
-      0, strokeWidth / 4
+      0, strokeWidth / 4,
     ])
     .fill('black')
     .stroke('black')
@@ -91,10 +76,8 @@ function drawBranch (branch, depth, maxBranchDepth) {
     .translate(branch.length, 0);
 
   if (branch.children) {
-    for (var i = 0; i < branch.children.length; i += 1) {
-      var child = branch.children[i];
-
-      var branchDone = drawBranch(child, depth + 1, maxBranchDepth);
+    for (const child of branch.children) {
+      const branchDone = drawBranch(child, depth + 1, maxBranchDepth);
 
       if (treeDone !== false || branchDone === false) {
         treeDone = branchDone;
@@ -104,10 +87,10 @@ function drawBranch (branch, depth, maxBranchDepth) {
 
   canvas.restore();
 
-  return treeDone;
-}
+  return Boolean(treeDone);
+};
 
-function draw () {
+const draw = () => {
   window.cancelAnimationFrame(raf);
 
   canvas
@@ -116,9 +99,9 @@ function draw () {
     .setStrokeJoin('round')
     .translate(canvas.getWidth() / 2, canvas.getHeight());
 
-  var treeDone = drawBranch(tree, 0, 6);
-  var tree1Done;
-  var tree2Done;
+  const treeDone = drawBranch(tree, 0, 6);
+  let tree1Done;
+  let tree2Done;
 
   if (window.innerWidth >= 768) {
     canvas.translate(-canvas.getWidth() / 4, 0);
@@ -132,17 +115,17 @@ function draw () {
   }
 
   velocity *= 0.95;
-}
+};
 
-function setCanvasSize () {
+const setCanvasSize = () => {
   canvas
-    .setWidth(parent.clientWidth);
+    .setWidth((parentElement as HTMLElement).clientWidth);
 
   window.requestAnimationFrame(draw);
-}
+};
 
-function mouseMove (event) {
-  var thisPos = event.clientX;
+const mouseMove = (event: MouseEvent) => {
+  const thisPos = event.clientX;
 
   if (typeof lastPos !== 'undefined') {
     velocity += (thisPos - lastPos) * (event.type.indexOf('touch') >= 0 ? 2 : 1);
@@ -151,26 +134,26 @@ function mouseMove (event) {
   lastPos = thisPos;
 
   raf = window.requestAnimationFrame(draw);
-}
+};
 
-function touchMove (event) {
+const touchMove = (event: TouchEvent) => {
   if (event.touches[0]) {
-    event.clientX = event.touches[0].clientX;
-    event.clientY = event.touches[0].clientY;
-    mouseMove(event);
+    (event as any).clientX = event.touches[0].clientX;
+    (event as any).clientY = event.touches[0].clientY;
+    mouseMove(event as any as MouseEvent);
   }
-}
+};
 
-function touchEnd () {
+const touchEnd = () => {
   lastPos = undefined;
-}
+};
 
-function reset () {
+const reset = () => {
   tree = createTree(30);
   tree1 = createTree(20);
   tree2 = createTree(20);
   window.requestAnimationFrame(draw);
-}
+};
 
 element.addEventListener('click', reset);
 element.addEventListener('mousemove', mouseMove);

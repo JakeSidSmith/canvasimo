@@ -9,6 +9,7 @@ interface Props {
 export default class MethodComponent extends Component<Props, {}> {
   public render () {
     const method = this.props.method;
+    const { arguments: args } = method;
 
     return (
       <pre>
@@ -18,8 +19,8 @@ export default class MethodComponent extends Component<Props, {}> {
         <span className="code-property">{method.name}</span>
         <span>(</span>
         {
-          method.arguments && method.arguments.map((arg, index) => {
-            const isLastArgument = index === method.arguments.length - 1;
+          args && args.map((arg, index) => {
+            const isLastArgument = index === args.length - 1;
 
             return (
               <span key={arg.name}>

@@ -126,8 +126,6 @@ export default class Document extends Component<Props, {}> {
                 <noscript>
                   You must have javascript enabled for this demo.
                 </noscript>
-                <script type="text/javascript" src="build/js/canvasimo.js" />
-                <script type="text/javascript" src="build/js/demo.js" />
 
                 <LinkHeader type="h2" header="Features" />
 
@@ -211,8 +209,8 @@ export default class Document extends Component<Props, {}> {
           </div>
 
           <Analytics />
-          <script type="text/javascript" src="build/js/tracking.js" />
-          <script type="text/javascript" src="build/js/sidebar.js" />
+
+          <script type="text/javascript" src="build/js/bundle.js" />
         </body>
       </html>
     );

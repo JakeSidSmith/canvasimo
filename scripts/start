@@ -5,4 +5,4 @@ concurrently --kill-others \
   --names='watch-js     ,generate-docs' \
   --prefix-colors='red,green' \
   'ts-node scripts/generate-docs.tsx watch' \
-  'http-server -c-0 docs/ -o'
+  'http-server -c-0 docs/'

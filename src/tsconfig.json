@@ -6,5 +6,11 @@
     "listFiles": true,
     "rootDir": "./",
     "outDir": "../build/"
-  }
+  },
+  "exclude": [
+    "node_modules/*",
+    "dist/*",
+    "docs/*",
+    "styleguide/*"
+  ]
 }

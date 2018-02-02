@@ -12,11 +12,5 @@
       "node_modules/@types/",
       "types/"
     ]
-  },
-  "exclude": [
-    "node_modules/*",
-    "dist/*",
-    "docs/*",
-    "styleguide/*"
-  ]
+  }
 }

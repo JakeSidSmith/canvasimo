@@ -351,7 +351,11 @@ export default class Canvasimo {
       this.ctx.fill(color);
     } else if (typeof color === 'string') {
       this.setFill(color);
-      this.ctx.fill(fillRule);
+      if (fillRule) {
+        this.ctx.fill(fillRule);
+      } else {
+        this.ctx.fill();
+      }
     } else {
       this.ctx.fill(fillRule);
     }
@@ -361,7 +365,11 @@ export default class Canvasimo {
   public stroke: Stroke = (color?: string | Path2D, path?: Path2D): Canvasimo => {
     if (typeof color === 'string') {
       this.setStroke(color);
-      this.ctx.stroke(path);
+      if (path) {
+        this.ctx.stroke(path);
+      } else {
+        this.ctx.stroke();
+      }
     } else if (typeof color === 'object') {
       this.ctx.stroke(color);
     } else {
@@ -466,7 +474,11 @@ export default class Canvasimo {
     return this.ctx.createImageData(width, height);
   }
   public isPointInPath = (x: number, y: number, fillRule?: FillRules): boolean => {
-    return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
+    if (fillRule) {
+      return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
+    }
+
+    return this.ctx.isPointInPath(x * this.density, y * this.density);
   }
   // FIXME: Needs implementation for IE
   // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
