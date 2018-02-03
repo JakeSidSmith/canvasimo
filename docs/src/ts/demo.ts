@@ -10,7 +10,7 @@ if (!element) {
 }
 
 const parentElement = element.parentElement;
-const canvas = new Canvasimo(element as HTMLCanvasElement);
+const canvas = new Canvasimo(element as HTMLCanvasElement).setDensity(2);
 
 interface Tree {
   length: number;

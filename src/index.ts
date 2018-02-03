@@ -64,7 +64,7 @@ export default class Canvasimo {
   // Canvas size
   public setDensity = (density: number): Canvasimo => {
     this.density = density;
-    return this;
+    return this.setSize(this.element.width, this.element.height);
   }
   public getDensity = () => this.density;
   public setWidth = (width: number): Canvasimo => {
