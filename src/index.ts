@@ -52,7 +52,7 @@ export default class Canvasimo {
   }
 
   public getCanvas = (): HTMLCanvasElement => this.element;
-  public getElement = () => this.getCanvas();
+  public getElement = (): HTMLCanvasElement => this.getCanvas();
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
   public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
     return this.element.getContext(type, contextAttributes);
@@ -64,9 +64,10 @@ export default class Canvasimo {
   // Canvas size
   public setDensity = (density: number): Canvasimo => {
     this.density = density;
+    // FIXME: Setting the density should update all existing context attributes
     return this.setSize(this.element.width, this.element.height);
   }
-  public getDensity = () => this.density;
+  public getDensity = (): number => this.density;
   public setWidth = (width: number): Canvasimo => {
     this.element.width = width * this.density;
     return this;
@@ -115,58 +116,62 @@ export default class Canvasimo {
   }
 
   // Context property getter and setters
-  public setGlobalAlpha = (value: number) => this.setCanvasProperty('globalAlpha', value);
+  public setGlobalAlpha = (value: number): Canvasimo => this.setCanvasProperty('globalAlpha', value);
   public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
-  public setGlobalCompositeOperation = (value: GlobalCompositeOperations) => {
+  public setGlobalCompositeOperation = (value: GlobalCompositeOperations): Canvasimo => {
     return this.setCanvasProperty('globalCompositeOperation', value);
   }
   public getGlobalCompositeOperation = (): GlobalCompositeOperations => {
     return this.getCanvasProperty('globalCompositeOperation');
   }
-  public setFillStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('fillStyle', value);
-  public getFillStyle = (): string => this.getCanvasProperty('fillStyle');
-  public setStrokeStyle = (value: FillAndStrokeStyles) => this.setCanvasProperty('strokeStyle', value);
+  public setFillStyle = (value: FillAndStrokeStyles): Canvasimo => this.setCanvasProperty('fillStyle', value);
+  public getFillStyle = (): FillAndStrokeStyles => this.getCanvasProperty('fillStyle');
+  public setStrokeStyle = (value: FillAndStrokeStyles): Canvasimo => this.setCanvasProperty('strokeStyle', value);
   public getStrokeStyle = (): string => this.getCanvasProperty('strokeStyle');
-  public setLineWidth = (value: number) => this.setCanvasProperty('lineWidth', value * this.density);
+  public setLineWidth = (value: number): Canvasimo => this.setCanvasProperty('lineWidth', value * this.density);
   public getLineWidth = (): number => this.getCanvasProperty('lineWidth') / this.density;
-  public setLineCap = (value: LineCaps) => this.setCanvasProperty('lineCap', value);
+  public setLineCap = (value: LineCaps): Canvasimo => this.setCanvasProperty('lineCap', value);
   public getLineCap = (): LineCaps => this.getCanvasProperty('lineCap');
-  public setLineJoin = (value: LineJoins) => this.setCanvasProperty('lineJoin', value);
+  public setLineJoin = (value: LineJoins): Canvasimo => this.setCanvasProperty('lineJoin', value);
   public getLineJoin = (): LineJoins => this.getCanvasProperty('lineJoin');
-  public setLineDashOffset = (value: number) => this.setCanvasProperty('lineDashOffset', value * this.density);
+  public setLineDashOffset = (value: number): Canvasimo => {
+    return this.setCanvasProperty('lineDashOffset', value * this.density);
+  }
   public getLineDashOffset = (): number => this.getCanvasProperty('lineDashOffset') / this.density;
-  public setMiterLimit = (value: number) => this.setCanvasProperty('miterLimit', value * this.density);
+  public setMiterLimit = (value: number): Canvasimo => this.setCanvasProperty('miterLimit', value * this.density);
   public getMiterLimit = (): number => this.getCanvasProperty('miterLimit') / this.density;
-  public setShadowColor = (value: Color) => this.setCanvasProperty('shadowColor', value);
+  public setShadowColor = (value: Color): Canvasimo => this.setCanvasProperty('shadowColor', value);
   public getShadowColor = (): Color => this.getCanvasProperty('shadowColor');
-  public setShadowBlur = (value: number) => this.setCanvasProperty('shadowBlur', value * this.density);
+  public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
   public getShadowBlur = (): number => this.getCanvasProperty('shadowBlur') / this.density;
-  public setShadowOffsetX = (value: number) => this.setCanvasProperty('shadowOffsetX', value * this.density);
+  public setShadowOffsetX = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetX', value * this.density);
   public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
-  public setShadowOffsetY = (value: number) => this.setCanvasProperty('shadowOffsetY', value * this.density);
+  public setShadowOffsetY = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetY', value * this.density);
   public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
-  public setTextAlign = (value: TextAligns) => this.setCanvasProperty('textAlign', value);
+  public setTextAlign = (value: TextAligns): Canvasimo => this.setCanvasProperty('textAlign', value);
   public getTextAlign = (): TextAligns => this.getCanvasProperty('textAlign');
-  public setTextBaseline = (value: TextBaselines) => this.setCanvasProperty('textBaseline', value);
+  public setTextBaseline = (value: TextBaselines): Canvasimo => this.setCanvasProperty('textBaseline', value);
   public getTextBaseline = (): TextBaselines => this.getCanvasProperty('textBaseline');
 
   // Renamed property getter and setters
-  public setOpacity = (value: number) => this.setGlobalAlpha(value);
-  public getOpacity = () => this.getGlobalAlpha();
-  public setCompositeOperation = (value: GlobalCompositeOperations) => this.setGlobalCompositeOperation(value);
-  public getCompositeOperation = () => this.getGlobalCompositeOperation();
-  public setFill = (value: FillAndStrokeStyles) => this.setFillStyle(value);
-  public getFill = () => this.getFillStyle();
-  public setStroke = (value: FillAndStrokeStyles) => this.setStrokeStyle(value);
-  public getStroke = () => this.getStrokeStyle();
-  public setStrokeWidth = (value: number) => this.setLineWidth(value);
-  public getStrokeWidth = () => this.getLineWidth();
-  public setStrokeCap = (value: LineCaps) => this.setLineCap(value);
-  public getStrokeCap = () => this.getLineCap();
-  public setStrokeJoin = (value: LineJoins) => this.setLineJoin(value);
-  public getStrokeJoin = () => this.getLineJoin();
-  public setStrokeDashOffset = (value: number) => this.setLineDashOffset(value);
-  public getStrokeDashOffset = () => this.getLineDashOffset();
+  public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
+  public getOpacity = (): number => this.getGlobalAlpha();
+  public setCompositeOperation = (value: GlobalCompositeOperations): Canvasimo => {
+    return this.setGlobalCompositeOperation(value);
+  }
+  public getCompositeOperation = (): GlobalCompositeOperations => this.getGlobalCompositeOperation();
+  public setFill = (value: FillAndStrokeStyles): Canvasimo => this.setFillStyle(value);
+  public getFill = (): FillAndStrokeStyles => this.getFillStyle();
+  public setStroke = (value: FillAndStrokeStyles): Canvasimo => this.setStrokeStyle(value);
+  public getStroke = (): FillAndStrokeStyles => this.getStrokeStyle();
+  public setStrokeWidth = (value: number): Canvasimo => this.setLineWidth(value);
+  public getStrokeWidth = (): number => this.getLineWidth();
+  public setStrokeCap = (value: LineCaps): Canvasimo => this.setLineCap(value);
+  public getStrokeCap = (): LineCaps => this.getLineCap();
+  public setStrokeJoin = (value: LineJoins): Canvasimo => this.setLineJoin(value);
+  public getStrokeJoin = (): LineJoins => this.getLineJoin();
+  public setStrokeDashOffset = (value: number): Canvasimo => this.setLineDashOffset(value);
+  public getStrokeDashOffset = (): number => this.getLineDashOffset();
 
   // Standard context methods
   public save = (): Canvasimo => {
@@ -332,7 +337,7 @@ export default class Canvasimo {
   }
 
   // Renamed context methods
-  public plotRect = (x: number, y: number, width: number, height: number) => this.rect(x, y, width, height);
+  public plotRect = (x: number, y: number, width: number, height: number): Canvasimo => this.rect(x, y, width, height);
   public plotArc = (
     x: number,
     y: number,
@@ -340,10 +345,10 @@ export default class Canvasimo {
     startAngle: number,
     endAngle: number,
     anticlockwise?: boolean
-  ) => {
+  ): Canvasimo => {
     return this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
   }
-  public setStrokeDash = (segments: Segments) => this.setLineDash(segments);
+  public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
 
   // Expanded context methods
   public fill: Fill = (color?: string, fillRule?: FillRules): Canvasimo => {
@@ -486,34 +491,34 @@ export default class Canvasimo {
   public getLineDash = (): Segments => (this.ctx.getLineDash() || []).map((value) => value / this.density);
 
   // Renamed context getters
-  public getTextSize = (text: string) => this.measureText(text);
-  public getStrokeDash = () => this.getLineDash();
+  public getTextSize = (text: string): TextMetrics => this.measureText(text);
+  public getStrokeDash = (): Segments => this.getLineDash();
 
   // Additional methods
-  public clearCanvas = () => {
+  public clearCanvas = (): Canvasimo => {
     return this
       .setWidth(this.getWidth());
   }
 
-  public fillCanvas = (color: Color) => {
+  public fillCanvas = (color: Color): Canvasimo => {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
   }
 
-  public plotLine = (x1: number, y1: number, x2: number, y2: number) => {
+  public plotLine = (x1: number, y1: number, x2: number, y2: number): Canvasimo => {
     return this
       .moveTo(x1, y1)
       .lineTo(x2, y2);
   }
 
-  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: Color) => {
+  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: Color): Canvasimo => {
     return this
       .plotLine(x1, y1, x2, y2)
       .stroke(color);
   }
 
-  public plotLength = (x1: number, y1: number, length: number, angle: number) => {
+  public plotLength = (x1: number, y1: number, length: number, angle: number): Canvasimo => {
     const x2 = x1 + length * Math.cos(angle);
     const y2 = y1 + length * Math.sin(angle);
 
@@ -522,13 +527,13 @@ export default class Canvasimo {
       .lineTo(x2, y2);
   }
 
-  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: Color) => {
+  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: Color): Canvasimo => {
     return this
       .plotLength(x1, y1, length, angle)
       .stroke(color);
   }
 
-  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: boolean) => {
+  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: boolean): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -558,7 +563,7 @@ export default class Canvasimo {
     sides: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -577,7 +582,7 @@ export default class Canvasimo {
     sides: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -589,7 +594,7 @@ export default class Canvasimo {
       .fill(color);
   }
 
-  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: boolean) => {
+  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: boolean): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -627,7 +632,7 @@ export default class Canvasimo {
     sides: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -646,7 +651,7 @@ export default class Canvasimo {
     sides: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -665,7 +670,7 @@ export default class Canvasimo {
     radius2: number,
     sides: number,
     anticlockwise?: boolean
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -701,7 +706,7 @@ export default class Canvasimo {
     sides: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -721,7 +726,7 @@ export default class Canvasimo {
     sides: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -733,7 +738,7 @@ export default class Canvasimo {
       .fill(color);
   }
 
-  public plotPath = (points: Points) => {
+  public plotPath = (points: Points): Canvasimo => {
     forPoints(points, (x: number, y: number, i: number) => {
       if (i === 0) {
         this.moveTo(x, y);
@@ -745,38 +750,38 @@ export default class Canvasimo {
     return this;
   }
 
-  public fillPath = (points: Points, color?: Color) => {
+  public fillPath = (points: Points, color?: Color): Canvasimo => {
     return this
       .plotPath(points)
       .fill(color);
   }
 
-  public strokePath = (points: Points, color?: Color) => {
+  public strokePath = (points: Points, color?: Color): Canvasimo => {
     return this
       .plotPath(points)
       .stroke(color);
   }
 
-  public plotClosedPath = (points: Points) => {
+  public plotClosedPath = (points: Points): Canvasimo => {
     return this
       .beginPath()
       .plotPath(points)
       .closePath();
   }
 
-  public fillClosedPath = (points: Points, color?: Color) => {
+  public fillClosedPath = (points: Points, color?: Color): Canvasimo => {
     return this
       .plotClosedPath(points)
       .fill(color);
   }
 
-  public strokeClosedPath = (points: Points, color?: Color) => {
+  public strokeClosedPath = (points: Points, color?: Color): Canvasimo => {
     return this
       .plotClosedPath(points)
       .stroke(color);
   }
 
-  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: Color) => {
+  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: Color): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
@@ -789,7 +794,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: Color) => {
+  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: Color): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
@@ -801,7 +806,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public fillRect = (x: number, y: number, width: number, height: number, color?: Color) => {
+  public fillRect = (x: number, y: number, width: number, height: number, color?: Color): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
@@ -809,7 +814,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public strokeRect = (x: number, y: number, width: number, height: number, color?: Color) => {
+  public strokeRect = (x: number, y: number, width: number, height: number, color?: Color): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
@@ -825,7 +830,7 @@ export default class Canvasimo {
     endAngle: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     return this
       .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
       .fill(color);
@@ -839,7 +844,7 @@ export default class Canvasimo {
     endAngle: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     return this
       .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
       .stroke(color);
@@ -855,7 +860,7 @@ export default class Canvasimo {
     endAngle: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     return this
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
       .fill(color);
@@ -871,32 +876,32 @@ export default class Canvasimo {
     endAngle: number,
     anticlockwise?: boolean,
     color?: Color
-  ) => {
+  ): Canvasimo => {
     return this
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
       .stroke(color);
   }
 
-  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: boolean) => {
+  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: boolean): Canvasimo => {
     return this
       .beginPath()
       .plotArc(x, y, radius, 0, Math.PI * 2, anticlockwise)
       .closePath();
   }
 
-  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color) => {
+  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color): Canvasimo => {
     return this
       .plotCircle(x, y, radius, anticlockwise)
       .fill(color);
   }
 
-  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color) => {
+  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color): Canvasimo => {
     return this
       .plotCircle(x, y, radius, anticlockwise)
       .stroke(color);
   }
 
-  public plotRoundedRect = (x: number, y: number, width: number, height: number, radius: number) => {
+  public plotRoundedRect = (x: number, y: number, width: number, height: number, radius: number): Canvasimo => {
     const minRadius = Math.min(width / 2, height / 2, radius);
 
     return this
@@ -913,45 +918,59 @@ export default class Canvasimo {
       .closePath();
   }
 
-  public fillRoundedRect = (x: number, y: number, width: number, height: number, radius: number, color?: Color) => {
+  public fillRoundedRect = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+    color?: Color
+  ): Canvasimo => {
     return this
       .plotRoundedRect(x, y, width, height, radius)
       .fill(color);
   }
 
-  public strokeRoundedRect = (x: number, y: number, width: number, height: number, radius: number, color?: Color) => {
+  public strokeRoundedRect = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+    color?: Color
+  ): Canvasimo => {
     return this
       .plotRoundedRect(x, y, width, height, radius)
       .stroke(color);
   }
 
-  public plotPixel = (x: number, y: number) => {
+  public plotPixel = (x: number, y: number): Canvasimo => {
     return this
       .plotRect(x, y, 1, 1);
   }
 
-  public fillPixel = (x: number, y: number, color?: Color) => {
+  public fillPixel = (x: number, y: number, color?: Color): Canvasimo => {
     return this
       .fillRect(x, y, 1, 1, color);
   }
 
-  public strokePixel = (x: number, y: number, color?: Color) => {
+  public strokePixel = (x: number, y: number, color?: Color): Canvasimo => {
     return this
       .strokeRect(x, y, 1, 1, color);
   }
 
   // Font methods
-  public setFont = (font: string) => {
+  public setFont = (font: string): Canvasimo => {
     this.ctx.font = formatFont(font, this.density);
     return this;
   }
 
-  public getFont = () => {
+  public getFont = (): string => {
     return formatFont(this.ctx.font, this.density);
   }
 
   // Font property setters
-  public setFontStyle = (style: string) => {
+  public setFontStyle = (style: string): Canvasimo => {
     const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
@@ -961,7 +980,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public setFontVariant = (variant: string) => {
+  public setFontVariant = (variant: string): Canvasimo => {
     const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
@@ -971,7 +990,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public setFontWeight = (weight: string | number) => {
+  public setFontWeight = (weight: string | number): Canvasimo => {
     const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
@@ -981,7 +1000,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public setFontSize = (size: string | number) => {
+  public setFontSize = (size: string | number): Canvasimo => {
     const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
@@ -991,7 +1010,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public setFontFamily = (family: string) => {
+  public setFontFamily = (family: string): Canvasimo => {
     const parts = getFontParts(this.ctx.font, this.density);
     if (parts.length < 5) {
       return this.setFont('');
@@ -1002,64 +1021,49 @@ export default class Canvasimo {
   }
 
   // Font property getters
-  public getFontStyle = () => {
+  public getFontStyle = (): string => {
     const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
     return parts[0];
   }
 
-  public getFontVariant = () => {
+  public getFontVariant = (): string => {
     const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
     return parts[1];
   }
 
-  public getFontWeight = () => {
+  public getFontWeight = (): string | number => {
     const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
     return parts[2];
   }
 
-  public getFontSize = () => {
+  public getFontSize = (): number => {
     const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
     return parseFloat(parts[3]);
   }
 
-  public getFontFamily = () => {
+  public getFontFamily = (): string => {
     const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
     return parts[4];
   }
 
   // Helper methods
-  public createHSL = (h: number, s: number, l: number) => {
+  public createHSL = (h: number, s: number, l: number): Color => {
     return 'hsl(' + h + ',' + s + '%,' + l + '%)';
   }
 
-  public createHSLA = (h: number, s: number, l: number, a: number) => {
+  public createHSLA = (h: number, s: number, l: number, a: number): Color => {
     return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
   }
 
-  public createRGB = (r: number, g: number, b: number) => {
+  public createRGB = (r: number, g: number, b: number): Color => {
     return 'rgb(' + r + ',' + g + ',' + b + ')';
   }
 
-  public createRGBA = (r: number, g: number, b: number, a: number) => {
+  public createRGBA = (r: number, g: number, b: number, a: number): Color => {
     return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
   }
 
-  public getDistance = (x1: number, y1: number, x2: number, y2: number) => {
+  public getDistance = (x1: number, y1: number, x2: number, y2: number): number => {
     return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
   }
 
@@ -1091,51 +1095,51 @@ export default class Canvasimo {
     return -Math.PI - c;
   }
 
-  public getRGBFromRGBA = (color: Color) => {
+  public getRGBFromRGBA = (color: Color): Color => {
     const lastCommaIndex = color.lastIndexOf(',');
     return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
   }
 
-  public getHSLFromHSLA = (color: Color) => this.getRGBFromRGBA(color);
+  public getHSLFromHSLA = (color: Color): Color => this.getRGBFromRGBA(color);
 
-  public getRadiansFromDegrees = (degrees: number) => {
+  public getRadiansFromDegrees = (degrees: number): number => {
     return degrees * Math.PI / 180;
   }
 
-  public getDegreesFromRadians = (radians: number) => {
+  public getDegreesFromRadians = (radians: number): number => {
     return radians * 180 / Math.PI;
   }
 
-  public getPercentFromFraction = (fraction: number) => {
+  public getPercentFromFraction = (fraction: number): number => {
     return (fraction * 100);
   }
 
-  public getFractionFromPercent = (percent: number) => {
+  public getFractionFromPercent = (percent: number): number => {
     return (percent / 100);
   }
 
-  public getPercentOfWidth = (percent: number) => {
+  public getPercentOfWidth = (percent: number): number => {
     return this.getWidth() / 100 * percent;
   }
 
-  public getFractionOfWidth = (fraction: number) => {
+  public getFractionOfWidth = (fraction: number): number => {
     return this.getWidth() * fraction;
   }
 
-  public getPercentOfHeight = (percent: number) => {
+  public getPercentOfHeight = (percent: number): number => {
     return this.getHeight() / 100 * percent;
   }
 
-  public getFractionOfHeight = (fraction: number) => {
+  public getFractionOfHeight = (fraction: number): number => {
     return this.getHeight() * fraction;
   }
 
-  public getPixelColor = (x: number, y: number) => {
+  public getPixelColor = (x: number, y: number): Color => {
     const data = this.getImageData(x, y, 1, 1).data;
     return this.createRGBA(data[0], data[1], data[2], data[3]);
   }
 
-  public getPixelData = (x: number, y: number) => {
+  public getPixelData = (x: number, y: number): Uint8ClampedArray => {
     return this.getImageData(x, y, 1, 1).data;
   }
 
