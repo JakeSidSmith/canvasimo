@@ -122,7 +122,7 @@ const createDocumentation = () => {
 const createDocJson = () => {
   const docs = getDocJson();
 
-  fs.writeFileSync(path.join(CWD, 'docs/build/json/docs.json'), JSON.stringify(docs), 'utf8');
+  fs.writeFileSync(path.join(CWD, 'docs/build/json/docs.json'), JSON.stringify(docs, null, '  '), 'utf8');
   console.log('Doc json created.');
 };
 
