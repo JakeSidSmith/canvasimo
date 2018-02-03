@@ -3,7 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, Method } from '../docs/src/ts/types';
+import { Docs, Method, Parameter } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
 const SOURCE_FILE = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
@@ -62,12 +62,28 @@ const getReturnType = (name: string, node: ts.ArrowFunction): string => {
   return getTypeName(type);
 };
 
+const getParameters = (name: string, node: ts.ArrowFunction): Parameter[] => {
+  return node.parameters.map((parameter) => {
+    const { type } = parameter;
+    const paramName = getName(parameter);
+
+    if (!type) {
+      throw new Error(`Parameter ${paramName} of ${name} does not have a type`);
+    }
+
+    return {
+      name: paramName,
+      type: getTypeName(type),
+    };
+  });
+};
+
 const documentArrowFunction = (name: string, node: ts.ArrowFunction): Method => {
   return {
     name,
     description: '',
     returns: getReturnType(name, node),
-    parameters: [],
+    parameters: getParameters(name, node),
   };
 };
 
@@ -78,11 +94,6 @@ const getDocJson = (verbose?: boolean): Docs => {
 
   const documentProperty = (property: ts.Node) => {
     if (property.kind === ts.SyntaxKind.PropertyDeclaration && isPublic(property)) {
-      // console.log(
-      //   getName(property),
-      //   isPublic(property), property.getChildren().map((child) => ts.SyntaxKind[child.kind])
-      // );
-
       const initializer = (property as ts.PropertyDeclaration).initializer;
       const name = getName(property);
 
@@ -103,8 +114,6 @@ const getDocJson = (verbose?: boolean): Docs => {
     }
 
     if (node.kind === ts.SyntaxKind.ClassDeclaration && isDefaultExport(node)) {
-      console.log('DEFAULT EXPORT: ' + getName(node));
-
       ts.forEachChild(node, documentProperty);
     } else {
       ts.forEachChild(node, (subNode) => {
@@ -117,11 +126,7 @@ const getDocJson = (verbose?: boolean): Docs => {
 
   traverse(SOURCE);
 
-  console.log(docs[0].methods);
-
   return docs;
 };
-
-getDocJson(false);
 
 export default getDocJson;
