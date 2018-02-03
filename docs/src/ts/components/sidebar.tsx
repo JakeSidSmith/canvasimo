@@ -2,11 +2,12 @@ declare function ga(event: string, options: {[i: string]: string}): void;
 
 import * as React from 'react';
 import { Component } from 'react';
-import docs from '../docs';
+import { Docs } from '../types';
 import LinkHeader from './link-header';
 
 interface Props {
   javascript?: boolean;
+  docs: Docs;
 }
 
 interface State {
@@ -112,7 +113,7 @@ export default class Sidebar extends Component<Props, State> {
   }
 
   public render () {
-    const javascript = this.props.javascript;
+    const { docs, javascript } = this.props;
 
     return (
       <span id="sidebar">
@@ -157,8 +158,7 @@ export default class Sidebar extends Component<Props, State> {
                   const parts = this.state.query.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/g);
                   methods = methods.filter((method) => {
                     return every(parts, (part) => {
-                      return method.name.toLowerCase().indexOf(part.toLowerCase()) >= 0 ||
-                        Boolean(method.alias && method.alias.toLowerCase().indexOf(part.toLowerCase()) >= 0);
+                      return method.name.toLowerCase().indexOf(part.toLowerCase()) >= 0;
                     });
                   });
                 }
@@ -185,9 +185,7 @@ export default class Sidebar extends Component<Props, State> {
                               header={method.name}
                               key={method.name}
                               onClick={this.onMethodOrGroupClick}
-                            >
-                              {method.alias && (' / ' + method.alias)}
-                            </LinkHeader>
+                            />
                           );
                         })
                       }

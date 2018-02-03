@@ -26,7 +26,7 @@ export default class MethodComponent extends Component<Props, {}> {
               <span key={parameter.name}>
                 <span className="code-argument">{parameter.name}</span>
                 <span className="code-type">
-                  {' <' + (Array.isArray(parameter.type) ? parameter.type.join(', ') : parameter.type) + '>'}
+                  {': ' + (Array.isArray(parameter.type) ? parameter.type.join(', ') : parameter.type)}
                 </span>
                 {
                   parameter.optional && (
@@ -42,17 +42,7 @@ export default class MethodComponent extends Component<Props, {}> {
             );
           })
         }
-        <span>);</span>
-        {
-          method.returns && (
-            <span>
-              <br />
-              <span>Returns </span>
-              <span className="code-return">{method.returns.name}</span>
-              <span className="code-type">{' <' + method.returns.type + '>'}</span>
-            </span>
-          )
-        }
+        <span>) => <span className="code-type">{method.returns}</span>;</span>
       </pre>
     );
   }

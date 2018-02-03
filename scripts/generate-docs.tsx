@@ -8,6 +8,7 @@ import * as path from 'path';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/server';
 import * as rimraf from 'rimraf';
+import getDocJson from './get-doc-json';
 
 const UTF8 = 'utf8';
 
@@ -83,6 +84,7 @@ const clearBuildDirectory = (verbose: boolean) => {
 
 const createBuildDirectories = (verbose: boolean) => {
   mkdirp.sync(path.join(CWD, '/docs/build/js/'));
+  mkdirp.sync(path.join(CWD, '/docs/build/json/'));
   mkdirp.sync(path.join(CWD, '/docs/build/css/'));
 
   if (verbose) {
@@ -116,10 +118,18 @@ const createDocumentation = () => {
   );
 };
 
+const createDocJson = () => {
+  const docs = getDocJson();
+
+  fs.writeFileSync(path.join(CWD, 'docs/build/json/docs.json'), JSON.stringify(docs), 'utf8');
+  console.log('Doc json created.');
+};
+
 const buildEverything = (verbose: boolean) => {
   clearBuildDirectory(verbose);
   createBuildDirectories(verbose);
   copyFilesToBuildDirectory(verbose);
+  createDocJson();
   createDocumentation();
   bundle();
 };

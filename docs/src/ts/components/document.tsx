@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Component } from 'react';
-import docs from '../docs';
+import { Docs } from '../types';
 import Analytics from './analytics';
 import Group from './group';
 import LinkHeader from './link-header';
 import Sidebar from './sidebar';
+
+// tslint:disable-next-line:no-var-requires
+const docs: Docs = require('../../../build/json/docs.json');
 
 const TITLE = 'Canvasimo | The fluent HTML5 canvas drawing library';
 
@@ -61,7 +64,7 @@ export default class Document extends Component<Props, {}> {
         <body>
           <div className="wrapper">
 
-            <Sidebar />
+            <Sidebar docs={docs} />
 
             <div className="container">
               <div className="doc-container">

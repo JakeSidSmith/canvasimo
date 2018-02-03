@@ -22,16 +22,7 @@ export default class GroupComponent extends Component<Props, {}> {
           group.methods.map((method) => {
             return (
               <div className="method" key={method.name}>
-                <LinkHeader type="h3" header={method.name}>
-                  {
-                    method.alias && (
-                      <span className="alias">
-                        <span className="alias-word">Alias: </span>
-                        <strong className="alias-method">{method.alias}</strong>
-                      </span>
-                    )
-                  }
-                </LinkHeader>
+                <LinkHeader type="h3" header={method.name} />
                 <p>
                   {method.description}
                 </p>
