@@ -29,7 +29,7 @@ const b = browserify(
     cache: {},
   }
 )
-.plugin('tsify'); // tslint:disable-line:no-var-requires
+  .plugin('tsify'); // tslint:disable-line:no-var-requires
 
 b.plugin('minifyify', {
   map: 'build/js/bundle.map.json',
@@ -38,12 +38,12 @@ b.plugin('minifyify', {
 
 const bundle = () => {
   b.bundle(() => {
-    console.log('Sidebar, analytics, and demo compiled.', new Date().toString());
+    console.log('Sidebar, analytics, and demo compiled.', new Date().toISOString());
   })
-  .on('error', (error) => {
-    console.log(error);
-  })
-  .pipe(fs.createWriteStream(path.join(CWD, 'docs/build/js/bundle.js')));
+    .on('error', (error) => {
+      console.log(error);
+    })
+    .pipe(fs.createWriteStream(path.join(CWD, 'docs/build/js/bundle.js')));
 };
 
 const clearModuleCache = (modulePath: string) => {
@@ -74,15 +74,15 @@ const copy = (src: string, dest: string) => {
 };
 
 const clearBuildDirectory = (verbose: boolean) => {
-  rimraf.sync(CWD + '/docs/build/');
+  rimraf.sync(path.join(CWD, '/docs/build/'));
   if (verbose) {
     console.log('Build directory cleared.');
   }
 };
 
 const createBuildDirectories = (verbose: boolean) => {
-  mkdirp.sync(CWD + '/docs/build/js/');
-  mkdirp.sync(CWD + '/docs/build/css/');
+  mkdirp.sync(path.join(CWD, '/docs/build/js/'));
+  mkdirp.sync(path.join(CWD, '/docs/build/css/'));
   if (verbose) {
     console.log('Sub directories created.');
   }
@@ -90,9 +90,7 @@ const createBuildDirectories = (verbose: boolean) => {
 
 const copyFilesToBuildDirectory = (verbose: boolean) => {
   copy(path.join(CWD, '/docs/src/css/styles.css'), path.join(CWD, '/docs/build/css/styles.css'));
-  // copy(path.join(CWD, '/src/index.tsx'), path.join(CWD, '/docs/build/js/canvasimo.js'));
-  // copy(path.join(CWD, '/docs/src/ts/demo.ts'), path.join(CWD, '/docs/build/js/demo.js'));
-  // copy(path.join(CWD, '/docs/src/ts/tracking.ts'), path.join(CWD, '/docs/build/js/tracking.js'));
+
   if (verbose) {
     console.log('Static files copied.');
   }
@@ -103,14 +101,14 @@ const createDocumentation = () => {
 
   fs.writeFile(
     path.join(CWD, 'docs/index.html'),
-    '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(
+    `<!DOCTYPE html>${ReactDOM.renderToStaticMarkup(
       <Document version={packageJSON.version} description={packageJSON.description} />
-    ),
+    )}`,
     (error) => {
       if (error) {
         console.error(error);
       } else {
-        console.log('Docs generated.', new Date().toString());
+        console.log('Docs generated.', new Date().toISOString());
       }
     }
   );
