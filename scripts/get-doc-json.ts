@@ -17,12 +17,16 @@ const TYPE_MAP: {[i: string]: string | undefined} = {
   [ts.SyntaxKind.UndefinedKeyword]: 'undefined',
   [ts.SyntaxKind.OpenBracketToken]: '[',
   [ts.SyntaxKind.CloseBracketToken]: ']',
-  [ts.SyntaxKind.BarToken]: '|',
   [ts.SyntaxKind.OpenBraceToken]: '{',
   [ts.SyntaxKind.CloseBraceToken]: '}',
+  [ts.SyntaxKind.OpenParenToken]: '(',
+  [ts.SyntaxKind.CloseParenToken]: ')',
+  [ts.SyntaxKind.BarToken]: ' | ',
   [ts.SyntaxKind.ColonToken]: ': ',
   [ts.SyntaxKind.QuestionToken]: '?',
   [ts.SyntaxKind.DotDotDotToken]: '...',
+  [ts.SyntaxKind.EqualsGreaterThanToken]: ' => ',
+  [ts.SyntaxKind.CommaToken]: ', ',
 };
 
 const getName = (node: ts.Node): string => {
@@ -31,18 +35,17 @@ const getName = (node: ts.Node): string => {
     case ts.SyntaxKind.ArrayType:
     case ts.SyntaxKind.TypeLiteral:
     case ts.SyntaxKind.IndexSignature:
+    case ts.SyntaxKind.FunctionType:
       return node.getChildren().map(getName).join('');
     case ts.SyntaxKind.UnionType:
     case ts.SyntaxKind.SyntaxList:
-      return node.getChildren().map(getName).join(' ');
+      return node.getChildren().map(getName).join('');
     case ts.SyntaxKind.Identifier:
       return (node as ts.Identifier).text;
     case ts.SyntaxKind.TypeReference:
       return getName((node as ts.TypeReferenceNode).typeName);
     case ts.SyntaxKind.TypeQuery:
       return getName((node as ts.TypeQueryNode).exprName);
-    case ts.SyntaxKind.FunctionType:
-      return 'FUNCTION';
     default:
       if ('name' in node && typeof (node as any).name === 'object') {
         const text = (node as any).name.text;
