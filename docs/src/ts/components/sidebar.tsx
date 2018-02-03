@@ -34,7 +34,7 @@ export default class Sidebar extends Component<Props, State> {
     };
   }
 
-  public onSearchChange (event: React.ChangeEvent<HTMLInputElement>) {
+  public onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       query: event.target.value,
     });
@@ -46,7 +46,7 @@ export default class Sidebar extends Component<Props, State> {
       (this.state.open ? ' open' : '');
   }
 
-  public onSidebarToggleClick () {
+  public onSidebarToggleClick = () => {
     // tslint:disable-next-line:strict-type-predicates
     if (typeof ga === 'function') {
       ga('send', {
@@ -63,7 +63,7 @@ export default class Sidebar extends Component<Props, State> {
     });
   }
 
-  public onSidebarOverlayClick () {
+  public onSidebarOverlayClick = () => {
     // tslint:disable-next-line:strict-type-predicates
     if (typeof ga === 'function') {
       ga('send', {
@@ -80,7 +80,7 @@ export default class Sidebar extends Component<Props, State> {
     });
   }
 
-  public onMethodOrGroupClick (event: React.MouseEvent<HTMLElement>) {
+  public onMethodOrGroupClick = (event: React.MouseEvent<HTMLElement>) => {
     // tslint:disable-next-line:strict-type-predicates
     if (typeof ga === 'function') {
       const searchTerm = (this.refs.search as HTMLInputElement).value;
