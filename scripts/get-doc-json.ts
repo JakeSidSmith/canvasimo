@@ -11,20 +11,58 @@ const TYPE_MAP: {[i: string]: string | undefined} = {
   [ts.SyntaxKind.StringKeyword]: 'string',
   [ts.SyntaxKind.NullKeyword]: 'null',
   [ts.SyntaxKind.BooleanKeyword]: 'boolean',
+  [ts.SyntaxKind.AnyKeyword]: 'any',
+  [ts.SyntaxKind.NeverKeyword]: 'never',
+  [ts.SyntaxKind.VoidKeyword]: 'void',
+  [ts.SyntaxKind.UndefinedKeyword]: 'undefined',
+  [ts.SyntaxKind.OpenBracketToken]: '[',
+  [ts.SyntaxKind.CloseBracketToken]: ']',
+  [ts.SyntaxKind.BarToken]: '|',
+  [ts.SyntaxKind.OpenBraceToken]: '{',
+  [ts.SyntaxKind.CloseBraceToken]: '}',
+  [ts.SyntaxKind.ColonToken]: ': ',
+  [ts.SyntaxKind.QuestionToken]: '?',
+  [ts.SyntaxKind.DotDotDotToken]: '...',
 };
 
-const isTypeReference = (node: ts.Node): node is ts.TypeReferenceNode => node.kind === ts.SyntaxKind.TypeReference;
-const isTypeQuery = (node: ts.Node): node is ts.TypeQueryNode => node.kind === ts.SyntaxKind.TypeQuery;
-const isArrayType = (node: ts.Node): node is ts.ArrayTypeNode => node.kind === ts.SyntaxKind.ArrayType;
-const isUnionType = (node: ts.Node): node is ts.UnionTypeNode => node.kind === ts.SyntaxKind.UnionType;
-const isFunctionType = (node: ts.Node): node is ts.FunctionTypeNode => node.kind === ts.SyntaxKind.FunctionType;
+const getName = (node: ts.Node): string => {
+  switch (node.kind) {
+    case ts.SyntaxKind.Parameter:
+    case ts.SyntaxKind.ArrayType:
+    case ts.SyntaxKind.TypeLiteral:
+    case ts.SyntaxKind.IndexSignature:
+      return node.getChildren().map(getName).join('');
+    case ts.SyntaxKind.UnionType:
+    case ts.SyntaxKind.SyntaxList:
+      return node.getChildren().map(getName).join(' ');
+    case ts.SyntaxKind.Identifier:
+      return (node as ts.Identifier).text;
+    case ts.SyntaxKind.TypeReference:
+      return getName((node as ts.TypeReferenceNode).typeName);
+    case ts.SyntaxKind.TypeQuery:
+      return getName((node as ts.TypeQueryNode).exprName);
+    case ts.SyntaxKind.FunctionType:
+      return 'FUNCTION';
+    default:
+      if ('name' in node && typeof (node as any).name === 'object') {
+        const text = (node as any).name.text;
 
-const getName = (node: ts.Node) => {
-  if (node.kind === ts.SyntaxKind.Identifier) {
-    return (node as ts.Identifier).text;
+        if (!text) {
+          throw new Error('Could not get text from node name');
+        }
+
+        return text;
+      }
+
+      const typeName = TYPE_MAP[node.kind];
+
+      if (typeName) {
+        return typeName;
+      }
+
+      console.log(node);
+      throw new Error(`Unhandled node type ${ts.SyntaxKind[node.kind]}`);
   }
-
-  return 'name' in node && typeof (node as any).name === 'object' ? (node as any).name.text : '';
 };
 
 const isDefaultExport = (node: ts.Node): boolean => {
@@ -56,29 +94,6 @@ const isPublic = (node: ts.Node): boolean => {
   return Boolean(firstChild && firstChild.kind === ts.SyntaxKind.PublicKeyword);
 };
 
-const getTypeName = (node: ts.TypeNode | ts.TypeReferenceNode): string => {
-  if (isTypeReference(node)) {
-    return getName(node.typeName);
-  } else if (isTypeQuery(node)) {
-    return getName(node.exprName);
-  } else if (isArrayType(node)) {
-    return 'ARRAY ' + node.getFullText();
-  } else if (isUnionType(node)) {
-    return 'UNION ' + node.getFullText();
-  } else if (isFunctionType(node)) {
-    return 'FUNCTION ' + node.getFullText();
-  }
-
-  const typeName = TYPE_MAP[node.kind];
-
-  if (!typeName) {
-    console.log(node);
-    throw new Error(`Unknown type name ${ts.SyntaxKind[node.kind]}`);
-  }
-
-  return typeName;
-};
-
 const getReturnType = (name: string, node: ts.ArrowFunction): string => {
   const { type } = node;
 
@@ -86,21 +101,23 @@ const getReturnType = (name: string, node: ts.ArrowFunction): string => {
     throw new Error(`Property ${name} does not have an explicit return type`);
   }
 
-  return getTypeName(type);
+  return getName(type);
 };
 
 const getParameters = (name: string, node: ts.ArrowFunction): Parameter[] => {
   return node.parameters.map((parameter) => {
     const { type } = parameter;
-    const paramName = getName(parameter);
+    const paramName = getName(parameter).split(':')[0];
 
     if (!type) {
       throw new Error(`Parameter ${paramName} of ${name} does not have a type`);
     }
 
+    const paramType = getName(type);
+
     return {
       name: paramName,
-      type: getTypeName(type),
+      type: paramType,
     };
   });
 };
