@@ -6,8 +6,6 @@ import * as ts from 'typescript';
 import { Docs, Method, Parameter } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
-const SOURCE_FILE = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
-const SOURCE = ts.createSourceFile('index.ts', SOURCE_FILE, ts.ScriptTarget.ES2015, true);
 
 const getName = (node: ts.Node) => node.kind === ts.SyntaxKind.Identifier ?
   (node as ts.Identifier).text :
@@ -88,6 +86,9 @@ const documentArrowFunction = (name: string, node: ts.ArrowFunction): Method => 
 };
 
 const getDocJson = (verbose?: boolean): Docs => {
+  const sourceFile = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
+  const source = ts.createSourceFile('index.ts', sourceFile, ts.ScriptTarget.ES2015, true);
+
   // let defaultExport: ts.Node;
   const docs = [{name: 'Test', description: 'Description', methods: []}] as Docs;
   let indentation = '';
@@ -124,7 +125,7 @@ const getDocJson = (verbose?: boolean): Docs => {
     }
   };
 
-  traverse(SOURCE);
+  traverse(source);
 
   return docs;
 };

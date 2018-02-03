@@ -14,7 +14,7 @@ const UTF8 = 'utf8';
 
 const CWD = process.cwd();
 const SHOULD_WATCH = process.argv[2] === 'watch';
-const MATCHES_EXTENSION = /\.(j|t)sx?$/;
+const MATCHES_EXTENSION = /\.(js|jsx|ts|tsx|json)$/;
 
 const packageJSON = JSON.parse(fs.readFileSync(path.join(CWD, 'package.json'), UTF8));
 
