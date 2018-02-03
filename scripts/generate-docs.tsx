@@ -75,6 +75,7 @@ const copy = (src: string, dest: string) => {
 
 const clearBuildDirectory = (verbose: boolean) => {
   rimraf.sync(path.join(CWD, '/docs/build/'));
+
   if (verbose) {
     console.log('Build directory cleared.');
   }
@@ -83,6 +84,7 @@ const clearBuildDirectory = (verbose: boolean) => {
 const createBuildDirectories = (verbose: boolean) => {
   mkdirp.sync(path.join(CWD, '/docs/build/js/'));
   mkdirp.sync(path.join(CWD, '/docs/build/css/'));
+
   if (verbose) {
     console.log('Sub directories created.');
   }
