@@ -6,10 +6,26 @@ import * as ts from 'typescript';
 import { Docs, Method, Parameter } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
+const TYPE_MAP: {[i: string]: string | undefined} = {
+  [ts.SyntaxKind.NumberKeyword]: 'number',
+  [ts.SyntaxKind.StringKeyword]: 'string',
+  [ts.SyntaxKind.NullKeyword]: 'null',
+  [ts.SyntaxKind.BooleanKeyword]: 'boolean',
+};
 
-const getName = (node: ts.Node) => node.kind === ts.SyntaxKind.Identifier ?
-  (node as ts.Identifier).text :
-  ('name' in node && typeof (node as any).name === 'object' ? (node as any).name.text : '');
+const isTypeReference = (node: ts.Node): node is ts.TypeReferenceNode => node.kind === ts.SyntaxKind.TypeReference;
+const isTypeQuery = (node: ts.Node): node is ts.TypeQueryNode => node.kind === ts.SyntaxKind.TypeQuery;
+const isArrayType = (node: ts.Node): node is ts.ArrayTypeNode => node.kind === ts.SyntaxKind.ArrayType;
+const isUnionType = (node: ts.Node): node is ts.UnionTypeNode => node.kind === ts.SyntaxKind.UnionType;
+const isFunctionType = (node: ts.Node): node is ts.FunctionTypeNode => node.kind === ts.SyntaxKind.FunctionType;
+
+const getName = (node: ts.Node) => {
+  if (node.kind === ts.SyntaxKind.Identifier) {
+    return (node as ts.Identifier).text;
+  }
+
+  return 'name' in node && typeof (node as any).name === 'object' ? (node as any).name.text : '';
+};
 
 const isDefaultExport = (node: ts.Node): boolean => {
   const [syntaxList] = node.getChildren();
@@ -40,14 +56,27 @@ const isPublic = (node: ts.Node): boolean => {
   return Boolean(firstChild && firstChild.kind === ts.SyntaxKind.PublicKeyword);
 };
 
-const isTypeReference = (node: ts.Node): node is ts.TypeReferenceNode => 'typeName' in node;
-
 const getTypeName = (node: ts.TypeNode | ts.TypeReferenceNode): string => {
   if (isTypeReference(node)) {
     return getName(node.typeName);
+  } else if (isTypeQuery(node)) {
+    return getName(node.exprName);
+  } else if (isArrayType(node)) {
+    return 'ARRAY ' + node.getFullText();
+  } else if (isUnionType(node)) {
+    return 'UNION ' + node.getFullText();
+  } else if (isFunctionType(node)) {
+    return 'FUNCTION ' + node.getFullText();
   }
 
-  return ts.SyntaxKind[node.kind];
+  const typeName = TYPE_MAP[node.kind];
+
+  if (!typeName) {
+    console.log(node);
+    throw new Error(`Unknown type name ${ts.SyntaxKind[node.kind]}`);
+  }
+
+  return typeName;
 };
 
 const getReturnType = (name: string, node: ts.ArrowFunction): string => {
