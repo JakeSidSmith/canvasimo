@@ -1021,28 +1021,43 @@ export default class Canvasimo {
   }
 
   // Font property getters
-  public getFontStyle = (): string => {
+  public getFontStyle = (): string | null => {
     const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
     return parts[0];
   }
 
-  public getFontVariant = (): string => {
+  public getFontVariant = (): string | null => {
     const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
     return parts[1];
   }
 
-  public getFontWeight = (): string | number => {
+  public getFontWeight = (): string | number | null => {
     const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
     return parts[2];
   }
 
-  public getFontSize = (): number => {
+  public getFontSize = (): number | null => {
     const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
     return parseFloat(parts[3]);
   }
 
-  public getFontFamily = (): string => {
+  public getFontFamily = (): string | null => {
     const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
     return parts[4];
   }
 
