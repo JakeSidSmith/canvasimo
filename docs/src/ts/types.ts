@@ -1,4 +1,4 @@
-export interface Argument {
+export interface Parameter {
   name: string;
   type: string | string[];
   optional?: boolean;
@@ -7,9 +7,8 @@ export interface Argument {
 export interface Method {
   name: string;
   description: string;
-  alias?: string;
-  returns?: Argument;
-  arguments?: Argument[];
+  returns: string;
+  parameters: Parameter[];
 }
 
 export interface Group {

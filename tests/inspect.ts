@@ -2,11 +2,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 
-const cwd = process.cwd();
-
-const sourceFile = fs.readFileSync(path.join(cwd, 'src/index.ts'), 'utf8');
-
-const source = ts.createSourceFile('index.ts', sourceFile, ts.ScriptTarget.ES2015);
+const CLASS_NAME = 'Canvasimo';
+const CWD = process.cwd();
+const SOURCE_FILE = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
+const SOURCE = ts.createSourceFile('index.ts', SOURCE_FILE, ts.ScriptTarget.ES2015);
 
 describe('inspect', () => {
 
@@ -21,7 +20,7 @@ describe('inspect', () => {
         if (node.kind === ts.SyntaxKind.ClassDeclaration) {
           const name = (node as ts.ClassDeclaration).name;
 
-          if (name && name.text === 'Canvasimo') {
+          if (name && name.text === CLASS_NAME) {
             CanvasimoClass = node;
 
             ts.forEachChild(node, (child) => {
@@ -37,7 +36,7 @@ describe('inspect', () => {
         ts.forEachChild(node, traverse);
       };
 
-      traverse(source);
+      traverse(SOURCE);
 
       expect(CanvasimoClass).toBeTruthy();
 

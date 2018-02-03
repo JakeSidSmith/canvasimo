@@ -9,7 +9,7 @@ interface Props {
 export default class MethodComponent extends Component<Props, {}> {
   public render () {
     const method = this.props.method;
-    const { arguments: args } = method;
+    const { parameters } = method;
 
     return (
       <pre>
@@ -19,17 +19,17 @@ export default class MethodComponent extends Component<Props, {}> {
         <span className="code-property">{method.name}</span>
         <span>(</span>
         {
-          args && args.map((arg, index) => {
-            const isLastArgument = index === args.length - 1;
+          parameters && parameters.map((parameter, index) => {
+            const isLastArgument = index === parameters.length - 1;
 
             return (
-              <span key={arg.name}>
-                <span className="code-argument">{arg.name}</span>
+              <span key={parameter.name}>
+                <span className="code-argument">{parameter.name}</span>
                 <span className="code-type">
-                  {' <' + (Array.isArray(arg.type) ? arg.type.join(', ') : arg.type) + '>'}
+                  {' <' + (Array.isArray(parameter.type) ? parameter.type.join(', ') : parameter.type) + '>'}
                 </span>
                 {
-                  arg.optional && (
+                  parameter.optional && (
                     <span className="code-optional"> (Optional)</span>
                   )
                 }
