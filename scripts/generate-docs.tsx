@@ -38,9 +38,10 @@ b.plugin('minifyify', {
 });
 
 const bundle = () => {
-  b.bundle(() => {
-    console.log('Sidebar, analytics, and demo compiled.', new Date().toISOString());
-  })
+  b.bundle()
+    .on('end', () => {
+      console.log('Sidebar, analytics, and demo bundled.', new Date().toISOString());
+    })
     .on('error', (error) => {
       console.log(error);
     })
