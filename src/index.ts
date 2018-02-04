@@ -60,9 +60,12 @@ export default class Canvasimo {
    * Get the canvas element.
    * @alias getElement
    */
-
   public getCanvas = (): HTMLCanvasElement => this.element;
   public getElement = (): HTMLCanvasElement => this.getCanvas();
+
+  /**
+   * Returns the canvas size & position on screen.
+   */
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
   public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
     return this.element.getContext(type, contextAttributes);

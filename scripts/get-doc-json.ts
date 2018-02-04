@@ -112,14 +112,12 @@ const groupMethods = (methods: Methods): Docs => {
       }
     }
 
-    if (!group) {
-      console.error(`No group for method ${method.name}`);
-    } else if (!groupDescription) {
-      console.error(`No description for group ${group}`);
-    } else {
-      let groupIndex = foundGroups.indexOf(group);
+    let groupIndex = group ? foundGroups.indexOf(group) : foundGroups.length - 1;
 
-      if (groupIndex < 0) {
+    if (group && groupIndex < 0) {
+      if (!groupDescription) {
+        console.error(`No description for group ${group}`);
+      } else {
         groupIndex = foundGroups.length;
         foundGroups.push(group);
         docs.push({
@@ -128,7 +126,9 @@ const groupMethods = (methods: Methods): Docs => {
           methods: [],
         });
       }
+    }
 
+    if (groupIndex >= 0 && groupIndex < foundGroups.length) {
       docs[groupIndex].methods.push({
         name,
         description,
