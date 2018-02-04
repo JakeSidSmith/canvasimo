@@ -57,7 +57,7 @@ export default class Canvasimo {
    */
 
   /**
-   * Get the canvas element.
+   * Returns the canvas element.
    * @alias getElement
    */
   public getCanvas = (): HTMLCanvasElement => this.element;
