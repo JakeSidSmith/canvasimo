@@ -19,7 +19,7 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   return ret;
 };
 
-const serializeParameters = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
+const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
   const name = symbol.getName();
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
 
@@ -43,9 +43,7 @@ const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): M
     description,
     tags,
     signatures: signatures.map((signature) => ({
-      parameters: signature.parameters.map((parameter) => {
-        return serializeParameters(parameter, checker);
-      }),
+      parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
       returns: checker.typeToString(checker.getReturnTypeOfSignature(signature)),
     })),
   };
