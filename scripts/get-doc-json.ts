@@ -36,12 +36,11 @@ const getName = (node: ts.Node): string => {
   switch (node.kind) {
     case ts.SyntaxKind.Parameter:
     case ts.SyntaxKind.ArrayType:
-    case ts.SyntaxKind.TypeLiteral:
     case ts.SyntaxKind.IndexSignature:
     case ts.SyntaxKind.FunctionType:
-      return node.getChildren().map(getName).join('');
     case ts.SyntaxKind.UnionType:
     case ts.SyntaxKind.SyntaxList:
+    case ts.SyntaxKind.TypeLiteral:
       return node.getChildren().map(getName).join('');
     case ts.SyntaxKind.Identifier:
       return (node as ts.Identifier).text;
