@@ -27,6 +27,7 @@ const serializeParameters = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
   return {
     name,
     type: checker.typeToString(type),
+    optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
   };
 };
 

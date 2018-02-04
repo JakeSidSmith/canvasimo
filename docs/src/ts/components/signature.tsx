@@ -13,20 +13,17 @@ const Signature = ({method, signature: { parameters, returns }}: Props) => (
     <span className="code-property">{method.name}</span>
     <span>(</span>
     {
-      parameters.map((parameter, index) => {
+      parameters.map(({name, type, optional}, index) => {
         const isLastArgument = index === parameters.length - 1;
 
         return (
-          <span key={parameter.name}>
-            <span className="code-argument">{parameter.name}</span>
+          <span key={name}>
+            <span className="code-argument">{name}</span>
+            {optional && '?'}
+            {': '}
             <span className="code-type">
-              {': ' + (Array.isArray(parameter.type) ? parameter.type.join(', ') : parameter.type)}
+              {type}
             </span>
-            {
-              parameter.optional && (
-                <span className="code-optional"> (Optional)</span>
-              )
-            }
             {
               !isLastArgument && (
                 <span>, </span>

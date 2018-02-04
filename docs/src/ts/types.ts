@@ -16,6 +16,7 @@ export interface Tags {
 export interface Method {
   name: string;
   description: string;
+  optional?: boolean;
   tags: Tags;
   signatures: Signature[];
 }
@@ -24,6 +25,7 @@ export interface GroupedMethod {
   name: string;
   description: string;
   alias?: string;
+  optional?: boolean;
   signatures: Signature[];
 }
 
