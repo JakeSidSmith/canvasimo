@@ -11,7 +11,7 @@
     "dist": "./scripts/dist",
     "start": "./scripts/start",
     "build": "ts-node scripts/generate-docs.tsx",
-    "lint-js": "tslint --project tsconfig.json '@(src|tests|types|docs)/**/*.@(ts|tsx)'",
+    "lint-js": "tslint --project tsconfig.json '{docs/src,src,tests,types}/**/*.@(ts|tsx)'",
     "lint": "npm run lint-js",
     "tests": "jest",
     "test": "npm run lint && npm run tests -- --coverage --runInBand && if grep -rn FIXME src; then exit 1; fi;"
