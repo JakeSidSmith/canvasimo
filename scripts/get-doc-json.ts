@@ -1,10 +1,9 @@
 // tslint:disable:no-console
 
-import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, GroupedMethod, Method, Methods, Parameter, Tags } from '../docs/src/ts/types';
+import { Docs, Method, Methods, Tags } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
 // tslint:disable-next-line:no-var-requires
@@ -93,7 +92,6 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
 
 const groupMethods = (methods: Methods): Docs => {
   const foundGroups: string[] = [];
-  const foundMethods: string[] = [];
   const foundAliases: string[] = [];
   const docs: Docs = [];
 
@@ -107,7 +105,7 @@ const groupMethods = (methods: Methods): Docs => {
 
     if (alias) {
       if (foundAliases.indexOf(alias) >= 0) {
-        console.error(`Duplicate alias ${alias} on method ${method.name}`);
+        console.error(`Duplicate alias ${alias} on method ${name}`);
       } else {
         foundAliases.push(alias);
       }
