@@ -1,49 +1,30 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Method } from '../types';
+import { GroupedMethod } from '../types';
+import LinkHeader from './link-header';
+import Signature from './signature';
 
 interface Props {
-  method: Method;
+  method: GroupedMethod;
 }
 
 export default class MethodComponent extends Component<Props, {}> {
   public render () {
     const method = this.props.method;
-    const { parameters } = method;
+    const { signatures } = method;
 
     return (
-      <pre>
-
-        <span className="code-object">canvas</span>
-        <span>.</span>
-        <span className="code-property">{method.name}</span>
-        <span>(</span>
-        {
-          parameters && parameters.map((parameter, index) => {
-            const isLastArgument = index === parameters.length - 1;
-
-            return (
-              <span key={parameter.name}>
-                <span className="code-argument">{parameter.name}</span>
-                <span className="code-type">
-                  {': ' + (Array.isArray(parameter.type) ? parameter.type.join(', ') : parameter.type)}
-                </span>
-                {
-                  parameter.optional && (
-                    <span className="code-optional"> (Optional)</span>
-                  )
-                }
-                {
-                  !isLastArgument && (
-                    <span>, </span>
-                  )
-                }
-              </span>
-            );
-          })
-        }
-        <span>) => <span className="code-type">{method.returns}</span>;</span>
-      </pre>
+      <div className="method" key={method.name}>
+        <LinkHeader type="h3" header={method.name} />
+        <p>
+          {method.description}
+        </p>
+        <pre>
+          {
+            signatures.map((signature, index) => <Signature key={index} signature={signature} method={method} />)
+          }
+        </pre>
+      </div>
     );
   }
 }

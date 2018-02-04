@@ -19,17 +19,7 @@ export default class GroupComponent extends Component<Props, {}> {
           {group.description}
         </p>
         {
-          group.methods.map((method) => {
-            return (
-              <div className="method" key={method.name}>
-                <LinkHeader type="h3" header={method.name} />
-                <p>
-                  {method.description}
-                </p>
-                <Method method={method} />
-              </div>
-            );
-          })
+          group.methods.map((method) => <Method key={method.name} method={method} />)
         }
       </div>
     );
