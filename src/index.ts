@@ -364,7 +364,7 @@ export default class Canvasimo {
   public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
 
   // Expanded context methods
-  public fill: Fill = (color?: string, fillRule?: FillRules): Canvasimo => {
+  public fill: Fill = (color?: string | FillRules, fillRule?: FillRules): Canvasimo => {
     if (isFillRule(color)) {
       this.ctx.fill(color);
     } else if (typeof color === 'string') {
