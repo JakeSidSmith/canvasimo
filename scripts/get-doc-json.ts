@@ -71,23 +71,6 @@ const getName = (node: ts.Node): string => {
   }
 };
 
-const isDefaultExport = (node: ts.Node): boolean => {
-  const [syntaxList] = node.getChildren();
-
-  if (syntaxList && syntaxList.kind === ts.SyntaxKind.SyntaxList) {
-    const [firstChild, secondChild] = syntaxList.getChildren();
-
-    if (
-      firstChild && firstChild.kind === ts.SyntaxKind.ExportKeyword &&
-      secondChild && secondChild.kind === ts.SyntaxKind.DefaultKeyword
-    ) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
 const isPublic = (node: ts.Node): boolean => {
   const [syntax] = node.getChildren();
 
@@ -188,7 +171,11 @@ const getDocJson = (verbose?: boolean): Docs => {
       console.log(`${indentation}${ts.SyntaxKind[node.kind]}${name}${parent}`);
     }
 
-    if (node.kind === ts.SyntaxKind.ClassDeclaration && isDefaultExport(node)) {
+    if (
+      node.kind === ts.SyntaxKind.ClassDeclaration &&
+      // Is default export
+      ts.getCombinedModifierFlags(node) === ts.ModifierFlags.Export + ts.ModifierFlags.Default
+    ) {
       ts.forEachChild(node, documentProperty);
     } else {
       ts.forEachChild(node, (subNode) => {
