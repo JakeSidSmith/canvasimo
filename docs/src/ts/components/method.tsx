@@ -10,12 +10,21 @@ interface Props {
 
 export default class MethodComponent extends Component<Props, {}> {
   public render () {
-    const method = this.props.method;
+    const { method, method: { name, alias } } = this.props;
     const { signatures } = method;
 
     return (
-      <div className="method" key={method.name}>
-        <LinkHeader type="h3" header={method.name} />
+      <div className="method" key={name}>
+        <LinkHeader type="h3" header={name}>
+          {
+            Boolean(alias) && (
+              <span className="alias">
+                <span className="alias-word">Alias: </span>
+                <strong className="alias-method">{alias}</strong>
+              </span>
+            )
+          }
+        </LinkHeader>
         <p>
           {method.description}
         </p>
