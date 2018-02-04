@@ -1,11 +1,14 @@
 // tslint:disable:no-console
 
 import * as fs from 'fs';
+import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
 import { Docs, Method, Parameter } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
+// tslint:disable-next-line:no-var-requires
+const COMPILER_OPTIONS = require(path.join(CWD, 'tsconfig.json'));
 const TYPE_MAP: {[i: string]: string | undefined} = {
   [ts.SyntaxKind.NumberKeyword]: 'number',
   [ts.SyntaxKind.StringKeyword]: 'string',
@@ -135,14 +138,36 @@ const documentArrowFunction = (name: string, node: ts.ArrowFunction): Method => 
 };
 
 const getDocJson = (verbose?: boolean): Docs => {
-  const sourceFile = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
-  const source = ts.createSourceFile('index.ts', sourceFile, ts.ScriptTarget.ES2015, true);
+  const sourceFileNames = glob.sync('src/**/*.{js,jsx,ts,tsx}');
+  const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
+  const checker = program.getTypeChecker();
 
   // let defaultExport: ts.Node;
   const docs = [{name: 'Test', description: 'Description', methods: []}] as Docs;
   let indentation = '';
 
+  const serializeSymbol = (symbol: ts.Symbol): {[i: string]: string} => ({
+    name: symbol.getName(),
+    documentation: ts.displayPartsToString(
+      symbol.getDocumentationComment()
+    ),
+    type: checker.typeToString(
+      checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration)
+    ),
+  });
+
   const documentProperty = (property: ts.Node) => {
+    if (property.kind === ts.SyntaxKind.PropertyDeclaration) {
+      const symbol = checker.getSymbolAtLocation((property as ts.PropertyDeclaration).name);
+
+      // Group doc comment
+      console.log(symbol.getJsDocTags());
+      // Property info
+      console.log(serializeSymbol(symbol));
+      // Check if public
+      console.log((ts.getCombinedModifierFlags(property) === ts.ModifierFlags.Public));
+    }
+
     if (property.kind === ts.SyntaxKind.PropertyDeclaration && isPublic(property)) {
       const initializer = (property as ts.PropertyDeclaration).initializer;
       const name = getName(property);
@@ -174,7 +199,9 @@ const getDocJson = (verbose?: boolean): Docs => {
     }
   };
 
-  traverse(source);
+  const sourceFiles = program.getSourceFiles();
+
+  sourceFiles.forEach(traverse);
 
   return docs;
 };
