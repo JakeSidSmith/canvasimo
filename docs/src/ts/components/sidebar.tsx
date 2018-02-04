@@ -156,9 +156,10 @@ export default class Sidebar extends Component<Props, State> {
 
                 if (this.state.query) {
                   const parts = this.state.query.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/g);
-                  methods = methods.filter((method) => {
+                  methods = methods.filter(({name, alias}) => {
                     return every(parts, (part) => {
-                      return method.name.toLowerCase().indexOf(part.toLowerCase()) >= 0;
+                      return name.toLowerCase().indexOf(part.toLowerCase()) >= 0 ||
+                        Boolean(alias && alias.toLowerCase().indexOf(part.toLowerCase()) >= 0);
                     });
                   });
                 }
@@ -177,15 +178,17 @@ export default class Sidebar extends Component<Props, State> {
                   >
                     <ul>
                       {
-                        methods.map((method) => {
+                        methods.map(({name, alias}) => {
                           return (
                             <LinkHeader
                               noId
                               type="li"
-                              header={method.name}
-                              key={method.name}
+                              header={name}
+                              key={name}
                               onClick={this.onMethodOrGroupClick}
-                            />
+                            >
+                              {Boolean(alias) && ` / ${alias}`}
+                            </LinkHeader>
                           );
                         })
                       }
