@@ -51,6 +51,16 @@ export default class Canvasimo {
     this.ctx.font = formatFont(ctx.font, this.density);
   }
 
+  /**
+   * @group Canvas element
+   * @description A collection of methods for getting and setting various properties of the canvas element.
+   */
+
+  /**
+   * Get the canvas element.
+   * @alias getElement
+   */
+
   public getCanvas = (): HTMLCanvasElement => this.element;
   public getElement = (): HTMLCanvasElement => this.getCanvas();
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
