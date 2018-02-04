@@ -4,192 +4,150 @@ import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, Method, Parameter } from '../docs/src/ts/types';
+import { Docs, GroupedMethod, Method, Methods, Parameter, Tags } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
 // tslint:disable-next-line:no-var-requires
 const COMPILER_OPTIONS = require(path.join(CWD, 'tsconfig.json'));
-const TYPE_MAP: {[i: string]: string | undefined} = {
-  [ts.SyntaxKind.NumberKeyword]: 'number',
-  [ts.SyntaxKind.StringKeyword]: 'string',
-  [ts.SyntaxKind.NullKeyword]: 'null',
-  [ts.SyntaxKind.BooleanKeyword]: 'boolean',
-  [ts.SyntaxKind.AnyKeyword]: 'any',
-  [ts.SyntaxKind.NeverKeyword]: 'never',
-  [ts.SyntaxKind.VoidKeyword]: 'void',
-  [ts.SyntaxKind.UndefinedKeyword]: 'undefined',
-  [ts.SyntaxKind.OpenBracketToken]: '[',
-  [ts.SyntaxKind.CloseBracketToken]: ']',
-  [ts.SyntaxKind.OpenBraceToken]: '{',
-  [ts.SyntaxKind.CloseBraceToken]: '}',
-  [ts.SyntaxKind.OpenParenToken]: '(',
-  [ts.SyntaxKind.CloseParenToken]: ')',
-  [ts.SyntaxKind.BarToken]: ' | ',
-  [ts.SyntaxKind.ColonToken]: ': ',
-  [ts.SyntaxKind.QuestionToken]: '?',
-  [ts.SyntaxKind.DotDotDotToken]: '...',
-  [ts.SyntaxKind.EqualsGreaterThanToken]: ' => ',
-  [ts.SyntaxKind.CommaToken]: ', ',
-};
 
-const getName = (node: ts.Node): string => {
-  switch (node.kind) {
-    case ts.SyntaxKind.Parameter:
-    case ts.SyntaxKind.ArrayType:
-    case ts.SyntaxKind.IndexSignature:
-    case ts.SyntaxKind.FunctionType:
-    case ts.SyntaxKind.UnionType:
-    case ts.SyntaxKind.SyntaxList:
-    case ts.SyntaxKind.TypeLiteral:
-      return node.getChildren().map(getName).join('');
-    case ts.SyntaxKind.Identifier:
-      return (node as ts.Identifier).text;
-    case ts.SyntaxKind.TypeReference:
-      return getName((node as ts.TypeReferenceNode).typeName);
-    case ts.SyntaxKind.TypeQuery:
-      return getName((node as ts.TypeQueryNode).exprName);
-    default:
-      if ('name' in node && typeof (node as any).name === 'object') {
-        const text = (node as any).name.text;
+const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
+  const ret: Tags = {};
 
-        if (!text) {
-          throw new Error('Could not get text from node name');
-        }
-
-        return text;
-      }
-
-      const typeName = TYPE_MAP[node.kind];
-
-      if (typeName) {
-        return typeName;
-      }
-
-      console.log(node);
-      throw new Error(`Unhandled node type ${ts.SyntaxKind[node.kind]}`);
-  }
-};
-
-const isPublic = (node: ts.Node): boolean => {
-  const [syntax] = node.getChildren();
-
-  if (!syntax || syntax.kind !== ts.SyntaxKind.SyntaxList) {
-    return false;
+  for (const tag of tags) {
+    ret[tag.name] = tag.text;
   }
 
-  const [firstChild] = syntax.getChildren();
-
-  return Boolean(firstChild && firstChild.kind === ts.SyntaxKind.PublicKeyword);
+  return ret;
 };
 
-const getReturnType = (name: string, node: ts.ArrowFunction): string => {
-  const { type } = node;
+const serializeParameters = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
+  const name = symbol.getName();
+  const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
 
-  if (!type) {
-    throw new Error(`Property ${name} does not have an explicit return type`);
-  }
-
-  return getName(type);
-};
-
-const getParameters = (name: string, node: ts.ArrowFunction): Parameter[] => {
-  return node.parameters.map((parameter) => {
-    const { type } = parameter;
-    const paramName = getName(parameter).split(':')[0];
-
-    if (!type) {
-      throw new Error(`Parameter ${paramName} of ${name} does not have a type`);
-    }
-
-    const paramType = getName(type);
-
-    return {
-      name: paramName,
-      type: paramType,
-    };
-  });
-};
-
-const documentArrowFunction = (name: string, node: ts.ArrowFunction): Method => {
   return {
     name,
-    description: '',
-    returns: getReturnType(name, node),
-    parameters: getParameters(name, node),
+    type: checker.typeToString(type),
   };
 };
 
-const getDocJson = (verbose?: boolean): Docs => {
-  const sourceFileNames = glob.sync('src/**/*.{js,jsx,ts,tsx}');
-  const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
-  const checker = program.getTypeChecker();
+const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): Method => {
+  const symbol = checker.getSymbolAtLocation(node.name);
+  const name = symbol.getName();
+  const description = ts.displayPartsToString(symbol.getDocumentationComment());
+  const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
+  const signatures = checker.getSignaturesOfType(type, ts.SignatureKind.Call);
+  const tags = serializeTags(symbol.getJsDocTags());
 
-  // let defaultExport: ts.Node;
-  const docs = [{name: 'Test', description: 'Description', methods: []}] as Docs;
-  let indentation = '';
+  return {
+    name,
+    description,
+    tags,
+    signatures: signatures.map((signature) => ({
+      parameters: signature.parameters.map((parameter) => {
+        return serializeParameters(parameter, checker);
+      }),
+      returns: checker.typeToString(checker.getReturnTypeOfSignature(signature)),
+    })),
+  };
+};
 
-  const serializeSymbol = (symbol: ts.Symbol): {[i: string]: string} => ({
-    name: symbol.getName(),
-    documentation: ts.displayPartsToString(
-      symbol.getDocumentationComment()
-    ),
-    type: checker.typeToString(
-      checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration)
-    ),
-  });
+const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Methods => {
+  const methods: Methods = [];
 
-  const documentProperty = (property: ts.Node) => {
-    if (property.kind === ts.SyntaxKind.PropertyDeclaration) {
-      const symbol = checker.getSymbolAtLocation((property as ts.PropertyDeclaration).name);
-
-      // Group doc comment
-      console.log(symbol.getJsDocTags());
-      // Property info
-      console.log(serializeSymbol(symbol));
-      // Check if public
-      console.log((ts.getCombinedModifierFlags(property) === ts.ModifierFlags.Public));
-    }
-
-    if (property.kind === ts.SyntaxKind.PropertyDeclaration && isPublic(property)) {
-      const initializer = (property as ts.PropertyDeclaration).initializer;
-      const name = getName(property);
+  const documentProperty = (node: ts.Node) => {
+    if (
+      node.kind === ts.SyntaxKind.PropertyDeclaration &&
+      ts.getCombinedModifierFlags(node) === ts.ModifierFlags.Public
+    ) {
+      const initializer = (node as ts.PropertyDeclaration).initializer;
+      const name = (node as ts.PropertyDeclaration).name.getText();
 
       if (initializer && initializer.kind === ts.SyntaxKind.ArrowFunction) {
-        docs[0].methods.push(documentArrowFunction(name, initializer as ts.ArrowFunction));
+        const method = serializeNode(node as ts.PropertyDeclaration, checker);
+
+        methods.push(method);
       } else {
-        throw new Error(`Property ${name} is public, but not an arrow function`);
+        console.error(`Property ${name} is public, but not an arrow function`);
       }
     }
   };
 
   const traverse = (node: ts.Node) => {
-    if (verbose) {
-      const name = ': ' + getName(node);
-      const parent = node.parent ? ' < ' + getName(node.parent) : '';
-
-      console.log(`${indentation}${ts.SyntaxKind[node.kind]}${name}${parent}`);
-    }
-
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
-      // Is default export
       ts.getCombinedModifierFlags(node) === ts.ModifierFlags.Export + ts.ModifierFlags.Default
     ) {
       ts.forEachChild(node, documentProperty);
     } else {
       ts.forEachChild(node, (subNode) => {
-        indentation += '  ';
         traverse(subNode);
-        indentation = indentation.substring(2);
       });
     }
   };
 
-  const sourceFiles = program.getSourceFiles();
-
   sourceFiles.forEach(traverse);
 
+  return methods;
+};
+
+const groupMethods = (methods: Methods): Docs => {
+  const foundGroups: string[] = [];
+  const foundMethods: string[] = [];
+  const foundAliases: string[] = [];
+  const docs: Docs = [];
+
+  for (const method of methods) {
+    if (foundAliases.indexOf(method.name) >= 0) {
+      continue;
+    }
+
+    const { name, description, tags, signatures } = method;
+    const { alias, group, description: groupDescription } = tags;
+
+    if (alias) {
+      if (foundAliases.indexOf(alias) >= 0) {
+        console.error(`Duplicate alias ${alias} on method ${method.name}`);
+      } else {
+        foundAliases.push(alias);
+      }
+    }
+
+    if (!group) {
+      console.error(`No group for method ${method.name}`);
+    } else if (!groupDescription) {
+      console.error(`No description for group ${group}`);
+    } else {
+      let groupIndex = foundGroups.indexOf(group);
+
+      if (groupIndex < 0) {
+        groupIndex = foundGroups.length;
+        foundGroups.push(group);
+        docs.push({
+          name: group,
+          description: groupDescription,
+          methods: [],
+        });
+      }
+
+      docs[groupIndex].methods.push({
+        name,
+        description,
+        alias,
+        signatures,
+      });
+    }
+  }
+
   return docs;
+};
+
+const getDocJson = (): Docs => {
+  const sourceFileNames = glob.sync('src/**/*.{js,jsx,ts,tsx}');
+  const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
+  const sourceFiles = program.getSourceFiles();
+  const checker = program.getTypeChecker();
+
+  return groupMethods(getMethods(sourceFiles, checker));
 };
 
 export default getDocJson;
