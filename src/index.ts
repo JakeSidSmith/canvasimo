@@ -1233,7 +1233,7 @@ export default class Canvasimo {
 
   public forEach: ForEach = (
     obj: any[] | string | {[i: string]: any},
-    callback: (value: any, key: string | number) => any
+    callback: (value: any, key: any) => any
   ): Canvasimo => {
     if (Array.isArray(obj) || typeof obj === 'string') {
       for (let i = 0; i < obj.length; i += 1) {
