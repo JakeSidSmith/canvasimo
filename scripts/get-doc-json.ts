@@ -53,9 +53,12 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   const methods: Methods = [];
 
   const documentProperty = (node: ts.Node) => {
+    const flags = ts.getCombinedModifierFlags(node);
+
     if (
       node.kind === ts.SyntaxKind.PropertyDeclaration &&
-      ts.getCombinedModifierFlags(node) === ts.ModifierFlags.Public
+      // tslint:disable-next-line:no-bitwise
+      (flags & ts.ModifierFlags.Public) !== 0
     ) {
       const initializer = (node as ts.PropertyDeclaration).initializer;
       const name = (node as ts.PropertyDeclaration).name.getText();
@@ -71,9 +74,11 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   };
 
   const traverse = (node: ts.Node) => {
+    const flags = ts.getCombinedModifierFlags(node);
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
-      ts.getCombinedModifierFlags(node) === ts.ModifierFlags.Export + ts.ModifierFlags.Default
+      // tslint:disable-next-line:no-bitwise
+      (flags & ts.ModifierFlags.Export) !== 0 && (flags & ts.ModifierFlags.Default) !== 0
     ) {
       ts.forEachChild(node, documentProperty);
     } else {
