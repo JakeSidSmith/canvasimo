@@ -22,10 +22,11 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
 const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
   const name = symbol.getName();
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
+  const typeName = checker.typeToString(type);
 
   return {
     name,
-    type: checker.typeToString(type),
+    type: typeName,
     optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
   };
 };
