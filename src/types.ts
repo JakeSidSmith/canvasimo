@@ -102,8 +102,8 @@ export interface CreateImageData {
 }
 
 export interface Fill {
-  (color?: string | FillRules): Canvasimo;
-  (color: string, fillRule: FillRules): Canvasimo;
+  (color?: string | FillRule): Canvasimo;
+  (color: string, fillRule: FillRule): Canvasimo;
 }
 
 export interface Stroke {
