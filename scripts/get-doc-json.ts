@@ -19,14 +19,23 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   return ret;
 };
 
+const getTypeAlias = (type: ts.Type): string | null => {
+  if (type.aliasSymbol) {
+    return (type.aliasSymbol.getDeclarations()[0] as ts.TypeAliasDeclaration).type.getText();
+  }
+
+  return null;
+};
+
 const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
   const name = symbol.getName();
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
   const typeName = checker.typeToString(type);
+  const alias = getTypeAlias(type);
 
   return {
     name,
-    type: typeName,
+    type: alias ? alias : typeName,
     optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
   };
 };
