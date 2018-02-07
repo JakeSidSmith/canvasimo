@@ -19,10 +19,16 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   return ret;
 };
 
-const getTypeAlias = (type: ts.Type): string | null => {
+const getTypeAlias = (type: ts.Type, checker: ts.TypeChecker): string | null => {
   if (type.aliasSymbol) {
     return (type.aliasSymbol.getDeclarations()[0] as ts.TypeAliasDeclaration).type.getText();
   }
+
+  // const typeNode = checker.typeToTypeNode(type);
+
+  // if (typeNode.kind === ts.SyntaxKind.TypeReference && type.symbol) {
+  //   console.log((type.symbol.members));
+  // }
 
   return null;
 };
@@ -31,7 +37,7 @@ const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
   const name = symbol.getName();
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
   const typeName = checker.typeToString(type);
-  const alias = getTypeAlias(type);
+  const alias = getTypeAlias(type, checker);
 
   return {
     name,
@@ -52,10 +58,15 @@ const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): M
     name,
     description,
     tags,
-    signatures: signatures.map((signature) => ({
-      parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
-      returns: checker.typeToString(checker.getReturnTypeOfSignature(signature)),
-    })),
+    signatures: signatures.map((signature) => {
+      const returnType = checker.getReturnTypeOfSignature(signature);
+      const returnAlias = getTypeAlias(returnType, checker);
+
+      return {
+        parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
+        returns: returnAlias ? returnAlias : checker.typeToString(returnType),
+      };
+    }),
   };
 };
 
