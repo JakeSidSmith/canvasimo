@@ -12,7 +12,7 @@ import {
 } from './constants';
 import {
   AnyPoint,
-  FillRules,
+  FillRule,
   Point,
   PointArray,
   Points,
@@ -133,5 +133,5 @@ export const forPoints = (points: Points, callback: (x: number, y: number, index
   }
 };
 
-export const isFillRule = (value: any): value is FillRules => typeof value === 'string' &&
+export const isFillRule = (value: any): value is FillRule => typeof value === 'string' &&
   MATCHES_SPECIAL_FILL.test(value);

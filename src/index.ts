@@ -5,26 +5,26 @@ import {
   INCORRECT_GET_ANGLE_ARGUMENTS,
 } from './constants';
 import {
-  AnyCanvasContext,
-  AnyCanvasContextAttributes,
+  CanvasContext,
+  CanvasContextAttributes,
   Color,
   CreateImageData,
   DrawImage,
   Fill,
-  FillAndStrokeStyles,
-  FillRules,
+  FillOrStrokeStyle,
+  FillRule,
   ForEach,
-  GlobalCompositeOperations,
-  LineCaps,
-  LineJoins,
+  GlobalCompositeOperation,
+  LineCap,
+  LineJoin,
   Points,
   Repeat,
   Segments,
   SetSize,
   Size,
   Stroke,
-  TextAligns,
-  TextBaselines,
+  TextAlign,
+  TextBaseline,
 } from './types';
 import {
   formatFont,
@@ -67,7 +67,7 @@ export default class Canvasimo {
    * Returns the canvas size & position on screen.
    */
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
-  public getContext = (type: string, contextAttributes?: AnyCanvasContextAttributes): AnyCanvasContext => {
+  public getContext = (type: string, contextAttributes?: CanvasContextAttributes): CanvasContext => {
     return this.element.getContext(type, contextAttributes);
   }
   public getCurrentContext = (): CanvasRenderingContext2D => this.ctx;
@@ -131,22 +131,22 @@ export default class Canvasimo {
   // Context property getter and setters
   public setGlobalAlpha = (value: number): Canvasimo => this.setCanvasProperty('globalAlpha', value);
   public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
-  public setGlobalCompositeOperation = (value: GlobalCompositeOperations): Canvasimo => {
+  public setGlobalCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
     return this.setCanvasProperty('globalCompositeOperation', value);
   }
-  public getGlobalCompositeOperation = (): GlobalCompositeOperations => {
+  public getGlobalCompositeOperation = (): GlobalCompositeOperation => {
     return this.getCanvasProperty('globalCompositeOperation');
   }
-  public setFillStyle = (value: FillAndStrokeStyles): Canvasimo => this.setCanvasProperty('fillStyle', value);
-  public getFillStyle = (): FillAndStrokeStyles => this.getCanvasProperty('fillStyle');
-  public setStrokeStyle = (value: FillAndStrokeStyles): Canvasimo => this.setCanvasProperty('strokeStyle', value);
+  public setFillStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('fillStyle', value);
+  public getFillStyle = (): FillOrStrokeStyle => this.getCanvasProperty('fillStyle');
+  public setStrokeStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('strokeStyle', value);
   public getStrokeStyle = (): string => this.getCanvasProperty('strokeStyle');
   public setLineWidth = (value: number): Canvasimo => this.setCanvasProperty('lineWidth', value * this.density);
   public getLineWidth = (): number => this.getCanvasProperty('lineWidth') / this.density;
-  public setLineCap = (value: LineCaps): Canvasimo => this.setCanvasProperty('lineCap', value);
-  public getLineCap = (): LineCaps => this.getCanvasProperty('lineCap');
-  public setLineJoin = (value: LineJoins): Canvasimo => this.setCanvasProperty('lineJoin', value);
-  public getLineJoin = (): LineJoins => this.getCanvasProperty('lineJoin');
+  public setLineCap = (value: LineCap): Canvasimo => this.setCanvasProperty('lineCap', value);
+  public getLineCap = (): LineCap => this.getCanvasProperty('lineCap');
+  public setLineJoin = (value: LineJoin): Canvasimo => this.setCanvasProperty('lineJoin', value);
+  public getLineJoin = (): LineJoin => this.getCanvasProperty('lineJoin');
   public setLineDashOffset = (value: number): Canvasimo => {
     return this.setCanvasProperty('lineDashOffset', value * this.density);
   }
@@ -161,28 +161,28 @@ export default class Canvasimo {
   public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
   public setShadowOffsetY = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetY', value * this.density);
   public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
-  public setTextAlign = (value: TextAligns): Canvasimo => this.setCanvasProperty('textAlign', value);
-  public getTextAlign = (): TextAligns => this.getCanvasProperty('textAlign');
-  public setTextBaseline = (value: TextBaselines): Canvasimo => this.setCanvasProperty('textBaseline', value);
-  public getTextBaseline = (): TextBaselines => this.getCanvasProperty('textBaseline');
+  public setTextAlign = (value: TextAlign): Canvasimo => this.setCanvasProperty('textAlign', value);
+  public getTextAlign = (): TextAlign => this.getCanvasProperty('textAlign');
+  public setTextBaseline = (value: TextBaseline): Canvasimo => this.setCanvasProperty('textBaseline', value);
+  public getTextBaseline = (): TextBaseline => this.getCanvasProperty('textBaseline');
 
   // Renamed property getter and setters
   public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
   public getOpacity = (): number => this.getGlobalAlpha();
-  public setCompositeOperation = (value: GlobalCompositeOperations): Canvasimo => {
+  public setCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
     return this.setGlobalCompositeOperation(value);
   }
-  public getCompositeOperation = (): GlobalCompositeOperations => this.getGlobalCompositeOperation();
-  public setFill = (value: FillAndStrokeStyles): Canvasimo => this.setFillStyle(value);
-  public getFill = (): FillAndStrokeStyles => this.getFillStyle();
-  public setStroke = (value: FillAndStrokeStyles): Canvasimo => this.setStrokeStyle(value);
-  public getStroke = (): FillAndStrokeStyles => this.getStrokeStyle();
+  public getCompositeOperation = (): GlobalCompositeOperation => this.getGlobalCompositeOperation();
+  public setFill = (value: FillOrStrokeStyle): Canvasimo => this.setFillStyle(value);
+  public getFill = (): FillOrStrokeStyle => this.getFillStyle();
+  public setStroke = (value: FillOrStrokeStyle): Canvasimo => this.setStrokeStyle(value);
+  public getStroke = (): FillOrStrokeStyle => this.getStrokeStyle();
   public setStrokeWidth = (value: number): Canvasimo => this.setLineWidth(value);
   public getStrokeWidth = (): number => this.getLineWidth();
-  public setStrokeCap = (value: LineCaps): Canvasimo => this.setLineCap(value);
-  public getStrokeCap = (): LineCaps => this.getLineCap();
-  public setStrokeJoin = (value: LineJoins): Canvasimo => this.setLineJoin(value);
-  public getStrokeJoin = (): LineJoins => this.getLineJoin();
+  public setStrokeCap = (value: LineCap): Canvasimo => this.setLineCap(value);
+  public getStrokeCap = (): LineCap => this.getLineCap();
+  public setStrokeJoin = (value: LineJoin): Canvasimo => this.setLineJoin(value);
+  public getStrokeJoin = (): LineJoin => this.getLineJoin();
   public setStrokeDashOffset = (value: number): Canvasimo => this.setLineDashOffset(value);
   public getStrokeDashOffset = (): number => this.getLineDashOffset();
 
@@ -219,7 +219,7 @@ export default class Canvasimo {
     this.ctx.drawFocusIfNeeded(element);
     return this;
   }
-  public clip = (fillRules?: FillRules): Canvasimo => {
+  public clip = (fillRules?: FillRule): Canvasimo => {
     this.ctx.clip(fillRules);
     return this;
   }
@@ -364,7 +364,7 @@ export default class Canvasimo {
   public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
 
   // Expanded context methods
-  public fill: Fill = (color?: string | FillRules, fillRule?: FillRules): Canvasimo => {
+  public fill: Fill = (color?: string | FillRule, fillRule?: FillRule): Canvasimo => {
     if (isFillRule(color)) {
       this.ctx.fill(color);
     } else if (typeof color === 'string') {
@@ -491,7 +491,7 @@ export default class Canvasimo {
 
     return this.ctx.createImageData(width, height);
   }
-  public isPointInPath = (x: number, y: number, fillRule?: FillRules): boolean => {
+  public isPointInPath = (x: number, y: number, fillRule?: FillRule): boolean => {
     if (fillRule) {
       return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
     }

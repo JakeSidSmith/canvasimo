@@ -14,15 +14,15 @@ export type NumberArray = number[];
 export type AnyPoint = Point | TuplePoint | number;
 export type Points = PointArray | TuplePointArray | NumberArray;
 
-export type AnyCanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
-export type AnyCanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;
+export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
+export type CanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;
 
 export interface Size {
   width: number;
   height: number;
 }
 
-export type GlobalCompositeOperations = 'source-over' |
+export type GlobalCompositeOperation = 'source-over' |
   'source-in' |
   'source-out' |
   'source-atop' |
@@ -51,19 +51,19 @@ export type GlobalCompositeOperations = 'source-over' |
 
 export type Color = string;
 
-export type FillAndStrokeStyles = Color | CanvasGradient | CanvasPattern;
+export type FillOrStrokeStyle = Color | CanvasGradient | CanvasPattern;
 
-export type LineCaps = 'butt' | 'round' | 'square';
+export type LineCap = 'butt' | 'round' | 'square';
 
-export type LineJoins = 'bevel' | 'round' | 'miter';
+export type LineJoin = 'bevel' | 'round' | 'miter';
 
-export type TextAligns = 'left' | 'right' | 'center' | 'start' | 'end';
+export type TextAlign = 'left' | 'right' | 'center' | 'start' | 'end';
 
-export type TextBaselines = 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom';
+export type FillRule = 'nonzero' | 'evenodd';
+
+export type TextBaseline = 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom';
 
 export type Segments = number[];
-
-export type FillRules = 'nonzero' | 'evenodd';
 
 export interface SetSize {
   (size: Size): Canvasimo;
