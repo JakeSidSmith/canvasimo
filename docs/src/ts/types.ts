@@ -1,12 +1,15 @@
 export interface Parameter {
   name: string;
   alias: string | null;
-  type: string | string[];
+  type: string;
   optional?: boolean;
 }
 
 export interface Signature {
-  returns: string;
+  returns: {
+    type: string;
+    alias: string | null;
+  };
   parameters: Parameter[];
 }
 
@@ -22,12 +25,18 @@ export interface Method {
   signatures: Signature[];
 }
 
+export interface TypeAlias {
+  name: string;
+  alias: string;
+}
+
 export interface GroupedMethod {
   name: string;
   description: string;
   alias?: string;
   optional?: boolean;
   signatures: Signature[];
+  typeAliases: TypeAlias[];
 }
 
 export type Methods = Method[];

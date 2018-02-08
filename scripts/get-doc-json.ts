@@ -3,7 +3,7 @@
 import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, Method, Methods, Parameter, Tags } from '../docs/src/ts/types';
+import { Docs, GroupedMethod, Method, Methods, Parameter, Tags, TypeAlias } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
 // tslint:disable-next-line:no-var-requires
@@ -59,7 +59,10 @@ const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): M
 
       return {
         parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
-        returns: returnAlias ? returnAlias : checker.typeToString(returnType),
+        returns: {
+          type: checker.typeToString(returnType),
+          alias: returnAlias,
+        },
       };
     }),
   };
@@ -109,6 +112,39 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   return methods;
 };
 
+const getMethodWithTypeAliases = ({name, description, tags: { alias }, signatures}: Method): GroupedMethod => {
+  const foundTypeAliases: string[] = [];
+  const typeAliases: TypeAlias[] = [];
+
+  signatures.forEach((signature) => {
+    signature.parameters.forEach((parameter) => {
+      if (parameter.alias && foundTypeAliases.indexOf(parameter.type) < 0) {
+        foundTypeAliases.push(parameter.type);
+        typeAliases.push({
+          name: parameter.type,
+          alias: parameter.alias,
+        });
+      }
+    });
+
+    if (signature.returns.alias && foundTypeAliases.indexOf(signature.returns.type) < 0) {
+      foundTypeAliases.push(signature.returns.type);
+      typeAliases.push({
+        name: signature.returns.type,
+        alias: signature.returns.alias,
+      });
+    }
+  });
+
+  return {
+    name,
+    description,
+    alias,
+    signatures,
+    typeAliases,
+  };
+};
+
 const groupMethods = (methods: Methods): Docs => {
   const foundGroups: string[] = [];
   const foundAliases: string[] = [];
@@ -119,7 +155,7 @@ const groupMethods = (methods: Methods): Docs => {
       continue;
     }
 
-    const { name, description, tags, signatures } = method;
+    const { name, tags } = method;
     const { alias, group, description: groupDescription } = tags;
 
     if (alias) {
@@ -147,12 +183,7 @@ const groupMethods = (methods: Methods): Docs => {
     }
 
     if (groupIndex >= 0 && groupIndex < foundGroups.length) {
-      docs[groupIndex].methods.push({
-        name,
-        description,
-        alias,
-        signatures,
-      });
+      docs[groupIndex].methods.push(getMethodWithTypeAliases(method));
     }
   }
 
