@@ -1,5 +1,6 @@
 export interface Parameter {
   name: string;
+  alias: string | null;
   type: string | string[];
   optional?: boolean;
 }

@@ -3,7 +3,7 @@
 import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, Method, Methods, Tags } from '../docs/src/ts/types';
+import { Docs, Method, Methods, Parameter, Tags } from '../docs/src/ts/types';
 
 const CWD = process.cwd();
 // tslint:disable-next-line:no-var-requires
@@ -24,16 +24,10 @@ const getTypeAlias = (type: ts.Type, checker: ts.TypeChecker): string | null => 
     return (type.aliasSymbol.getDeclarations()[0] as ts.TypeAliasDeclaration).type.getText();
   }
 
-  // const typeNode = checker.typeToTypeNode(type);
-
-  // if (typeNode.kind === ts.SyntaxKind.TypeReference && type.symbol) {
-  //   console.log((type.symbol.members));
-  // }
-
   return null;
 };
 
-const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
+const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker): Parameter => {
   const name = symbol.getName();
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
   const typeName = checker.typeToString(type);
@@ -41,7 +35,8 @@ const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker) => {
 
   return {
     name,
-    type: alias ? alias : typeName,
+    alias,
+    type: typeName,
     optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
   };
 };
