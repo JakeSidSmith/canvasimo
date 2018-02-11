@@ -199,7 +199,7 @@ export default class Document extends Component<Props, {}> {
                     stroke('green')</code>, <code>fillCanvas('blue')</code>.
                 </p>
 
-                <LinkHeader type="h1" header="Example" />
+                <LinkHeader type="h2" header="Example" />
 
                 <div className="demo-container">
                   <canvas id="example-1" width="400" height="200">
