@@ -10,7 +10,7 @@
   "scripts": {
     "dist": "./scripts/dist",
     "start": "./scripts/start",
-    "build": "ts-node scripts/generate-docs.tsx",
+    "build": "NODE_ENV=production ts-node scripts/generate-docs.tsx",
     "lint-js": "tslint --project tsconfig.json '{docs/src,src,tests,types,scripts}/**/*.@(ts|tsx)'",
     "lint": "npm run lint-js",
     "tests": "jest",
@@ -53,6 +53,7 @@
     "browserify": "15.2.0",
     "chokidar": "2.0.0",
     "concurrently": "3.5.1",
+    "core-js": "2.5.3",
     "derequire": "2.0.6",
     "exorcist": "1.0.0",
     "glob": "7.1.2",

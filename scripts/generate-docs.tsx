@@ -21,6 +21,7 @@ const packageJSON = JSON.parse(fs.readFileSync(path.join(CWD, 'package.json'), U
 const b = browserify(
   {
     entries: [
+      path.join(CWD, 'docs/src/ts/polyfills.ts'),
       path.join(CWD, 'docs/src/ts/sidebar.tsx'),
       path.join(CWD, 'docs/src/ts/demo.ts'),
       path.join(CWD, 'docs/src/ts/example.ts'),
