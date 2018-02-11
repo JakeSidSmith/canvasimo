@@ -33,7 +33,7 @@ const Signature = ({method, signature: { parameters, returns }}: Props) => (
         );
       })
     }
-    <span>) => <span className="code-type">{returns}</span>;</span>
+    <span>) => <span className="code-type">{returns.type}</span>;</span>
   </div>
 );
 

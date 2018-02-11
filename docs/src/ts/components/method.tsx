@@ -11,7 +11,7 @@ interface Props {
 export default class MethodComponent extends Component<Props, {}> {
   public render () {
     const { method, method: { name, alias } } = this.props;
-    const { signatures } = method;
+    const { signatures, typeAliases } = method;
 
     return (
       <div className="method" key={name}>
@@ -33,6 +33,21 @@ export default class MethodComponent extends Component<Props, {}> {
             signatures.map((signature, index) => <Signature key={index} signature={signature} method={method} />)
           }
         </pre>
+        {
+          Boolean(typeAliases.length) && (
+            <pre>
+              {
+                typeAliases.map((typeAlias) => (
+                  <div key={typeAlias.name}>
+                    type <span className="code-type">{typeAlias.name}</span>
+                    {' = '}
+                    <span className="code-type">{typeAlias.alias}</span>;
+                  </div>
+                ))
+              }
+            </pre>
+          )
+        }
       </div>
     );
   }
