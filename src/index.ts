@@ -536,8 +536,14 @@ export default class Canvasimo {
 
     return this.ctx.isPointInPath(x * this.density, y * this.density);
   }
-  // FIXME: Needs implementation for IE
-  // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
+  public isPointInStroke = (): boolean => {
+    if (typeof (this.ctx as any).isPointInStroke !== 'function') {
+      logUnsupportedMethodError('isPointInStroke');
+      return false;
+    }
+
+    return (this.ctx as any).isPointInStroke();
+  }
   public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
   public getLineDash = (): Segments => {
     if (typeof this.ctx.getLineDash !== 'function') {
