@@ -1094,7 +1094,6 @@ export default class Canvasimo {
   public getDistance = (x1: number, y1: number, x2: number, y2: number): number => {
     return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
   }
-  // FIXME: getAngle should have overloads
   public getAngle: GetAngle = (...args: number[]): number => {
     if (!args.length || !(args.length === 4 || args.length === 6)) {
       throw new Error(INCORRECT_GET_ANGLE_ARGUMENTS);
