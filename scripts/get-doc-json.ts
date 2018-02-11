@@ -153,8 +153,12 @@ const groupMethods = (methods: Methods): Docs => {
 
   for (const method of methods) {
     const { description, name, tags } = method;
+    const aliasIndex = foundAliases.indexOf(name);
 
-    if (foundAliases.indexOf(name) >= 0) {
+    if (aliasIndex >= 0) {
+      if (aliasIndex !== foundAliases.length - 1) {
+        console.error(`Method ${name} should be defined immediately after its alias`);
+      }
       continue;
     } else if (!description) {
       console.error(`No description for method ${name}`);
