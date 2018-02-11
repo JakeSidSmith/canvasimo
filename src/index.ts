@@ -835,6 +835,7 @@ export default class Canvasimo {
    * @alias measureText
    */
   public getTextSize = (text: string): TextMetrics => this.measureText(text);
+  public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
   /**
    * Set the horizontal text alignment.
    */
@@ -981,6 +982,114 @@ export default class Canvasimo {
     return parts[2];
   }
 
+  /**
+   * @group Stroke Styles
+   * @description A collection of methods for getting and setting stroke styles,
+   * and applying strokes to existing shapes.
+   */
+
+  /**
+   * Apply a stroke to the current shape.
+   */
+  // stroke
+  /**
+   * Set the stroke style to use.
+   * @alias setStrokeStyle
+   */
+  public setStroke = (value: FillOrStrokeStyle): Canvasimo => this.setStrokeStyle(value);
+  public setStrokeStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('strokeStyle', value);
+  /**
+   * Get the stroke style that is being used.
+   * @alias getStrokeStyle
+   */
+  public getStroke = (): FillOrStrokeStyle => this.getStrokeStyle();
+  public getStrokeStyle = (): string => this.getCanvasProperty('strokeStyle');
+  /**
+   * Set the stroke cap to use.
+   * @alias setLineCap
+   */
+  public setStrokeCap = (value: LineCap): Canvasimo => this.setLineCap(value);
+  public setLineCap = (value: LineCap): Canvasimo => this.setCanvasProperty('lineCap', value);
+  /**
+   * Get the stroke cap that is being used.
+   * @alias getLineCap
+   */
+  public getStrokeCap = (): LineCap => this.getLineCap();
+  public getLineCap = (): LineCap => this.getCanvasProperty('lineCap');
+  /**
+   * Set the stroke dash to use.
+   * @alias setLineDash
+   */
+  public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
+  public setLineDash = (segments: Segments): Canvasimo => {
+    if (typeof this.ctx.setLineDash !== 'function') {
+      logUnsupportedMethodError('setLineDash');
+      return this;
+    }
+
+    this.ctx.setLineDash(segments.map((segment) => segment * this.density));
+    return this;
+  }
+  /**
+   * Get the stroke dash that is being used.
+   * @alias getLineDash
+   */
+  public getStrokeDash = (): Segments => this.getLineDash();
+  public getLineDash = (): Segments => {
+    if (typeof this.ctx.getLineDash !== 'function') {
+      logUnsupportedMethodError('getLineDash');
+      return [];
+    }
+
+    return (this.ctx.getLineDash() || []).map((value) => value / this.density);
+  }
+  /**
+   * Set the stroke dash offset to use.
+   * @alias setLineDashOffset
+   */
+  public setStrokeDashOffset = (value: number): Canvasimo => this.setLineDashOffset(value);
+  public setLineDashOffset = (value: number): Canvasimo => {
+    return this.setCanvasProperty('lineDashOffset', value * this.density);
+  }
+  /**
+   * Get the stroke dash offset that is being used.
+   * @alias getLineDashOffset
+   */
+  public getStrokeDashOffset = (): number => this.getLineDashOffset();
+  public getLineDashOffset = (): number => this.getCanvasProperty('lineDashOffset') / this.density;
+  /**
+   * Set the stroke join to use.
+   * @alias setLineJoin
+   */
+  public setStrokeJoin = (value: LineJoin): Canvasimo => this.setLineJoin(value);
+  public setLineJoin = (value: LineJoin): Canvasimo => this.setCanvasProperty('lineJoin', value);
+  /**
+   * Get the stroke join that is being used.
+   * @alias getLineJoin
+   */
+  public getStrokeJoin = (): LineJoin => this.getLineJoin();
+  public getLineJoin = (): LineJoin => this.getCanvasProperty('lineJoin');
+  /**
+   * Set the stroke width to use.
+   * @alias setLineWidth
+   */
+  public setStrokeWidth = (value: number): Canvasimo => this.setLineWidth(value);
+  public setLineWidth = (value: number): Canvasimo => this.setCanvasProperty('lineWidth', value * this.density);
+  /**
+   * Get the stroke width that is being used.
+   * @alias getLineWidth
+   */
+  public getStrokeWidth = (): number => this.getLineWidth();
+  public getLineWidth = (): number => this.getCanvasProperty('lineWidth') / this.density;
+  /**
+   * Set the miter limit to use.
+   */
+  public setMiterLimit = (value: number): Canvasimo => this.setCanvasProperty('miterLimit', value * this.density);
+  /**
+   * Get the miter limit that is being used.
+   */
+  public getMiterLimit = (): number => this.getCanvasProperty('miterLimit') / this.density;
+
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Image smoothing
@@ -1015,20 +1124,6 @@ export default class Canvasimo {
   }
   public setFillStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('fillStyle', value);
   public getFillStyle = (): FillOrStrokeStyle => this.getCanvasProperty('fillStyle');
-  public setStrokeStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('strokeStyle', value);
-  public getStrokeStyle = (): string => this.getCanvasProperty('strokeStyle');
-  public setLineWidth = (value: number): Canvasimo => this.setCanvasProperty('lineWidth', value * this.density);
-  public getLineWidth = (): number => this.getCanvasProperty('lineWidth') / this.density;
-  public setLineCap = (value: LineCap): Canvasimo => this.setCanvasProperty('lineCap', value);
-  public getLineCap = (): LineCap => this.getCanvasProperty('lineCap');
-  public setLineJoin = (value: LineJoin): Canvasimo => this.setCanvasProperty('lineJoin', value);
-  public getLineJoin = (): LineJoin => this.getCanvasProperty('lineJoin');
-  public setLineDashOffset = (value: number): Canvasimo => {
-    return this.setCanvasProperty('lineDashOffset', value * this.density);
-  }
-  public getLineDashOffset = (): number => this.getCanvasProperty('lineDashOffset') / this.density;
-  public setMiterLimit = (value: number): Canvasimo => this.setCanvasProperty('miterLimit', value * this.density);
-  public getMiterLimit = (): number => this.getCanvasProperty('miterLimit') / this.density;
   public setShadowColor = (value: string): Canvasimo => this.setCanvasProperty('shadowColor', value);
   public getShadowColor = (): string => this.getCanvasProperty('shadowColor');
   public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
@@ -1047,16 +1142,6 @@ export default class Canvasimo {
   public getCompositeOperation = (): GlobalCompositeOperation => this.getGlobalCompositeOperation();
   public setFill = (value: FillOrStrokeStyle): Canvasimo => this.setFillStyle(value);
   public getFill = (): FillOrStrokeStyle => this.getFillStyle();
-  public setStroke = (value: FillOrStrokeStyle): Canvasimo => this.setStrokeStyle(value);
-  public getStroke = (): FillOrStrokeStyle => this.getStrokeStyle();
-  public setStrokeWidth = (value: number): Canvasimo => this.setLineWidth(value);
-  public getStrokeWidth = (): number => this.getLineWidth();
-  public setStrokeCap = (value: LineCap): Canvasimo => this.setLineCap(value);
-  public getStrokeCap = (): LineCap => this.getLineCap();
-  public setStrokeJoin = (value: LineJoin): Canvasimo => this.setLineJoin(value);
-  public getStrokeJoin = (): LineJoin => this.getLineJoin();
-  public setStrokeDashOffset = (value: number): Canvasimo => this.setLineDashOffset(value);
-  public getStrokeDashOffset = (): number => this.getLineDashOffset();
 
   // Standard context methods
   public save = (): Canvasimo => {
@@ -1195,19 +1280,6 @@ export default class Canvasimo {
     return this;
   }
 
-  public setLineDash = (segments: Segments): Canvasimo => {
-    if (typeof this.ctx.setLineDash !== 'function') {
-      logUnsupportedMethodError('setLineDash');
-      return this;
-    }
-
-    this.ctx.setLineDash(segments.map((segment) => segment * this.density));
-    return this;
-  }
-
-  // Renamed context methods
-  public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
-
   // Expanded context methods
   public fill: Fill = (color?: string | FillRule, fillRule?: FillRule): Canvasimo => {
     if (isFillRule(color)) {
@@ -1304,18 +1376,6 @@ export default class Canvasimo {
 
     return (this.ctx as any).isPointInStroke();
   }
-  public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
-  public getLineDash = (): Segments => {
-    if (typeof this.ctx.getLineDash !== 'function') {
-      logUnsupportedMethodError('getLineDash');
-      return [];
-    }
-
-    return (this.ctx.getLineDash() || []).map((value) => value / this.density);
-  }
-
-  // Renamed context getters
-  public getStrokeDash = (): Segments => this.getLineDash();
 
   // Additional methods
   public clearCanvas = (): Canvasimo => {
