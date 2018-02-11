@@ -1245,7 +1245,68 @@ export default class Canvasimo {
     return this;
   }
 
+  /**
+   * @group Image Data
+   * @description A collection of methods for creating, putting, or getting image data about the canvas.
+   */
+
+  /**
+   * Get a data URL of the current canvas state.
+   */
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
+  /**
+   * Create image data with either the width and height specified,
+   * or with the width and height of a the image data supplied.
+   */
+  public createImageData: CreateImageData = (width: number | ImageData, height?: number): ImageData => {
+    if (typeof width === 'number' && typeof height === 'number') {
+      return this.ctx.createImageData(width * this.density, height * this.density);
+    }
+
+    return this.ctx.createImageData(width, height);
+  }
+  /**
+   * Get the image data from an area of the canvas.
+   */
+  public getImageData = (sx: number, sy: number, sw: number, sh: number): ImageData => {
+    return this.ctx.getImageData(sx * this.density, sy * this.density, sw * this.density, sh * this.density);
+  }
+  /**
+   * Draw image data onto the canvas.
+   */
+  public putImageData = (
+    imagedata: ImageData,
+    dx: number,
+    dy: number,
+    dirtyX?: number,
+    dirtyY?: number,
+    dirtyWidth?: number,
+    dirtyHeight?: number
+  ): Canvasimo => {
+    this.ctx.putImageData(
+      imagedata,
+      dx * this.density,
+      dy * this.density,
+      typeof dirtyX === 'number' ? dirtyX * this.density : dirtyX,
+      typeof dirtyY === 'number' ? dirtyY * this.density : dirtyY,
+      typeof dirtyWidth === 'number' ? dirtyWidth * this.density : dirtyWidth,
+      typeof dirtyHeight === 'number' ? dirtyHeight * this.density : dirtyHeight
+    );
+    return this;
+  }
+  /**
+   * Get image data about a specific pixel.
+   */
+  public getPixelData = (x: number, y: number): Uint8ClampedArray => {
+    return this.getImageData(x, y, 1, 1).data;
+  }
+  /**
+   * Get the color of a specific pixel.
+   */
+  public getPixelColor = (x: number, y: number): string => {
+    const data = this.getImageData(x, y, 1, 1).data;
+    return this.createRGBA(data[0], data[1], data[2], data[3]);
+  }
 
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
@@ -1369,27 +1430,6 @@ export default class Canvasimo {
     return this;
   }
 
-  public putImageData = (
-    imagedata: ImageData,
-    dx: number,
-    dy: number,
-    dirtyX?: number,
-    dirtyY?: number,
-    dirtyWidth?: number,
-    dirtyHeight?: number
-  ): Canvasimo => {
-    this.ctx.putImageData(
-      imagedata,
-      dx * this.density,
-      dy * this.density,
-      typeof dirtyX === 'number' ? dirtyX * this.density : dirtyX,
-      typeof dirtyY === 'number' ? dirtyY * this.density : dirtyY,
-      typeof dirtyWidth === 'number' ? dirtyWidth * this.density : dirtyWidth,
-      typeof dirtyHeight === 'number' ? dirtyHeight * this.density : dirtyHeight
-    );
-    return this;
-  }
-
   // Cross compatibility methods
   public resetTransform = (): Canvasimo => {
     if (typeof (this.ctx as any).resetTransform === 'function') {
@@ -1400,18 +1440,7 @@ export default class Canvasimo {
     return this.setTransform(1, 0, 0, 1, 0, 0);
   }
 
-  // Standard context getters
-  public getImageData = (sx: number, sy: number, sw: number, sh: number): ImageData => {
-    return this.ctx.getImageData(sx * this.density, sy * this.density, sw * this.density, sh * this.density);
-  }
-
-  public createImageData: CreateImageData = (width: number | ImageData, height?: number): ImageData => {
-    if (typeof width === 'number' && typeof height === 'number') {
-      return this.ctx.createImageData(width * this.density, height * this.density);
-    }
-
-    return this.ctx.createImageData(width, height);
-  }
+  // Standard context getter
   public isPointInPath = (x: number, y: number, fillRule?: FillRule): boolean => {
     if (fillRule) {
       return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
@@ -1513,15 +1542,6 @@ export default class Canvasimo {
 
   public getFractionOfHeight = (fraction: number): number => {
     return this.getHeight() * fraction;
-  }
-
-  public getPixelColor = (x: number, y: number): string => {
-    const data = this.getImageData(x, y, 1, 1).data;
-    return this.createRGBA(data[0], data[1], data[2], data[3]);
-  }
-
-  public getPixelData = (x: number, y: number): Uint8ClampedArray => {
-    return this.getImageData(x, y, 1, 1).data;
   }
 
   public tap = (callback: () => any): Canvasimo => {
