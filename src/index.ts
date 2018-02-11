@@ -73,6 +73,40 @@ export default class Canvasimo {
   public getCanvas = (): HTMLCanvasElement => this.element;
   public getElement = (): HTMLCanvasElement => this.getCanvas();
   /**
+   * Set the canvas pixel density.
+   */
+  public setDensity = (density: number): Canvasimo => {
+    const prevDensity = this.density;
+    const multiplier = density / prevDensity;
+    const prevFontSize = this.getFontSize();
+    const prevLineDash = this.getLineDash();
+
+    this.density = density;
+
+    if (prevDensity !== density) {
+      this.setSize(this.element.width, this.element.height);
+
+      if (typeof prevFontSize === 'number') {
+        this.setFontSize(prevFontSize);
+      }
+
+      this.setLineDash(prevLineDash);
+
+      this.ctx.lineDashOffset *= multiplier;
+      this.ctx.lineWidth *= multiplier;
+      this.ctx.miterLimit *= multiplier;
+      this.ctx.shadowBlur *= multiplier;
+      this.ctx.shadowOffsetX *= multiplier;
+      this.ctx.shadowOffsetY *= multiplier;
+    }
+
+    return this;
+  }
+  /**
+   * Get the canvas pixel density.
+   */
+  public getDensity = (): number => this.density;
+  /**
    * Set the canvas dimensions.
    */
   public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
@@ -151,36 +185,6 @@ export default class Canvasimo {
     return (this.ctx as any).getContextAttributes();
   }
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
-
-  // Canvas size
-  public setDensity = (density: number): Canvasimo => {
-    const prevDensity = this.density;
-    const multiplier = density / prevDensity;
-    const prevFontSize = this.getFontSize();
-    const prevLineDash = this.getLineDash();
-
-    this.density = density;
-
-    if (prevDensity !== density) {
-      this.setSize(this.element.width, this.element.height);
-
-      if (typeof prevFontSize === 'number') {
-        this.setFontSize(prevFontSize);
-      }
-
-      this.setLineDash(prevLineDash);
-
-      this.ctx.lineDashOffset *= multiplier;
-      this.ctx.lineWidth *= multiplier;
-      this.ctx.miterLimit *= multiplier;
-      this.ctx.shadowBlur *= multiplier;
-      this.ctx.shadowOffsetX *= multiplier;
-      this.ctx.shadowOffsetY *= multiplier;
-    }
-
-    return this;
-  }
-  public getDensity = (): number => this.density;
 
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
