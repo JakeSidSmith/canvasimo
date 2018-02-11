@@ -565,6 +565,78 @@ export default class Canvasimo {
       .fill(color);
   }
 
+  /**
+   * @group Open Shapes
+   * @description A collection of methods for plotting or drawing open shapes -
+   * those that create a new shape when invoked, but are not self closing.
+   */
+
+  /**
+   *  Plot a line that can then have a stroke or fill applied to it.
+   */
+  public plotLine = (x1: number, y1: number, x2: number, y2: number): Canvasimo => {
+    return this
+      .moveTo(x1, y1)
+      .lineTo(x2, y2);
+  }
+  /**
+   *  Plot a line and apply a stroke to it.
+   */
+  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: string): Canvasimo => {
+    return this
+      .plotLine(x1, y1, x2, y2)
+      .stroke(color);
+  }
+  /**
+   *  Plot a line, by length & angle, that can then have a stroke or fill applied to it.
+   */
+  public plotLength = (x1: number, y1: number, length: number, angle: number): Canvasimo => {
+    const x2 = x1 + length * Math.cos(angle);
+    const y2 = y1 + length * Math.sin(angle);
+
+    return this
+      .moveTo(x1, y1)
+      .lineTo(x2, y2);
+  }
+  /**
+   *  Plot a line, by length & angle, and apply a stroke to it.
+   */
+  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: string): Canvasimo => {
+    return this
+      .plotLength(x1, y1, length, angle)
+      .stroke(color);
+  }
+  /**
+   *  Plot a path, that is not self closing, that can have a stroke or fill applied to it.
+   */
+  public plotPath = (points: Points): Canvasimo => {
+    forPoints(points, (x: number, y: number, i: number) => {
+      if (i === 0) {
+        this.moveTo(x, y);
+      } else {
+        this.lineTo(x, y);
+      }
+    });
+
+    return this;
+  }
+  /**
+   *  Plot a path, that is not self closing, and apply a stroke to it.
+   */
+  public strokePath = (points: Points, color?: string): Canvasimo => {
+    return this
+      .plotPath(points)
+      .stroke(color);
+  }
+  /**
+   *  Plot a path, that is not self closing, and apply a fill to it.
+   */
+  public fillPath = (points: Points, color?: string): Canvasimo => {
+    return this
+      .plotPath(points)
+      .fill(color);
+  }
+
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Image smoothing
@@ -991,57 +1063,6 @@ export default class Canvasimo {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
-  }
-
-  public plotLine = (x1: number, y1: number, x2: number, y2: number): Canvasimo => {
-    return this
-      .moveTo(x1, y1)
-      .lineTo(x2, y2);
-  }
-
-  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: string): Canvasimo => {
-    return this
-      .plotLine(x1, y1, x2, y2)
-      .stroke(color);
-  }
-
-  public plotLength = (x1: number, y1: number, length: number, angle: number): Canvasimo => {
-    const x2 = x1 + length * Math.cos(angle);
-    const y2 = y1 + length * Math.sin(angle);
-
-    return this
-      .moveTo(x1, y1)
-      .lineTo(x2, y2);
-  }
-
-  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: string): Canvasimo => {
-    return this
-      .plotLength(x1, y1, length, angle)
-      .stroke(color);
-  }
-
-  public plotPath = (points: Points): Canvasimo => {
-    forPoints(points, (x: number, y: number, i: number) => {
-      if (i === 0) {
-        this.moveTo(x, y);
-      } else {
-        this.lineTo(x, y);
-      }
-    });
-
-    return this;
-  }
-
-  public fillPath = (points: Points, color?: string): Canvasimo => {
-    return this
-      .plotPath(points)
-      .fill(color);
-  }
-
-  public strokePath = (points: Points, color?: string): Canvasimo => {
-    return this
-      .plotPath(points)
-      .stroke(color);
   }
 
   public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
