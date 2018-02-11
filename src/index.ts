@@ -139,6 +139,17 @@ export default class Canvasimo {
    * Get the context type used by Canvasimo ('2d', 'webgl', etc).
    */
   public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
+  /**
+   * Get the context attributes used.
+   */
+  public getContextAttributes = (): CanvasContextAttributes | null => {
+    if (typeof (this.ctx as any).getContextAttributes !== 'function') {
+      logUnsupportedMethodError('getContextAttributes');
+      return null;
+    }
+
+    return (this.ctx as any).getContextAttributes();
+  }
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Canvas size
