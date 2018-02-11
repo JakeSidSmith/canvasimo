@@ -578,10 +578,10 @@ export default class Canvasimo {
 
     return this.ctx.isPointInPath(x * this.density, y * this.density);
   }
-  public isPointInStroke = (): boolean => {
+  public isPointInStroke = (): boolean | null => {
     if (typeof (this.ctx as any).isPointInStroke !== 'function') {
       logUnsupportedMethodError('isPointInStroke');
-      return false;
+      return null;
     }
 
     return (this.ctx as any).isPointInStroke();
