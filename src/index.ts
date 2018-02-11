@@ -80,6 +80,7 @@ export default class Canvasimo {
     const prevDensity = this.density;
     const multiplier = density / prevDensity;
     const prevFontSize = this.getFontSize();
+    const prevLineDash = this.getLineDash();
 
     this.density = density;
 
@@ -90,7 +91,7 @@ export default class Canvasimo {
         this.setFontSize(prevFontSize);
       }
 
-      this.ctx.setLineDash(this.ctx.getLineDash().map((dash) => dash * multiplier));
+      this.setLineDash(prevLineDash);
 
       this.ctx.lineDashOffset *= multiplier;
       this.ctx.lineWidth *= multiplier;
@@ -367,6 +368,12 @@ export default class Canvasimo {
     return this;
   }
   public setLineDash = (segments: Segments): Canvasimo => {
+    if (typeof this.ctx.setLineDash !== 'function') {
+      // tslint:disable-next-line:no-console
+      console.error('setLineDash is not supported by this browser');
+      return this;
+    }
+
     this.ctx.setLineDash(segments.map((segment) => segment * this.density));
     return this;
   }
@@ -523,7 +530,15 @@ export default class Canvasimo {
   // FIXME: Needs implementation for IE
   // public isPointInStroke = (): boolean => this.ctx.isPointInStroke();
   public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
-  public getLineDash = (): Segments => (this.ctx.getLineDash() || []).map((value) => value / this.density);
+  public getLineDash = (): Segments => {
+    if (typeof this.ctx.getLineDash !== 'function') {
+      // tslint:disable-next-line:no-console
+      console.error('getLineDash is not supported by this browser');
+      return [];
+    }
+
+    return (this.ctx.getLineDash() || []).map((value) => value / this.density);
+  }
 
   // Renamed context getters
   public getTextSize = (text: string): TextMetrics => this.measureText(text);
