@@ -155,8 +155,8 @@ export default class Canvasimo {
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
 
   /**
-   * @group: Context
-   * @description: 'A collection of methods for retrieving a canvas context or information about the context.
+   * @group Context
+   * @description 'A collection of methods for retrieving a canvas context or information about the context.
    */
 
   /**
@@ -184,6 +184,387 @@ export default class Canvasimo {
 
     return (this.ctx as any).getContextAttributes();
   }
+
+  /**
+   * @group Solid Shapes
+   * @description A collection of methods for plotting or drawing solid shapes -
+   * those that create a new shape when invoked, and are self closing.
+   */
+
+  // plotRect',
+  /**
+   * Plot a rectangle that can then have a fill or stroke applied to it.
+   * @alias rect
+   */
+  public plotRect = (x: number, y: number, width: number, height: number): Canvasimo => this.rect(x, y, width, height);
+  public rect = (x: number, y: number, width: number, height: number): Canvasimo => {
+    this.ctx.rect(x * this.density, y * this.density, width * this.density, height * this.density);
+    return this;
+  }
+  /**
+   * Plot a rectangle and apply a stroke to it.
+   */
+  public strokeRect = (x: number, y: number, width: number, height: number, color?: string): Canvasimo => {
+    if (typeof color !== 'undefined') {
+      this.setStroke(color);
+    }
+    this.ctx.strokeRect(x * this.density, y * this.density, width * this.density, height * this.density);
+    return this;
+  }
+  /**
+   *  Plot a rectangle and apply a fill to it.
+   */
+  public fillRect = (x: number, y: number, width: number, height: number, color?: string): Canvasimo => {
+    if (typeof color !== 'undefined') {
+      this.setFill(color);
+    }
+    this.ctx.fillRect(x * this.density, y * this.density, width * this.density, height * this.density);
+    return this;
+  }
+  /**
+   *  Plot a rounded rectangle that can then have a fill or stroke applied to it.
+   */
+  public plotRoundedRect = (x: number, y: number, width: number, height: number, radius: number): Canvasimo => {
+    const minRadius = Math.min(width / 2, height / 2, radius);
+
+    return this
+      .beginPath()
+      .moveTo(x + minRadius, y)
+      .lineTo(x + width - minRadius, y)
+      .arcTo(x + width, y, x + width, y + minRadius, minRadius)
+      .lineTo(x + width, y + height - minRadius)
+      .arcTo(x + width, y + height, x + width - minRadius, y + height, minRadius)
+      .lineTo(x + minRadius, y + height)
+      .arcTo(x, y + height, x, y + height - minRadius, minRadius)
+      .lineTo(x, y + minRadius)
+      .arcTo(x, y, x + minRadius, y, minRadius)
+      .closePath();
+  }
+  /**
+   *  Plot a rounded rectangle and apply a stroke to it.
+   */
+  public strokeRoundedRect = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+    color?: string
+  ): Canvasimo => {
+    return this
+      .plotRoundedRect(x, y, width, height, radius)
+      .stroke(color);
+  }
+  /**
+   *  Plot a rounded rectangle and apply a fill to it.
+   */
+  public fillRoundedRect = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+    color?: string
+  ): Canvasimo => {
+    return this
+      .plotRoundedRect(x, y, width, height, radius)
+      .fill(color);
+  }
+  /**
+   * Plot a circle that can then have a stroke or fill applied to it.
+   */
+  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: boolean): Canvasimo => {
+    return this
+      .beginPath()
+      .plotArc(x, y, radius, 0, Math.PI * 2, anticlockwise)
+      .closePath();
+  }
+  /**
+   * Plot a circle and apply a stroke to it.
+   */
+  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
+    return this
+      .plotCircle(x, y, radius, anticlockwise)
+      .stroke(color);
+  }
+  /**
+   * Plot a circle and apply a fill to it.
+   */
+  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
+    return this
+      .plotCircle(x, y, radius, anticlockwise)
+      .fill(color);
+  }
+  /**
+   * Plot a polygon that can then have a stroke or fill applied to it.
+   */
+  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: boolean): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    const direction = anticlockwise ? -1 : 1;
+
+    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
+
+    this
+      .beginPath()
+      .moveTo(x + radius, y);
+
+    for (let i = 0; beforeEnd(i); i += direction) {
+      const angle = Math.PI * 2 / sides * i;
+      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+    }
+
+    return this.closePath();
+  }
+  /**
+   * Plot a polygon and apply a stoke to it.
+   */
+  public strokePoly = (
+    x: number,
+    y: number,
+    radius: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotPoly(x, y, radius, sides, anticlockwise)
+      .stroke(color);
+  }
+  /**
+   * Plot a polygon and apply a fill to it.
+   */
+  public fillPoly = (
+    x: number,
+    y: number,
+    radius: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotPoly(x, y, radius, sides, anticlockwise)
+      .fill(color);
+  }
+  /**
+   * Plot a star that can then have a stroke or fill applied to it.
+   */
+  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: boolean): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    } else if (sides === 3 || sides === 4) {
+      return this.plotPoly(x, y, radius1, sides);
+    }
+
+    sides = sides * 2;
+
+    const direction = anticlockwise ? -1 : 1;
+    const offset = Math.PI * 2 / sides;
+    const cross = Math.cos(offset * 2) * radius1;
+    const radius2 = cross / Math.cos(offset);
+
+    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
+
+    this
+      .beginPath()
+      .moveTo(x + radius1, y);
+
+    for (let i = 0; beforeEnd(i); i += direction) {
+      const angle = offset * i;
+      const radius = i % 2 ? radius2 : radius1;
+      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+    }
+
+    return this.closePath();
+  }
+  /**
+   * Plot a star and apply a stoke to it.
+   */
+  public strokeStar = (
+    x: number,
+    y: number,
+    radius1: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotStar(x, y, radius1, sides, anticlockwise)
+      .stroke(color);
+  }
+  /**
+   * Plot a star and apply a fill to it.
+   */
+  public fillStar = (
+    x: number,
+    y: number,
+    radius1: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotStar(x, y, radius1, sides, anticlockwise)
+      .fill(color);
+  }
+  /**
+   * Plot a burst that can then have a stroke or fill applied to it.
+   */
+  public plotBurst = (
+    x: number,
+    y: number,
+    radius1: number,
+    radius2: number,
+    sides: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    sides = sides * 2;
+
+    const direction = anticlockwise ? -1 : 1;
+    const offset = Math.PI * 2 / sides;
+
+    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
+
+    this
+      .beginPath()
+      .moveTo(x + radius1, y);
+
+    for (let i = 0; beforeEnd(i); i += direction) {
+      const angle = offset * i;
+      const radius = i % 2 ? radius2 : radius1;
+      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+    }
+
+    return this
+      .closePath();
+  }
+  /**
+   * Plot a burst and apply a stoke to it.
+   */
+  public strokeBurst = (
+    x: number,
+    y: number,
+    radius1: number,
+    radius2: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotBurst(x, y, radius1, radius2, sides, anticlockwise)
+      .stroke(color);
+  }
+  /**
+   * Plot a burst and apply a fill to it.
+   */
+  public fillBurst = (
+    x: number,
+    y: number,
+    radius1: number,
+    radius2: number,
+    sides: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    sides = Math.round(sides);
+
+    if (!sides || sides < 3) {
+      return this;
+    }
+
+    return this
+      .plotBurst(x, y, radius1, radius2, sides, anticlockwise)
+      .fill(color);
+  }
+  /**
+   * Plot a single pixel that can then have a stroke or fill applied to it.
+   */
+  public plotPixel = (x: number, y: number): Canvasimo => {
+    return this
+      .plotRect(x, y, 1, 1);
+  }
+  /**
+   * Plot a single pixel and apply a stroke to it.
+   */
+  public strokePixel = (x: number, y: number, color?: string): Canvasimo => {
+    return this
+      .strokeRect(x, y, 1, 1, color);
+  }
+  /**
+   * Plot a single pixel and apply a fill to it.
+   */
+  public fillPixel = (x: number, y: number, color?: string): Canvasimo => {
+    return this
+      .fillRect(x, y, 1, 1, color);
+  }
+  /**
+   * Plot a closed path that can then have a stroke or fill applied to it.
+   */
+  public plotClosedPath = (points: Points): Canvasimo => {
+    return this
+      .beginPath()
+      .plotPath(points)
+      .closePath();
+  }
+  /**
+   * Plot a closed path and apply a stroke to it.
+   */
+  public strokeClosedPath = (points: Points, color?: string): Canvasimo => {
+    return this
+      .plotClosedPath(points)
+      .stroke(color);
+  }
+  /**
+   * Plot a closed path and apply a fill to it.
+   */
+  public fillClosedPath = (points: Points, color?: string): Canvasimo => {
+    return this
+      .plotClosedPath(points)
+      .fill(color);
+  }
+
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Image smoothing
@@ -401,10 +782,7 @@ export default class Canvasimo {
     );
     return this;
   }
-  public rect = (x: number, y: number, width: number, height: number): Canvasimo => {
-    this.ctx.rect(x * this.density, y * this.density, width * this.density, height * this.density);
-    return this;
-  }
+
   public arc = (
     x: number,
     y: number,
@@ -434,7 +812,6 @@ export default class Canvasimo {
   }
 
   // Renamed context methods
-  public plotRect = (x: number, y: number, width: number, height: number): Canvasimo => this.rect(x, y, width, height);
   public plotArc = (
     x: number,
     y: number,
@@ -643,211 +1020,6 @@ export default class Canvasimo {
       .stroke(color);
   }
 
-  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: boolean): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    const direction = anticlockwise ? -1 : 1;
-
-    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
-
-    this
-      .beginPath()
-      .moveTo(x + radius, y);
-
-    for (let i = 0; beforeEnd(i); i += direction) {
-      const angle = Math.PI * 2 / sides * i;
-      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
-    }
-
-    return this.closePath();
-  }
-
-  public strokePoly = (
-    x: number,
-    y: number,
-    radius: number,
-    sides: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotPoly(x, y, radius, sides, anticlockwise)
-      .stroke(color);
-  }
-
-  public fillPoly = (
-    x: number,
-    y: number,
-    radius: number,
-    sides: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotPoly(x, y, radius, sides, anticlockwise)
-      .fill(color);
-  }
-
-  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: boolean): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    } else if (sides === 3 || sides === 4) {
-      return this.plotPoly(x, y, radius1, sides);
-    }
-
-    sides = sides * 2;
-
-    const direction = anticlockwise ? -1 : 1;
-    const offset = Math.PI * 2 / sides;
-    const cross = Math.cos(offset * 2) * radius1;
-    const radius2 = cross / Math.cos(offset);
-
-    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
-
-    this
-      .beginPath()
-      .moveTo(x + radius1, y);
-
-    for (let i = 0; beforeEnd(i); i += direction) {
-      const angle = offset * i;
-      const radius = i % 2 ? radius2 : radius1;
-      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
-    }
-
-    return this.closePath();
-  }
-
-  public strokeStar = (
-    x: number,
-    y: number,
-    radius1: number,
-    sides: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotStar(x, y, radius1, sides, anticlockwise)
-      .stroke(color);
-  }
-
-  public fillStar = (
-    x: number,
-    y: number,
-    radius1: number,
-    sides: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotStar(x, y, radius1, sides, anticlockwise)
-      .fill(color);
-  }
-
-  public plotBurst = (
-    x: number,
-    y: number,
-    radius1: number,
-    radius2: number,
-    sides: number,
-    anticlockwise?: boolean
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    sides = sides * 2;
-
-    const direction = anticlockwise ? -1 : 1;
-    const offset = Math.PI * 2 / sides;
-
-    const beforeEnd = (i: number) => anticlockwise ? i > -sides : i < sides;
-
-    this
-      .beginPath()
-      .moveTo(x + radius1, y);
-
-    for (let i = 0; beforeEnd(i); i += direction) {
-      const angle = offset * i;
-      const radius = i % 2 ? radius2 : radius1;
-      this.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
-    }
-
-    return this
-      .closePath();
-  }
-
-  public strokeBurst = (
-    x: number,
-    y: number,
-    radius1: number,
-    radius2: number,
-    sides: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotBurst(x, y, radius1, radius2, sides, anticlockwise)
-      .stroke(color);
-  }
-
-  public fillBurst = (
-    x: number,
-    y: number,
-    radius1: number,
-    radius2: number,
-    sides: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    sides = Math.round(sides);
-
-    if (!sides || sides < 3) {
-      return this;
-    }
-
-    return this
-      .plotBurst(x, y, radius1, radius2, sides, anticlockwise)
-      .fill(color);
-  }
-
   public plotPath = (points: Points): Canvasimo => {
     forPoints(points, (x: number, y: number, i: number) => {
       if (i === 0) {
@@ -869,25 +1041,6 @@ export default class Canvasimo {
   public strokePath = (points: Points, color?: string): Canvasimo => {
     return this
       .plotPath(points)
-      .stroke(color);
-  }
-
-  public plotClosedPath = (points: Points): Canvasimo => {
-    return this
-      .beginPath()
-      .plotPath(points)
-      .closePath();
-  }
-
-  public fillClosedPath = (points: Points, color?: string): Canvasimo => {
-    return this
-      .plotClosedPath(points)
-      .fill(color);
-  }
-
-  public strokeClosedPath = (points: Points, color?: string): Canvasimo => {
-    return this
-      .plotClosedPath(points)
       .stroke(color);
   }
 
@@ -913,22 +1066,6 @@ export default class Canvasimo {
     } else {
       this.ctx.strokeText(text, x * this.density, y * this.density, maxWidth * this.density);
     }
-    return this;
-  }
-
-  public fillRect = (x: number, y: number, width: number, height: number, color?: string): Canvasimo => {
-    if (typeof color !== 'undefined') {
-      this.setFill(color);
-    }
-    this.ctx.fillRect(x * this.density, y * this.density, width * this.density, height * this.density);
-    return this;
-  }
-
-  public strokeRect = (x: number, y: number, width: number, height: number, color?: string): Canvasimo => {
-    if (typeof color !== 'undefined') {
-      this.setStroke(color);
-    }
-    this.ctx.strokeRect(x * this.density, y * this.density, width * this.density, height * this.density);
     return this;
   }
 
@@ -990,83 +1127,6 @@ export default class Canvasimo {
     return this
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
       .stroke(color);
-  }
-
-  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: boolean): Canvasimo => {
-    return this
-      .beginPath()
-      .plotArc(x, y, radius, 0, Math.PI * 2, anticlockwise)
-      .closePath();
-  }
-
-  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
-    return this
-      .plotCircle(x, y, radius, anticlockwise)
-      .fill(color);
-  }
-
-  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
-    return this
-      .plotCircle(x, y, radius, anticlockwise)
-      .stroke(color);
-  }
-
-  public plotRoundedRect = (x: number, y: number, width: number, height: number, radius: number): Canvasimo => {
-    const minRadius = Math.min(width / 2, height / 2, radius);
-
-    return this
-      .beginPath()
-      .moveTo(x + minRadius, y)
-      .lineTo(x + width - minRadius, y)
-      .arcTo(x + width, y, x + width, y + minRadius, minRadius)
-      .lineTo(x + width, y + height - minRadius)
-      .arcTo(x + width, y + height, x + width - minRadius, y + height, minRadius)
-      .lineTo(x + minRadius, y + height)
-      .arcTo(x, y + height, x, y + height - minRadius, minRadius)
-      .lineTo(x, y + minRadius)
-      .arcTo(x, y, x + minRadius, y, minRadius)
-      .closePath();
-  }
-
-  public fillRoundedRect = (
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    radius: number,
-    color?: string
-  ): Canvasimo => {
-    return this
-      .plotRoundedRect(x, y, width, height, radius)
-      .fill(color);
-  }
-
-  public strokeRoundedRect = (
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    radius: number,
-    color?: string
-  ): Canvasimo => {
-    return this
-      .plotRoundedRect(x, y, width, height, radius)
-      .stroke(color);
-  }
-
-  public plotPixel = (x: number, y: number): Canvasimo => {
-    return this
-      .plotRect(x, y, 1, 1);
-  }
-
-  public fillPixel = (x: number, y: number, color?: string): Canvasimo => {
-    return this
-      .fillRect(x, y, 1, 1, color);
-  }
-
-  public strokePixel = (x: number, y: number, color?: string): Canvasimo => {
-    return this
-      .strokeRect(x, y, 1, 1, color);
   }
 
   // Font methods
