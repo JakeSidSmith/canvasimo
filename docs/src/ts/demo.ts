@@ -1,7 +1,4 @@
-import { polyfill } from 'raf';
 import Canvasimo from '../../../src';
-
-polyfill();
 
 (window as any).Canvasimo = Canvasimo;
 
