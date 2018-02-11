@@ -123,7 +123,7 @@ export default class Document extends Component<Props, {}> {
 
                 <LinkHeader type="h2" header="Demo" />
 
-                <canvas id="canvas" width="400" height="200">
+                <canvas id="demo-1" width="400" height="200">
                   Looks like this browser doesn't support the canvas element, or you have javascript disabled.
                 </canvas>
                 <noscript>

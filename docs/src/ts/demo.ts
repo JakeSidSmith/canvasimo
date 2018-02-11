@@ -5,7 +5,7 @@ polyfill();
 
 (window as any).Canvasimo = Canvasimo;
 
-const element = document.getElementById('canvas');
+const element = document.getElementById('demo-1');
 
 if (!element) {
   throw new Error('Could not find canvas element for demo');
