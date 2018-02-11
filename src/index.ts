@@ -7,13 +7,13 @@ import {
 import {
   CanvasContext,
   CanvasContextAttributes,
-  Color,
   CreateImageData,
   DrawImage,
   Fill,
   FillOrStrokeStyle,
   FillRule,
   ForEach,
+  GetAngle,
   GlobalCompositeOperation,
   LineCap,
   LineJoin,
@@ -153,8 +153,8 @@ export default class Canvasimo {
   public getLineDashOffset = (): number => this.getCanvasProperty('lineDashOffset') / this.density;
   public setMiterLimit = (value: number): Canvasimo => this.setCanvasProperty('miterLimit', value * this.density);
   public getMiterLimit = (): number => this.getCanvasProperty('miterLimit') / this.density;
-  public setShadowColor = (value: Color): Canvasimo => this.setCanvasProperty('shadowColor', value);
-  public getShadowColor = (): Color => this.getCanvasProperty('shadowColor');
+  public setShadowColor = (value: string): Canvasimo => this.setCanvasProperty('shadowColor', value);
+  public getShadowColor = (): string => this.getCanvasProperty('shadowColor');
   public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
   public getShadowBlur = (): number => this.getCanvasProperty('shadowBlur') / this.density;
   public setShadowOffsetX = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetX', value * this.density);
@@ -513,7 +513,7 @@ export default class Canvasimo {
       .setWidth(this.getWidth());
   }
 
-  public fillCanvas = (color: Color): Canvasimo => {
+  public fillCanvas = (color: string): Canvasimo => {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
@@ -525,7 +525,7 @@ export default class Canvasimo {
       .lineTo(x2, y2);
   }
 
-  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: Color): Canvasimo => {
+  public strokeLine = (x1: number, y1: number, x2: number, y2: number, color?: string): Canvasimo => {
     return this
       .plotLine(x1, y1, x2, y2)
       .stroke(color);
@@ -540,7 +540,7 @@ export default class Canvasimo {
       .lineTo(x2, y2);
   }
 
-  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: Color): Canvasimo => {
+  public strokeLength = (x1: number, y1: number, length: number, angle: number, color?: string): Canvasimo => {
     return this
       .plotLength(x1, y1, length, angle)
       .stroke(color);
@@ -575,7 +575,7 @@ export default class Canvasimo {
     radius: number,
     sides: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -594,7 +594,7 @@ export default class Canvasimo {
     radius: number,
     sides: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -644,7 +644,7 @@ export default class Canvasimo {
     radius1: number,
     sides: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -663,7 +663,7 @@ export default class Canvasimo {
     radius1: number,
     sides: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -718,7 +718,7 @@ export default class Canvasimo {
     radius2: number,
     sides: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -738,7 +738,7 @@ export default class Canvasimo {
     radius2: number,
     sides: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -763,13 +763,13 @@ export default class Canvasimo {
     return this;
   }
 
-  public fillPath = (points: Points, color?: Color): Canvasimo => {
+  public fillPath = (points: Points, color?: string): Canvasimo => {
     return this
       .plotPath(points)
       .fill(color);
   }
 
-  public strokePath = (points: Points, color?: Color): Canvasimo => {
+  public strokePath = (points: Points, color?: string): Canvasimo => {
     return this
       .plotPath(points)
       .stroke(color);
@@ -782,19 +782,19 @@ export default class Canvasimo {
       .closePath();
   }
 
-  public fillClosedPath = (points: Points, color?: Color): Canvasimo => {
+  public fillClosedPath = (points: Points, color?: string): Canvasimo => {
     return this
       .plotClosedPath(points)
       .fill(color);
   }
 
-  public strokeClosedPath = (points: Points, color?: Color): Canvasimo => {
+  public strokeClosedPath = (points: Points, color?: string): Canvasimo => {
     return this
       .plotClosedPath(points)
       .stroke(color);
   }
 
-  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: Color): Canvasimo => {
+  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
@@ -807,7 +807,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: Color): Canvasimo => {
+  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
@@ -819,7 +819,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public fillRect = (x: number, y: number, width: number, height: number, color?: Color): Canvasimo => {
+  public fillRect = (x: number, y: number, width: number, height: number, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
@@ -827,7 +827,7 @@ export default class Canvasimo {
     return this;
   }
 
-  public strokeRect = (x: number, y: number, width: number, height: number, color?: Color): Canvasimo => {
+  public strokeRect = (x: number, y: number, width: number, height: number, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
@@ -842,7 +842,7 @@ export default class Canvasimo {
     startAngle: number,
     endAngle: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     return this
       .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
@@ -856,7 +856,7 @@ export default class Canvasimo {
     startAngle: number,
     endAngle: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     return this
       .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
@@ -872,7 +872,7 @@ export default class Canvasimo {
     startAngle: number,
     endAngle: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     return this
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
@@ -888,7 +888,7 @@ export default class Canvasimo {
     startAngle: number,
     endAngle: number,
     anticlockwise?: boolean,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     return this
       .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
@@ -902,13 +902,13 @@ export default class Canvasimo {
       .closePath();
   }
 
-  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color): Canvasimo => {
+  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
     return this
       .plotCircle(x, y, radius, anticlockwise)
       .fill(color);
   }
 
-  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: Color): Canvasimo => {
+  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
     return this
       .plotCircle(x, y, radius, anticlockwise)
       .stroke(color);
@@ -937,7 +937,7 @@ export default class Canvasimo {
     width: number,
     height: number,
     radius: number,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     return this
       .plotRoundedRect(x, y, width, height, radius)
@@ -950,7 +950,7 @@ export default class Canvasimo {
     width: number,
     height: number,
     radius: number,
-    color?: Color
+    color?: string
   ): Canvasimo => {
     return this
       .plotRoundedRect(x, y, width, height, radius)
@@ -962,12 +962,12 @@ export default class Canvasimo {
       .plotRect(x, y, 1, 1);
   }
 
-  public fillPixel = (x: number, y: number, color?: Color): Canvasimo => {
+  public fillPixel = (x: number, y: number, color?: string): Canvasimo => {
     return this
       .fillRect(x, y, 1, 1, color);
   }
 
-  public strokePixel = (x: number, y: number, color?: Color): Canvasimo => {
+  public strokePixel = (x: number, y: number, color?: string): Canvasimo => {
     return this
       .strokeRect(x, y, 1, 1, color);
   }
@@ -1075,19 +1075,19 @@ export default class Canvasimo {
   }
 
   // Helper methods
-  public createHSL = (h: number, s: number, l: number): Color => {
+  public createHSL = (h: number, s: number, l: number): string => {
     return 'hsl(' + h + ',' + s + '%,' + l + '%)';
   }
 
-  public createHSLA = (h: number, s: number, l: number, a: number): Color => {
+  public createHSLA = (h: number, s: number, l: number, a: number): string => {
     return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
   }
 
-  public createRGB = (r: number, g: number, b: number): Color => {
+  public createRGB = (r: number, g: number, b: number): string => {
     return 'rgb(' + r + ',' + g + ',' + b + ')';
   }
 
-  public createRGBA = (r: number, g: number, b: number, a: number): Color => {
+  public createRGBA = (r: number, g: number, b: number, a: number): string => {
     return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
   }
 
@@ -1122,12 +1122,12 @@ export default class Canvasimo {
     return -Math.PI - c;
   }
 
-  public getRGBFromRGBA = (color: Color): Color => {
+  public getRGBFromRGBA = (color: string): string => {
     const lastCommaIndex = color.lastIndexOf(',');
     return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
   }
 
-  public getHSLFromHSLA = (color: Color): Color => this.getRGBFromRGBA(color);
+  public getHSLFromHSLA = (color: string): string => this.getRGBFromRGBA(color);
 
   public getRadiansFromDegrees = (degrees: number): number => {
     return degrees * Math.PI / 180;
@@ -1161,7 +1161,7 @@ export default class Canvasimo {
     return this.getHeight() * fraction;
   }
 
-  public getPixelColor = (x: number, y: number): Color => {
+  public getPixelColor = (x: number, y: number): string => {
     const data = this.getImageData(x, y, 1, 1).data;
     return this.createRGBA(data[0], data[1], data[2], data[3]);
   }

@@ -1,6 +1,5 @@
 import Canvasimo from './';
 
-export type Color = string;
 export type Segments = number[];
 
 export interface Point {
