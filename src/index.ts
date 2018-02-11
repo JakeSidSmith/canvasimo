@@ -795,6 +795,63 @@ export default class Canvasimo {
       .fill(color);
   }
 
+  /**
+   * @group Text
+   * @description A collection of methods for drawing text,
+   * and getting and setting properties related to text rendering.
+   */
+
+  /**
+   * Draw a text with a stroke.
+   */
+  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
+    if (typeof color !== 'undefined') {
+      this.setStroke(color);
+    }
+    if (typeof maxWidth !== 'number') {
+      this.ctx.strokeText(text, x * this.density, y * this.density);
+    } else {
+      this.ctx.strokeText(text, x * this.density, y * this.density, maxWidth * this.density);
+    }
+    return this;
+  }
+  /**
+   * Draw a text with a fill.
+   */
+  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
+    if (typeof color !== 'undefined') {
+      this.setFill(color);
+    }
+    // If max width is not a number (e.g. undefined) then iOS does not draw anything
+    if (typeof maxWidth !== 'number') {
+      this.ctx.fillText(text, x * this.density, y * this.density);
+    } else {
+      this.ctx.fillText(text, x * this.density, y * this.density, maxWidth * this.density);
+    }
+    return this;
+  }
+  /**
+   * Get information about the size text will be drawn.
+   * @alias measureText
+   */
+  public getTextSize = (text: string): TextMetrics => this.measureText(text);
+  /**
+   * Set the horizontal text alignment.
+   */
+  public setTextAlign = (value: TextAlign): Canvasimo => this.setCanvasProperty('textAlign', value);
+  /**
+   * Get the horizontal text alignment.
+   */
+  public getTextAlign = (): TextAlign => this.getCanvasProperty('textAlign');
+  /**
+   * Set the vertical text alignment.
+   */
+  public setTextBaseline = (value: TextBaseline): Canvasimo => this.setCanvasProperty('textBaseline', value);
+  /**
+   * Get the vertical text alignment.
+   */
+  public getTextBaseline = (): TextBaseline => this.getCanvasProperty('textBaseline');
+
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Image smoothing
@@ -851,10 +908,6 @@ export default class Canvasimo {
   public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
   public setShadowOffsetY = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetY', value * this.density);
   public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
-  public setTextAlign = (value: TextAlign): Canvasimo => this.setCanvasProperty('textAlign', value);
-  public getTextAlign = (): TextAlign => this.getCanvasProperty('textAlign');
-  public setTextBaseline = (value: TextBaseline): Canvasimo => this.setCanvasProperty('textBaseline', value);
-  public getTextBaseline = (): TextBaseline => this.getCanvasProperty('textBaseline');
 
   // Renamed property getter and setters
   public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
@@ -1133,7 +1186,6 @@ export default class Canvasimo {
   }
 
   // Renamed context getters
-  public getTextSize = (text: string): TextMetrics => this.measureText(text);
   public getStrokeDash = (): Segments => this.getLineDash();
 
   // Additional methods
@@ -1146,31 +1198,6 @@ export default class Canvasimo {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
-  }
-
-  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
-    if (typeof color !== 'undefined') {
-      this.setFill(color);
-    }
-    // If max width is not a number (e.g. undefined) then iOS does not draw anything
-    if (typeof maxWidth !== 'number') {
-      this.ctx.fillText(text, x * this.density, y * this.density);
-    } else {
-      this.ctx.fillText(text, x * this.density, y * this.density, maxWidth * this.density);
-    }
-    return this;
-  }
-
-  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
-    if (typeof color !== 'undefined') {
-      this.setStroke(color);
-    }
-    if (typeof maxWidth !== 'number') {
-      this.ctx.strokeText(text, x * this.density, y * this.density);
-    } else {
-      this.ctx.strokeText(text, x * this.density, y * this.density, maxWidth * this.density);
-    }
-    return this;
   }
 
   // Font methods
