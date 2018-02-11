@@ -72,13 +72,15 @@ export interface CreateImageData {
 }
 
 export interface Fill {
-  (color?: string | FillRule): Canvasimo;
-  (color: string, fillRule: FillRule): Canvasimo;
+  (color?: string): Canvasimo;
+  (fillRule?: FillRule): Canvasimo; // tslint:disable-line:unified-signatures
+  (color: string, fillRule: FillRule): Canvasimo; // tslint:disable-line:unified-signatures
 }
 
 export interface Stroke {
-  (color?: string | Path2D): Canvasimo;
-  (color: string, path: Path2D): Canvasimo;
+  (color?: string): Canvasimo;
+  (path?: Path2D): Canvasimo; // tslint:disable-line:unified-signatures
+  (color: string, path: Path2D): Canvasimo; // tslint:disable-line:unified-signatures
 }
 
 export interface Repeat {
