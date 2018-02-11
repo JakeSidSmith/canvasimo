@@ -76,9 +76,30 @@ export default class Canvasimo {
 
   // Canvas size
   public setDensity = (density: number): Canvasimo => {
+    const prevDensity = this.density;
+    const multiplier = density / prevDensity;
+    const prevFontSize = this.getFontSize();
+
     this.density = density;
-    // FIXME: Setting the density should update all existing context attributes
-    return this.setSize(this.element.width, this.element.height);
+
+    if (prevDensity !== density) {
+      this.setSize(this.element.width, this.element.height);
+
+      if (typeof prevFontSize === 'number') {
+        this.setFontSize(prevFontSize);
+      }
+
+      this.ctx.setLineDash(this.ctx.getLineDash().map((dash) => dash * multiplier));
+
+      this.ctx.lineDashOffset *= multiplier;
+      this.ctx.lineWidth *= multiplier;
+      this.ctx.miterLimit *= multiplier;
+      this.ctx.shadowBlur *= multiplier;
+      this.ctx.shadowOffsetX *= multiplier;
+      this.ctx.shadowOffsetY *= multiplier;
+    }
+
+    return this;
   }
   public getDensity = (): number => this.density;
   public setWidth = (width: number): Canvasimo => {
