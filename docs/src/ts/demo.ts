@@ -3,6 +3,8 @@ import Canvasimo from '../../../src';
 
 polyfill();
 
+(window as any).Canvasimo = Canvasimo;
+
 const element = document.getElementById('canvas');
 
 if (!element) {
