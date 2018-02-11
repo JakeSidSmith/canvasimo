@@ -23,6 +23,11 @@ const draw = () => {
     .clearCanvas()
     .setSize(width, height)
     .fillCanvas('#EEEEEE')
+    .save()
+    .translate(width / 2, height / 2)
+    .rotate(canvas.getRadiansFromDegrees(-90))
+    .strokeStar(0, 0, 50, 5, false, 'red')
+    .restore()
     .fillCircle(width / 2, height / 2, 20, false, 'red')
     .repeat(10, (index) => {
       const y = canvas.map(index, 0, 10, 0, height) + height / 10 / 2;
