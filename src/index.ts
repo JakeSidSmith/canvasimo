@@ -1350,6 +1350,58 @@ export default class Canvasimo {
     return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
   }
 
+  /**
+   * @group Converting Sizes
+   * @description A collection of methods to help with calculating and converting sizes, and distances.
+   */
+
+  /**
+   * Get a fraction from the provided percent value e.g. 80 returns 0.8.
+   */
+  public getFractionFromPercent = (percent: number): number => {
+    return (percent / 100);
+  }
+  /**
+   * Get a percent from the provided fraction value e.g. 0.7 returns 70.
+   */
+  public getPercentFromFraction = (fraction: number): number => {
+    return (fraction * 100);
+  }
+  /**
+   * Returns the actual value of a fraction of the canvas width e.g.
+   * a canvas with a width of 200 returns 100 if the provided value is 0.5.
+   */
+  public getFractionOfWidth = (fraction: number): number => {
+    return this.getWidth() * fraction;
+  }
+  /**
+   * Returns the actual value of a fraction of the canvas height e.g.
+   * a canvas with a height of 100 returns 20 if the provided value is 0.2.
+   */
+  public getFractionOfHeight = (fraction: number): number => {
+    return this.getHeight() * fraction;
+  }
+  /**
+   * Returns the actual value of a percentage of the canvas width e.g.
+   * a canvas with a width of 200 returns 100 if the provided value is 50.
+   */
+  public getPercentOfWidth = (percent: number): number => {
+    return this.getWidth() / 100 * percent;
+  }
+  /**
+   * Returns the actual value of a percentage of the canvas height e.g.
+   * a canvas with a height of 100 returns 20 if the provided value is 20.
+   */
+  public getPercentOfHeight = (percent: number): number => {
+    return this.getHeight() / 100 * percent;
+  }
+  /**
+   * Returns the distance between 2 points.
+   */
+  public getDistance = (x1: number, y1: number, x2: number, y2: number): number => {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  }
+
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
@@ -1499,9 +1551,7 @@ export default class Canvasimo {
     return (this.ctx as any).isPointInStroke();
   }
 
-  public getDistance = (x1: number, y1: number, x2: number, y2: number): number => {
-    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-  }
+
   public getAngle: GetAngle = (...args: number[]): number => {
     if (!args.length || !(args.length === 4 || args.length === 6)) {
       throw new Error(INCORRECT_GET_ANGLE_ARGUMENTS);
@@ -1536,30 +1586,6 @@ export default class Canvasimo {
 
   public getDegreesFromRadians = (radians: number): number => {
     return radians * 180 / Math.PI;
-  }
-
-  public getPercentFromFraction = (fraction: number): number => {
-    return (fraction * 100);
-  }
-
-  public getFractionFromPercent = (percent: number): number => {
-    return (percent / 100);
-  }
-
-  public getPercentOfWidth = (percent: number): number => {
-    return this.getWidth() / 100 * percent;
-  }
-
-  public getFractionOfWidth = (fraction: number): number => {
-    return this.getWidth() * fraction;
-  }
-
-  public getPercentOfHeight = (percent: number): number => {
-    return this.getHeight() / 100 * percent;
-  }
-
-  public getFractionOfHeight = (fraction: number): number => {
-    return this.getHeight() * fraction;
   }
 
   public tap = (callback: () => any): Canvasimo => {
