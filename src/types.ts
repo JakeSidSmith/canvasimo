@@ -27,7 +27,7 @@ export type FillRule = 'nonzero' | 'evenodd';
 export type ImageLike = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
 export type CanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;
 export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
-export type FillOrStrokeStyle = Color | CanvasGradient | CanvasPattern;
+export type FillOrStrokeStyle = string | CanvasGradient | CanvasPattern;
 
 export interface Size {
   width: number;
