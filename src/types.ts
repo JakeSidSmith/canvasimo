@@ -29,10 +29,11 @@ export type CanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAt
 export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
 export type FillOrStrokeStyle = string | CanvasGradient | CanvasPattern;
 
-export interface Size {
+// tslint:disable-next-line:interface-over-type-literal
+export type Size = {
   width: number;
   height: number;
-}
+};
 
 export interface SetSize {
   (size: Size): Canvasimo;
