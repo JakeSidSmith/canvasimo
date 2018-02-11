@@ -82,7 +82,6 @@ export default class Canvasimo {
   }
   public getCurrentContext = (): CanvasRenderingContext2D => this.ctx;
   public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
-  // FIXME: Display spread in docs
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Canvas size

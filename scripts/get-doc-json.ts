@@ -29,12 +29,13 @@ const getTypeAlias = (type: ts.Type, checker: ts.TypeChecker): string | null => 
 
 const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker): Parameter => {
   const name = symbol.getName();
-  const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
+  const declaration = symbol.valueDeclaration as ts.ParameterDeclaration;
+  const type = checker.getTypeOfSymbolAtLocation(symbol, declaration);
   const typeName = checker.typeToString(type);
   const alias = getTypeAlias(type, checker);
 
   return {
-    name,
+    name: `${declaration.dotDotDotToken ? '...' : ''}${name}`,
     alias,
     type: typeName,
     optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
