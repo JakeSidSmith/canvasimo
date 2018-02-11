@@ -11,20 +11,17 @@ import {
   MATCHES_WHITESPACE,
 } from './constants';
 import {
-  AnyPoint,
   FillRule,
-  Point,
-  PointArray,
   Points,
-  TuplePoint,
-  TuplePointArray,
 } from './types';
 
-export const isPoint = (point?: AnyPoint): point is Point => {
+export const isPoint = (point?: {x: number, y: number} | [number, number] | number):
+  point is {x: number, y: number} => {
   return typeof point === 'object' && 'x' in point && 'y' in point;
 };
 
-export const isTuplePoint = (point?: AnyPoint): point is TuplePoint => {
+export const isTuplePoint = (point?: {x: number, y: number} | [number, number] | number):
+  point is [number, number] => {
   return typeof point === 'object' && Array.isArray(point) && point.length === 2;
 };
 
@@ -101,7 +98,7 @@ export const forPoints = (points: Points, callback: (x: number, y: number, index
   const secondPoint = points[1];
 
   if (isPoint(firstPoint)) {
-    (points as PointArray).forEach((point, index) => {
+    (points as Array<{x: number, y: number}>).forEach((point, index) => {
       if (!isPoint(point)) {
         throw new Error(`Expected point with format {x, y} but got ${point}`);
       }
@@ -109,7 +106,7 @@ export const forPoints = (points: Points, callback: (x: number, y: number, index
       callback(point.x, point.y, index);
     });
   } else if (isTuplePoint(firstPoint)) {
-    (points as TuplePointArray).forEach((point, index) => {
+    (points as Array<[number, number]>).forEach((point, index) => {
       if (!isTuplePoint(point)) {
         throw new Error(`Expected point with format [x, y] but got ${point}`);
       }

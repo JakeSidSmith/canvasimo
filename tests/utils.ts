@@ -24,7 +24,7 @@ describe('utils', () => {
       const spy = jest.fn();
 
       expect(() => forPoints({} as any, spy)).toThrow(anError);
-      expect(() => forPoints([[0, 0], [0]], spy)).toThrow(tupleError);
+      expect(() => forPoints([[0, 0], [0]] as any, spy)).toThrow(tupleError);
       expect(() => forPoints([{x: 0, y: 0}, {x: 0}] as any, spy)).toThrow(pointError);
       expect(() => forPoints([{x: 0, y: 0}, {y: 0}] as any, spy)).toThrow(pointError);
       expect(() => forPoints([{x: 0, y: 0}, {}] as any, spy)).toThrow(pointError);

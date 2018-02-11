@@ -2,19 +2,7 @@ import Canvasimo from './';
 
 export type Segments = number[];
 
-export interface Point {
-  x: number;
-  y: number;
-}
-
-export type TuplePoint = number[];
-
-export type PointArray = Point[];
-export type TuplePointArray = TuplePoint[];
-export type NumberArray = number[];
-
-export type AnyPoint = Point | TuplePoint | number;
-export type Points = PointArray | TuplePointArray | NumberArray;
+export type Points = Array<{x: number, y: number}> | Array<[number, number]> | number[];
 
 // tslint:disable-next-line:max-line-length
 export type GlobalCompositeOperation = 'source-over' | 'source-in' | 'source-out' | 'source-atop' | 'destination-over' | 'destination-in' | 'destination-out' | 'destination-atop' | 'lighter' | 'copy' | 'xor' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity';
