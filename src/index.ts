@@ -991,7 +991,22 @@ export default class Canvasimo {
   /**
    * Apply a stroke to the current shape.
    */
-  // stroke
+  public stroke: Stroke = (color?: string | Path2D, path?: Path2D): Canvasimo => {
+    if (typeof color === 'string') {
+      this.setStroke(color);
+      if (path) {
+        this.ctx.stroke(path);
+      } else {
+        this.ctx.stroke();
+      }
+    } else if (typeof color === 'object') {
+      this.ctx.stroke(color);
+    } else {
+      this.ctx.stroke(path);
+    }
+
+    return this;
+  }
   /**
    * Set the stroke style to use.
    * @alias setStrokeStyle
@@ -1090,135 +1105,105 @@ export default class Canvasimo {
    */
   public getMiterLimit = (): number => this.getCanvasProperty('miterLimit') / this.density;
 
-  public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
+  /**
+   * @group Fill styles
+   * @description A collection of methods for getting and setting fill styles,
+   * and applying fills to existing shapes.
+   */
 
-  // Image smoothing
-  public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
-    for (const key of IMAGE_SMOOTHING_KEYS) {
-      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
-        this.ctx[key] = value;
-        return this;
+  /**
+   * Apply a fill to the current shape.
+   */
+  public fill: Fill = (color?: string | FillRule, fillRule?: FillRule): Canvasimo => {
+    if (isFillRule(color)) {
+      this.ctx.fill(color);
+    } else if (typeof color === 'string') {
+      this.setFill(color);
+      if (fillRule) {
+        this.ctx.fill(fillRule);
+      } else {
+        this.ctx.fill();
       }
+    } else {
+      this.ctx.fill(fillRule);
     }
 
     return this;
   }
-  public getImageSmoothingEnabled = (): boolean => {
-    for (const key of IMAGE_SMOOTHING_KEYS) {
-      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
-        return this.ctx[key];
-      }
-    }
-
-    return false;
+  /**
+   * Apply a fill to the entire canvas area.
+   */
+  public fillCanvas = (color?: string): Canvasimo => {
+    return this
+      .resetTransform()
+      .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
   }
-
-  // Context property getter and setters
-  public setGlobalAlpha = (value: number): Canvasimo => this.setCanvasProperty('globalAlpha', value);
-  public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
-  public setGlobalCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
-    return this.setCanvasProperty('globalCompositeOperation', value);
+  /**
+   * Clear the entire canvas area
+   */
+  public clearCanvas = (): Canvasimo => {
+    return this
+      .setWidth(this.getWidth());
   }
-  public getGlobalCompositeOperation = (): GlobalCompositeOperation => {
-    return this.getCanvasProperty('globalCompositeOperation');
-  }
-  public setFillStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('fillStyle', value);
-  public getFillStyle = (): FillOrStrokeStyle => this.getCanvasProperty('fillStyle');
-  public setShadowColor = (value: string): Canvasimo => this.setCanvasProperty('shadowColor', value);
-  public getShadowColor = (): string => this.getCanvasProperty('shadowColor');
-  public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
-  public getShadowBlur = (): number => this.getCanvasProperty('shadowBlur') / this.density;
-  public setShadowOffsetX = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetX', value * this.density);
-  public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
-  public setShadowOffsetY = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetY', value * this.density);
-  public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
-
-  // Renamed property getter and setters
-  public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
-  public getOpacity = (): number => this.getGlobalAlpha();
-  public setCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
-    return this.setGlobalCompositeOperation(value);
-  }
-  public getCompositeOperation = (): GlobalCompositeOperation => this.getGlobalCompositeOperation();
-  public setFill = (value: FillOrStrokeStyle): Canvasimo => this.setFillStyle(value);
-  public getFill = (): FillOrStrokeStyle => this.getFillStyle();
-
-  // Standard context methods
-  public save = (): Canvasimo => {
-    this.ctx.save();
-    return this;
-  }
-  public restore = (): Canvasimo => {
-    this.ctx.restore();
-    return this;
-  }
-  public scale = (x: number, y: number): Canvasimo => {
-    this.ctx.scale(x, y);
-    return this;
-  }
-  public rotate = (angle: number): Canvasimo => {
-    this.ctx.rotate(angle);
-    return this;
-  }
-  public translate = (x: number, y: number): Canvasimo => {
-    this.ctx.translate(x * this.density, y * this.density);
-    return this;
-  }
-  public transform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
-    this.ctx.transform(m11, m12, m21, m22, dx, dy);
-    return this;
-  }
-  public setTransform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
-    this.ctx.setTransform(m11, m12, m21, m22, dx, dy);
-    return this;
-  }
-  public drawFocusIfNeeded = (element: Element): Canvasimo => {
-    this.ctx.drawFocusIfNeeded(element);
-    return this;
-  }
-  public clip = (fillRules?: FillRule): Canvasimo => {
-    this.ctx.clip(fillRules);
-    return this;
-  }
+  /**
+   * Clear a rectangular area of the canvas.
+   */
   public clearRect = (x: number, y: number, width: number, height: number): Canvasimo => {
     this.ctx.clearRect(x * this.density, y * this.density, width * this.density, height * this.density);
     return this;
   }
-  public moveTo = (x: number, y: number): Canvasimo => {
-    this.ctx.moveTo(x * this.density, y * this.density);
-    return this;
+  /**
+   * Set the fill to use.
+   * @alias setFillStyle
+   */
+  public setFill = (value: FillOrStrokeStyle): Canvasimo => this.setFillStyle(value);
+  public setFillStyle = (value: FillOrStrokeStyle): Canvasimo => this.setCanvasProperty('fillStyle', value);
+  /**
+   * Get the fill that is being used.
+   * @alias getFillStyle
+   */
+  public getFill = (): FillOrStrokeStyle => this.getFillStyle();
+  public getFillStyle = (): FillOrStrokeStyle => this.getCanvasProperty('fillStyle');
+  /**
+   * Create a linear gradient to use as a fill.
+   */
+  public createLinearGradient = (x0: number, y0: number, x1: number, y1: number): CanvasGradient => {
+    return this.ctx.createLinearGradient(x0 * this.density, y0 * this.density, x1 * this.density, y1 * this.density);
   }
-  public lineTo = (x: number, y: number): Canvasimo => {
-    this.ctx.lineTo(x * this.density, y * this.density);
-    return this;
-  }
-  public quadraticCurveTo = (cpx: number, cpy: number, x: number, y: number): Canvasimo => {
-    this.ctx.quadraticCurveTo(cpx * this.density, cpy * this.density, x * this.density, y * this.density);
-    return this;
-  }
-  public bezierCurveTo = (cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): Canvasimo => {
-    this.ctx.bezierCurveTo(
-      cp1x * this.density,
-      cp1y * this.density,
-      cp2x * this.density,
-      cp2y * this.density,
-      x * this.density,
-      y * this.density
+  /**
+   * Create a radial gradient to use as a fill.
+   */
+  public createRadialGradient = (
+    x0: number,
+    y0: number,
+    r0: number,
+    x1: number,
+    y1: number,
+    r1: number
+  ): CanvasGradient => {
+    return this.ctx.createRadialGradient(
+      x0 * this.density,
+      y0 * this.density,
+      r0 * this.density,
+      x1 * this.density,
+      y1 * this.density,
+      r1 * this.density
     );
-    return this;
   }
-  public arcTo = (x1: number, y1: number, x2: number, y2: number, radius: number): Canvasimo => {
-    this.ctx.arcTo(x1 * this.density, y1 * this.density, x2 * this.density, y2 * this.density, radius * this.density);
-    return this;
+  /**
+   * Create a pattern to be used as a fill.
+   */
+  public createPattern = (
+    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
+    repetition: string
+  ): CanvasPattern => {
+    return this.ctx.createPattern(image, repetition);
   }
-  public beginPath = (): Canvasimo => {
-    this.ctx.beginPath();
-    return this;
-  }
-  public closePath = (): Canvasimo => {
-    this.ctx.closePath();
-    return this;
-  }
+  /**
+   * Draw an image to the canvas.
+   * If the second position / size arguments are supplied, the first will be used for cropping the image,
+   * and the second for the position and size it will be drawn.
+   */
   public drawImage: DrawImage = (
     image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
     srcX: number,
@@ -1259,6 +1244,131 @@ export default class Canvasimo {
     }
     return this;
   }
+
+  public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
+
+  // Image smoothing
+  public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
+    for (const key of IMAGE_SMOOTHING_KEYS) {
+      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
+        this.ctx[key] = value;
+        return this;
+      }
+    }
+
+    return this;
+  }
+  public getImageSmoothingEnabled = (): boolean => {
+    for (const key of IMAGE_SMOOTHING_KEYS) {
+      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
+        return this.ctx[key];
+      }
+    }
+
+    return false;
+  }
+
+  // Context property getter and setters
+  public setGlobalAlpha = (value: number): Canvasimo => this.setCanvasProperty('globalAlpha', value);
+  public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
+  public setGlobalCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
+    return this.setCanvasProperty('globalCompositeOperation', value);
+  }
+  public getGlobalCompositeOperation = (): GlobalCompositeOperation => {
+    return this.getCanvasProperty('globalCompositeOperation');
+  }
+
+  public setShadowColor = (value: string): Canvasimo => this.setCanvasProperty('shadowColor', value);
+  public getShadowColor = (): string => this.getCanvasProperty('shadowColor');
+  public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
+  public getShadowBlur = (): number => this.getCanvasProperty('shadowBlur') / this.density;
+  public setShadowOffsetX = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetX', value * this.density);
+  public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
+  public setShadowOffsetY = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetY', value * this.density);
+  public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
+
+  // Renamed property getter and setters
+  public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
+  public getOpacity = (): number => this.getGlobalAlpha();
+  public setCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
+    return this.setGlobalCompositeOperation(value);
+  }
+  public getCompositeOperation = (): GlobalCompositeOperation => this.getGlobalCompositeOperation();
+
+  // Standard context methods
+  public save = (): Canvasimo => {
+    this.ctx.save();
+    return this;
+  }
+  public restore = (): Canvasimo => {
+    this.ctx.restore();
+    return this;
+  }
+  public scale = (x: number, y: number): Canvasimo => {
+    this.ctx.scale(x, y);
+    return this;
+  }
+  public rotate = (angle: number): Canvasimo => {
+    this.ctx.rotate(angle);
+    return this;
+  }
+  public translate = (x: number, y: number): Canvasimo => {
+    this.ctx.translate(x * this.density, y * this.density);
+    return this;
+  }
+  public transform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
+    this.ctx.transform(m11, m12, m21, m22, dx, dy);
+    return this;
+  }
+  public setTransform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
+    this.ctx.setTransform(m11, m12, m21, m22, dx, dy);
+    return this;
+  }
+  public drawFocusIfNeeded = (element: Element): Canvasimo => {
+    this.ctx.drawFocusIfNeeded(element);
+    return this;
+  }
+  public clip = (fillRules?: FillRule): Canvasimo => {
+    this.ctx.clip(fillRules);
+    return this;
+  }
+
+  public moveTo = (x: number, y: number): Canvasimo => {
+    this.ctx.moveTo(x * this.density, y * this.density);
+    return this;
+  }
+  public lineTo = (x: number, y: number): Canvasimo => {
+    this.ctx.lineTo(x * this.density, y * this.density);
+    return this;
+  }
+  public quadraticCurveTo = (cpx: number, cpy: number, x: number, y: number): Canvasimo => {
+    this.ctx.quadraticCurveTo(cpx * this.density, cpy * this.density, x * this.density, y * this.density);
+    return this;
+  }
+  public bezierCurveTo = (cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): Canvasimo => {
+    this.ctx.bezierCurveTo(
+      cp1x * this.density,
+      cp1y * this.density,
+      cp2x * this.density,
+      cp2y * this.density,
+      x * this.density,
+      y * this.density
+    );
+    return this;
+  }
+  public arcTo = (x1: number, y1: number, x2: number, y2: number, radius: number): Canvasimo => {
+    this.ctx.arcTo(x1 * this.density, y1 * this.density, x2 * this.density, y2 * this.density, radius * this.density);
+    return this;
+  }
+  public beginPath = (): Canvasimo => {
+    this.ctx.beginPath();
+    return this;
+  }
+  public closePath = (): Canvasimo => {
+    this.ctx.closePath();
+    return this;
+  }
+
   public putImageData = (
     imagedata: ImageData,
     dx: number,
@@ -1280,40 +1390,6 @@ export default class Canvasimo {
     return this;
   }
 
-  // Expanded context methods
-  public fill: Fill = (color?: string | FillRule, fillRule?: FillRule): Canvasimo => {
-    if (isFillRule(color)) {
-      this.ctx.fill(color);
-    } else if (typeof color === 'string') {
-      this.setFill(color);
-      if (fillRule) {
-        this.ctx.fill(fillRule);
-      } else {
-        this.ctx.fill();
-      }
-    } else {
-      this.ctx.fill(fillRule);
-    }
-
-    return this;
-  }
-  public stroke: Stroke = (color?: string | Path2D, path?: Path2D): Canvasimo => {
-    if (typeof color === 'string') {
-      this.setStroke(color);
-      if (path) {
-        this.ctx.stroke(path);
-      } else {
-        this.ctx.stroke();
-      }
-    } else if (typeof color === 'object') {
-      this.ctx.stroke(color);
-    } else {
-      this.ctx.stroke(path);
-    }
-
-    return this;
-  }
-
   // Cross compatibility methods
   public resetTransform = (): Canvasimo => {
     if (typeof (this.ctx as any).resetTransform === 'function') {
@@ -1328,32 +1404,7 @@ export default class Canvasimo {
   public getImageData = (sx: number, sy: number, sw: number, sh: number): ImageData => {
     return this.ctx.getImageData(sx * this.density, sy * this.density, sw * this.density, sh * this.density);
   }
-  public createLinearGradient = (x0: number, y0: number, x1: number, y1: number): CanvasGradient => {
-    return this.ctx.createLinearGradient(x0 * this.density, y0 * this.density, x1 * this.density, y1 * this.density);
-  }
-  public createRadialGradient = (
-    x0: number,
-    y0: number,
-    r0: number,
-    x1: number,
-    y1: number,
-    r1: number
-  ): CanvasGradient => {
-    return this.ctx.createRadialGradient(
-      x0 * this.density,
-      y0 * this.density,
-      r0 * this.density,
-      x1 * this.density,
-      y1 * this.density,
-      r1 * this.density
-    );
-  }
-  public createPattern = (
-    image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
-    repetition: string
-  ): CanvasPattern => {
-    return this.ctx.createPattern(image, repetition);
-  }
+
   public createImageData: CreateImageData = (width: number | ImageData, height?: number): ImageData => {
     if (typeof width === 'number' && typeof height === 'number') {
       return this.ctx.createImageData(width * this.density, height * this.density);
@@ -1375,18 +1426,6 @@ export default class Canvasimo {
     }
 
     return (this.ctx as any).isPointInStroke();
-  }
-
-  // Additional methods
-  public clearCanvas = (): Canvasimo => {
-    return this
-      .setWidth(this.getWidth());
-  }
-
-  public fillCanvas = (color?: string): Canvasimo => {
-    return this
-      .resetTransform()
-      .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
   }
 
   // Helper methods
