@@ -1308,6 +1308,48 @@ export default class Canvasimo {
     return this.createRGBA(data[0], data[1], data[2], data[3]);
   }
 
+  /**
+   * @group Color Helpers
+   * @description A collection of methods to help with creating color strings.
+   */
+
+
+  /**
+   * Create an HSL color string from the given values.
+   */
+  public createHSL = (h: number, s: number, l: number): string => {
+    return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+  }
+  /**
+   * Create an HSLA color string from the given values.
+   */
+  public createHSLA = (h: number, s: number, l: number, a: number): string => {
+    return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
+  }
+  /**
+   * Create an RGB color string from the given values.
+   */
+  public createRGB = (r: number, g: number, b: number): string => {
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+  /**
+   * Create an RGBA color string from the given values.
+   */
+  public createRGBA = (r: number, g: number, b: number, a: number): string => {
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+  }
+  /**
+   * Return an HSL color string from the given HSLA color string.
+   */
+  public getHSLFromHSLA = (color: string): string => this.getRGBFromRGBA(color);
+  /**
+   * Return an RGB color string from the given RGBA color string.
+   */
+  public getRGBFromRGBA = (color: string): string => {
+    const lastCommaIndex = color.lastIndexOf(',');
+    return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
+  }
+
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
@@ -1457,23 +1499,6 @@ export default class Canvasimo {
     return (this.ctx as any).isPointInStroke();
   }
 
-  // Helper methods
-  public createHSL = (h: number, s: number, l: number): string => {
-    return 'hsl(' + h + ',' + s + '%,' + l + '%)';
-  }
-
-  public createHSLA = (h: number, s: number, l: number, a: number): string => {
-    return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
-  }
-
-  public createRGB = (r: number, g: number, b: number): string => {
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
-  }
-
-  public createRGBA = (r: number, g: number, b: number, a: number): string => {
-    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
-  }
-
   public getDistance = (x1: number, y1: number, x2: number, y2: number): number => {
     return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
   }
@@ -1504,13 +1529,6 @@ export default class Canvasimo {
 
     return -Math.PI - c;
   }
-
-  public getRGBFromRGBA = (color: string): string => {
-    const lastCommaIndex = color.lastIndexOf(',');
-    return color.replace(/^(\w{3})a/, '$1').substring(0, lastCommaIndex - 1) + ')';
-  }
-
-  public getHSLFromHSLA = (color: string): string => this.getRGBFromRGBA(color);
 
   public getRadiansFromDegrees = (degrees: number): number => {
     return degrees * Math.PI / 180;
