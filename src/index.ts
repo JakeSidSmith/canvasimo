@@ -637,6 +637,164 @@ export default class Canvasimo {
       .fill(color);
   }
 
+  /**
+   * @group Paths
+   * @description A collection of methods for plotting or drawing paths -
+   * shapes that can be connected to create more complex shapes.
+   */
+
+  /**
+   * Plot an arc that can have a stroke or fill applied to it.
+   * @alias arc
+   */
+  public plotArc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    return this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+  }
+  public arc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    this.ctx.arc(
+      x * this.density,
+      y * this.density,
+      radius * this.density,
+      startAngle,
+      endAngle,
+      anticlockwise || false
+    );
+    return this;
+  }
+
+  /**
+   * Plot an arc and apply a stroke to it.
+   */
+  public strokeArc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    return this
+      .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
+      .stroke(color);
+  }
+  /**
+   * Plot an arc and apply a fill to it.
+   */
+  public fillArc = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    return this
+      .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
+      .fill(color);
+  }
+
+  /**
+   * Plot an ellipse that can then have a stroke or fill applied to it.
+   * @alias ellipse
+   */
+  public plotEllipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    return this.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+  }
+  public ellipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean
+  ): Canvasimo => {
+    // tslint:disable-next-line:strict-type-predicates
+    if (typeof this.ctx.ellipse === 'function') {
+      this.ctx.ellipse(
+        x * this.density,
+        y * this.density,
+        radiusX * this.density,
+        radiusY * this.density,
+        rotation,
+        startAngle,
+        endAngle,
+        anticlockwise || false
+      );
+      return this;
+    }
+
+    return this
+      .save()
+      .translate(x, y)
+      .rotate(rotation)
+      .scale(1, radiusY / radiusX)
+      .plotArc(0, 0, radiusX, startAngle, endAngle, anticlockwise)
+      .restore();
+  }
+  /**
+   * Plot an ellipse and apply a stroke to it.
+   */
+  public strokeEllipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    return this
+      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
+      .stroke(color);
+  }
+  /**
+   * Plot an ellipse and apply a fill to it.
+   */
+  public fillEllipse = (
+    x: number,
+    y: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+    startAngle: number,
+    endAngle: number,
+    anticlockwise?: boolean,
+    color?: string
+  ): Canvasimo => {
+    return this
+      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
+      .fill(color);
+  }
+
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Image smoothing
@@ -855,24 +1013,6 @@ export default class Canvasimo {
     return this;
   }
 
-  public arc = (
-    x: number,
-    y: number,
-    radius: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean
-  ): Canvasimo => {
-    this.ctx.arc(
-      x * this.density,
-      y * this.density,
-      radius * this.density,
-      startAngle,
-      endAngle,
-      anticlockwise || false
-    );
-    return this;
-  }
   public setLineDash = (segments: Segments): Canvasimo => {
     if (typeof this.ctx.setLineDash !== 'function') {
       logUnsupportedMethodError('setLineDash');
@@ -884,16 +1024,6 @@ export default class Canvasimo {
   }
 
   // Renamed context methods
-  public plotArc = (
-    x: number,
-    y: number,
-    radius: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean
-  ): Canvasimo => {
-    return this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
-  }
   public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
 
   // Expanded context methods
@@ -938,53 +1068,6 @@ export default class Canvasimo {
     }
 
     return this.setTransform(1, 0, 0, 1, 0, 0);
-  }
-  public ellipse = (
-    x: number,
-    y: number,
-    radiusX: number,
-    radiusY: number,
-    rotation: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean
-  ): Canvasimo => {
-    // tslint:disable-next-line:strict-type-predicates
-    if (typeof this.ctx.ellipse === 'function') {
-      this.ctx.ellipse(
-        x * this.density,
-        y * this.density,
-        radiusX * this.density,
-        radiusY * this.density,
-        rotation,
-        startAngle,
-        endAngle,
-        anticlockwise || false
-      );
-      return this;
-    }
-
-    return this
-      .save()
-      .translate(x, y)
-      .rotate(rotation)
-      .scale(1, radiusY / radiusX)
-      .plotArc(0, 0, radiusX, startAngle, endAngle, anticlockwise)
-      .restore();
-  }
-
-  // Renamed compatibility methods
-  public plotEllipse = (
-    x: number,
-    y: number,
-    radiusX: number,
-    radiusY: number,
-    rotation: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean
-  ): Canvasimo => {
-    return this.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
   }
 
   // Standard context getters
@@ -1088,66 +1171,6 @@ export default class Canvasimo {
       this.ctx.strokeText(text, x * this.density, y * this.density, maxWidth * this.density);
     }
     return this;
-  }
-
-  public fillArc = (
-    x: number,
-    y: number,
-    radius: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    return this
-      .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
-      .fill(color);
-  }
-
-  public strokeArc = (
-    x: number,
-    y: number,
-    radius: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    return this
-      .plotArc(x, y, radius, startAngle, endAngle, anticlockwise)
-      .stroke(color);
-  }
-
-  public fillEllipse = (
-    x: number,
-    y: number,
-    radiusX: number,
-    radiusY: number,
-    rotation: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    return this
-      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
-      .fill(color);
-  }
-
-  public strokeEllipse = (
-    x: number,
-    y: number,
-    radiusX: number,
-    radiusY: number,
-    rotation: number,
-    startAngle: number,
-    endAngle: number,
-    anticlockwise?: boolean,
-    color?: string
-  ): Canvasimo => {
-    return this
-      .plotEllipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
-      .stroke(color);
   }
 
   // Font methods
