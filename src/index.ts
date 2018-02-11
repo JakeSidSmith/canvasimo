@@ -513,7 +513,7 @@ export default class Canvasimo {
       .setWidth(this.getWidth());
   }
 
-  public fillCanvas = (color: string): Canvasimo => {
+  public fillCanvas = (color?: string): Canvasimo => {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
