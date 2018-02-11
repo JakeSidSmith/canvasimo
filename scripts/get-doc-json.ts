@@ -152,11 +152,14 @@ const groupMethods = (methods: Methods): Docs => {
   const docs: Docs = [];
 
   for (const method of methods) {
-    if (foundAliases.indexOf(method.name) >= 0) {
+    const { description, name, tags } = method;
+
+    if (foundAliases.indexOf(name) >= 0) {
       continue;
+    } else if (!description) {
+      console.error(`No description for method ${name}`);
     }
 
-    const { name, tags } = method;
     const { alias, group, description: groupDescription } = tags;
 
     if (alias) {
