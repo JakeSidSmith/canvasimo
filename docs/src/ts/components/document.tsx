@@ -199,6 +199,58 @@ export default class Document extends Component<Props, {}> {
                     stroke('green')</code>, <code>fillCanvas('blue')</code>.
                 </p>
 
+                <LinkHeader type="h1" header="Example" />
+
+                <div className="demo-container">
+                  <canvas id="example-1" width="400" height="200">
+                    Looks like this browser doesn't support the canvas element, or you have javascript disabled.
+                  </canvas>
+                </div>
+                <noscript>
+                  You must have javascript enabled for this example.
+                </noscript>
+
+                <pre>{`const element = document.getElementById('canvas');
+const canvas = new Canvasimo(element as HTMLCanvasElement);
+const rect = canvas.getBoundingClientRect();
+
+const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => Math.random());
+
+canvas
+  .setDensity(2)
+  .setSize(rect.width, rect.height);
+
+const draw = () => {
+  const { width } = canvas.getBoundingClientRect();
+  const height = canvas.getHeight();
+
+  canvas
+    .clearCanvas()
+    .setSize(width, height)
+    .fillCanvas('#EEEEEE')
+    .fillCircle(width / 2, height / 2, 20, false, 'red')
+    .repeat(10, (index) => {
+      const y = canvas.map(index, 0, 10, 0, height) + height / 10 / 2;
+
+      canvas.strokeLine(10, y, width - 10, y, 'green');
+    })
+    .tap(() => {
+      const path = randoms.map((value, index) => ({
+        x: canvas.getFractionOfWidth(1 / (randoms.length - 1)) * index,
+        y: canvas.map(value, 0, 1, 0, height),
+      }));
+
+      canvas
+        .beginPath()
+        .setStrokeWidth(2)
+        .strokePath(path, 'blue');
+    });
+};
+
+draw();
+
+window.addEventListener('resize', draw);`}</pre>
+
                 <LinkHeader type="h1" header="Documentation" className="main-header" />
 
                 {

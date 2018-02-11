@@ -23,6 +23,7 @@ const b = browserify(
     entries: [
       path.join(CWD, 'docs/src/ts/sidebar.tsx'),
       path.join(CWD, 'docs/src/ts/demo.ts'),
+      path.join(CWD, 'docs/src/ts/example.ts'),
       path.join(CWD, 'docs/src/ts/tracking.ts'),
     ],
     paths: ['node_modules'],
