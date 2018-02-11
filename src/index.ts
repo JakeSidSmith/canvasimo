@@ -852,6 +852,135 @@ export default class Canvasimo {
    */
   public getTextBaseline = (): TextBaseline => this.getCanvasProperty('textBaseline');
 
+  /**
+   * @group Fonts
+   * @description A collection of methods for getting and setting font styles and variations.
+   */
+
+  /**
+   * Set the font to use.
+   */
+  public setFont = (font: string): Canvasimo => {
+    this.ctx.font = formatFont(font, this.density);
+    return this;
+  }
+  /**
+   * Get the font that is being used.
+   */
+  public getFont = (): string => {
+    return formatFont(this.ctx.font, this.density);
+  }
+  /**
+   * Set the font family to use.
+   */
+  public setFontFamily = (family: string): Canvasimo => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return this.setFont('');
+    }
+    parts[4] = family || DEFAULT_FONT[4];
+    this.ctx.font = formatFont(parts.join(' '), this.density);
+    return this;
+  }
+  /**
+   * Get the font that is being used.
+   */
+  public getFontFamily = (): string | null => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[4];
+  }
+  /**
+   * Set the font size to use.
+   */
+  public setFontSize = (size: string | number): Canvasimo => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return this.setFont('');
+    }
+    parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
+    this.ctx.font = formatFont(parts.join(' '), this.density);
+    return this;
+  }
+  /**
+   * Get the font size that is being used.
+   */
+  public getFontSize = (): number | null => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parseFloat(parts[3]);
+  }
+  /**
+   * Set the font style to use.
+   */
+  public setFontStyle = (style: string): Canvasimo => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return this.setFont('');
+    }
+    parts[0] = style || DEFAULT_FONT[0];
+    this.ctx.font = formatFont(parts.join(' '), this.density);
+    return this;
+  }
+  /**
+   * Get the font style that is being used.
+   */
+  public getFontStyle = (): string | null => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[0];
+  }
+  /**
+   * Set the font variant to use.
+   */
+  public setFontVariant = (variant: string): Canvasimo => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return this.setFont('');
+    }
+    parts[1] = variant || DEFAULT_FONT[1];
+    this.ctx.font = formatFont(parts.join(' '), this.density);
+    return this;
+  }
+  /**
+   * Get the font variant that is being used.
+   */
+  public getFontVariant = (): string | null => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[1];
+  }
+  /**
+   * Set the font weight to use.
+   */
+  public setFontWeight = (weight: string | number): Canvasimo => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return this.setFont('');
+    }
+    parts[2] = weight.toString() || DEFAULT_FONT[2];
+    this.ctx.font = formatFont(parts.join(' '), this.density);
+    return this;
+  }
+  /**
+   * Get the font weight that is being used.
+   */
+  public getFontWeight = (): string | number | null => {
+    const parts = getFontParts(this.ctx.font, this.density);
+    if (parts.length < 5) {
+      return null;
+    }
+    return parts[2];
+  }
+
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
   // Image smoothing
@@ -1198,108 +1327,6 @@ export default class Canvasimo {
     return this
       .resetTransform()
       .fillRect(0, 0, this.getWidth(), this.getHeight(), color);
-  }
-
-  // Font methods
-  public setFont = (font: string): Canvasimo => {
-    this.ctx.font = formatFont(font, this.density);
-    return this;
-  }
-
-  public getFont = (): string => {
-    return formatFont(this.ctx.font, this.density);
-  }
-
-  // Font property setters
-  public setFontStyle = (style: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return this.setFont('');
-    }
-    parts[0] = style || DEFAULT_FONT[0];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
-    return this;
-  }
-
-  public setFontVariant = (variant: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return this.setFont('');
-    }
-    parts[1] = variant || DEFAULT_FONT[1];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
-    return this;
-  }
-
-  public setFontWeight = (weight: string | number): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return this.setFont('');
-    }
-    parts[2] = weight.toString() || DEFAULT_FONT[2];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
-    return this;
-  }
-
-  public setFontSize = (size: string | number): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return this.setFont('');
-    }
-    parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
-    return this;
-  }
-
-  public setFontFamily = (family: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return this.setFont('');
-    }
-    parts[4] = family || DEFAULT_FONT[4];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
-    return this;
-  }
-
-  // Font property getters
-  public getFontStyle = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
-    return parts[0];
-  }
-
-  public getFontVariant = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
-    return parts[1];
-  }
-
-  public getFontWeight = (): string | number | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
-    return parts[2];
-  }
-
-  public getFontSize = (): number | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
-    return parseFloat(parts[3]);
-  }
-
-  public getFontFamily = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
-    if (parts.length < 5) {
-      return null;
-    }
-    return parts[4];
   }
 
   // Helper methods
