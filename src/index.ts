@@ -33,6 +33,16 @@ import {
   isFillRule,
 } from './utils';
 
+const unsupportedMethodErrors: string[] = [];
+
+const logUnsupportedMethodError = (method: string) => {
+  if (unsupportedMethodErrors.indexOf(method) < 0) {
+    unsupportedMethodErrors.push(method);
+    // tslint:disable-next-line:no-console
+    console.warn(`${method} is not supported by this browser`);
+  }
+};
+
 export default class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -369,8 +379,7 @@ export default class Canvasimo {
   }
   public setLineDash = (segments: Segments): Canvasimo => {
     if (typeof this.ctx.setLineDash !== 'function') {
-      // tslint:disable-next-line:no-console
-      console.error('setLineDash is not supported by this browser');
+      logUnsupportedMethodError('setLineDash');
       return this;
     }
 
@@ -532,8 +541,7 @@ export default class Canvasimo {
   public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
   public getLineDash = (): Segments => {
     if (typeof this.ctx.getLineDash !== 'function') {
-      // tslint:disable-next-line:no-console
-      console.error('getLineDash is not supported by this browser');
+      logUnsupportedMethodError('getLineDash');
       return [];
     }
 
