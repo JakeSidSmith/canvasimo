@@ -211,7 +211,7 @@ export default class Document extends Component<Props, {}> {
                 </noscript>
 
                 <pre>{`const element = document.getElementById('canvas');
-const canvas = new Canvasimo(element as HTMLCanvasElement);
+const canvas = new Canvasimo(element);
 const rect = canvas.getBoundingClientRect();
 
 const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => Math.random());
