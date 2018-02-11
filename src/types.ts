@@ -83,6 +83,11 @@ export interface Stroke {
   (color: string, path: Path2D): Canvasimo; // tslint:disable-line:unified-signatures
 }
 
+export interface GetAngle {
+  (x1: number, y1: number, x2: number, y2: number): number;
+  (x1: number, y1: number, x2: number, y2: number, x3: number, y3: number): number;
+}
+
 export interface Repeat {
   (end: number, callback: (i: number) => any): Canvasimo;
   (start: number, end: number, callback: (i: number) => any): Canvasimo;
