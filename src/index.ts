@@ -67,20 +67,77 @@ export default class Canvasimo {
    */
 
   /**
-   * Returns the canvas element.
+   * Get the canvas element.
    * @alias getElement
    */
   public getCanvas = (): HTMLCanvasElement => this.element;
   public getElement = (): HTMLCanvasElement => this.getCanvas();
-
   /**
-   * Returns the canvas size & position on screen.
+   * Set the canvas dimensions.
+   */
+  public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
+    if (typeof width === 'object') {
+      this.element.width = width.width * this.density;
+      this.element.height = width.height * this.density;
+    } else if (typeof height === 'number') {
+      this.element.width = width * this.density;
+      this.element.height = height * this.density;
+    }
+
+    return this;
+  }
+  /**
+   * Get the canvas dimensions.
+   */
+  public getSize = (): Size => ({
+    width: this.element.width / this.density,
+    height: this.element.height / this.density,
+  })
+  /**
+   * Set the canvas width.
+   */
+  public setWidth = (width: number): Canvasimo => {
+    this.element.width = width * this.density;
+    return this;
+  }
+  /**
+   * Get the canvas width.
+   */
+  public getWidth = (): number => this.element.width / this.density;
+  /**
+   * Set the canvas height.
+   */
+  public setHeight = (height: number): Canvasimo => {
+    this.element.height = height * this.density;
+    return this;
+  }
+  /**
+   * Get the canvas height.
+   */
+  public getHeight = (): number => this.element.height / this.density;
+  /**
+   * Get the canvas size & position on screen.
    */
   public getBoundingClientRect = (): ClientRect => this.element.getBoundingClientRect();
+
+  /**
+   * @group: Context
+   * @description: 'A collection of methods for retrieving a canvas context or information about the context.
+   */
+
+  /**
+   * Get the standard canvas context (used for drawing).
+   */
   public getContext = (type: string, contextAttributes?: CanvasContextAttributes): CanvasContext => {
     return this.element.getContext(type, contextAttributes);
   }
+  /**
+   * Get canvas context used by Canvasimo (2d).
+   */
   public getCurrentContext = (): CanvasRenderingContext2D => this.ctx;
+  /**
+   * Get the context type used by Canvasimo ('2d', 'webgl', etc).
+   */
   public getCurrentContextType = (): typeof CONTEXT_TYPE => this.ctxType;
   public getDataURL = (type?: string, ...args: any[]): string => this.element.toDataURL(type, ...args);
 
@@ -113,31 +170,6 @@ export default class Canvasimo {
     return this;
   }
   public getDensity = (): number => this.density;
-  public setWidth = (width: number): Canvasimo => {
-    this.element.width = width * this.density;
-    return this;
-  }
-  public getWidth = (): number => this.element.width / this.density;
-  public setHeight = (height: number): Canvasimo => {
-    this.element.height = height * this.density;
-    return this;
-  }
-  public getHeight = (): number => this.element.height / this.density;
-  public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
-    if (typeof width === 'object') {
-      this.element.width = width.width * this.density;
-      this.element.height = width.height * this.density;
-    } else if (typeof height === 'number') {
-      this.element.width = width * this.density;
-      this.element.height = height * this.density;
-    }
-
-    return this;
-  }
-  public getSize = (): Size => ({
-    width: this.element.width / this.density,
-    height: this.element.height / this.density,
-  })
 
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
