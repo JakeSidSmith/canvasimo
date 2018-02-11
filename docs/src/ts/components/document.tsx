@@ -231,13 +231,18 @@ const draw = () => {
     .save()
     .translate(width / 2, height / 2)
     .rotate(canvas.getRadiansFromDegrees(-90))
-    .strokeStar(0, 0, 50, 5, false, 'red')
+    .setOpacity(0.25)
+    .fillStar(0, 0, 50, 5, false, 'red')
     .restore()
-    .fillCircle(width / 2, height / 2, 20, false, 'red')
+    .strokeCircle(width * 0.25, height / 2, 30, false, 'black')
+    .strokeBurst(width * 0.25, height / 2, 40, 50, 8, false, 'black')
+    .strokeRoundedRect(width * 0.75 - 20, height / 2 - 20, 40, 40, 10, 'black')
     .repeat(10, (index) => {
       const y = canvas.map(index, 0, 10, 0, height) + height / 10 / 2;
 
-      canvas.strokeLine(10, y, width - 10, y, 'green');
+      canvas
+        .beginPath()
+        .strokeLine(10, y, width - 10, y, 'green');
     })
     .tap(() => {
       const path = randoms.map((value, index) => ({
