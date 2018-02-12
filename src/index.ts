@@ -1452,6 +1452,68 @@ export default class Canvasimo {
     return -Math.PI - c;
   }
 
+  /**
+   * @group Path Plotting
+   * @description A collection of methods for path drawing.
+   */
+
+  /**
+   * Begin a new path (shape).
+   */
+  public beginPath = (): Canvasimo => {
+    this.ctx.beginPath();
+    return this;
+  }
+  /**
+   * Close the current path (shape).
+   */
+  public closePath = (): Canvasimo => {
+    this.ctx.closePath();
+    return this;
+  }
+  /**
+   * Move the starting point of a the next sub-path.
+   */
+  public moveTo = (x: number, y: number): Canvasimo => {
+    this.ctx.moveTo(x * this.density, y * this.density);
+    return this;
+  }
+  /**
+   * Connect the last point to the provided coordinates.
+   */
+  public lineTo = (x: number, y: number): Canvasimo => {
+    this.ctx.lineTo(x * this.density, y * this.density);
+    return this;
+  }
+  /**
+   * Arc from one point to another.
+   */
+  public arcTo = (x1: number, y1: number, x2: number, y2: number, radius: number): Canvasimo => {
+    this.ctx.arcTo(x1 * this.density, y1 * this.density, x2 * this.density, y2 * this.density, radius * this.density);
+    return this;
+  }
+  /**
+   * Connect the last point to the provided coordinates with a bezier curve (2 control points).
+   */
+  public bezierCurveTo = (cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): Canvasimo => {
+    this.ctx.bezierCurveTo(
+      cp1x * this.density,
+      cp1y * this.density,
+      cp2x * this.density,
+      cp2y * this.density,
+      x * this.density,
+      y * this.density
+    );
+    return this;
+  }
+  /**
+   * Connect the last point to the provided coordinates with a quadratic curve (1 control point).
+   */
+  public quadraticCurveTo = (cpx: number, cpy: number, x: number, y: number): Canvasimo => {
+    this.ctx.quadraticCurveTo(cpx * this.density, cpy * this.density, x * this.density, y * this.density);
+    return this;
+  }
+
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
@@ -1537,43 +1599,6 @@ export default class Canvasimo {
     this.ctx.clip(fillRules);
     return this;
   }
-
-  public moveTo = (x: number, y: number): Canvasimo => {
-    this.ctx.moveTo(x * this.density, y * this.density);
-    return this;
-  }
-  public lineTo = (x: number, y: number): Canvasimo => {
-    this.ctx.lineTo(x * this.density, y * this.density);
-    return this;
-  }
-  public quadraticCurveTo = (cpx: number, cpy: number, x: number, y: number): Canvasimo => {
-    this.ctx.quadraticCurveTo(cpx * this.density, cpy * this.density, x * this.density, y * this.density);
-    return this;
-  }
-  public bezierCurveTo = (cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): Canvasimo => {
-    this.ctx.bezierCurveTo(
-      cp1x * this.density,
-      cp1y * this.density,
-      cp2x * this.density,
-      cp2y * this.density,
-      x * this.density,
-      y * this.density
-    );
-    return this;
-  }
-  public arcTo = (x1: number, y1: number, x2: number, y2: number, radius: number): Canvasimo => {
-    this.ctx.arcTo(x1 * this.density, y1 * this.density, x2 * this.density, y2 * this.density, radius * this.density);
-    return this;
-  }
-  public beginPath = (): Canvasimo => {
-    this.ctx.beginPath();
-    return this;
-  }
-  public closePath = (): Canvasimo => {
-    this.ctx.closePath();
-    return this;
-  }
-
   // Cross compatibility methods
   public resetTransform = (): Canvasimo => {
     if (typeof (this.ctx as any).resetTransform === 'function') {
