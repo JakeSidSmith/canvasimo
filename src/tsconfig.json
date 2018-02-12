@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "sourceMap": true,
+    "listFiles": true,
+    "rootDir": "./",
+    "outDir": "../build/"
+  },
+  "exclude": [
+    "node_modules/*",
+    "dist/*",
+    "docs/*",
+    "styleguide/*"
+  ]
+}

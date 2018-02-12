@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "pretty": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "target": "es5",
+    "module": "commonjs",
+    "typeRoots": [
+      "node_modules/@types/",
+      "types/"
+    ]
+  }
+}

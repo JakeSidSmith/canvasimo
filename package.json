@@ -1,18 +1,21 @@
 {
   "name": "canvasimo",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "An HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, and cross-browser compatibility enhancements.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "build/index.d.ts",
   "directories": {
     "example": "examples"
   },
   "scripts": {
-    "start": "http-server docs -c-0 -o",
-    "build": "babel-node scripts/generate-docs.js",
-    "watch": "babel-node scripts/generate-docs.js watch",
-    "tests": "mocha --opts .mocha.opts tests/",
-    "lint": "eslint src/ && eslint -c .eslintrc-docs.json docs/src/ tests/helpers/ && eslint -c .eslintrc-tests.json tests/",
-    "test": "npm run lint && npm run tests"
+    "prepublish": "npm run dist",
+    "dist": "./scripts/dist",
+    "start": "./scripts/start",
+    "build": "NODE_ENV=production ts-node scripts/generate-docs.tsx",
+    "lint-js": "tslint --project tsconfig.json '{docs/src,src,tests,types,scripts}/**/*.@(ts|tsx)'",
+    "lint": "npm run lint-js",
+    "tests": "jest",
+    "test": "npm run lint && npm run tests -- --coverage --runInBand && if grep -rn FIXME src; then exit 1; fi;"
   },
   "repository": {
     "type": "git",
@@ -35,25 +38,57 @@
     "url": "https://github.com/jakesidsmith/canvasimo/issues"
   },
   "homepage": "https://github.com/jakesidsmith/canvasimo#readme",
+  "dependencies": {},
   "devDependencies": {
-    "babel-cli": "=6.11.4",
-    "babel-preset-react": "=6.11.1",
-    "babelify": "=7.3.0",
-    "browserify": "=13.1.0",
-    "chai": "=3.5.0",
-    "eslint": "3.19.0",
-    "eslint-config-jakesidsmith": "github:jakesidsmith/eslint-config-jakesidsmith#v2.2.0",
-    "http-server": "=0.9.0",
-    "jsdom": "=8.4.1",
-    "minifyify": "=7.3.3",
-    "mkdirp": "=0.5.1",
-    "mocha": "=2.4.5",
-    "react": "=15.3.0",
-    "react-dom": "=15.3.0",
-    "rimraf": "=2.5.4",
-    "sinon": "=1.17.3",
-    "sinon-chai": "=2.8.0",
-    "underscore": "=1.8.3",
-    "watch": "=0.19.1"
+    "@types/browserify": "12.0.33",
+    "@types/chokidar": "1.7.4",
+    "@types/glob": "5.0.35",
+    "@types/jest": "22.1.0",
+    "@types/mkdirp": "0.5.2",
+    "@types/node": "9.4.0",
+    "@types/react": "16.0.36",
+    "@types/react-dom": "16.0.3",
+    "@types/rimraf": "2.0.2",
+    "browserify": "15.2.0",
+    "chokidar": "2.0.0",
+    "concurrently": "3.5.1",
+    "core-js": "2.5.3",
+    "derequire": "2.0.6",
+    "exorcist": "1.0.0",
+    "glob": "7.1.2",
+    "http-server": "0.9.0",
+    "jest": "22.1.4",
+    "minifyify": "7.3.5",
+    "mkdirp": "0.5.1",
+    "raf": "3.4.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "rimraf": "2.5.4",
+    "ts-jest": "22.0.1",
+    "ts-node": "4.1.0",
+    "tsify": "3.0.4",
+    "tslint": "5.9.1",
+    "tslint-eslint-rules": "4.1.1",
+    "typescript": "2.3.4"
+  },
+  "jest": {
+    "mapCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
+    "testPathIgnorePatterns": [
+      "tests/helpers/",
+      "tests/mocks/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
   }
 }

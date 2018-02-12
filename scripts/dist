@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+rm -rf build
+rm -rf dist
+
+mkdir -p build
+mkdir -p dist
+
+tsc --project src
+
+browserify --debug --standalone canvasimo build/index.js | derequire | exorcist dist/index.js.map > dist/index.js
