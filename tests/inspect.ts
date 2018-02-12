@@ -41,7 +41,7 @@ describe('inspect', () => {
       expect(CanvasimoClass).toBeTruthy();
 
       expect(methods.length).toBe(0);
-      expect(properties.length).toBe(182);
+      expect(properties.length).toBe(184);
 
       properties.forEach((property, index) => {
         if (property.initializer) {
