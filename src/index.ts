@@ -1402,6 +1402,56 @@ export default class Canvasimo {
     return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
   }
 
+  /**
+   * @group Converting Angles
+   * @description A collection of methods to help with calculating and converting angles.
+   */
+
+
+  /**
+   * Get a radian value from the provided degrees e.g. 90 returns 1.5708.
+   */
+  public getRadiansFromDegrees = (degrees: number): number => {
+    return degrees * Math.PI / 180;
+  }
+
+  /**
+   * Get a degree value from the provided radians e.g. 3.14159 returns 180.
+   */
+  public getDegreesFromRadians = (radians: number): number => {
+    return radians * 180 / Math.PI;
+  }
+  /**
+   * Get the angle (in radians) between 2 or 3 points.
+   */
+  public getAngle: GetAngle = (...args: number[]): number => {
+    if (!args.length || !(args.length === 4 || args.length === 6)) {
+      throw new Error(INCORRECT_GET_ANGLE_ARGUMENTS);
+    }
+
+    const x1 = args[0];
+    const y1 = args[1];
+    const x2 = args[2];
+    const y2 = args[3];
+
+    if (args.length === 4) {
+      return Math.atan2(y2 - y1, x2 - x1);
+    }
+
+    const x3 = args[4];
+    const y3 = args[5];
+
+    const a = this.getAngle(x1, y1, x2, y2);
+    const b = this.getAngle(x2, y2, x3, y3);
+    const c = b - a;
+
+    if (c >= 0) {
+      return Math.PI - c;
+    }
+
+    return -Math.PI - c;
+  }
+
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
@@ -1549,43 +1599,6 @@ export default class Canvasimo {
     }
 
     return (this.ctx as any).isPointInStroke();
-  }
-
-
-  public getAngle: GetAngle = (...args: number[]): number => {
-    if (!args.length || !(args.length === 4 || args.length === 6)) {
-      throw new Error(INCORRECT_GET_ANGLE_ARGUMENTS);
-    }
-
-    const x1 = args[0];
-    const y1 = args[1];
-    const x2 = args[2];
-    const y2 = args[3];
-
-    if (args.length === 4) {
-      return Math.atan2(y2 - y1, x2 - x1);
-    }
-
-    const x3 = args[4];
-    const y3 = args[5];
-
-    const a = this.getAngle(x1, y1, x2, y2);
-    const b = this.getAngle(x2, y2, x3, y3);
-    const c = b - a;
-
-    if (c >= 0) {
-      return Math.PI - c;
-    }
-
-    return -Math.PI - c;
-  }
-
-  public getRadiansFromDegrees = (degrees: number): number => {
-    return degrees * Math.PI / 180;
-  }
-
-  public getDegreesFromRadians = (radians: number): number => {
-    return radians * 180 / Math.PI;
   }
 
   public tap = (callback: () => any): Canvasimo => {
