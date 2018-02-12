@@ -1520,101 +1520,103 @@ export default class Canvasimo {
   /**
    * Push the current state of the canvas into a stack that can later be restored.
    */
-  // save
+  public save = (): Canvasimo => {
+    this.ctx.save();
+    return this;
+  }
   /**
    * Restore the most recent state of the canvas that was saved.
    */
-  // restore
+  public restore = (): Canvasimo => {
+    this.ctx.restore();
+    return this;
+  }
   /**
    * Add rotation (in radians) to the transform matrix so that shapes can be drawn at an angle.
    */
-  // rotate
+  public rotate = (angle: number): Canvasimo => {
+    this.ctx.rotate(angle);
+    return this;
+  }
   /**
    * Scale the transform matrix so that shapes can be drawn at the provided scale.
    */
-  // scale
+  public scale = (x: number, y: number): Canvasimo => {
+    this.ctx.scale(x, y);
+    return this;
+  }
   /**
    * Move the canvas origin.
    */
-  // translate
+  public translate = (x: number, y: number): Canvasimo => {
+    this.ctx.translate(x * this.density, y * this.density);
+    return this;
+  }
   /**
    * Multiply the current transformation with the provided matrix.
    */
-  // transform
+  public transform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
+    this.ctx.transform(m11, m12, m21, m22, dx, dy);
+    return this;
+  }
   /**
    * Replace the current transformation with the provided matrix.
    */
-  // setTransform
+  public setTransform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
+    this.ctx.setTransform(m11, m12, m21, m22, dx, dy);
+    return this;
+  }
   /**
    * Replace the current transformation with the default matrix: [1, 0, 0, 1, 0, 0].
    */
-  // resetTransform
+  public resetTransform = (): Canvasimo => {
+    if (typeof (this.ctx as any).resetTransform === 'function') {
+      (this.ctx as any).resetTransform();
+      return this;
+    }
+
+    return this.setTransform(1, 0, 0, 1, 0, 0);
+  }
   /**
    * Use the current path as a clipping path.
    */
-  // clip
+  public clip = (fillRules?: FillRule): Canvasimo => {
+    this.ctx.clip(fillRules);
+    return this;
+  }
   /**
    * Set the opacity to use for drawing.
    * @alias setGlobalAlpha
    */
-  // setOpacity
+  public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
+  public setGlobalAlpha = (value: number): Canvasimo => this.setCanvasProperty('globalAlpha', value);
   /**
    * Get the opacity that is being used.
    * @alias getGlobalAlpha
    */
-  // getOpacity
+  public getOpacity = (): number => this.getGlobalAlpha();
+  public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
   /**
    * Set the composite operation to use for drawing.
    * @alias setGlobalCompositeOperation
    */
-  // setCompositeOperation
+  public setCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
+    return this.setGlobalCompositeOperation(value);
+  }
+  public setGlobalCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
+    return this.setCanvasProperty('globalCompositeOperation', value);
+  }
   /**
    * Get the composite operation that is being used.
    * @alias getGlobalCompositeOperation
    */
-  // getCompositeOperation
+  public getCompositeOperation = (): GlobalCompositeOperation => this.getGlobalCompositeOperation();
+  public getGlobalCompositeOperation = (): GlobalCompositeOperation => {
+    return this.getCanvasProperty('globalCompositeOperation');
+  }
   /**
    * Set whether image smoothing should be used.
    */
-  // setImageSmoothingEnabled
-  /**
-   * Get whether image smoothing is being used.
-   */
-  // getImageSmoothingEnabled
-  /**
-   * Set how blurry shadows are.
-   */
-  // setShadowBlur
-  /**
-   * Get the value of how blurry shadows are.
-   */
-  // getShadowBlur
-  /**
-   * Set the color to be used for shadows.
-   */
-  // setShadowColor
-  /**
-   * Get the color being used for shadows.
-   */
-  // getShadowColor
-  /**
-   * Set how horizontally offset shadows should be.
-   */
-  // setShadowOffsetX
-  /**
-   * Get the value of how horizontally offset shadows should be.
-   */
-  // getShadowOffsetX
-  /**
-   * Set how vertically offset shadows should be.
-   */
-  // setShadowOffsetY
-  /**
-   * Get the value of how vertically offset shadows should be.
-   */
-  // getShadowOffsetY
-
-  // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
       if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
@@ -1625,6 +1627,9 @@ export default class Canvasimo {
 
     return this;
   }
+  /**
+   * Get whether image smoothing is being used.
+   */
   public getImageSmoothingEnabled = (): boolean => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
       if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
@@ -1634,79 +1639,42 @@ export default class Canvasimo {
 
     return false;
   }
-
-  // Context property getter and setters
-  public setGlobalAlpha = (value: number): Canvasimo => this.setCanvasProperty('globalAlpha', value);
-  public getGlobalAlpha = (): number => this.getCanvasProperty('globalAlpha');
-  public setGlobalCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
-    return this.setCanvasProperty('globalCompositeOperation', value);
-  }
-  public getGlobalCompositeOperation = (): GlobalCompositeOperation => {
-    return this.getCanvasProperty('globalCompositeOperation');
-  }
-
-  public setShadowColor = (value: string): Canvasimo => this.setCanvasProperty('shadowColor', value);
-  public getShadowColor = (): string => this.getCanvasProperty('shadowColor');
+  /**
+   * Set how blurry shadows are.
+   */
   public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
+  /**
+   * Get the value of how blurry shadows are.
+   */
   public getShadowBlur = (): number => this.getCanvasProperty('shadowBlur') / this.density;
+  /**
+   * Set the color to be used for shadows.
+   */
+  public setShadowColor = (value: string): Canvasimo => this.setCanvasProperty('shadowColor', value);
+  /**
+   * Get the color being used for shadows.
+   */
+  public getShadowColor = (): string => this.getCanvasProperty('shadowColor');
+  /**
+   * Set how horizontally offset shadows should be.
+   */
   public setShadowOffsetX = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetX', value * this.density);
+  /**
+   * Get the value of how horizontally offset shadows should be.
+   */
   public getShadowOffsetX = (): number => this.getCanvasProperty('shadowOffsetX') / this.density;
+  /**
+   * Set how vertically offset shadows should be.
+   */
   public setShadowOffsetY = (value: number): Canvasimo => this.setCanvasProperty('shadowOffsetY', value * this.density);
+  /**
+   * Get the value of how vertically offset shadows should be.
+   */
   public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
 
-  // Renamed property getter and setters
-  public setOpacity = (value: number): Canvasimo => this.setGlobalAlpha(value);
-  public getOpacity = (): number => this.getGlobalAlpha();
-  public setCompositeOperation = (value: GlobalCompositeOperation): Canvasimo => {
-    return this.setGlobalCompositeOperation(value);
-  }
-  public getCompositeOperation = (): GlobalCompositeOperation => this.getGlobalCompositeOperation();
-
-  // Standard context methods
-  public save = (): Canvasimo => {
-    this.ctx.save();
-    return this;
-  }
-  public restore = (): Canvasimo => {
-    this.ctx.restore();
-    return this;
-  }
-  public scale = (x: number, y: number): Canvasimo => {
-    this.ctx.scale(x, y);
-    return this;
-  }
-  public rotate = (angle: number): Canvasimo => {
-    this.ctx.rotate(angle);
-    return this;
-  }
-  public translate = (x: number, y: number): Canvasimo => {
-    this.ctx.translate(x * this.density, y * this.density);
-    return this;
-  }
-  public transform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
-    this.ctx.transform(m11, m12, m21, m22, dx, dy);
-    return this;
-  }
-  public setTransform = (m11: number, m12: number, m21: number, m22: number, dx: number, dy: number): Canvasimo => {
-    this.ctx.setTransform(m11, m12, m21, m22, dx, dy);
-    return this;
-  }
   public drawFocusIfNeeded = (element: Element): Canvasimo => {
     this.ctx.drawFocusIfNeeded(element);
     return this;
-  }
-  public clip = (fillRules?: FillRule): Canvasimo => {
-    this.ctx.clip(fillRules);
-    return this;
-  }
-  // Cross compatibility methods
-  public resetTransform = (): Canvasimo => {
-    if (typeof (this.ctx as any).resetTransform === 'function') {
-      (this.ctx as any).resetTransform();
-      return this;
-    }
-
-    return this.setTransform(1, 0, 0, 1, 0, 0);
   }
 
   // Standard context getter
