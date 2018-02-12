@@ -12,7 +12,7 @@ Install Canvasimo with npm (add `--save` to add to your package.json)
 npm install canvasimo
 ```
 
-...or download the source from [GitHub](https://github.com/JakeSidSmith/canvasimo)
+...or download from [GitHub](https://github.com/JakeSidSmith/canvasimo)
 
 ## Getting started
 
