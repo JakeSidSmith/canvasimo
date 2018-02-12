@@ -1672,33 +1672,23 @@ export default class Canvasimo {
    */
   public getShadowOffsetY = (): number => this.getCanvasProperty('shadowOffsetY') / this.density;
 
-  public drawFocusIfNeeded = (element: Element): Canvasimo => {
-    this.ctx.drawFocusIfNeeded(element);
-    return this;
-  }
+  /**
+   * @group Misc
+   * @description Miscellaneous methods.
+   */
 
-  // Standard context getter
-  public isPointInPath = (x: number, y: number, fillRule?: FillRule): boolean => {
-    if (fillRule) {
-      return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
-    }
-
-    return this.ctx.isPointInPath(x * this.density, y * this.density);
-  }
-  public isPointInStroke = (): boolean | null => {
-    if (typeof (this.ctx as any).isPointInStroke !== 'function') {
-      logUnsupportedMethodError('isPointInStroke');
-      return null;
-    }
-
-    return (this.ctx as any).isPointInStroke();
-  }
-
+  /**
+   * Break out of the method chain and execute a callback.
+   */
   public tap = (callback: () => any): Canvasimo => {
     callback.call(this);
     return this;
   }
-
+  /**
+   * Break out of the method chain and execute a callback with values between start and end,
+   * increasing / decreasing by step (start defaults to 0, step defaults to 1).
+   * You may return false from the callback at any point to stop at the current iteration.
+   */
   public repeat: Repeat = (...args: Array<number | ((i: number) => any)>): Canvasimo => {
     let start: number;
     let end: number;
@@ -1753,7 +1743,11 @@ export default class Canvasimo {
 
     return this;
   }
-
+  /**
+   * Break out of the method chain and loop over the given array, object or string,
+   * calling the callback with the value & key / index.
+   * You may return false from the callback at any point to stop at the current iteration.
+   */
   public forEach: ForEach = (
     obj: any[] | string | {[i: string]: any},
     callback: (value: any, key: any) => any
@@ -1776,7 +1770,9 @@ export default class Canvasimo {
 
     return this;
   }
-
+  /**
+   * Constrain a number between a minimum and maximum value.
+   */
   public constrain = (value: number, min: number, max: number): number => {
     if (min > max) {
       const temp = min;
@@ -1786,11 +1782,43 @@ export default class Canvasimo {
 
     return Math.max(Math.min(value, max), min);
   }
-
+  /**
+   * Map a value from one range to another e.g. mapping 0.5 from 0-1 to 0-10 returns 5.
+   */
   public map = (value: number, fromStart: number, fromEnd: number, toStart: number, toEnd: number): number => {
     const fromDiff = fromEnd - fromStart;
     const toDiff = toEnd - toStart;
     return toStart + toDiff * (value - fromStart) / fromDiff;
+  }
+  /**
+   * Draw a focus ring around the current path, or the path supplied,
+   * if the element supplied has focus.
+   */
+  public drawFocusIfNeeded = (element: Element): Canvasimo => {
+    this.ctx.drawFocusIfNeeded(element);
+    return this;
+  }
+  /**
+   * Returns whether the given point is within the current or given path.
+   */
+  public isPointInPath = (x: number, y: number, fillRule?: FillRule): boolean => {
+    if (fillRule) {
+      return this.ctx.isPointInPath(x * this.density, y * this.density, fillRule);
+    }
+
+    return this.ctx.isPointInPath(x * this.density, y * this.density);
+  }
+  /**
+   * Returns whether the given point is within the area contained by applying
+   * a stroke to the current or given path.
+   */
+  public isPointInStroke = (): boolean | null => {
+    if (typeof (this.ctx as any).isPointInStroke !== 'function') {
+      logUnsupportedMethodError('isPointInStroke');
+      return null;
+    }
+
+    return (this.ctx as any).isPointInStroke();
   }
 
   // Set and get context properties
