@@ -1037,6 +1037,7 @@ export default class Canvasimo {
    */
   public setStrokeDash = (segments: Segments): Canvasimo => this.setLineDash(segments);
   public setLineDash = (segments: Segments): Canvasimo => {
+    // tslint:disable-next-line:strict-type-predicates
     if (typeof this.ctx.setLineDash !== 'function') {
       logUnsupportedMethodError('setLineDash');
       return this;
@@ -1051,6 +1052,7 @@ export default class Canvasimo {
    */
   public getStrokeDash = (): Segments => this.getLineDash();
   public getLineDash = (): Segments => {
+    // tslint:disable-next-line:strict-type-predicates
     if (typeof this.ctx.getLineDash !== 'function') {
       logUnsupportedMethodError('getLineDash');
       return [];
