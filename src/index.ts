@@ -1313,7 +1313,6 @@ export default class Canvasimo {
    * @description A collection of methods to help with creating color strings.
    */
 
-
   /**
    * Create an HSL color string from the given values.
    */
@@ -1406,7 +1405,6 @@ export default class Canvasimo {
    * @group Converting Angles
    * @description A collection of methods to help with calculating and converting angles.
    */
-
 
   /**
    * Get a radian value from the provided degrees e.g. 90 returns 1.5708.
@@ -1513,6 +1511,108 @@ export default class Canvasimo {
     this.ctx.quadraticCurveTo(cpx * this.density, cpy * this.density, x * this.density, y * this.density);
     return this;
   }
+
+  /**
+   * @group Canvas State
+   * @description A collection of methods to save, restore, or transform the canvas state.
+   */
+
+  /**
+   * Push the current state of the canvas into a stack that can later be restored.
+   */
+  // save
+  /**
+   * Restore the most recent state of the canvas that was saved.
+   */
+  // restore
+  /**
+   * Add rotation (in radians) to the transform matrix so that shapes can be drawn at an angle.
+   */
+  // rotate
+  /**
+   * Scale the transform matrix so that shapes can be drawn at the provided scale.
+   */
+  // scale
+  /**
+   * Move the canvas origin.
+   */
+  // translate
+  /**
+   * Multiply the current transformation with the provided matrix.
+   */
+  // transform
+  /**
+   * Replace the current transformation with the provided matrix.
+   */
+  // setTransform
+  /**
+   * Replace the current transformation with the default matrix: [1, 0, 0, 1, 0, 0].
+   */
+  // resetTransform
+  /**
+   * Use the current path as a clipping path.
+   */
+  // clip
+  /**
+   * Set the opacity to use for drawing.
+   * @alias setGlobalAlpha
+   */
+  // setOpacity
+  /**
+   * Get the opacity that is being used.
+   * @alias getGlobalAlpha
+   */
+  // getOpacity
+  /**
+   * Set the composite operation to use for drawing.
+   * @alias setGlobalCompositeOperation
+   */
+  // setCompositeOperation
+  /**
+   * Get the composite operation that is being used.
+   * @alias getGlobalCompositeOperation
+   */
+  // getCompositeOperation
+  /**
+   * Set whether image smoothing should be used.
+   */
+  // setImageSmoothingEnabled
+  /**
+   * Get whether image smoothing is being used.
+   */
+  // getImageSmoothingEnabled
+  /**
+   * Set how blurry shadows are.
+   */
+  // setShadowBlur
+  /**
+   * Get the value of how blurry shadows are.
+   */
+  // getShadowBlur
+  /**
+   * Set the color to be used for shadows.
+   */
+  // setShadowColor
+  /**
+   * Get the color being used for shadows.
+   */
+  // getShadowColor
+  /**
+   * Set how horizontally offset shadows should be.
+   */
+  // setShadowOffsetX
+  /**
+   * Get the value of how horizontally offset shadows should be.
+   */
+  // getShadowOffsetX
+  /**
+   * Set how vertically offset shadows should be.
+   */
+  // setShadowOffsetY
+  /**
+   * Get the value of how vertically offset shadows should be.
+   */
+  // getShadowOffsetY
 
   // Image smoothing
   public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
