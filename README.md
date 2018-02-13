@@ -26,9 +26,13 @@ Canvasimo can be bundled with all major build tools, or loaded with a script tag
 <script type="text/javascript" src="path/to/canvasimo.js">
 ```
 
-Now Canvasimo is accessible globally
+Now Canvasimo is accessible globally like so (to allow for ES6 and TypeScript default imports)
 
-#### With a bundler (commonjs example)
+```typescript
+const Canvasimo = canvasimo.default;
+```
+
+#### With an ES6 bundler / TypeScript (recommended)
 
 ```typescript
 import Canvasimo from 'canvasimo';
