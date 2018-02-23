@@ -397,7 +397,7 @@ describe('canvasimo', () => {
 
   });
 
-  describe('fill and strong', () => {
+  describe('fill and stroke', () => {
 
     it('should set the fill if it is not a special fill', () => {
       const fillSpy = jest.spyOn(canvas, 'setFill');
