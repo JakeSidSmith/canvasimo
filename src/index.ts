@@ -835,7 +835,9 @@ export default class Canvasimo {
    * @alias measureText
    */
   public getTextSize = (text: string): TextMetrics => this.measureText(text);
-  public measureText = (text: string): TextMetrics => this.ctx.measureText(text);
+  public measureText = (text: string): TextMetrics => ({
+    width: (this.ctx.measureText(text).width || 0) / this.density,
+  })
   /**
    * Set the horizontal text alignment.
    */
