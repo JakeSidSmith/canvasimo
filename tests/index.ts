@@ -1,6 +1,6 @@
 import Canvasimo from '../src/';
 import getBoundingClientRectStub from './helpers/get-bounding-client-rect-stub';
-import getContextStub from './helpers/get-context-stub';
+import getContextStub, { mockClearAll } from './helpers/get-context-stub';
 import ImageData from './helpers/image-data-stub';
 import { each } from './helpers/utils';
 
@@ -76,6 +76,10 @@ describe('canvasimo', () => {
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
+
+  beforeEach(() => {
+    mockClearAll();
+  });
 
   it('should return an interface', () => {
     jest.spyOn(element, 'getContext').mockImplementation(getContextStub);
