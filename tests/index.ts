@@ -1,6 +1,6 @@
 import Canvasimo from '../src/';
 import getBoundingClientRectStub from './helpers/get-bounding-client-rect-stub';
-import getContextStub from './helpers/get-context-stub';
+import getContextStub, { mockClearAll } from './helpers/get-context-stub';
 import ImageData from './helpers/image-data-stub';
 import { each } from './helpers/utils';
 
@@ -76,6 +76,10 @@ describe('canvasimo', () => {
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map)/i;
+
+  beforeEach(() => {
+    mockClearAll();
+  });
 
   it('should return an interface', () => {
     jest.spyOn(element, 'getContext').mockImplementation(getContextStub);
@@ -397,7 +401,7 @@ describe('canvasimo', () => {
 
   });
 
-  describe('fill and strong', () => {
+  describe('fill and stroke', () => {
 
     it('should set the fill if it is not a special fill', () => {
       const fillSpy = jest.spyOn(canvas, 'setFill');
@@ -414,6 +418,27 @@ describe('canvasimo', () => {
 
       canvas.stroke('red');
       expect(strokeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not call stroke with undefined or null', () => {
+      const ctx = canvas.getCurrentContext();
+
+      canvas.stroke();
+      canvas.stroke('red');
+      canvas.stroke(undefined);
+      canvas.stroke(null as any);
+      canvas.stroke('red', undefined as any);
+      canvas.stroke('red', null as any);
+
+      const strokeCalls = (ctx.stroke as jest.Mock<any>).mock.calls;
+
+      expect(strokeCalls.length).toBe(6);
+      expect(ctx.stroke).not.toHaveBeenCalledWith(null);
+      expect(ctx.stroke).not.toHaveBeenCalledWith(undefined);
+
+      strokeCalls.forEach((call) => {
+        expect(call.length).toBe(0);
+      });
     });
 
   });

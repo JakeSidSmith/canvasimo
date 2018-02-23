@@ -994,15 +994,20 @@ export default class Canvasimo {
   public stroke: Stroke = (color?: string | Path2D, path?: Path2D): Canvasimo => {
     if (typeof color === 'string') {
       this.setStroke(color);
-      if (path) {
+      // tslint:disable-next-line:strict-type-predicates
+      if (path && typeof path === 'object') {
         this.ctx.stroke(path);
       } else {
         this.ctx.stroke();
       }
-    } else if (typeof color === 'object') {
+    // tslint:disable-next-line:strict-type-predicates
+    } else if (color && typeof color === 'object') {
       this.ctx.stroke(color);
-    } else {
+    // tslint:disable-next-line:strict-type-predicates
+    } else if (path && typeof path === 'object') {
       this.ctx.stroke(path);
+    } else {
+      this.ctx.stroke();
     }
 
     return this;
