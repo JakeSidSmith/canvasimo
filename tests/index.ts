@@ -420,6 +420,27 @@ describe('canvasimo', () => {
       expect(strokeSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('should not call stroke with undefined or null', () => {
+      const ctx = canvas.getCurrentContext();
+
+      canvas.stroke();
+      canvas.stroke('red');
+      canvas.stroke(undefined);
+      canvas.stroke(null as any);
+      canvas.stroke('red', undefined as any);
+      canvas.stroke('red', null as any);
+
+      const strokeCalls = (ctx.stroke as jest.Mock<any>).mock.calls;
+
+      expect(strokeCalls.length).toBe(6);
+      expect(ctx.stroke).not.toHaveBeenCalledWith(null);
+      expect(ctx.stroke).not.toHaveBeenCalledWith(undefined);
+
+      strokeCalls.forEach((call) => {
+        expect(call.length).toBe(0);
+      });
+    });
+
   });
 
   describe('resetTransform', () => {
