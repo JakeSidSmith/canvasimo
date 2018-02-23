@@ -1,6 +1,6 @@
 import ImageData from './image-data-stub';
 
-const ctx = {
+const ctx: {[i: string]: any} = {
   imageSmoothingEnabled: true,
   webkitImageSmoothingEnabled: false,
   globalAlpha: 1, // number
@@ -20,8 +20,8 @@ const ctx = {
   textAlign: 'start', // string
   textBaseline: 'alphabetic', // string
   getContextAttributes: jest.fn(),
-  getImageData: jest.fn().mockImplementation((x: number, y: number, width: number, height: number) => {
-    return new ImageData(width, height)
+  getImageData: jest.fn((x: number, y: number, width: number, height: number) => {
+    return new ImageData(width, height);
   }),
   createLinearGradient: jest.fn(),
   createRadialGradient: jest.fn(),
@@ -61,6 +61,18 @@ const ctx = {
   setLineDash: jest.fn(),
   fillRect: jest.fn(),
   strokeRect: jest.fn(),
+};
+
+export const mockClearAll = () => {
+  for (const key in ctx) {
+    if (Object.prototype.hasOwnProperty.call(ctx, key)) {
+      const prop = ctx[key];
+
+      if (typeof prop === 'function') {
+        (prop as jest.Mock<any>).mockClear();
+      }
+    }
+  }
 };
 
 const getContext = (type: string) => {
