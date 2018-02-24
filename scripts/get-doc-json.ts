@@ -98,7 +98,9 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
     const flags = ts.getCombinedModifierFlags(node);
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
-      (node as ts.ClassDeclaration).name && (node as ts.ClassDeclaration).name!.text === CLASS_NAME
+      (node as ts.ClassDeclaration).name && (node as ts.ClassDeclaration).name!.text === CLASS_NAME &&
+      // tslint:disable-next-line:no-bitwise
+      (flags & ts.ModifierFlags.Export) !== 0
     ) {
       ts.forEachChild(node, documentProperty);
     } else {
