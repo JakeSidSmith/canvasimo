@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 
+const NUMBER_OF_PROPERTIES = 186;
 const CLASS_NAME = 'Canvasimo';
 const CWD = process.cwd();
 const SOURCE_FILE = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
@@ -41,7 +42,7 @@ describe('inspect', () => {
       expect(CanvasimoClass).toBeTruthy();
 
       expect(methods.length).toBe(0);
-      expect(properties.length).toBe(184);
+      expect(properties.length).toBe(NUMBER_OF_PROPERTIES);
 
       properties.forEach((property, index) => {
         if (property.initializer) {

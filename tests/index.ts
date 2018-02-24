@@ -75,7 +75,7 @@ describe('canvasimo', () => {
     strokeClosedPath: [[]],
   };
 
-  const isGetter = /^(get|create|is|measure|constrain|map)/i;
+  const isGetter = /^(get|create|is|measure|constrain|map|version)/i;
 
   beforeEach(() => {
     mockClearAll();
@@ -752,6 +752,38 @@ describe('canvasimo', () => {
       expect(canvas.map(0.5, 0, 1, 0, -1)).toBe(-0.5);
       expect(canvas.map(6, 2, 4, 4, 10)).toBe(16);
       expect(canvas.map(3, 2, 4, 4, 10)).toBe(7);
+    });
+
+  });
+
+  describe('version', () => {
+
+    beforeEach(() => {
+      jest.spyOn(console, 'info').mockImplementation(jest.fn());
+    });
+
+    afterEach(() => {
+      (console.info as jest.Mock<any>).mockReset();
+    });
+
+    const { version } = require('../package.json');
+
+    it('should return the current version of Canvasimo', () => {
+      expect(typeof version).toBe('string');
+      expect(version.length).toBeGreaterThanOrEqual(5);
+      expect(canvas.getVersion()).toBe(version);
+      expect(canvas.version()).toBe(version);
+    });
+
+    it('should log to console if logInfo parameter is true', () => {
+      canvas.version();
+
+      expect(console.info).not.toHaveBeenCalled();
+
+      canvas.version(true);
+
+      expect(console.info).toHaveBeenCalledTimes(1);
+      expect(console.info).toHaveBeenCalledWith(`Using Canvasimo version ${version}`);
     });
 
   });

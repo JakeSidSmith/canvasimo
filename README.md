@@ -20,6 +20,23 @@ npm install canvasimo
 
 Canvasimo can be bundled with all major build tools, or loaded with a script tag and used as a global
 
+#### With an ES6 bundler / TypeScript (recommended)
+
+```typescript
+import Canvasimo from 'canvasimo';
+// Or
+import { Canvasimo } from 'canvasimo';
+```
+
+Both of these will import the Canvasimo class as it is both a default and named export.
+
+#### With an ES5 bundler / commonjs
+
+```javascript
+var canvasimo = require('canvasimo');
+var Canvasimo = canvasimo.Canvasimo;
+```
+
 #### As a global
 
 ```html
@@ -29,13 +46,7 @@ Canvasimo can be bundled with all major build tools, or loaded with a script tag
 Now Canvasimo is accessible globally like so (to allow for ES6 and TypeScript default imports)
 
 ```typescript
-const Canvasimo = canvasimo.default;
-```
-
-#### With an ES6 bundler / TypeScript (recommended)
-
-```typescript
-import Canvasimo from 'canvasimo';
+const Canvasimo = canvasimo.Canvasimo;
 ```
 
 ## Create a Canvasimo instance

@@ -1,3 +1,5 @@
+// tslint:disable-next-line:no-var-requires
+const { version: VERSION } = require('../package.json');
 import {
   CONTEXT_TYPE,
   DEFAULT_FONT,
@@ -5,6 +7,7 @@ import {
   INCORRECT_GET_ANGLE_ARGUMENTS,
 } from './constants';
 import {
+  BooleanFalsy,
   CanvasContext,
   CanvasContextAttributes,
   CreateImageData,
@@ -43,7 +46,7 @@ const logUnsupportedMethodError = (method: string) => {
   }
 };
 
-export default class Canvasimo {
+export class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
@@ -273,7 +276,7 @@ export default class Canvasimo {
   /**
    * Plot a circle that can then have a stroke or fill applied to it.
    */
-  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: boolean): Canvasimo => {
+  public plotCircle = (x: number, y: number, radius: number, anticlockwise?: BooleanFalsy): Canvasimo => {
     return this
       .beginPath()
       .plotArc(x, y, radius, 0, Math.PI * 2, anticlockwise)
@@ -282,7 +285,13 @@ export default class Canvasimo {
   /**
    * Plot a circle and apply a stroke to it.
    */
-  public strokeCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
+  public strokeCircle = (
+    x: number,
+    y: number,
+    radius: number,
+    anticlockwise?: BooleanFalsy,
+    color?: string
+  ): Canvasimo => {
     return this
       .plotCircle(x, y, radius, anticlockwise)
       .stroke(color);
@@ -290,7 +299,13 @@ export default class Canvasimo {
   /**
    * Plot a circle and apply a fill to it.
    */
-  public fillCircle = (x: number, y: number, radius: number, anticlockwise?: boolean, color?: string): Canvasimo => {
+  public fillCircle = (
+    x: number,
+    y: number,
+    radius: number,
+    anticlockwise?: BooleanFalsy,
+    color?: string
+  ): Canvasimo => {
     return this
       .plotCircle(x, y, radius, anticlockwise)
       .fill(color);
@@ -298,7 +313,7 @@ export default class Canvasimo {
   /**
    * Plot a polygon that can then have a stroke or fill applied to it.
    */
-  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: boolean): Canvasimo => {
+  public plotPoly = (x: number, y: number, radius: number, sides: number, anticlockwise?: BooleanFalsy): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -328,7 +343,7 @@ export default class Canvasimo {
     y: number,
     radius: number,
     sides: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
@@ -349,7 +364,7 @@ export default class Canvasimo {
     y: number,
     radius: number,
     sides: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
@@ -365,7 +380,7 @@ export default class Canvasimo {
   /**
    * Plot a star that can then have a stroke or fill applied to it.
    */
-  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: boolean): Canvasimo => {
+  public plotStar = (x: number, y: number, radius1: number, sides: number, anticlockwise?: BooleanFalsy): Canvasimo => {
     sides = Math.round(sides);
 
     if (!sides || sides < 3) {
@@ -403,7 +418,7 @@ export default class Canvasimo {
     y: number,
     radius1: number,
     sides: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
@@ -424,7 +439,7 @@ export default class Canvasimo {
     y: number,
     radius1: number,
     sides: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
@@ -446,7 +461,7 @@ export default class Canvasimo {
     radius1: number,
     radius2: number,
     sides: number,
-    anticlockwise?: boolean
+    anticlockwise?: BooleanFalsy
   ): Canvasimo => {
     sides = Math.round(sides);
 
@@ -483,7 +498,7 @@ export default class Canvasimo {
     radius1: number,
     radius2: number,
     sides: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
@@ -505,7 +520,7 @@ export default class Canvasimo {
     radius1: number,
     radius2: number,
     sides: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     sides = Math.round(sides);
@@ -653,7 +668,7 @@ export default class Canvasimo {
     radius: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean
+    anticlockwise?: BooleanFalsy
   ): Canvasimo => {
     return this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
   }
@@ -663,7 +678,7 @@ export default class Canvasimo {
     radius: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean
+    anticlockwise?: BooleanFalsy
   ): Canvasimo => {
     this.ctx.arc(
       x * this.density,
@@ -685,7 +700,7 @@ export default class Canvasimo {
     radius: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     return this
@@ -701,7 +716,7 @@ export default class Canvasimo {
     radius: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     return this
@@ -721,7 +736,7 @@ export default class Canvasimo {
     rotation: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean
+    anticlockwise?: BooleanFalsy
   ): Canvasimo => {
     return this.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
   }
@@ -733,7 +748,7 @@ export default class Canvasimo {
     rotation: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean
+    anticlockwise?: BooleanFalsy
   ): Canvasimo => {
     // tslint:disable-next-line:strict-type-predicates
     if (typeof this.ctx.ellipse === 'function') {
@@ -769,7 +784,7 @@ export default class Canvasimo {
     rotation: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     return this
@@ -787,7 +802,7 @@ export default class Canvasimo {
     rotation: number,
     startAngle: number,
     endAngle: number,
-    anticlockwise?: boolean,
+    anticlockwise?: BooleanFalsy,
     color?: string
   ): Canvasimo => {
     return this
@@ -1626,10 +1641,10 @@ export default class Canvasimo {
   /**
    * Set whether image smoothing should be used.
    */
-  public setImageSmoothingEnabled = (value: boolean): Canvasimo => {
+  public setImageSmoothingEnabled = (value: BooleanFalsy): Canvasimo => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
       if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
-        this.ctx[key] = value;
+        this.ctx[key] = value || false;
         return this;
       }
     }
@@ -1830,6 +1845,21 @@ export default class Canvasimo {
     return (this.ctx as any).isPointInStroke();
   }
 
+  /**
+   * Return the current version of Canvasimo (and log to console if logInfo parameter is true)
+   * @alias version
+   */
+  public getVersion = (logInfo?: BooleanFalsy): string => {
+    // tslint:disable-next-line:strict-type-predicates
+    if (logInfo && console && typeof console.info === 'function') {
+      // tslint:disable-next-line:no-console
+      console.info(`Using Canvasimo version ${VERSION}`);
+    }
+
+    return VERSION;
+  }
+  public version = (logInfo?: BooleanFalsy): string => this.getVersion(logInfo);
+
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
     (this.ctx as any)[attribute] = value;
@@ -1837,3 +1867,5 @@ export default class Canvasimo {
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
 }
+
+export default Canvasimo;
