@@ -46,7 +46,7 @@ const logUnsupportedMethodError = (method: string) => {
   }
 };
 
-export default class Canvasimo {
+export class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
@@ -1859,3 +1859,5 @@ export default class Canvasimo {
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
 }
+
+export default Canvasimo;
