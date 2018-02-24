@@ -205,8 +205,13 @@ const getDocJson = (): Docs => {
   const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
   const sourceFiles = program.getSourceFiles();
   const checker = program.getTypeChecker();
+  const methods = getMethods(sourceFiles, checker);
 
-  return groupMethods(getMethods(sourceFiles, checker));
+  if (!methods.length) {
+    throw new Error(`Could not find an exported class called ${CLASS_NAME} with any methods`);
+  }
+
+  return groupMethods(methods);
 };
 
 export default getDocJson;
