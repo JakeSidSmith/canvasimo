@@ -11,6 +11,7 @@ export type TextAlign = 'left' | 'right' | 'center' | 'start' | 'end';
 export type LineJoin = 'bevel' | 'round' | 'miter';
 export type LineCap = 'butt' | 'round' | 'square';
 export type FillRule = 'nonzero' | 'evenodd';
+export type BooleanFalsy = boolean | undefined | null;
 
 export type ImageLike = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
 export type CanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;
