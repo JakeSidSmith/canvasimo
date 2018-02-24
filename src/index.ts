@@ -1,3 +1,5 @@
+// tslint:disable-next-line:no-var-requires
+const { version: VERSION } = require('../package.json');
 import {
   CONTEXT_TYPE,
   DEFAULT_FONT,
@@ -1842,6 +1844,13 @@ export default class Canvasimo {
 
     return (this.ctx as any).isPointInStroke();
   }
+
+  /**
+   * Return the current version of Canvasimo
+   * @alias version
+   */
+  public getVersion = (): string => VERSION;
+  public version = (): string => VERSION;
 
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
