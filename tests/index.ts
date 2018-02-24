@@ -758,13 +758,32 @@ describe('canvasimo', () => {
 
   describe('version', () => {
 
-    it('should return the current version of Canvasimo', () => {
-      const { version } = require('../package.json');
+    beforeEach(() => {
+      jest.spyOn(console, 'info').mockImplementation(jest.fn());
+    });
 
+    afterEach(() => {
+      (console.info as jest.Mock<any>).mockReset();
+    });
+
+    const { version } = require('../package.json');
+
+    it('should return the current version of Canvasimo', () => {
       expect(typeof version).toBe('string');
       expect(version.length).toBeGreaterThanOrEqual(5);
       expect(canvas.getVersion()).toBe(version);
       expect(canvas.version()).toBe(version);
+    });
+
+    it('should log to console if logInfo parameter is true', () => {
+      canvas.version();
+
+      expect(console.info).not.toHaveBeenCalled();
+
+      canvas.version(true);
+
+      expect(console.info).toHaveBeenCalledTimes(1);
+      expect(console.info).toHaveBeenCalledWith(`Using Canvasimo version ${version}`);
     });
 
   });

@@ -1846,11 +1846,19 @@ export class Canvasimo {
   }
 
   /**
-   * Return the current version of Canvasimo
+   * Return the current version of Canvasimo (and log to console if logInfo parameter is true)
    * @alias version
    */
-  public getVersion = (): string => VERSION;
-  public version = (): string => VERSION;
+  public getVersion = (logInfo?: BooleanFalsy): string => {
+    // tslint:disable-next-line:strict-type-predicates
+    if (logInfo && console && typeof console.info === 'function') {
+      // tslint:disable-next-line:no-console
+      console.info(`Using Canvasimo version ${VERSION}`);
+    }
+
+    return VERSION;
+  }
+  public version = (logInfo?: BooleanFalsy): string => this.getVersion(logInfo);
 
   // Set and get context properties
   private setCanvasProperty = (attribute: string, value: any): Canvasimo => {
