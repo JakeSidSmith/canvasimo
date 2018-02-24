@@ -1,5 +1,6 @@
 import Canvasimo from '../../../src';
 
+(window as any).canvasimo = {Canvasimo};
 (window as any).Canvasimo = Canvasimo;
 
 const element = document.getElementById('demo-1');
