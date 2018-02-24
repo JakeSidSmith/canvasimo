@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as ts from 'typescript';
 import { Docs, GroupedMethod, Method, Methods, Parameter, Tags, TypeAlias } from '../docs/src/ts/types';
 
+const CLASS_NAME = 'Canvasimo';
 const CWD = process.cwd();
 // tslint:disable-next-line:no-var-requires
 const COMPILER_OPTIONS = require(path.join(CWD, 'tsconfig.json'));
@@ -97,8 +98,7 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
     const flags = ts.getCombinedModifierFlags(node);
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
-      // tslint:disable-next-line:no-bitwise
-      (flags & ts.ModifierFlags.Export) !== 0 && (flags & ts.ModifierFlags.Default) !== 0
+      (node as ts.ClassDeclaration).name && (node as ts.ClassDeclaration).name!.text === CLASS_NAME
     ) {
       ts.forEachChild(node, documentProperty);
     } else {
