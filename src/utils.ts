@@ -25,6 +25,8 @@ export const isTuplePoint = (point?: {x: number, y: number} | [number, number] |
   return typeof point === 'object' && Array.isArray(point) && point.length === 2;
 };
 
+let warnedAboutLineHeight = false;
+
 export const getFontParts = (input: string | undefined, density: number) => {
   if (!input) {
     return DEFAULT_FONT;
@@ -42,9 +44,19 @@ export const getFontParts = (input: string | undefined, density: number) => {
     return DEFAULT_FONT;
   }
 
+  const fontString = matchFontSize[0].trim()
   const leadingSpaces = matchFontSize[1].length;
   const size = matchFontSize[2];
   const unit = matchFontSize[3];
+  const lineHeight = matchFontSize[4];
+
+  if (lineHeight && !warnedAboutLineHeight) {
+    console.warn(
+      `Attempted to set the font line height with "${fontString}", ` +
+      'but this is not supported by canvas. Use the Canvasimo TextWrap methods with the lineHeight parameter instead.'
+    );
+    warnedAboutLineHeight = true;
+  }
 
   const fontSize = (unit !== '%' ? parseFloat(size) * density : size) + unit;
 
