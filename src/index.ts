@@ -946,6 +946,7 @@ export class Canvasimo {
   }
   /**
    * Get the font that is being used.
+   * This returns the exact CanvasRenderingContext2D.font string.
    */
   public getFont = (): string => {
     return formatFont(this.ctx.font, this.density);
@@ -986,6 +987,7 @@ export class Canvasimo {
   }
   /**
    * Get the font size that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontSize = (): number | null => {
     const parts = getFontParts(this.ctx.font, this.density);
@@ -1008,6 +1010,7 @@ export class Canvasimo {
   }
   /**
    * Get the font style that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontStyle = (): string | null => {
     const parts = getFontParts(this.ctx.font, this.density);
@@ -1030,6 +1033,7 @@ export class Canvasimo {
   }
   /**
    * Get the font variant that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontVariant = (): string | null => {
     const parts = getFontParts(this.ctx.font, this.density);
@@ -1052,6 +1056,7 @@ export class Canvasimo {
   }
   /**
    * Get the font weight that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontWeight = (): string | number | null => {
     const parts = getFontParts(this.ctx.font, this.density);
