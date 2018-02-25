@@ -383,6 +383,11 @@ describe('canvasimo', () => {
 
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setDensity(1);
+
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
     });
 
   });
