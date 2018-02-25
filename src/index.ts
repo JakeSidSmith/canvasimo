@@ -861,7 +861,8 @@ export class Canvasimo {
     maxWidth?: MaxWidth,
     breakWord?: BooleanFalsy,
     hyphenate?: BooleanFalsy,
-    lineHeight?: number
+    lineHeight?: number,
+    color?: string
   ): Canvasimo => {
     // Do stuff here
     return this;
