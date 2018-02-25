@@ -365,27 +365,32 @@ describe('canvasimo', () => {
       canvas.setDensity(1);
       canvas.setFont('10px arial');
 
+      expect(canvas.getFont()).toBe('10px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(10);
 
       canvas.setFontSize(5);
 
+      expect(canvas.getFont()).toBe('5px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
 
       canvas.setDensity(2);
       canvas.setFont('10px arial');
 
+      expect(canvas.getFont()).toBe('10px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(10);
 
       canvas.setFontSize(5);
 
+      expect(canvas.getFont()).toBe('5px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
 
       canvas.setDensity(1);
 
+      expect(canvas.getFont()).toBe('5px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
     });
