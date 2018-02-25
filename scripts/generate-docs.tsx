@@ -32,7 +32,8 @@ const b = browserify(
     cache: {},
   }
 )
-  .plugin('tsify'); // tslint:disable-line:no-var-requires
+  .plugin('tsify')
+  .transform('brfs');
 
 b.plugin('minifyify', {
   map: 'build/js/bundle.map.json',
