@@ -1942,8 +1942,6 @@ export class Canvasimo {
     const definedFontSize = this.getFontSize();
     const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
 
-    console.log(fontSize, height);
-
     if (!breakWord && !hyphenate) {
       const lines = text.split('\n');
       lines.forEach((line, index) => {
