@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 
-const NUMBER_OF_PROPERTIES = 186;
+const NUMBER_OF_PROPERTIES = 189;
 const CLASS_NAME = 'Canvasimo';
 const CWD = process.cwd();
 const SOURCE_FILE = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
