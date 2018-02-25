@@ -864,8 +864,17 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-    // Do stuff here
-    return this;
+    return this.textWrap(
+      this.strokeText,
+      text,
+      x,
+      y,
+      maxWidth,
+      breakWord,
+      hyphenate,
+      lineHeight,
+      color
+    );
   }
   /**
    * Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
@@ -885,8 +894,17 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-    // Do stuff here
-    return this;
+    return this.textWrap(
+      this.fillText,
+      text,
+      x,
+      y,
+      maxWidth,
+      breakWord,
+      hyphenate,
+      lineHeight,
+      color
+    );
   }
   /**
    * Get information about the size text will be drawn.
@@ -1909,6 +1927,20 @@ export class Canvasimo {
     return this;
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
+  private textWrap = (
+    method: this['strokeText'] | this['fillText'],
+    text: string,
+    x: number,
+    y: number,
+    maxWidth?: MaxWidth,
+    breakWord?: BooleanFalsy,
+    hyphenate?: BooleanFalsy,
+    lineHeight?: number,
+    color?: string
+  ): Canvasimo => {
+
+    return this;
+  }
 }
 
 export default Canvasimo;
