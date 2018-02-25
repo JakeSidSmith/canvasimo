@@ -36,7 +36,7 @@ const b = browserify(
   .transform('brfs');
 
 b.plugin('minifyify', {
-  map: 'build/js/bundle.map.json',
+  map: 'bundle.map.json',
   output: path.join(CWD, 'docs/build/js/bundle.map.json'),
 });
 
