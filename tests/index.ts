@@ -73,6 +73,9 @@ describe('canvasimo', () => {
     plotClosedPath: [[]],
     fillClosedPath: [[]],
     strokeClosedPath: [[]],
+    strokeTextWrap: ['', 0, 0],
+    fillTextWrap: ['', 0, 0],
+    textWrap: [jest.fn(), '', 0, 0],
   };
 
   const isGetter = /^(get|create|is|measure|constrain|map|version)/i;
