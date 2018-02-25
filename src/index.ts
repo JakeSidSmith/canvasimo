@@ -847,12 +847,12 @@ export class Canvasimo {
     return this;
   }
   /**
-   * Draw text with a stroke, wrapped at newlines and or, automatically wrapped if the text exceeds the maxWidth.
+   * Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
    * If no maxWidth is specified text will only wrap at newlines.
    * Words will not break by default and therefore may overflow.
    * Text is not hyphenated by default and may overflow.
-   * If the `hyphenated` parameter is `true`, `breakWord` will be ignored.
-   * The `lineHeight` parameter is a multiplier for the font size, and defaults to 1.5.
+   * If the hyphenated parameter is true, breakWord will be ignored.
+   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
    */
   public strokeTextWrap = (
     text: string,
