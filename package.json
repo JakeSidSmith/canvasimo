@@ -73,7 +73,6 @@
     "typescript": "2.3.4"
   },
   "jest": {
-    "mapCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
     ],
