@@ -357,6 +357,32 @@ describe('canvasimo', () => {
       expect(canvas.getFont()).toBe('normal normal normal 10px sans-serif');
     });
 
+    it('should handle canvas density when setting and getting font sizes', () => {
+      canvas.setDensity(1);
+      canvas.setFont('10px arial');
+
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(10);
+
+      canvas.setFontSize(5);
+
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setDensity(2);
+      canvas.setFont('10px arial');
+
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(10);
+
+      canvas.setFontSize(5);
+
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setDensity(1);
+    });
+
   });
 
   describe('plot path', () => {
