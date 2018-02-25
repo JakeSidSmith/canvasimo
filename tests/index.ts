@@ -84,6 +84,10 @@ describe('canvasimo', () => {
     mockClearAll();
   });
 
+  afterEach(() => {
+    canvas.setDensity(1);
+  });
+
   it('should return an interface', () => {
     jest.spyOn(element, 'getContext').mockImplementation(getContextStub);
     jest.spyOn(element, 'getBoundingClientRect').mockImplementation(getBoundingClientRectStub);
@@ -379,8 +383,6 @@ describe('canvasimo', () => {
 
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
-
-      canvas.setDensity(1);
     });
 
   });
