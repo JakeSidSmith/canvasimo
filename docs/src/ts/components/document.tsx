@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 import * as React from 'react';
 import { Component } from 'react';
 import { Docs } from '../types';
