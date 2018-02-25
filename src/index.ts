@@ -87,6 +87,7 @@ export class Canvasimo {
 
     this.density = density;
 
+    // FIXME: Test that these are correctly adjusted
     if (prevDensity !== density) {
       this.setSize(this.element.width, this.element.height);
 
