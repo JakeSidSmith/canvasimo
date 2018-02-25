@@ -1938,7 +1938,7 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-
+    method(text, x, y, undefined, color);
     return this;
   }
 }

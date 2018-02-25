@@ -6,6 +6,7 @@ if (!element) {
   throw new Error('Could not find canvas element for example');
 }
 
+const FONT_SIZE = 14;
 const canvas = new Canvasimo(element as HTMLCanvasElement);
 const rect = canvas.getBoundingClientRect();
 
@@ -23,6 +24,23 @@ const draw = () => {
     .clearCanvas()
     .setSize(width, height)
     .fillCanvas('#EEEEEE')
+    .setTextBaseline('top')
+    .setFontFamily('arial')
+    .setFontSize(FONT_SIZE)
+    .fillText('Regular text', 10, 10, null, 'black')
+    .fillTextWrap(
+      'Text with newline after this...\n...so this is on a newline',
+      10,
+      10 + FONT_SIZE * 2
+    )
+    .fillTextWrap(
+      'Text that automatically wraps and, in this case, is hyphenated',
+      10,
+      10 + FONT_SIZE * 5,
+      100,
+      true,
+      true
+    )
     .save()
     .translate(width / 2, height / 2)
     .rotate(canvas.getRadiansFromDegrees(-90))
