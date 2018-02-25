@@ -20,6 +20,7 @@ import {
   GlobalCompositeOperation,
   LineCap,
   LineJoin,
+  MaxWidth,
   Points,
   Repeat,
   Segments,
@@ -819,7 +820,7 @@ export class Canvasimo {
   /**
    * Draw a text with a stroke.
    */
-  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
+  public strokeText = (text: string, x: number, y: number, maxWidth?: MaxWidth, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
@@ -833,7 +834,7 @@ export class Canvasimo {
   /**
    * Draw a text with a fill.
    */
-  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
+  public fillText = (text: string, x: number, y: number, maxWidth?: MaxWidth, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
