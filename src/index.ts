@@ -1938,6 +1938,21 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
+    const height = typeof lineHeight === 'number' ? lineHeight : 1.5;
+    const definedFontSize = this.getFontSize();
+    const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
+
+    console.log(fontSize, height);
+
+    if (!breakWord && !hyphenate) {
+      const lines = text.split('\n');
+      lines.forEach((line, index) => {
+        const offset = fontSize * height;
+        method(line, x, y + offset * index, undefined, color);
+      });
+
+      return this;
+    }
     method(text, x, y, undefined, color);
     return this;
   }
