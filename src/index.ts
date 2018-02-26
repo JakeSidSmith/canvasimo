@@ -29,6 +29,7 @@ import {
   Stroke,
   TextAlign,
   TextBaseline,
+  WordBreak,
 } from './types';
 import {
   formatFont,
@@ -849,10 +850,9 @@ export class Canvasimo {
   }
   /**
    * Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
-   * If no maxWidth is specified text will only wrap at newlines (breakWord and hyphenate are ignored).
-   * Words will not break by default and therefore may overflow.
-   * Text is not hyphenated by default and may overflow.
-   * If the hyphenated parameter is true, breakWord will be ignored.
+   * If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
+   * Words will not break by default (normal) and therefore may overflow.
+   * break-all will break words wherever possible, and break-word will only break words if there is not enough room.
    * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
    */
   public strokeTextMultiline = (
@@ -860,8 +860,7 @@ export class Canvasimo {
     x: number,
     y: number,
     maxWidth?: MaxWidth,
-    breakWord?: BooleanFalsy,
-    hyphenate?: BooleanFalsy,
+    wordBreak?: WordBreak,
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
@@ -871,18 +870,16 @@ export class Canvasimo {
       x,
       y,
       maxWidth,
-      breakWord,
-      hyphenate,
+      wordBreak,
       lineHeight,
       color
     );
   }
   /**
    * Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
-   * If no maxWidth is specified text will only wrap at newlines (breakWord and hyphenate are ignored).
-   * Words will not break by default and therefore may overflow.
-   * Text is not hyphenated by default and may overflow.
-   * If the hyphenated parameter is true, breakWord will be ignored.
+   * If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
+   * Words will not break by default (normal) and therefore may overflow.
+   * break-all will break words wherever possible, and break-word will only break words if there is not enough room.
    * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
    */
   public fillTextMultiline = (
@@ -890,8 +887,7 @@ export class Canvasimo {
     x: number,
     y: number,
     maxWidth?: MaxWidth,
-    breakWord?: BooleanFalsy,
-    hyphenate?: BooleanFalsy,
+    wordBreak?: WordBreak,
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
@@ -901,8 +897,7 @@ export class Canvasimo {
       x,
       y,
       maxWidth,
-      breakWord,
-      hyphenate,
+      wordBreak,
       lineHeight,
       color
     );
@@ -1939,29 +1934,13 @@ export class Canvasimo {
     x: number,
     y: number,
     maxWidth?: MaxWidth,
-    breakWord?: BooleanFalsy,
-    hyphenate?: BooleanFalsy,
+    wordBreak?: WordBreak,
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
     const height = typeof lineHeight === 'number' ? lineHeight : 1.5;
     const definedFontSize = this.getFontSize();
     const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
-
-    /*
-
-    NOTES
-
-    Existing hyphens should not have additional hyphens added to them
-    Existing hyphens should remain attached which there is room
-
-    New hyphens should not be inserted if there is no room on that line (when only 1 or less characters fit)
-
-    Non-word characters (.,! etc) should not have a hyphen appended, even if they are broken
-
-    Words should only be split as close to half their characters as possible
-
-    */
 
     if (typeof maxWidth === 'undefined' || maxWidth === null) {
       const lines = text.split('\n');
