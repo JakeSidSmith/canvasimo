@@ -28,12 +28,12 @@ const draw = () => {
     .setFontFamily('arial')
     .setFontSize(FONT_SIZE)
     .fillText('Regular text', 10, 10, null, 'black')
-    .fillTextWrap(
+    .fillTextMultiline(
       'Text with newline after this...\n...so this is on a newline',
       10,
       10 + FONT_SIZE * 2
     )
-    .fillTextWrap(
+    .fillTextMultiline(
       'Text that automatically wraps and, in this case, is hyphenated',
       10,
       10 + FONT_SIZE * 5,

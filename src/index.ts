@@ -855,7 +855,7 @@ export class Canvasimo {
    * If the hyphenated parameter is true, breakWord will be ignored.
    * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
    */
-  public strokeTextWrap = (
+  public strokeTextMultiline = (
     text: string,
     x: number,
     y: number,
@@ -885,7 +885,7 @@ export class Canvasimo {
    * If the hyphenated parameter is true, breakWord will be ignored.
    * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
    */
-  public fillTextWrap = (
+  public fillTextMultiline = (
     text: string,
     x: number,
     y: number,

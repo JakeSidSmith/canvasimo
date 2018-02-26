@@ -55,7 +55,8 @@ export const getFontParts = (input: string | undefined, density: number, getter:
     // tslint:disable-next-line:no-console
     console.warn(
       `Attempted to set the font line height with "${fontString}", ` +
-      'but this is not supported by canvas. Use the Canvasimo TextWrap methods with the lineHeight parameter instead.'
+      'but this is not supported by canvas. ' +
+      'Use the Canvasimo TextMultiline methods with the lineHeight parameter instead.'
     );
     warnedAboutLineHeight = true;
   }
