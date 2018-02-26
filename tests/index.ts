@@ -365,34 +365,80 @@ describe('canvasimo', () => {
       canvas.setDensity(1);
       canvas.setFont('10px arial');
 
-      expect(canvas.getFont()).toBe('10px arial');
+      expect(canvas.getFont()).toBe('normal normal normal 10px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(10);
 
       canvas.setFontSize(5);
 
-      expect(canvas.getFont()).toBe('5px arial');
+      expect(canvas.getFont()).toBe('normal normal normal 5px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
 
       canvas.setDensity(2);
       canvas.setFont('10px arial');
 
-      expect(canvas.getFont()).toBe('10px arial');
+      expect(canvas.getFont()).toBe('normal normal normal 10px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(10);
 
       canvas.setFontSize(5);
 
-      expect(canvas.getFont()).toBe('5px arial');
+      expect(canvas.getFont()).toBe('normal normal normal 5px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
 
       canvas.setDensity(1);
 
-      expect(canvas.getFont()).toBe('5px arial');
+      expect(canvas.getFont()).toBe('normal normal normal 5px arial');
       expect(canvas.getFontFamily()).toBe('arial');
       expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setFontWeight(300);
+
+      expect(canvas.getFont()).toBe('normal normal 300 5px arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setDensity(2);
+
+      expect(canvas.getFont()).toBe('normal normal 300 5px arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setFontWeight(600);
+
+      expect(canvas.getFont()).toBe('normal normal 600 5px arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setDensity(1);
+      canvas.setFontSize(50);
+
+      expect(canvas.getFont()).toBe('normal normal 600 50px arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(50);
+
+      canvas.setDensity(2);
+      canvas.setFontSize('5em');
+
+      expect(canvas.getFont()).toBe('normal normal 600 5em arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(5);
+
+      canvas.setDensity(2);
+      canvas.setFontSize('70%');
+
+      expect(canvas.getFont()).toBe('normal normal 600 70% arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(70);
+
+      canvas.setDensity(1);
+      canvas.setFontSize('70%');
+
+      expect(canvas.getFont()).toBe('normal normal 600 70% arial');
+      expect(canvas.getFontFamily()).toBe('arial');
+      expect(canvas.getFontSize()).toBe(70);
     });
 
   });

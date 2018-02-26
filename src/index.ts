@@ -62,7 +62,7 @@ export class Canvasimo {
     }
 
     this.ctx = ctx;
-    this.ctx.font = formatFont(ctx.font, this.density);
+    this.ctx.font = formatFont(ctx.font, this.density, true);
   }
 
   /**
@@ -941,7 +941,7 @@ export class Canvasimo {
    * Set the font to use.
    */
   public setFont = (font: string): Canvasimo => {
-    this.ctx.font = formatFont(font, this.density);
+    this.ctx.font = formatFont(font, this.density, false);
     return this;
   }
   /**
@@ -949,25 +949,25 @@ export class Canvasimo {
    * This returns the exact CanvasRenderingContext2D.font string.
    */
   public getFont = (): string => {
-    return formatFont(this.ctx.font, this.density);
+    return formatFont(this.ctx.font, this.density, true);
   }
   /**
    * Set the font family to use.
    */
   public setFontFamily = (family: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[4] = family || DEFAULT_FONT[4];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
    * Get the font that is being used.
    */
   public getFontFamily = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -977,12 +977,12 @@ export class Canvasimo {
    * Set the font size to use.
    */
   public setFontSize = (size: string | number): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
@@ -990,7 +990,7 @@ export class Canvasimo {
    * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontSize = (): number | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -1000,12 +1000,12 @@ export class Canvasimo {
    * Set the font style to use.
    */
   public setFontStyle = (style: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[0] = style || DEFAULT_FONT[0];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
@@ -1013,7 +1013,7 @@ export class Canvasimo {
    * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontStyle = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -1023,12 +1023,12 @@ export class Canvasimo {
    * Set the font variant to use.
    */
   public setFontVariant = (variant: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[1] = variant || DEFAULT_FONT[1];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
@@ -1036,7 +1036,7 @@ export class Canvasimo {
    * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontVariant = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -1046,12 +1046,12 @@ export class Canvasimo {
    * Set the font weight to use.
    */
   public setFontWeight = (weight: string | number): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[2] = weight.toString() || DEFAULT_FONT[2];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
@@ -1059,7 +1059,7 @@ export class Canvasimo {
    * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontWeight = (): string | number | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
