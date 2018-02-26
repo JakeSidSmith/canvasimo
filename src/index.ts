@@ -849,7 +849,7 @@ export class Canvasimo {
   }
   /**
    * Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
-   * If no maxWidth is specified text will only wrap at newlines.
+   * If no maxWidth is specified text will only wrap at newlines (breakWord and hyphenate are ignored).
    * Words will not break by default and therefore may overflow.
    * Text is not hyphenated by default and may overflow.
    * If the hyphenated parameter is true, breakWord will be ignored.
@@ -879,7 +879,7 @@ export class Canvasimo {
   }
   /**
    * Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
-   * If no maxWidth is specified text will only wrap at newlines.
+   * If no maxWidth is specified text will only wrap at newlines (breakWord and hyphenate are ignored).
    * Words will not break by default and therefore may overflow.
    * Text is not hyphenated by default and may overflow.
    * If the hyphenated parameter is true, breakWord will be ignored.
@@ -1948,7 +1948,7 @@ export class Canvasimo {
     const definedFontSize = this.getFontSize();
     const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
 
-    if (!breakWord && !hyphenate) {
+    if (typeof maxWidth === 'undefined' || maxWidth === null) {
       const lines = text.split('\n');
       lines.forEach((line, index) => {
         const offset = fontSize * height;
@@ -1956,6 +1956,8 @@ export class Canvasimo {
       });
 
       return this;
+    } else if (!breakWord && !hyphenate) {
+
     }
     method(text, x, y, undefined, color);
     return this;
