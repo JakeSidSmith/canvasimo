@@ -1957,6 +1957,10 @@ export class Canvasimo {
 
     New hyphens should not be inserted if there is no room on that line (when only 1 or less characters fit)
 
+    Non-word characters (.,! etc) should not have a hyphen appended, even if they are broken
+
+    Words should only be split as close to half their characters as possible
+
     */
 
     if (typeof maxWidth === 'undefined' || maxWidth === null) {
