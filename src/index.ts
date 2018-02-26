@@ -865,7 +865,7 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-    return this.textWrap(
+    return this.textMultiline(
       this.strokeText,
       text,
       x,
@@ -895,7 +895,7 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-    return this.textWrap(
+    return this.textMultiline(
       this.fillText,
       text,
       x,
@@ -1933,7 +1933,7 @@ export class Canvasimo {
     return this;
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
-  private textWrap = (
+  private textMultiline = (
     method: this['strokeText'] | this['fillText'],
     text: string,
     x: number,
