@@ -1948,6 +1948,17 @@ export class Canvasimo {
     const definedFontSize = this.getFontSize();
     const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
 
+    /*
+
+    NOTES
+
+    Existing hyphens should not have additional hyphens added to them
+    Existing hyphens should remain attached which there is room
+
+    New hyphens should not be inserted if there is no room on that line (when only 1 or less characters fit)
+
+    */
+
     if (typeof maxWidth === 'undefined' || maxWidth === null) {
       const lines = text.split('\n');
       lines.forEach((line, index) => {
