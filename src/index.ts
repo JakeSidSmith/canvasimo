@@ -1950,9 +1950,14 @@ export class Canvasimo {
       });
 
       return this;
-    } else if (!breakWord && !hyphenate) {
+    } else if (wordBreak === 'break-all') {
+
+    } else if (wordBreak === 'break-word') {
+
+    } else {
 
     }
+
     method(text, x, y, undefined, color);
     return this;
   }
