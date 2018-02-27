@@ -1971,15 +1971,11 @@ export class Canvasimo {
         const { width: lineWidth } = this.getTextSize(line);
         const { width: newLineWidth } = this.getTextSize(line + letter);
 
-        // Current offset if too large put on new line
-        if (line.length >= 1 && newLineWidth > maxWidth) {
-          lineIndex += 1;
-          lines.push(letter);
-        // Current offset fits on this line
-        } else if (newLineWidth < maxWidth) {
+        if (newLineWidth < maxWidth || line.length === 0) {
           lines[lineIndex] += letter;
         } else {
           lines.push(letter);
+          lineIndex = lines.length - 1;
         }
       });
 
