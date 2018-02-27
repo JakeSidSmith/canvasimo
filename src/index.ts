@@ -1928,6 +1928,27 @@ export class Canvasimo {
     return this;
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
+  private textWithLineBreaks = (
+    method: this['strokeText'] | this['fillText'],
+    text: string,
+    x: number,
+    y: number,
+    lineHeight?: number,
+    color?: string
+  ): Canvasimo => {
+    const height = typeof lineHeight === 'number' ? lineHeight : 1;
+    const definedFontSize = this.getFontSize();
+    const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
+
+    const lines = text.split('\n');
+
+    lines.forEach((line, index) => {
+      const offset = fontSize * height;
+      method(line, x, y + offset * index, undefined, color);
+    });
+
+    return this;
+  }
   private textMultiline = (
     method: this['strokeText'] | this['fillText'],
     text: string,
@@ -1938,20 +1959,31 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-    const height = typeof lineHeight === 'number' ? lineHeight : 1;
-    const definedFontSize = this.getFontSize();
-    const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
-
     if (typeof maxWidth === 'undefined' || maxWidth === null) {
-      const lines = text.split('\n');
-      lines.forEach((line, index) => {
-        const offset = fontSize * height;
-        method(line, x, y + offset * index, undefined, color);
+      return this.textWithLineBreaks(method, text, x, y, lineHeight, color);
+    } else if (wordBreak === 'break-all') {
+      const lines: string[] = [''];
+      const letters = text.split('');
+      let lineIndex = 0;
+
+      letters.forEach((letter, index) => {
+        const line = lines[lineIndex];
+        const { width: lineWidth } = this.getTextSize(line);
+        const { width: newLineWidth } = this.getTextSize(line + letter);
+
+        // Current offset if too large put on new line
+        if (line.length >= 1 && newLineWidth > maxWidth) {
+          lineIndex += 1;
+          lines.push(letter);
+        // Current offset fits on this line
+        } else if (newLineWidth < maxWidth) {
+          lines[lineIndex] += letter;
+        } else {
+          lines.push(letter);
+        }
       });
 
-      return this;
-    } else if (wordBreak === 'break-all') {
-
+      return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else if (wordBreak === 'break-word') {
 
     } else {
