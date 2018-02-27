@@ -25,39 +25,6 @@ const draw = () => {
     .clearCanvas()
     .setSize(width, height)
     .fillCanvas('#EEEEEE')
-    .setTextBaseline('top')
-    .setFontFamily('arial')
-    .setFontSize(FONT_SIZE)
-    .strokeLine(10 + MULTILINE_TEXT_WIDTH, 0, 10 + MULTILINE_TEXT_WIDTH, height, '#AAAAAA')
-    .strokeLine(10 + MULTILINE_TEXT_WIDTH * 2, 0, 10 + MULTILINE_TEXT_WIDTH * 2, height, '#AAAAAA')
-    .strokeLine(10 + MULTILINE_TEXT_WIDTH * 3, 0, 10 + MULTILINE_TEXT_WIDTH * 3, height, '#AAAAAA')
-    .fillText('Regular text that does not have newlines or automatic wrapping', 10, 10, null, 'black')
-    .fillTextMultiline(
-      'Text with newline after this...\n...so this is on a newline',
-      10,
-      10 + FONT_SIZE * 2
-    )
-    .fillTextMultiline(
-      'Text that automatically wraps and breaks words if necessary',
-      10,
-      10 + FONT_SIZE * 5,
-      MULTILINE_TEXT_WIDTH,
-      'break-word'
-    )
-    .fillTextMultiline(
-      'Text that automatically wraps and always breaks words',
-      10 + MULTILINE_TEXT_WIDTH,
-      10 + FONT_SIZE * 5,
-      MULTILINE_TEXT_WIDTH,
-      'break-all'
-    )
-    .fillTextMultiline(
-      'Text that automatically wraps but never breaks words',
-      10 + MULTILINE_TEXT_WIDTH * 2,
-      10 + FONT_SIZE * 5,
-      MULTILINE_TEXT_WIDTH,
-      'normal'
-    )
     .save()
     .translate(width / 2, height / 2)
     .rotate(canvas.getRadiansFromDegrees(-90))
