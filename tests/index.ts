@@ -137,7 +137,7 @@ describe('canvasimo', () => {
 
     it('should return the actual canvas context', () => {
       expect(canvas.getContext('2d')).toBe(element.getContext('2d'));
-      expect(canvas.getContext('someothercontext')).toEqual({});
+      expect(canvas.getContext('SomeOtherContext')).toEqual({});
       expect(canvas.getContext('')).toEqual({});
     });
 
