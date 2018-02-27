@@ -45,7 +45,7 @@ const draw = () => {
     .translate(multilineTextOffset, 0)
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .fillTextMultiline(
-      'non-breaking\nText that automatically wraps but never breaks words',
+      'normal\nText that automatically wraps but never breaks words',
       SPACE,
       SPACE + FONT_SIZE * 5,
       multilineTextWidth,
