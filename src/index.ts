@@ -1997,8 +1997,7 @@ export class Canvasimo {
 
     return lines;
   }
-  private wrapNormal = (text: string, maxWidth: number): string[] => {
-    const lines: string[] = [''];
+  private wrapNormal = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
     const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
