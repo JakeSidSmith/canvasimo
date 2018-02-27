@@ -6,8 +6,6 @@ if (!element) {
   throw new Error('Could not find canvas element for basic shapes example');
 }
 
-const MULTILINE_TEXT_WIDTH = 70;
-const FONT_SIZE = 14;
 const canvas = new Canvasimo(element as HTMLCanvasElement);
 const rect = canvas.getBoundingClientRect();
 

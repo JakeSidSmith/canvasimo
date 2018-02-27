@@ -21,10 +21,10 @@ const getExampleCode = (code: string) => {
 };
 
 const exampleBasicShapes = getExampleCode(
-  fs.readFileSync(path.join(__dirname, `../examples/basic-shapes.ts`), 'utf8')
+  fs.readFileSync(path.join(__dirname, '../examples/basic-shapes.ts'), 'utf8')
 );
 const exampleMultilineText = getExampleCode(
-  fs.readFileSync(path.join(__dirname, `../examples/multiline-text.ts`), 'utf8')
+  fs.readFileSync(path.join(__dirname, '../examples/multiline-text.ts'), 'utf8')
 );
 
 const TITLE = 'Canvasimo | The fluent HTML5 canvas drawing library';

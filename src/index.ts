@@ -1999,12 +1999,11 @@ export class Canvasimo {
   }
   private wrapNormal = (text: string, maxWidth: number): string[] => {
     const lines: string[] = [''];
-      const words = text.split(MATCHES_WORD_BREAKS);
+    const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
     words.forEach((word, index) => {
-      let line = lines[lineIndex];
-      const { width: lineWidth } = this.getTextSize(line);
+      const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + word);
 
       if (newLineWidth < maxWidth || line.length === 0) {
