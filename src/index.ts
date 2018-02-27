@@ -5,6 +5,8 @@ import {
   DEFAULT_FONT,
   IMAGE_SMOOTHING_KEYS,
   INCORRECT_GET_ANGLE_ARGUMENTS,
+  MATCHES_ALL_WHITESPACE,
+  MATCHES_WORD_BREAKS,
 } from './constants';
 import {
   BooleanFalsy,
@@ -1981,13 +1983,66 @@ export class Canvasimo {
 
       return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else if (wordBreak === 'break-word') {
+      const lines: string[] = [''];
+      const words = text.split(MATCHES_WORD_BREAKS);
+      let lineIndex = 0;
 
+      words.forEach((word, index) => {
+        let line = lines[lineIndex];
+        const { width: lineWidth } = this.getTextSize(line);
+        const { width: newLineWidth } = this.getTextSize(line + word);
+
+        if (newLineWidth < maxWidth || line.length === 0) {
+          lines[lineIndex] += word;
+        } else {
+          lines.push('');
+          lineIndex = lines.length - 1;
+
+          line = lines[lineIndex];
+
+          if (!MATCHES_ALL_WHITESPACE.test(word)) {
+            word.split('').forEach((letter, index) => {
+              const line = lines[lineIndex];
+              const { width: lineWidth } = this.getTextSize(line);
+              const { width: newLineWidth } = this.getTextSize(line + letter);
+
+              if (newLineWidth < maxWidth || line.length === 0) {
+                lines[lineIndex] += letter;
+              } else {
+                lines.push(letter);
+                lineIndex = lines.length - 1;
+              }
+            });
+          }
+        }
+      });
+
+      return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else {
+      const lines: string[] = [''];
+      const words = text.split(MATCHES_WORD_BREAKS);
+      let lineIndex = 0;
 
+      words.forEach((word, index) => {
+        let line = lines[lineIndex];
+        const { width: lineWidth } = this.getTextSize(line);
+        const { width: newLineWidth } = this.getTextSize(line + word);
+
+        if (newLineWidth < maxWidth || line.length === 0) {
+          lines[lineIndex] += word;
+        } else {
+          if (!MATCHES_ALL_WHITESPACE.test(word)) {
+            lines.push(word);
+          } else {
+            lines.push('');
+          }
+
+          lineIndex = lines.length - 1;
+        }
+      });
+
+      return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     }
-
-    method(text, x, y, undefined, color);
-    return this;
   }
 }
 

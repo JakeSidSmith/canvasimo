@@ -6,7 +6,7 @@ if (!element) {
   throw new Error('Could not find canvas element for example');
 }
 
-const MULTILINE_TEXT_WIDTH = 80;
+const MULTILINE_TEXT_WIDTH = 70;
 const FONT_SIZE = 14;
 const canvas = new Canvasimo(element as HTMLCanvasElement);
 const rect = canvas.getBoundingClientRect();
@@ -28,7 +28,9 @@ const draw = () => {
     .setTextBaseline('top')
     .setFontFamily('arial')
     .setFontSize(FONT_SIZE)
-    .strokeLine(10 + MULTILINE_TEXT_WIDTH, 0, 10 + MULTILINE_TEXT_WIDTH, height, 'black')
+    .strokeLine(10 + MULTILINE_TEXT_WIDTH, 0, 10 + MULTILINE_TEXT_WIDTH, height, '#AAAAAA')
+    .strokeLine(10 + MULTILINE_TEXT_WIDTH * 2, 0, 10 + MULTILINE_TEXT_WIDTH * 2, height, '#AAAAAA')
+    .strokeLine(10 + MULTILINE_TEXT_WIDTH * 3, 0, 10 + MULTILINE_TEXT_WIDTH * 3, height, '#AAAAAA')
     .fillText('Regular text that does not have newlines or automatic wrapping', 10, 10, null, 'black')
     .fillTextMultiline(
       'Text with newline after this...\n...so this is on a newline',
@@ -36,25 +38,25 @@ const draw = () => {
       10 + FONT_SIZE * 2
     )
     .fillTextMultiline(
-      'Text that automatically wraps and but never breaks words',
-      10,
-      10 + FONT_SIZE * 5,
-      MULTILINE_TEXT_WIDTH,
-      'normal'
-    )
-    .fillTextMultiline(
       'Text that automatically wraps and breaks words if necessary',
       10,
-      10 + FONT_SIZE * 10,
+      10 + FONT_SIZE * 5,
       MULTILINE_TEXT_WIDTH,
       'break-word'
     )
     .fillTextMultiline(
       'Text that automatically wraps and always breaks words',
-      10,
-      10 + FONT_SIZE * 15,
+      10 + MULTILINE_TEXT_WIDTH,
+      10 + FONT_SIZE * 5,
       MULTILINE_TEXT_WIDTH,
       'break-all'
+    )
+    .fillTextMultiline(
+      'Text that automatically wraps but never breaks words',
+      10 + MULTILINE_TEXT_WIDTH * 2,
+      10 + FONT_SIZE * 5,
+      MULTILINE_TEXT_WIDTH,
+      'normal'
     )
     .save()
     .translate(width / 2, height / 2)
