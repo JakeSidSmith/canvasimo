@@ -41,6 +41,13 @@ const draw = () => {
       100,
       'break-word'
     )
+    .fillTextMultiline(
+      'Text that automatically wraps and always breaks words',
+      10,
+      10 + FONT_SIZE * 10,
+      100,
+      'break-all'
+    )
     .save()
     .translate(width / 2, height / 2)
     .rotate(canvas.getRadiansFromDegrees(-90))
