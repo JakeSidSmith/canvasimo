@@ -853,7 +853,7 @@ export class Canvasimo {
    * If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
    * Words will not break by default (normal) and therefore may overflow.
    * break-all will break words wherever possible, and break-word will only break words if there is not enough room.
-   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
+   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.
    */
   public strokeTextMultiline = (
     text: string,
@@ -880,7 +880,7 @@ export class Canvasimo {
    * If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
    * Words will not break by default (normal) and therefore may overflow.
    * break-all will break words wherever possible, and break-word will only break words if there is not enough room.
-   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.5.
+   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.
    */
   public fillTextMultiline = (
     text: string,
@@ -1938,7 +1938,7 @@ export class Canvasimo {
     lineHeight?: number,
     color?: string
   ): Canvasimo => {
-    const height = typeof lineHeight === 'number' ? lineHeight : 1.5;
+    const height = typeof lineHeight === 'number' ? lineHeight : 1;
     const definedFontSize = this.getFontSize();
     const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
 
