@@ -13,10 +13,19 @@ const MATCHES_CANVASIMO_PATH = /'.+'/;
 
 // tslint:disable-next-line:no-var-requires
 const docs: Docs = require('../../../build/json/docs.json');
-const example = fs.readFileSync(path.join(__dirname, '../example.ts'), 'utf8')
-  .replace(MATCHES_CANVASIMO_IMPORT, (subString: string) => {
-    return subString.replace(MATCHES_CANVASIMO_PATH, '\'canvasimo\'');
-  });
+
+const getExampleCode = (code: string) => {
+  return code.replace(MATCHES_CANVASIMO_IMPORT, (subString: string) => {
+      return subString.replace(MATCHES_CANVASIMO_PATH, '\'canvasimo\'');
+    });
+};
+
+const exampleBasicShapes = getExampleCode(
+  fs.readFileSync(path.join(__dirname, `../examples/basic-shapes.ts`), 'utf8')
+);
+const exampleMultilineText = getExampleCode(
+  fs.readFileSync(path.join(__dirname, `../examples/multiline-text.ts`), 'utf8')
+);
 
 const TITLE = 'Canvasimo | The fluent HTML5 canvas drawing library';
 
@@ -208,10 +217,12 @@ export default class Document extends Component<Props, {}> {
                     stroke('green')</code>, <code>fillCanvas('blue')</code>.
                 </p>
 
-                <LinkHeader type="h2" header="Example" />
+                <LinkHeader type="h2" header="Examples" />
+
+                <LinkHeader type="h3" header="Basic shapes" />
 
                 <div className="demo-container">
-                  <canvas id="example-1" width="400" height="200">
+                  <canvas id="example-basic-shapes" width="400" height="200">
                     Looks like this browser doesn't support the canvas element, or you have javascript disabled.
                   </canvas>
                 </div>
@@ -219,7 +230,20 @@ export default class Document extends Component<Props, {}> {
                   You must have javascript enabled for this example.
                 </noscript>
 
-                <pre>{example}</pre>
+                <pre>{exampleBasicShapes}</pre>
+
+                <LinkHeader type="h3" header="Multiline text" />
+
+                <div className="demo-container">
+                  <canvas id="example-multiline-text" width="400" height="200">
+                    Looks like this browser doesn't support the canvas element, or you have javascript disabled.
+                  </canvas>
+                </div>
+                <noscript>
+                  You must have javascript enabled for this example.
+                </noscript>
+
+                <pre>{exampleMultilineText}</pre>
 
                 <LinkHeader type="h1" header="Documentation" className="main-header" />
 

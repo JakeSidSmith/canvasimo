@@ -1,9 +1,9 @@
-import Canvasimo from '../../../src';
+import Canvasimo from '../../../../src';
 
-const element = document.getElementById('example-1');
+const element = document.getElementById('example-basic-shapes');
 
 if (!element) {
-  throw new Error('Could not find canvas element for example');
+  throw new Error('Could not find canvas element for basic shapes example');
 }
 
 const MULTILINE_TEXT_WIDTH = 70;
