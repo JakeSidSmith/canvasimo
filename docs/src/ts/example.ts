@@ -34,12 +34,11 @@ const draw = () => {
       10 + FONT_SIZE * 2
     )
     .fillTextMultiline(
-      'Text that automatically wraps and, in this case, is hyphenated',
+      'Text that automatically wraps and breaks words if necessary',
       10,
       10 + FONT_SIZE * 5,
       100,
-      true,
-      true
+      'break-word'
     )
     .save()
     .translate(width / 2, height / 2)
