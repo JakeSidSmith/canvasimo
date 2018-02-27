@@ -27,6 +27,7 @@ const draw = () => {
     .setTextBaseline('top')
     .setFontFamily('arial')
     .setFontSize(FONT_SIZE)
+    .strokeLine(10 + 100, 0, 10 + 100, height, 'black')
     .fillText('Regular text', 10, 10, null, 'black')
     .fillTextMultiline(
       'Text with newline after this...\n...so this is on a newline',
