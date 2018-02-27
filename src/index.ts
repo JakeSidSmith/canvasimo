@@ -1951,6 +1951,50 @@ export class Canvasimo {
 
     return this;
   }
+  private wrapLetters = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+    const letters = text.split('');
+    let lineIndex = lines.length - 1;
+
+    letters.forEach((letter, index) => {
+      const line = lines[lineIndex];
+      const { width: newLineWidth } = this.getTextSize(line + letter);
+
+      if (newLineWidth < maxWidth || line.length === 0) {
+        lines[lineIndex] += letter;
+      } else {
+        lines.push('');
+        lineIndex = lines.length - 1;
+
+        if (!MATCHES_ALL_WHITESPACE.test(letter)) {
+          lines[lineIndex] += letter;
+        }
+      }
+    });
+
+    return lines;
+  }
+  private wrapWords = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+    const words = text.split(MATCHES_WORD_BREAKS);
+    let lineIndex = 0;
+
+    words.forEach((word, index) => {
+      const line = lines[lineIndex];
+      const { width: newLineWidth } = this.getTextSize(line + word);
+
+      if (newLineWidth < maxWidth) {
+        lines[lineIndex] += word;
+      } else {
+        if (!MATCHES_ALL_WHITESPACE.test(word)) {
+          lines.push('');
+          lines = this.wrapLetters(word, maxWidth, lines);
+        }
+
+        lineIndex = lines.length - 1;
+      }
+    });
+
+    return lines;
+  }
   private textMultiline = (
     method: this['strokeText'] | this['fillText'],
     text: string,
@@ -1964,59 +2008,10 @@ export class Canvasimo {
     if (typeof maxWidth === 'undefined' || maxWidth === null) {
       return this.textWithLineBreaks(method, text, x, y, lineHeight, color);
     } else if (wordBreak === 'break-all') {
-      const lines: string[] = [''];
-      const letters = text.split('');
-      let lineIndex = 0;
-
-      letters.forEach((letter, index) => {
-        const line = lines[lineIndex];
-        const { width: lineWidth } = this.getTextSize(line);
-        const { width: newLineWidth } = this.getTextSize(line + letter);
-
-        if (newLineWidth < maxWidth || line.length === 0) {
-          lines[lineIndex] += letter;
-        } else {
-          lines.push(letter);
-          lineIndex = lines.length - 1;
-        }
-      });
-
+      let lines = this.wrapLetters(text, maxWidth);
       return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else if (wordBreak === 'break-word') {
-      const lines: string[] = [''];
-      const words = text.split(MATCHES_WORD_BREAKS);
-      let lineIndex = 0;
-
-      words.forEach((word, index) => {
-        let line = lines[lineIndex];
-        const { width: lineWidth } = this.getTextSize(line);
-        const { width: newLineWidth } = this.getTextSize(line + word);
-
-        if (newLineWidth < maxWidth || line.length === 0) {
-          lines[lineIndex] += word;
-        } else {
-          lines.push('');
-          lineIndex = lines.length - 1;
-
-          line = lines[lineIndex];
-
-          if (!MATCHES_ALL_WHITESPACE.test(word)) {
-            word.split('').forEach((letter, index) => {
-              const line = lines[lineIndex];
-              const { width: lineWidth } = this.getTextSize(line);
-              const { width: newLineWidth } = this.getTextSize(line + letter);
-
-              if (newLineWidth < maxWidth || line.length === 0) {
-                lines[lineIndex] += letter;
-              } else {
-                lines.push(letter);
-                lineIndex = lines.length - 1;
-              }
-            });
-          }
-        }
-      });
-
+      const lines = this.wrapWords(text, maxWidth);
       return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else {
       const lines: string[] = [''];
