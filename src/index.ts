@@ -1930,7 +1930,7 @@ export class Canvasimo {
     return this;
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
-  private textWithLineBreaks = (
+  private drawTextWithLineBreaks = (
     method: this['strokeText'] | this['fillText'],
     text: string,
     x: number,
@@ -1951,7 +1951,7 @@ export class Canvasimo {
 
     return this;
   }
-  private wrapLetters = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+  private wrapBreakAll = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
     const letters = text.split('');
     let lineIndex = lines.length - 1;
 
@@ -1973,7 +1973,7 @@ export class Canvasimo {
 
     return lines;
   }
-  private wrapWords = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+  private wrapBreakWord = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
     const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
@@ -1985,8 +1985,35 @@ export class Canvasimo {
         lines[lineIndex] += word;
       } else {
         if (!MATCHES_ALL_WHITESPACE.test(word)) {
+          if (line.length > 0) {
+            lines.push('');
+          }
+          lines = this.wrapBreakAll(word, maxWidth, lines);
+        }
+
+        lineIndex = lines.length - 1;
+      }
+    });
+
+    return lines;
+  }
+  private wrapNormal = (text: string, maxWidth: number): string[] => {
+    const lines: string[] = [''];
+      const words = text.split(MATCHES_WORD_BREAKS);
+    let lineIndex = 0;
+
+    words.forEach((word, index) => {
+      let line = lines[lineIndex];
+      const { width: lineWidth } = this.getTextSize(line);
+      const { width: newLineWidth } = this.getTextSize(line + word);
+
+      if (newLineWidth < maxWidth || line.length === 0) {
+        lines[lineIndex] += word;
+      } else {
+        if (!MATCHES_ALL_WHITESPACE.test(word)) {
+          lines.push(word);
+        } else {
           lines.push('');
-          lines = this.wrapLetters(word, maxWidth, lines);
         }
 
         lineIndex = lines.length - 1;
@@ -2006,37 +2033,16 @@ export class Canvasimo {
     color?: string
   ): Canvasimo => {
     if (typeof maxWidth === 'undefined' || maxWidth === null) {
-      return this.textWithLineBreaks(method, text, x, y, lineHeight, color);
+      return this.drawTextWithLineBreaks(method, text, x, y, lineHeight, color);
     } else if (wordBreak === 'break-all') {
-      let lines = this.wrapLetters(text, maxWidth);
-      return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
+      const lines = text.split('\n').map((subText) => this.wrapBreakAll(subText, maxWidth).join('\n'));
+      return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else if (wordBreak === 'break-word') {
-      const lines = this.wrapWords(text, maxWidth);
-      return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
+      const lines = text.split('\n').map((subText) => this.wrapBreakWord(subText, maxWidth).join('\n'));
+      return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     } else {
-      const lines: string[] = [''];
-      const words = text.split(MATCHES_WORD_BREAKS);
-      let lineIndex = 0;
-
-      words.forEach((word, index) => {
-        let line = lines[lineIndex];
-        const { width: lineWidth } = this.getTextSize(line);
-        const { width: newLineWidth } = this.getTextSize(line + word);
-
-        if (newLineWidth < maxWidth || line.length === 0) {
-          lines[lineIndex] += word;
-        } else {
-          if (!MATCHES_ALL_WHITESPACE.test(word)) {
-            lines.push(word);
-          } else {
-            lines.push('');
-          }
-
-          lineIndex = lines.length - 1;
-        }
-      });
-
-      return this.textWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
+      const lines = text.split('\n').map((subText) => this.wrapNormal(subText, maxWidth).join('\n'));
+      return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     }
   }
 }
