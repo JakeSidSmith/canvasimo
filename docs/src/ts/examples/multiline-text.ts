@@ -45,6 +45,15 @@ const draw = () => {
     .translate(multilineTextOffset, 0)
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .fillTextMultiline(
+      'Text that automatically wraps but never breaks words',
+      SPACE,
+      SPACE + FONT_SIZE * 5,
+      multilineTextWidth,
+      'normal'
+    )
+    .translate(SPACE * 2 + multilineTextWidth, 0)
+    .strokeLine(0, 0, 0, height, '#AAAAAA')
+    .fillTextMultiline(
       'Text that automatically wraps and breaks words if necessary',
       SPACE,
       SPACE + FONT_SIZE * 5,
@@ -59,15 +68,6 @@ const draw = () => {
       SPACE + FONT_SIZE * 5,
       multilineTextWidth,
       'break-all'
-    )
-    .translate(SPACE * 2 + multilineTextWidth, 0)
-    .strokeLine(0, 0, 0, height, '#AAAAAA')
-    .fillTextMultiline(
-      'Text that automatically wraps but never breaks words',
-      SPACE,
-      SPACE + FONT_SIZE * 5,
-      multilineTextWidth,
-      'normal'
     )
     .translate(SPACE * 2 + multilineTextWidth, 0)
     .strokeLine(0, 0, 0, height, '#AAAAAA');
