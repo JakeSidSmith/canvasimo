@@ -57,7 +57,7 @@ const draw = () => {
     .setTextAlign('center')
     .fillTextMultiline(
       'break-word\nText that automatically wraps and breaks words if necessary',
-      MARGIN,
+      MARGIN + multilineTextWidth / 2,
       MARGIN + FONT_SIZE * 5,
       multilineTextWidth,
       'break-word'
@@ -67,7 +67,7 @@ const draw = () => {
     .setTextAlign('right')
     .fillTextMultiline(
       'break-all\nText that automatically wraps and always breaks words',
-      MARGIN,
+      MARGIN + multilineTextWidth,
       MARGIN + FONT_SIZE * 5,
       multilineTextWidth,
       'break-all'
