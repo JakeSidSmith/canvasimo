@@ -42,6 +42,19 @@ const draw = () => {
       MARGIN,
       FONT_SIZE * 2
     )
+    .setTextAlign('center')
+    .setFontSize(FONT_SIZE - 2)
+    .fillTextMultiline(
+      'Try resizing the window! :D',
+      width / 2,
+      FONT_SIZE * 4,
+      width - MARGIN * 2,
+      undefined,
+      undefined,
+      '#555555'
+    )
+    .setFontSize(FONT_SIZE)
+    .setFill('black')
     .translate(multilineTextOffset, 0)
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('left')
