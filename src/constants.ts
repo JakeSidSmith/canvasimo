@@ -40,4 +40,6 @@ export const MATCHES_FONT_VARIANT = /^(small-caps)$/i;
 export const MATCHES_FONT_WEIGHT = /^(bold|bolder|lighter|\d00)$/i;
 export const MATCHES_SPECIAL_FONT = /^(caption|icon|menu|message-box|small-caption|status-bar)$/i;
 export const MATCHES_WHITESPACE = /\s+/g;
-export const MATCHES_FONT_SIZE = /(^|\s+)(\d*\.?\d+)([a-z]+|%)\s/i;
+export const MATCHES_ALL_WHITESPACE = /^\s*$/;
+export const MATCHES_FONT_SIZE = /(^|\s+)(\d*\.?\d+)([a-z]+|%)(\/\d*\.?\d+(?:[a-z]+|%)?)?\s/i;
+export const MATCHES_WORD_BREAKS = /(?![^\w\s])\b/g;

@@ -1,7 +1,13 @@
-import { forPoints } from '../src/utils';
+import { forPoints, getFontParts } from '../src/utils';
 import { each, some } from './helpers/utils';
 
 describe('utils', () => {
+
+  jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+
+  beforeEach(() => {
+    (console.warn as jest.Mock<any>).mockClear();
+  });
 
   describe('forPoints', () => {
 
@@ -31,6 +37,51 @@ describe('utils', () => {
       expect(() => forPoints([0, 1, 2, 3, 4], spy)).toThrow(anError);
       expect(() => forPoints([0, 1, 2, 'wat'] as any, spy)).toThrow(numberError);
       expect(() => forPoints([{}, {}] as any, spy)).toThrow(anError);
+    });
+
+  });
+
+  describe('getFontParts', () => {
+
+    it('should warn about using line height when setting fonts', () => {
+      expect(console.warn).not.toHaveBeenCalled();
+
+      getFontParts('10px/1 arial', 1, true);
+
+      expect(console.warn).toHaveBeenCalledTimes(1);
+
+      const { calls } = (console.warn as jest.Mock<any>).mock;
+
+      expect(calls[0].length).toBe(1);
+      expect(calls[0][0]).toMatch(/10px\/1.+TextMultiline.+lineHeight/);
+
+      getFontParts('10px/1 arial', 1, true);
+
+      expect(console.warn).toHaveBeenCalledTimes(1);
+    });
+
+    it('should return a font part array', () => {
+      expect(getFontParts('arial 20px', 1, true))
+        .toEqual(['normal', 'normal', 'normal', '10px', 'sans-serif']);
+      expect(getFontParts('20px arial', 1, true))
+        .toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('20px/2 arial', 1, true))
+        .toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('bold 20px arial', 1, true))
+        .toEqual(['normal', 'normal', 'bold', '20px', 'arial']);
+      expect(getFontParts('small-caps 20px arial', 1, true))
+        .toEqual(['normal', 'small-caps', 'normal', '20px', 'arial']);
+      expect(getFontParts('italic 20px arial', 1, true))
+        .toEqual(['italic', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('300 italic 20px arial', 1, true))
+        .toEqual(['italic', 'normal', '300', '20px', 'arial']);
+      expect(getFontParts('menu', 1, true))
+        .toEqual(['menu']);
+    });
+
+    it('should account for density when getting or setting font parts', () => {
+      expect(getFontParts('20px arial', 2, true)).toEqual(['normal', 'normal', 'normal', '10px', 'arial']);
+      expect(getFontParts('20px arial', 2, false)).toEqual(['normal', 'normal', 'normal', '40px', 'arial']);
     });
 
   });

@@ -25,7 +25,9 @@ export const isTuplePoint = (point?: {x: number, y: number} | [number, number] |
   return typeof point === 'object' && Array.isArray(point) && point.length === 2;
 };
 
-export const getFontParts = (input: string | undefined, density: number) => {
+let warnedAboutLineHeight = false;
+
+export const getFontParts = (input: string | undefined, density: number, getter: boolean) => {
   if (!input) {
     return DEFAULT_FONT;
   }
@@ -42,11 +44,23 @@ export const getFontParts = (input: string | undefined, density: number) => {
     return DEFAULT_FONT;
   }
 
+  const fontString = matchFontSize[0].trim();
   const leadingSpaces = matchFontSize[1].length;
   const size = matchFontSize[2];
   const unit = matchFontSize[3];
+  const lineHeight = matchFontSize[4];
 
-  const fontSize = (unit !== '%' ? parseFloat(size) * density : size) + unit;
+  if (lineHeight && !warnedAboutLineHeight) {
+    // tslint:disable-next-line:no-console
+    console.warn(
+      `Attempted to set the font line height with "${fontString}", ` +
+      'but this is not supported by canvas. ' +
+      'Use the Canvasimo TextMultiline methods with the lineHeight parameter instead.'
+    );
+    warnedAboutLineHeight = true;
+  }
+
+  const fontSize = (unit !== '%' ? (getter ? parseFloat(size) / density : parseFloat(size) * density) : size) + unit;
 
   const parts = font.substring(matchFontSize.index + leadingSpaces).split(MATCHES_WHITESPACE);
   const fontFamily = parts[parts.length - 1];
@@ -83,7 +97,8 @@ export const getFontParts = (input: string | undefined, density: number) => {
   ];
 };
 
-export const formatFont = (input: string, density: number): string => getFontParts(input, density).join(' ');
+export const formatFont = (input: string, density: number, getter: boolean): string =>
+  getFontParts(input, density, getter).join(' ');
 
 export const forPoints = (points: Points, callback: (x: number, y: number, index: number) => any): void => {
   if (!Array.isArray(points) || (typeof points[0] === 'number' && (points.length % 2) !== 0)) {

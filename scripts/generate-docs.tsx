@@ -13,29 +13,35 @@ import getDocJson from './get-doc-json';
 const UTF8 = 'utf8';
 
 const CWD = process.cwd();
+const DOCS_DIR = path.join(CWD, 'docs/src/ts');
+const EXAMPLES_DIR = path.join(DOCS_DIR, 'examples');
 const SHOULD_WATCH = process.argv[2] === 'watch';
 const MATCHES_EXTENSION = /\.(js|jsx|ts|tsx|json)$/;
 
 const packageJSON = JSON.parse(fs.readFileSync(path.join(CWD, 'package.json'), UTF8));
 
+const examples = fs.readdirSync(EXAMPLES_DIR, UTF8).map((example) => {
+  return path.join(EXAMPLES_DIR, example);
+});
+
 const b = browserify(
   {
     entries: [
-      path.join(CWD, 'docs/src/ts/polyfills.ts'),
-      path.join(CWD, 'docs/src/ts/sidebar.tsx'),
-      path.join(CWD, 'docs/src/ts/demo.ts'),
-      path.join(CWD, 'docs/src/ts/example.ts'),
-      path.join(CWD, 'docs/src/ts/tracking.ts'),
-    ],
+      path.join(DOCS_DIR, 'polyfills.ts'),
+      path.join(DOCS_DIR, 'sidebar.tsx'),
+      path.join(DOCS_DIR, 'demo.ts'),
+      path.join(DOCS_DIR, 'tracking.ts'),
+    ].concat(examples),
     paths: ['node_modules'],
     debug: true,
     cache: {},
   }
 )
-  .plugin('tsify'); // tslint:disable-line:no-var-requires
+  .plugin('tsify')
+  .transform('brfs');
 
 b.plugin('minifyify', {
-  map: 'build/js/bundle.map.json',
+  map: 'bundle.map.json',
   output: path.join(CWD, 'docs/build/js/bundle.map.json'),
 });
 
@@ -104,7 +110,7 @@ const copyFilesToBuildDirectory = (verbose: boolean) => {
 };
 
 const createDocumentation = () => {
-  const Document = require(path.join(CWD, 'docs/src/ts/components/document')).default;
+  const Document = require(path.join(DOCS_DIR, 'components/document')).default;
 
   fs.writeFile(
     path.join(CWD, 'docs/index.html'),

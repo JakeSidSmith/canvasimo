@@ -1,6 +1,6 @@
 {
   "name": "canvasimo",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "An HTML5 canvas drawing library, with 150+ useful methods, jQuery-like fluent interface, and cross-browser compatibility enhancements.",
   "main": "dist/index.js",
   "types": "build/index.d.ts",
@@ -49,6 +49,7 @@
     "@types/react": "16.0.36",
     "@types/react-dom": "16.0.3",
     "@types/rimraf": "2.0.2",
+    "brfs": "1.4.4",
     "browserify": "15.2.0",
     "chokidar": "2.0.0",
     "concurrently": "3.5.1",
@@ -72,7 +73,6 @@
     "typescript": "2.3.4"
   },
   "jest": {
-    "mapCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
     ],

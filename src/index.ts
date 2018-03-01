@@ -5,6 +5,8 @@ import {
   DEFAULT_FONT,
   IMAGE_SMOOTHING_KEYS,
   INCORRECT_GET_ANGLE_ARGUMENTS,
+  MATCHES_ALL_WHITESPACE,
+  MATCHES_WORD_BREAKS,
 } from './constants';
 import {
   BooleanFalsy,
@@ -20,6 +22,7 @@ import {
   GlobalCompositeOperation,
   LineCap,
   LineJoin,
+  MaxWidth,
   Points,
   Repeat,
   Segments,
@@ -28,6 +31,7 @@ import {
   Stroke,
   TextAlign,
   TextBaseline,
+  WordBreak,
 } from './types';
 import {
   formatFont,
@@ -61,7 +65,7 @@ export class Canvasimo {
     }
 
     this.ctx = ctx;
-    this.ctx.font = formatFont(ctx.font, this.density);
+    this.ctx.font = formatFont(ctx.font, this.density, true);
   }
 
   /**
@@ -80,27 +84,36 @@ export class Canvasimo {
    */
   public setDensity = (density: number): Canvasimo => {
     const prevDensity = this.density;
-    const multiplier = density / prevDensity;
+
+    const {
+      width: prevWidth,
+      height: prevHeight,
+    } = this.getSize();
     const prevFontSize = this.getFontSize();
     const prevLineDash = this.getLineDash();
+    const prevLineDashOffset = this.getLineDashOffset();
+    const prevLineWidth = this.getLineWidth();
+    const prevMiterLimit = this.getMiterLimit();
+    const prevShadowBlur = this.getShadowBlur();
+    const prevShadowOffsetX = this.getShadowOffsetX();
+    const prevShadowOffsetY = this.getShadowOffsetY();
 
     this.density = density;
 
     if (prevDensity !== density) {
-      this.setSize(this.element.width, this.element.height);
+      this.setSize(prevWidth, prevHeight);
 
       if (typeof prevFontSize === 'number') {
         this.setFontSize(prevFontSize);
       }
 
       this.setLineDash(prevLineDash);
-
-      this.ctx.lineDashOffset *= multiplier;
-      this.ctx.lineWidth *= multiplier;
-      this.ctx.miterLimit *= multiplier;
-      this.ctx.shadowBlur *= multiplier;
-      this.ctx.shadowOffsetX *= multiplier;
-      this.ctx.shadowOffsetY *= multiplier;
+      this.setLineDashOffset(prevLineDashOffset);
+      this.setLineWidth(prevLineWidth);
+      this.setMiterLimit(prevMiterLimit);
+      this.setShadowBlur(prevShadowBlur);
+      this.setShadowOffsetX(prevShadowOffsetX);
+      this.setShadowOffsetY(prevShadowOffsetY);
     }
 
     return this;
@@ -819,7 +832,7 @@ export class Canvasimo {
   /**
    * Draw a text with a stroke.
    */
-  public strokeText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
+  public strokeText = (text: string, x: number, y: number, maxWidth?: MaxWidth, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setStroke(color);
     }
@@ -833,7 +846,7 @@ export class Canvasimo {
   /**
    * Draw a text with a fill.
    */
-  public fillText = (text: string, x: number, y: number, maxWidth?: number, color?: string): Canvasimo => {
+  public fillText = (text: string, x: number, y: number, maxWidth?: MaxWidth, color?: string): Canvasimo => {
     if (typeof color !== 'undefined') {
       this.setFill(color);
     }
@@ -844,6 +857,60 @@ export class Canvasimo {
       this.ctx.fillText(text, x * this.density, y * this.density, maxWidth * this.density);
     }
     return this;
+  }
+  /**
+   * Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
+   * If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
+   * Words will not break by default (normal) and therefore may overflow.
+   * break-all will break words wherever possible, and break-word will only break words if there is not enough room.
+   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.
+   */
+  public strokeTextMultiline = (
+    text: string,
+    x: number,
+    y: number,
+    maxWidth?: MaxWidth,
+    wordBreak?: WordBreak,
+    lineHeight?: number,
+    color?: string
+  ): Canvasimo => {
+    return this.textMultiline(
+      this.strokeText,
+      text,
+      x,
+      y,
+      maxWidth,
+      wordBreak,
+      lineHeight,
+      color
+    );
+  }
+  /**
+   * Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
+   * If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
+   * Words will not break by default (normal) and therefore may overflow.
+   * break-all will break words wherever possible, and break-word will only break words if there is not enough room.
+   * The lineHeight parameter is a multiplier for the font size, and defaults to 1.
+   */
+  public fillTextMultiline = (
+    text: string,
+    x: number,
+    y: number,
+    maxWidth?: MaxWidth,
+    wordBreak?: WordBreak,
+    lineHeight?: number,
+    color?: string
+  ): Canvasimo => {
+    return this.textMultiline(
+      this.fillText,
+      text,
+      x,
+      y,
+      maxWidth,
+      wordBreak,
+      lineHeight,
+      color
+    );
   }
   /**
    * Get information about the size text will be drawn.
@@ -879,32 +946,33 @@ export class Canvasimo {
    * Set the font to use.
    */
   public setFont = (font: string): Canvasimo => {
-    this.ctx.font = formatFont(font, this.density);
+    this.ctx.font = formatFont(font, this.density, false);
     return this;
   }
   /**
    * Get the font that is being used.
+   * This returns the exact CanvasRenderingContext2D.font string.
    */
   public getFont = (): string => {
-    return formatFont(this.ctx.font, this.density);
+    return formatFont(this.ctx.font, this.density, true);
   }
   /**
    * Set the font family to use.
    */
   public setFontFamily = (family: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[4] = family || DEFAULT_FONT[4];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
    * Get the font that is being used.
    */
   public getFontFamily = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -914,19 +982,20 @@ export class Canvasimo {
    * Set the font size to use.
    */
   public setFontSize = (size: string | number): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
    * Get the font size that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontSize = (): number | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -936,19 +1005,20 @@ export class Canvasimo {
    * Set the font style to use.
    */
   public setFontStyle = (style: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[0] = style || DEFAULT_FONT[0];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
    * Get the font style that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontStyle = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -958,19 +1028,20 @@ export class Canvasimo {
    * Set the font variant to use.
    */
   public setFontVariant = (variant: string): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[1] = variant || DEFAULT_FONT[1];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
    * Get the font variant that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontVariant = (): string | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -980,19 +1051,20 @@ export class Canvasimo {
    * Set the font weight to use.
    */
   public setFontWeight = (weight: string | number): Canvasimo => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return this.setFont('');
     }
     parts[2] = weight.toString() || DEFAULT_FONT[2];
-    this.ctx.font = formatFont(parts.join(' '), this.density);
+    this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
   /**
    * Get the font weight that is being used.
+   * Returns null if using a special font e.g. caption, icon, menu.
    */
   public getFontWeight = (): string | number | null => {
-    const parts = getFontParts(this.ctx.font, this.density);
+    const parts = getFontParts(this.ctx.font, this.density, true);
     if (parts.length < 5) {
       return null;
     }
@@ -1866,6 +1938,119 @@ export class Canvasimo {
     return this;
   }
   private getCanvasProperty = (attribute: string) => (this.ctx as any)[attribute];
+  private drawTextWithLineBreaks = (
+    method: this['strokeText'] | this['fillText'],
+    text: string,
+    x: number,
+    y: number,
+    lineHeight?: number,
+    color?: string
+  ): Canvasimo => {
+    const height = typeof lineHeight === 'number' ? lineHeight : 1;
+    const definedFontSize = this.getFontSize();
+    const fontSize = typeof definedFontSize === 'number' ? definedFontSize : 10;
+
+    const lines = text.split('\n');
+
+    lines.forEach((line, index) => {
+      const offset = fontSize * height;
+      method(line, x, y + offset * index, undefined, color);
+    });
+
+    return this;
+  }
+  private wrapBreakAll = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+    const letters = text.split('');
+    let lineIndex = lines.length - 1;
+
+    letters.forEach((letter, index) => {
+      const line = lines[lineIndex];
+      const { width: newLineWidth } = this.getTextSize(line + letter);
+
+      if (newLineWidth < maxWidth || line.length === 0) {
+        lines[lineIndex] += letter;
+      } else {
+        lines.push('');
+        lineIndex = lines.length - 1;
+
+        if (!MATCHES_ALL_WHITESPACE.test(letter)) {
+          lines[lineIndex] += letter;
+        }
+      }
+    });
+
+    return lines;
+  }
+  private wrapBreakWord = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+    const words = text.split(MATCHES_WORD_BREAKS);
+    let lineIndex = 0;
+
+    words.forEach((word, index) => {
+      const line = lines[lineIndex];
+      const { width: newLineWidth } = this.getTextSize(line + word);
+
+      if (newLineWidth < maxWidth) {
+        lines[lineIndex] += word;
+      } else {
+        if (!MATCHES_ALL_WHITESPACE.test(word)) {
+          if (line.length > 0) {
+            lines.push('');
+          }
+          lines = this.wrapBreakAll(word, maxWidth, lines);
+        }
+
+        lineIndex = lines.length - 1;
+      }
+    });
+
+    return lines;
+  }
+  private wrapNormal = (text: string, maxWidth: number, lines: string[] = ['']): string[] => {
+    const words = text.split(MATCHES_WORD_BREAKS);
+    let lineIndex = 0;
+
+    words.forEach((word, index) => {
+      const line = lines[lineIndex];
+      const { width: newLineWidth } = this.getTextSize(line + word);
+
+      if (newLineWidth < maxWidth || line.length === 0) {
+        lines[lineIndex] += word;
+      } else {
+        if (!MATCHES_ALL_WHITESPACE.test(word)) {
+          lines.push(word);
+        } else {
+          lines.push('');
+        }
+
+        lineIndex = lines.length - 1;
+      }
+    });
+
+    return lines;
+  }
+  private textMultiline = (
+    method: this['strokeText'] | this['fillText'],
+    text: string,
+    x: number,
+    y: number,
+    maxWidth?: MaxWidth,
+    wordBreak?: WordBreak,
+    lineHeight?: number,
+    color?: string
+  ): Canvasimo => {
+    if (typeof maxWidth === 'undefined' || maxWidth === null) {
+      return this.drawTextWithLineBreaks(method, text, x, y, lineHeight, color);
+    } else if (wordBreak === 'break-all') {
+      const lines = text.split('\n').map((subText) => this.wrapBreakAll(subText, maxWidth).join('\n'));
+      return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
+    } else if (wordBreak === 'break-word') {
+      const lines = text.split('\n').map((subText) => this.wrapBreakWord(subText, maxWidth).join('\n'));
+      return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
+    } else {
+      const lines = text.split('\n').map((subText) => this.wrapNormal(subText, maxWidth).join('\n'));
+      return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
+    }
+  }
 }
 
 export default Canvasimo;
