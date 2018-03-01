@@ -246,6 +246,93 @@ describe('canvasimo', () => {
 
   });
 
+  describe('setDensity', () => {
+
+    it('should adjust canvas context properties when changing the density', () => {
+      const ctx = canvas.getCurrentContext();
+
+      canvas
+        .setDensity(1)
+        .setWidth(1)
+        .setHeight(1)
+        .setFontSize(1)
+        .setLineDashOffset(1)
+        .setLineWidth(1)
+        .setMiterLimit(1)
+        .setShadowBlur(1)
+        .setShadowOffsetX(1)
+        .setShadowOffsetY(1);
+
+      expect(canvas.getDensity()).toBe(1);
+      expect(canvas.getWidth()).toBe(1);
+      expect(canvas.getHeight()).toBe(1);
+      expect(canvas.getFontSize()).toBe(1);
+      expect(canvas.getLineDashOffset()).toBe(1);
+      expect(canvas.getLineWidth()).toBe(1);
+      expect(canvas.getMiterLimit()).toBe(1);
+      expect(canvas.getShadowBlur()).toBe(1);
+      expect(canvas.getShadowOffsetX()).toBe(1);
+      expect(canvas.getShadowOffsetY()).toBe(1);
+
+      expect(element.width).toBe(1);
+      expect(element.height).toBe(1);
+      expect(ctx.font).toBe('normal normal normal 1px sans-serif');
+      expect(ctx.lineDashOffset).toBe(1);
+      expect(ctx.lineWidth).toBe(1);
+      expect(ctx.miterLimit).toBe(1);
+      expect(ctx.shadowBlur).toBe(1);
+      expect(ctx.shadowOffsetX).toBe(1);
+      expect(ctx.shadowOffsetY).toBe(1);
+
+      canvas.setDensity(2);
+
+      expect(canvas.getDensity()).toBe(2);
+      expect(canvas.getWidth()).toBe(1);
+      expect(canvas.getHeight()).toBe(1);
+      expect(canvas.getFontSize()).toBe(1);
+      expect(canvas.getLineDashOffset()).toBe(1);
+      expect(canvas.getLineWidth()).toBe(1);
+      expect(canvas.getMiterLimit()).toBe(1);
+      expect(canvas.getShadowBlur()).toBe(1);
+      expect(canvas.getShadowOffsetX()).toBe(1);
+      expect(canvas.getShadowOffsetY()).toBe(1);
+
+      expect(element.width).toBe(2);
+      expect(element.height).toBe(2);
+      expect(ctx.font).toBe('normal normal normal 2px sans-serif');
+      expect(ctx.lineDashOffset).toBe(2);
+      expect(ctx.lineWidth).toBe(2);
+      expect(ctx.miterLimit).toBe(2);
+      expect(ctx.shadowBlur).toBe(2);
+      expect(ctx.shadowOffsetX).toBe(2);
+      expect(ctx.shadowOffsetY).toBe(2);
+
+      canvas.setDensity(1);
+
+      expect(canvas.getDensity()).toBe(1);
+      expect(canvas.getWidth()).toBe(1);
+      expect(canvas.getHeight()).toBe(1);
+      expect(canvas.getFontSize()).toBe(1);
+      expect(canvas.getLineDashOffset()).toBe(1);
+      expect(canvas.getLineWidth()).toBe(1);
+      expect(canvas.getMiterLimit()).toBe(1);
+      expect(canvas.getShadowBlur()).toBe(1);
+      expect(canvas.getShadowOffsetX()).toBe(1);
+      expect(canvas.getShadowOffsetY()).toBe(1);
+
+      expect(element.width).toBe(1);
+      expect(element.height).toBe(1);
+      expect(ctx.font).toBe('normal normal normal 1px sans-serif');
+      expect(ctx.lineDashOffset).toBe(1);
+      expect(ctx.lineWidth).toBe(1);
+      expect(ctx.miterLimit).toBe(1);
+      expect(ctx.shadowBlur).toBe(1);
+      expect(ctx.shadowOffsetX).toBe(1);
+      expect(ctx.shadowOffsetY).toBe(1);
+    });
+
+  });
+
   describe('font methods', () => {
 
     it('should return a formatted font value', () => {
