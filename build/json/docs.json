@@ -2080,6 +2080,130 @@
         "typeAliases": []
       },
       {
+        "name": "strokeTextMultiline",
+        "description": "Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.\nIf no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).\nWords will not break by default (normal) and therefore may overflow.\nbreak-all will break words wherever possible, and break-word will only break words if there is not enough room.\nThe lineHeight parameter is a multiplier for the font size, and defaults to 1.",
+        "signatures": [
+          {
+            "parameters": [
+              {
+                "name": "text",
+                "alias": null,
+                "type": "string",
+                "optional": false
+              },
+              {
+                "name": "x",
+                "alias": null,
+                "type": "number",
+                "optional": false
+              },
+              {
+                "name": "y",
+                "alias": null,
+                "type": "number",
+                "optional": false
+              },
+              {
+                "name": "maxWidth",
+                "alias": null,
+                "type": "number",
+                "optional": true
+              },
+              {
+                "name": "wordBreak",
+                "alias": "'normal' | 'break-word' | 'break-all'",
+                "type": "WordBreak",
+                "optional": true
+              },
+              {
+                "name": "lineHeight",
+                "alias": null,
+                "type": "number",
+                "optional": true
+              },
+              {
+                "name": "color",
+                "alias": null,
+                "type": "string",
+                "optional": true
+              }
+            ],
+            "returns": {
+              "type": "Canvasimo",
+              "alias": null
+            }
+          }
+        ],
+        "typeAliases": [
+          {
+            "name": "WordBreak",
+            "alias": "'normal' | 'break-word' | 'break-all'"
+          }
+        ]
+      },
+      {
+        "name": "fillTextMultiline",
+        "description": "Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.\nIf no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).\nWords will not break by default (normal) and therefore may overflow.\nbreak-all will break words wherever possible, and break-word will only break words if there is not enough room.\nThe lineHeight parameter is a multiplier for the font size, and defaults to 1.",
+        "signatures": [
+          {
+            "parameters": [
+              {
+                "name": "text",
+                "alias": null,
+                "type": "string",
+                "optional": false
+              },
+              {
+                "name": "x",
+                "alias": null,
+                "type": "number",
+                "optional": false
+              },
+              {
+                "name": "y",
+                "alias": null,
+                "type": "number",
+                "optional": false
+              },
+              {
+                "name": "maxWidth",
+                "alias": null,
+                "type": "number",
+                "optional": true
+              },
+              {
+                "name": "wordBreak",
+                "alias": "'normal' | 'break-word' | 'break-all'",
+                "type": "WordBreak",
+                "optional": true
+              },
+              {
+                "name": "lineHeight",
+                "alias": null,
+                "type": "number",
+                "optional": true
+              },
+              {
+                "name": "color",
+                "alias": null,
+                "type": "string",
+                "optional": true
+              }
+            ],
+            "returns": {
+              "type": "Canvasimo",
+              "alias": null
+            }
+          }
+        ],
+        "typeAliases": [
+          {
+            "name": "WordBreak",
+            "alias": "'normal' | 'break-word' | 'break-all'"
+          }
+        ]
+      },
+      {
         "name": "getTextSize",
         "description": "Get information about the size text will be drawn.",
         "alias": "measureText",
@@ -2220,7 +2344,7 @@
       },
       {
         "name": "getFont",
-        "description": "Get the font that is being used.",
+        "description": "Get the font that is being used.\nThis returns the exact CanvasRenderingContext2D.font string.",
         "signatures": [
           {
             "parameters": [],
@@ -2290,7 +2414,7 @@
       },
       {
         "name": "getFontSize",
-        "description": "Get the font size that is being used.",
+        "description": "Get the font size that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
         "signatures": [
           {
             "parameters": [],
@@ -2325,7 +2449,7 @@
       },
       {
         "name": "getFontStyle",
-        "description": "Get the font style that is being used.",
+        "description": "Get the font style that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
         "signatures": [
           {
             "parameters": [],
@@ -2360,7 +2484,7 @@
       },
       {
         "name": "getFontVariant",
-        "description": "Get the font variant that is being used.",
+        "description": "Get the font variant that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
         "signatures": [
           {
             "parameters": [],
@@ -2395,7 +2519,7 @@
       },
       {
         "name": "getFontWeight",
-        "description": "Get the font weight that is being used.",
+        "description": "Get the font weight that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
         "signatures": [
           {
             "parameters": [],
