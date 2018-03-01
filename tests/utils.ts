@@ -38,11 +38,25 @@ describe('utils', () => {
   describe('getFontParts', () => {
 
     it('should return a font part array', () => {
-      expect(getFontParts('arial 20px', 1, true)).toEqual(['normal', 'normal', 'normal', '10px', 'sans-serif']);
-      expect(getFontParts('20px arial', 1, true)).toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
-      expect(getFontParts('bold 20px arial', 1, true)).toEqual(['normal', 'normal', 'bold', '20px', 'arial']);
-      expect(getFontParts('italic 20px arial', 1, true)).toEqual(['italic', 'normal', 'normal', '20px', 'arial']);
-      expect(getFontParts('menu', 1, true)).toEqual(['menu']);
+      expect(getFontParts('arial 20px', 1, true))
+        .toEqual(['normal', 'normal', 'normal', '10px', 'sans-serif']);
+      expect(getFontParts('20px arial', 1, true))
+        .toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('bold 20px arial', 1, true))
+        .toEqual(['normal', 'normal', 'bold', '20px', 'arial']);
+      expect(getFontParts('small-caps 20px arial', 1, true))
+        .toEqual(['normal', 'small-caps', 'normal', '20px', 'arial']);
+      expect(getFontParts('italic 20px arial', 1, true))
+        .toEqual(['italic', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('300 italic 20px arial', 1, true))
+        .toEqual(['italic', 'normal', '300', '20px', 'arial']);
+      expect(getFontParts('menu', 1, true))
+        .toEqual(['menu']);
+    });
+
+    it('should account for density when getting or setting font parts', () => {
+      expect(getFontParts('20px arial', 2, true)).toEqual(['normal', 'normal', 'normal', '10px', 'arial']);
+      expect(getFontParts('20px arial', 2, false)).toEqual(['normal', 'normal', 'normal', '40px', 'arial']);
     });
 
   });
