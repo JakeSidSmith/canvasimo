@@ -84,13 +84,19 @@ export class Canvasimo {
    */
   public setDensity = (density: number): Canvasimo => {
     const prevDensity = this.density;
-    const multiplier = density / prevDensity;
+
     const {
       width: prevWidth,
       height: prevHeight,
     } = this.getSize();
     const prevFontSize = this.getFontSize();
     const prevLineDash = this.getLineDash();
+    const prevLineDashOffset = this.getLineDashOffset();
+    const prevLineWidth = this.getLineWidth();
+    const prevMiterLimit = this.getMiterLimit();
+    const prevShadowBlur = this.getShadowBlur();
+    const prevShadowOffsetX = this.getShadowOffsetX();
+    const prevShadowOffsetY = this.getShadowOffsetY();
 
     this.density = density;
 
@@ -102,13 +108,12 @@ export class Canvasimo {
       }
 
       this.setLineDash(prevLineDash);
-
-      this.ctx.lineDashOffset *= multiplier;
-      this.ctx.lineWidth *= multiplier;
-      this.ctx.miterLimit *= multiplier;
-      this.ctx.shadowBlur *= multiplier;
-      this.ctx.shadowOffsetX *= multiplier;
-      this.ctx.shadowOffsetY *= multiplier;
+      this.setLineDashOffset(prevLineDashOffset);
+      this.setLineWidth(prevLineWidth);
+      this.setMiterLimit(prevMiterLimit);
+      this.setShadowBlur(prevShadowBlur);
+      this.setShadowOffsetX(prevShadowOffsetX);
+      this.setShadowOffsetY(prevShadowOffsetY);
     }
 
     return this;
