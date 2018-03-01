@@ -85,13 +85,17 @@ export class Canvasimo {
   public setDensity = (density: number): Canvasimo => {
     const prevDensity = this.density;
     const multiplier = density / prevDensity;
+    const {
+      width: prevWidth,
+      height: prevHeight,
+    } = this.getSize();
     const prevFontSize = this.getFontSize();
     const prevLineDash = this.getLineDash();
 
     this.density = density;
 
     if (prevDensity !== density) {
-      this.setSize(this.element.width, this.element.height);
+      this.setSize(prevWidth, prevHeight);
 
       if (typeof prevFontSize === 'number') {
         this.setFontSize(prevFontSize);
