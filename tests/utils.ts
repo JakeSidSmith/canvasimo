@@ -3,6 +3,12 @@ import { each, some } from './helpers/utils';
 
 describe('utils', () => {
 
+  jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+
+  beforeEach(() => {
+    (console.warn as jest.Mock<any>).mockClear();
+  });
+
   describe('forPoints', () => {
 
     it('should accept but do nothing with empty and near empty point arrays', () => {
@@ -37,10 +43,29 @@ describe('utils', () => {
 
   describe('getFontParts', () => {
 
+    it('should warn about using line height when setting fonts', () => {
+      expect(console.warn).not.toHaveBeenCalled();
+
+      getFontParts('10px/1 arial', 1, true);
+
+      expect(console.warn).toHaveBeenCalledTimes(1);
+
+      const { calls } = (console.warn as jest.Mock<any>).mock;
+
+      expect(calls[0].length).toBe(1);
+      expect(calls[0][0]).toMatch(/10px\/1.+TextMultiline.+lineHeight/);
+
+      getFontParts('10px/1 arial', 1, true);
+
+      expect(console.warn).toHaveBeenCalledTimes(1);
+    });
+
     it('should return a font part array', () => {
       expect(getFontParts('arial 20px', 1, true))
         .toEqual(['normal', 'normal', 'normal', '10px', 'sans-serif']);
       expect(getFontParts('20px arial', 1, true))
+        .toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('20px/2 arial', 1, true))
         .toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
       expect(getFontParts('bold 20px arial', 1, true))
         .toEqual(['normal', 'normal', 'bold', '20px', 'arial']);

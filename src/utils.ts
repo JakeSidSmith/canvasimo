@@ -51,7 +51,6 @@ export const getFontParts = (input: string | undefined, density: number, getter:
   const lineHeight = matchFontSize[4];
 
   if (lineHeight && !warnedAboutLineHeight) {
-    // FIXME: Test for warning
     // tslint:disable-next-line:no-console
     console.warn(
       `Attempted to set the font line height with "${fontString}", ` +
