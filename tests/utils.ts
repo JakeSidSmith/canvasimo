@@ -1,4 +1,4 @@
-import { forPoints } from '../src/utils';
+import { forPoints, getFontParts } from '../src/utils';
 import { each, some } from './helpers/utils';
 
 describe('utils', () => {
@@ -31,6 +31,18 @@ describe('utils', () => {
       expect(() => forPoints([0, 1, 2, 3, 4], spy)).toThrow(anError);
       expect(() => forPoints([0, 1, 2, 'wat'] as any, spy)).toThrow(numberError);
       expect(() => forPoints([{}, {}] as any, spy)).toThrow(anError);
+    });
+
+  });
+
+  describe('getFontParts', () => {
+
+    it('should return a font part array', () => {
+      expect(getFontParts('arial 20px', 1, true)).toEqual(['normal', 'normal', 'normal', '10px', 'sans-serif']);
+      expect(getFontParts('20px arial', 1, true)).toEqual(['normal', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('bold 20px arial', 1, true)).toEqual(['normal', 'normal', 'bold', '20px', 'arial']);
+      expect(getFontParts('italic 20px arial', 1, true)).toEqual(['italic', 'normal', 'normal', '20px', 'arial']);
+      expect(getFontParts('menu', 1, true)).toEqual(['menu']);
     });
 
   });
