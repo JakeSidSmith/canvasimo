@@ -89,7 +89,9 @@ describe('canvasimo', () => {
   });
 
   afterEach(() => {
-    canvas.setDensity(1);
+    canvas
+      .setDensity(1)
+      .setFontSize('invalid');
   });
 
   it('should return an interface', () => {
@@ -265,6 +267,8 @@ describe('canvasimo', () => {
     });
 
     it('should return individual font properties', () => {
+      canvas.setFont('normal small-caps bold 20px arial');
+
       expect(canvas.getFontStyle()).toBe('normal');
       expect(canvas.getFontVariant()).toBe('small-caps');
       expect(canvas.getFontWeight()).toBe('bold');
@@ -273,6 +277,9 @@ describe('canvasimo', () => {
     });
 
     it('should set individual font properties', () => {
+      canvas.setFont('normal small-caps bold 20px arial');
+      expect(canvas.getFont()).toBe('normal small-caps bold 20px arial');
+
       canvas.setFontStyle('italic');
       expect(canvas.getFont()).toBe('italic small-caps bold 20px arial');
 
@@ -297,6 +304,8 @@ describe('canvasimo', () => {
     });
 
     it('should return null for individual properties when a special font is set', () => {
+      canvas.setFont('menu');
+
       expect(canvas.getFontStyle()).toBe(null);
       expect(canvas.getFontVariant()).toBe(null);
       expect(canvas.getFontWeight()).toBe(null);
