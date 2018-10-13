@@ -10,6 +10,7 @@ import {
   MATCHES_SPECIAL_FONT,
   MATCHES_WHITESPACE,
 } from './constants';
+import logger from './logger';
 import {
   FillRule,
   Points,
@@ -51,8 +52,7 @@ export const getFontParts = (input: string | undefined, density: number, getter:
   const lineHeight = matchFontSize[4];
 
   if (lineHeight && !warnedAboutLineHeight) {
-    // tslint:disable-next-line:no-console
-    console.warn(
+    logger.warn(
       `Attempted to set the font line height with "${fontString}", ` +
       'but this is not supported by canvas. ' +
       'Use the Canvasimo TextMultiline methods with the lineHeight parameter instead.'
