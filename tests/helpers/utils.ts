@@ -12,7 +12,7 @@ interface Some {
 
 export const each: Each = (
   obj: any[] | string | {[i: string]: any},
-  callback: (value: any, key: number | string) => any
+  callback: (value: any, key: any) => any
 ): void => {
   if (Array.isArray(obj) || typeof obj === 'string') {
     for (let i = 0; i < obj.length; i += 1) {
@@ -29,7 +29,7 @@ export const each: Each = (
 
 export const some: Some = (
   obj: any[] | string | {[i: string]: any},
-  callback: (value: any, key: number | string
+  callback: (value: any, key: any
 ) => any): boolean => {
   if (Array.isArray(obj) || typeof obj === 'string') {
     for (let i = 0; i < obj.length; i += 1) {
