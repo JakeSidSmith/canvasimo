@@ -1,5 +1,3 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import getDocJson from '../scripts/get-doc-json';
 import Canvasimo from '../src';
 import { NUMBER_OF_DOC_GROUPS, NUMBER_OF_PROPERTIES } from './helpers/constants';
@@ -30,6 +28,8 @@ describe('getDocJson', () => {
     const canvasimoProperties = Object.keys(instance).filter((name) => PRIVATE_PROPERTIES.indexOf(name) < 0);
     const groups = getDocJson();
 
+    expect(groups).toMatchSnapshot();
+
     expect(groups.length).toBe(NUMBER_OF_DOC_GROUPS);
 
     const methodsAndAliases = groups.reduce(
@@ -52,23 +52,5 @@ describe('getDocJson', () => {
 
     expect(methodsAndAliases).toEqual(canvasimoProperties);
     expect(methodsAndAliases.length).toBe(NUMBER_OF_PROPERTIES - PRIVATE_PROPERTIES.length);
-  });
-});
-
-describe('docs', () => {
-  describe('docs.json', () => {
-    it('should match snapshot', () => {
-      const generatedDocs = fs.readFileSync(path.resolve(__dirname, '../docs/build/json/docs.json'), 'utf8');
-
-      expect(generatedDocs).toMatchSnapshot();
-    });
-  });
-
-  describe('index.html', () => {
-    it('should match snapshot', () => {
-      const generatedDocs = fs.readFileSync(path.resolve(__dirname, '../docs/index.html'), 'utf8');
-
-      expect(generatedDocs).toMatchSnapshot();
-    });
   });
 });
