@@ -14,7 +14,7 @@ fi
 
 if [ ! -d "$DIST_DIR" ]; then
   echo "> Can't find dist directory, aborting..."
-  exit
+  exit 1
 fi
 
 set -e
@@ -28,7 +28,8 @@ mkdir $DEPLOY_DIR
 git clone --depth=1 --quiet --branch=$BRANCH --single-branch https://${GH_TOKEN}@github.com/${USERNAME}/${REPO}.git $DEPLOY_DIR
 
 # Copy new static build into temp directory
-rsync -rv $DIST_DIR/* circle.yml CNAME --exclude=src/* $DEPLOY_DIR
+cp -r $DIST_DIR/* $DEPLOY_DIR
+cp -r .circleci $DEPLOY_DIR
 
 # Commit changes
 cd $DEPLOY_DIR
