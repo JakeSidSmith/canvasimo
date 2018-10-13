@@ -970,7 +970,7 @@ describe('canvasimo', () => {
       canvas.version(true);
 
       expect(console.info).toHaveBeenCalledTimes(1);
-      expect(console.info).toHaveBeenCalledWith(`Using Canvasimo version ${version}`);
+      expect(console.info).toHaveBeenCalledWith(`Canvasimo: Using version ${version}`);
     });
 
   });
