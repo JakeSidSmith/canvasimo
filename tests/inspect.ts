@@ -2,8 +2,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 
-const NUMBER_OF_PROPERTIES = 193;
-const CLASS_NAME = 'Canvasimo';
+import {
+  CLASS_NAME,
+  NUMBER_OF_PROPERTIES,
+} from './helpers/constants';
+
 const CWD = process.cwd();
 const SOURCE_FILE = fs.readFileSync(path.join(CWD, 'src/index.ts'), 'utf8');
 const SOURCE = ts.createSourceFile('index.ts', SOURCE_FILE, ts.ScriptTarget.ES2015);
