@@ -8,6 +8,7 @@ import {
   MATCHES_ALL_WHITESPACE,
   MATCHES_WORD_BREAKS,
 } from './constants';
+import logger from './logger';
 import {
   BooleanFalsy,
   CanvasContext,
@@ -45,8 +46,7 @@ const unsupportedMethodErrors: string[] = [];
 const logUnsupportedMethodError = (method: string) => {
   if (unsupportedMethodErrors.indexOf(method) < 0) {
     unsupportedMethodErrors.push(method);
-    // tslint:disable-next-line:no-console
-    console.warn(`${method} is not supported by this browser`);
+    logger.warn(`${method} is not supported by this browser`);
   }
 };
 
@@ -1922,10 +1922,8 @@ export class Canvasimo {
    * @alias version
    */
   public getVersion = (logInfo?: BooleanFalsy): string => {
-    // tslint:disable-next-line:strict-type-predicates
-    if (logInfo && console && typeof console.info === 'function') {
-      // tslint:disable-next-line:no-console
-      console.info(`Using Canvasimo version ${VERSION}`);
+    if (logInfo) {
+      logger.info(`Using version ${VERSION}`);
     }
 
     return VERSION;

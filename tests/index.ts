@@ -233,7 +233,7 @@ describe('canvasimo', () => {
     it('should return false if no image smoothing keys present', () => {
       const context = element.getContext('2d') as CanvasRenderingContext2D;
       delete context.imageSmoothingEnabled;
-      delete context.webkitImageSmoothingEnabled;
+      delete (context as any).webkitImageSmoothingEnabled;
 
       expect(canvas.getImageSmoothingEnabled()).toBe(false);
     });
@@ -571,12 +571,12 @@ describe('canvasimo', () => {
   describe('actions and setters', () => {
 
     it('should return the canvas', () => {
-      each(canvas, (method, key: keyof typeof argumentMap) => {
+      each(canvas, (method, key) => {
         if (typeof method === 'function' && !isGetter.exec(key)) {
           let result;
 
           try {
-            result = method.apply(null, argumentMap[key]);
+            result = method.apply(null, argumentMap[key as keyof typeof argumentMap]);
           } catch (error) {
             throw new Error(`Method ${key} threw an error: ${error}`);
           }
@@ -970,7 +970,7 @@ describe('canvasimo', () => {
       canvas.version(true);
 
       expect(console.info).toHaveBeenCalledTimes(1);
-      expect(console.info).toHaveBeenCalledWith(`Using Canvasimo version ${version}`);
+      expect(console.info).toHaveBeenCalledWith(`Canvasimo: Using version ${version}`);
     });
 
   });

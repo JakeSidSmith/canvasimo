@@ -22,7 +22,11 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
 
 const getTypeAlias = (type: ts.Type, checker: ts.TypeChecker): string | null => {
   if (type.aliasSymbol) {
-    return (type.aliasSymbol.getDeclarations()[0] as ts.TypeAliasDeclaration).type.getText();
+    const typeAlias = type.aliasSymbol.getDeclarations();
+
+    if (typeAlias) {
+      return (typeAlias[0] as ts.TypeAliasDeclaration).type.getText();
+    }
   }
 
   return null;
@@ -43,10 +47,15 @@ const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker): Paramet
   };
 };
 
-const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): Method => {
+const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): Method | null => {
   const symbol = checker.getSymbolAtLocation(node.name);
+
+  if (!symbol) {
+    return null;
+  }
+
   const name = symbol.getName();
-  const description = ts.displayPartsToString(symbol.getDocumentationComment());
+  const description = ts.displayPartsToString(symbol.getDocumentationComment(checker));
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
   const signatures = checker.getSignaturesOfType(type, ts.SignatureKind.Call);
   const tags = serializeTags(symbol.getJsDocTags());
@@ -87,7 +96,9 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
       if (initializer && initializer.kind === ts.SyntaxKind.ArrowFunction) {
         const method = serializeNode(node as ts.PropertyDeclaration, checker);
 
-        methods.push(method);
+        if (method) {
+          methods.push(method);
+        }
       } else {
         console.error(`Property ${name} is public, but not an arrow function`);
       }
@@ -205,7 +216,7 @@ const getDocJson = (): Docs => {
   const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
   const sourceFiles = program.getSourceFiles();
   const checker = program.getTypeChecker();
-  const methods = getMethods(sourceFiles, checker);
+  const methods = getMethods([...sourceFiles], checker);
 
   if (!methods.length) {
     throw new Error(`Could not find an exported class called ${CLASS_NAME} with any methods`);
