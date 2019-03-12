@@ -57,7 +57,7 @@
     "derequire": "^2.0.6",
     "exorcist": "^1.0.0",
     "glob": "^7.1.2",
-    "http-server": "^0.9.0",
+    "http-server": "^0.11.1",
     "jest": "^23.6.0",
     "minifyify": "^7.3.5",
     "mkdirp": "^0.5.1",
