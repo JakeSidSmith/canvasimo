@@ -12,8 +12,8 @@
     "dist": "./scripts/dist",
     "start": "./scripts/start",
     "build": "NODE_ENV=production ts-node scripts/generate-docs.tsx",
-    "lint-js": "tslint --project tsconfig.json '{docs/src,src,tests,types,scripts}/**/*.@(ts|tsx)'",
-    "lint": "npm run lint-js",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "lint": "tslint --project tsconfig.json '{docs/src,src,tests,types,scripts}/**/*.@(ts|tsx)'",
     "tests": "jest",
     "test": "npm run lint && npm run tests -- --coverage --runInBand && if grep -rn FIXME src; then exit 1; fi;"
   },
