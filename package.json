@@ -15,7 +15,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "lint": "tslint --project tsconfig.json '{docs/src,src,tests,types,scripts}/**/*.@(ts|tsx)'",
     "tests": "jest",
-    "test": "npm run lint && npm run tests -- --coverage --runInBand && if grep -rn FIXME src; then exit 1; fi;"
+    "test": "npm run lint && npm run typecheck && npm run tests -- --coverage --runInBand && if grep -rn FIXME src; then exit 1; fi;"
   },
   "repository": {
     "type": "git",
