@@ -62,6 +62,23 @@ export interface CreateImageData {
   (ImageData: ImageData): ImageData;
 }
 
+export interface PutImageData {
+  (
+    imagedata: ImageData,
+    dx: number,
+    dy: number
+  ): Canvasimo;
+  (
+    imagedata: ImageData,
+    dx: number,
+    dy: number,
+    dirtyX: number,
+    dirtyY: number,
+    dirtyWidth: number,
+    dirtyHeight: number
+  ): Canvasimo;
+}
+
 export interface Fill {
   (color?: string): Canvasimo;
   (fillRule?: FillRule): Canvasimo; // tslint:disable-line:unified-signatures
