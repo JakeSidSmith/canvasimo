@@ -852,8 +852,8 @@ describe('canvasimo', () => {
       const anError = /arguments/i;
 
       expect(canvas.repeat).toThrow(anError);
-      expect(canvas.repeat.bind(null, 0)).toThrow(anError);
-      expect(canvas.repeat.bind(null, 0, 0, 0, 0, 0)).toThrow(anError);
+      expect(() => (canvas.repeat as any)(0)).toThrow(anError);
+      expect(() => (canvas.repeat as any)(0, 0, 0, 0, 0)).toThrow(anError);
     });
 
   });
