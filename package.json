@@ -50,7 +50,7 @@
     "@types/react-dom": "^16.0.3",
     "@types/rimraf": "^2.0.2",
     "brfs": "^1.4.4",
-    "browserify": "^15.2.0",
+    "browserify": "^16.2.3",
     "chokidar": "^2.0.0",
     "concurrently": "^3.5.1",
     "core-js": "^2.5.3",
