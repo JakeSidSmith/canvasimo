@@ -17,7 +17,8 @@ export type MaxWidth = number | undefined | null;
 
 export type ImageLike = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
 export type CanvasContextAttributes = CanvasRenderingContext2DSettings | WebGLContextAttributes;
-export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
+export type CanvasContextAttributesOrNull = CanvasRenderingContext2DSettings | WebGLContextAttributes;
+export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext;
 export type FillOrStrokeStyle = string | CanvasGradient | CanvasPattern;
 
 // tslint:disable-next-line:interface-over-type-literal

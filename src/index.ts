@@ -179,7 +179,7 @@ export class Canvasimo {
   /**
    * Get the standard canvas context (used for drawing).
    */
-  public getContext = (type: string, contextAttributes?: CanvasContextAttributes): CanvasContext => {
+  public getContext = (type: string, contextAttributes?: CanvasContextAttributes): CanvasContext | null => {
     return this.element.getContext(type, contextAttributes);
   }
   /**
