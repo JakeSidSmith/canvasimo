@@ -6,7 +6,7 @@ const createSlug = (text?: string) => {
 };
 
 interface Props {
-  type: string;
+  type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'li';
   header: string;
   className?: string;
   noId?: boolean;
@@ -21,7 +21,7 @@ export default class LinkHeader extends Component<Props, {}> {
     return (
       <ComponentType
         className={this.props.className}
-        id={this.props.noId ? null : slug}
+        id={this.props.noId ? undefined : slug}
       >
         <a
           href={'#' + slug}
