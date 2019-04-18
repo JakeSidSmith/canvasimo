@@ -20,7 +20,7 @@ const ctx: {[i: string]: any} = {
   textAlign: 'start', // string
   textBaseline: 'alphabetic', // string
   getContextAttributes: jest.fn(),
-  getImageData: jest.fn((x: number, y: number, width: number, height: number) => {
+  getImageData: jest.fn((_x: number, _y: number, width: number, height: number) => {
     return new ImageData(width, height);
   }),
   createLinearGradient: jest.fn(),
