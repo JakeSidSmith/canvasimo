@@ -6,9 +6,6 @@ import * as ts from 'typescript';
 import { Docs, GroupedMethod, Method, Methods, Parameter, Tags, TypeAlias } from '../docs/src/ts/types';
 
 const CLASS_NAME = 'Canvasimo';
-const CWD = process.cwd();
-// tslint:disable-next-line:no-var-requires
-const COMPILER_OPTIONS = require(path.join(CWD, 'tsconfig.json'));
 
 const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   const ret: Tags = {};
@@ -214,7 +211,9 @@ const groupMethods = (methods: Methods): Docs => {
 
 const getDocJson = (): Docs => {
   const sourceFileNames = glob.sync('src/**/*.{js,jsx,ts,tsx}');
-  const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
+  const json = ts.readConfigFile(path.join(process.cwd(), 'tsconfig.json'), ts.sys.readFile);
+  const compilerOptions = ts.parseJsonConfigFileContent(json.config, ts.sys, process.cwd()).options;
+  const program = ts.createProgram(sourceFileNames, compilerOptions);
   const sourceFiles = program.getSourceFiles();
   const checker = program.getTypeChecker();
   const methods = getMethods([...sourceFiles], checker);
