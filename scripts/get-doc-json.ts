@@ -17,7 +17,7 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   return ret;
 };
 
-const getTypeAlias = (type: ts.Type, checker: ts.TypeChecker): string | null => {
+const getTypeAlias = (type: ts.Type): string | null => {
   if (type.aliasSymbol) {
     const typeAlias = type.aliasSymbol.getDeclarations();
 
@@ -34,13 +34,14 @@ const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker): Paramet
   const declaration = symbol.valueDeclaration as ts.ParameterDeclaration;
   const type = checker.getTypeOfSymbolAtLocation(symbol, declaration);
   const typeName = checker.typeToString(type);
-  const alias = getTypeAlias(type, checker);
+  const alias = getTypeAlias(type);
+  const optional = checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration);
 
   return {
     name: `${declaration.dotDotDotToken ? '...' : ''}${name}`,
     alias,
     type: typeName,
-    optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
+    optional,
   };
 };
 
@@ -63,7 +64,7 @@ const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): M
     tags,
     signatures: signatures.map((signature) => {
       const returnType = checker.getReturnTypeOfSignature(signature);
-      const returnAlias = getTypeAlias(returnType, checker);
+      const returnAlias = getTypeAlias(returnType);
 
       return {
         parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
