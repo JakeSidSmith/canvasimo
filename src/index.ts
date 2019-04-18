@@ -1697,8 +1697,8 @@ export class Canvasimo {
   /**
    * Use the current path as a clipping path.
    */
-  public clip = (fillRules?: FillRule): Canvasimo => {
-    this.ctx.clip(fillRules);
+  public clip = (fillRule?: FillRule): Canvasimo => {
+    this.ctx.clip(fillRule);
     return this;
   }
   /**
