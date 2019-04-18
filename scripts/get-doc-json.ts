@@ -83,7 +83,7 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   const methods: Methods = [];
 
   const documentProperty = (node: ts.Node) => {
-    const flags = ts.getCombinedModifierFlags(node);
+    const flags = ts.getCombinedModifierFlags(node as ts.Declaration);
 
     if (
       node.kind === ts.SyntaxKind.PropertyDeclaration &&
@@ -106,7 +106,8 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   };
 
   const traverse = (node: ts.Node) => {
-    const flags = ts.getCombinedModifierFlags(node);
+    const flags = ts.getCombinedModifierFlags(node as ts.Declaration);
+
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
       (node as ts.ClassDeclaration).name && (node as ts.ClassDeclaration).name!.text === CLASS_NAME &&
