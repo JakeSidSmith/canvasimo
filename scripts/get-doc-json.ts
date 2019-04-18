@@ -7,6 +7,12 @@ import { Docs, GroupedMethod, Method, Methods, Parameter, Tags, TypeAlias } from
 
 const CLASS_NAME = 'Canvasimo';
 
+// tslint:disable-next-line:no-bitwise
+const isExported = (flags: ts.ModifierFlags) => (flags & ts.ModifierFlags.Export) !== 0;
+
+// tslint:disable-next-line:no-bitwise
+const isPublic = (flags: ts.ModifierFlags) => (flags & ts.ModifierFlags.Public) !== 0;
+
 const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   const ret: Tags = {};
 
@@ -86,8 +92,7 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
 
     if (
       node.kind === ts.SyntaxKind.PropertyDeclaration &&
-      // tslint:disable-next-line:no-bitwise
-      (flags & ts.ModifierFlags.Public) !== 0
+      isPublic(flags)
     ) {
       const initializer = (node as ts.PropertyDeclaration).initializer;
       const name = (node as ts.PropertyDeclaration).name.getText();
@@ -110,8 +115,7 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
       (node as ts.ClassDeclaration).name && (node as ts.ClassDeclaration).name!.text === CLASS_NAME &&
-      // tslint:disable-next-line:no-bitwise
-      (flags & ts.ModifierFlags.Export) !== 0
+      isExported(flags)
     ) {
       ts.forEachChild(node, documentProperty);
     } else {
