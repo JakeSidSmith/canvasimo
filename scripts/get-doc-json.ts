@@ -64,12 +64,13 @@ const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): M
     tags,
     signatures: signatures.map((signature) => {
       const returnType = checker.getReturnTypeOfSignature(signature);
+      const returnTypeName = checker.typeToString(returnType);
       const returnAlias = getTypeAlias(returnType);
 
       return {
         parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
         returns: {
-          type: checker.typeToString(returnType),
+          type: returnTypeName,
           alias: returnAlias,
         },
       };
