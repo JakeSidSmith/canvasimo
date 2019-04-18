@@ -1982,7 +1982,7 @@ export class Canvasimo {
     const letters = text.split('');
     let lineIndex = lines.length - 1;
 
-    letters.forEach((letter, index) => {
+    letters.forEach((letter) => {
       const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + letter);
 
@@ -2004,7 +2004,7 @@ export class Canvasimo {
     const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
       const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + word);
 
@@ -2028,7 +2028,7 @@ export class Canvasimo {
     const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
       const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + word);
 
