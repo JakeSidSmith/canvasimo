@@ -92,7 +92,7 @@ const serializeProperty = (node: ts.PropertyDeclaration, checker: ts.TypeChecker
         typeAliases = [...typeAliases, ...parameterType.typeAliases];
 
         return {
-          name: parameterName,
+          name: `${declaration.dotDotDotToken ? '...' : ''}${parameterName}`,
           type: parameterType.type,
           optional,
         };
