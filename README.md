@@ -118,3 +118,13 @@ canvas
       .restore()
   });
 ```
+
+## TypeScript support
+
+As of version `0.7.0` Canvasimo only officially supports TypeScript `3.1.6` and upwards.
+
+Canvasimo _may_ work with older versions of TypeScript, but due to a change in TypeScript's native lib types you will need to create a global type alias:
+
+```ts
+type Canvas2DContextAttributes = CanvasRenderingContext2DSettings;
+```
