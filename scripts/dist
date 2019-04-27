@@ -6,6 +6,6 @@ rm -rf dist
 mkdir -p build
 mkdir -p dist
 
-tsc --project src
+tsc --project tsconfig.dist.json
 
 browserify --debug --standalone canvasimo build/index.js | derequire | exorcist dist/index.js.map > dist/index.js
