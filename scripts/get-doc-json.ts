@@ -108,12 +108,16 @@ const serializeProperty = (node: ts.PropertyDeclaration, checker: ts.TypeChecker
       };
     });
 
+  const typeAliasesNames = typeAliases.map((typeAlias) => typeAlias.name);
+
   return {
     name,
     description,
     tags,
     signatures,
-    typeAliases,
+    typeAliases: typeAliases.filter((typeAlias, index) => {
+      return typeAliasesNames.indexOf(typeAlias.name) === index;
+    }),
   };
 };
 
