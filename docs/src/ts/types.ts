@@ -1,3 +1,8 @@
+export interface ResolvedType {
+  typeAliases: ReadonlyArray<TypeAlias>;
+  type: string;
+}
+
 export interface Parameter {
   name: string;
   type: string;

@@ -3,7 +3,7 @@
 import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, Method, Methods, Parameter, Tags, TypeAlias } from '../docs/src/ts/types';
+import { Docs, Method, Methods, Parameter, ResolvedType, Tags, TypeAlias } from '../docs/src/ts/types';
 
 const CLASS_NAME = 'Canvasimo';
 
@@ -25,11 +25,6 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   return ret;
 };
 
-interface ResolvedType {
-  aliases: ReadonlyArray<TypeAlias>;
-  type: string;
-}
-
 const resolveTypeNode = (typeNode: ts.TypeNode, checker: ts.TypeChecker): ResolvedType => {
   if (isUnion(typeNode)) {
     return typeNode.types.reduce<ResolvedType>(
@@ -37,11 +32,11 @@ const resolveTypeNode = (typeNode: ts.TypeNode, checker: ts.TypeChecker): Resolv
         const resolvedUnionType = resolveTypeNode(unionType, checker);
 
         return {
-          aliases: [...memo.aliases, ...resolvedUnionType.aliases],
+          typeAliases: [...memo.typeAliases, ...resolvedUnionType.typeAliases],
           type: `${memo.type}${memo.type ? ' | ' : ''}${resolvedUnionType.type}`,
         };
       },
-      {aliases: [], type: ''}
+      {typeAliases: [], type: ''}
     );
   }
 
@@ -54,7 +49,7 @@ const resolveTypeNode = (typeNode: ts.TypeNode, checker: ts.TypeChecker): Resolv
     const typeName = checker.typeToString(checker.getTypeAtLocation(aliasTypeNode));
 
     return {
-      aliases: [
+      typeAliases: [
         {
           name: typeName,
           alias: aliasTypeNode.getText(),
@@ -65,7 +60,7 @@ const resolveTypeNode = (typeNode: ts.TypeNode, checker: ts.TypeChecker): Resolv
   }
 
   return {
-    aliases: [],
+    typeAliases: [],
     type: checker.typeToString(type),
   };
 };
@@ -94,7 +89,7 @@ const serializeProperty = (node: ts.PropertyDeclaration, checker: ts.TypeChecker
 
         const parameterType = resolveTypeNode(typeNode as ts.TypeNode, checker);
 
-        typeAliases = [...typeAliases, ...parameterType.aliases];
+        typeAliases = [...typeAliases, ...parameterType.typeAliases];
 
         return {
           name: parameterName,
@@ -105,7 +100,7 @@ const serializeProperty = (node: ts.PropertyDeclaration, checker: ts.TypeChecker
 
       const returnType = resolveTypeNode(signature.declaration!.type as ts.TypeNode, checker);
 
-      typeAliases = [...typeAliases, ...returnType.aliases];
+      typeAliases = [...typeAliases, ...returnType.typeAliases];
 
       return {
         parameters,
