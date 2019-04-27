@@ -1,6 +1,6 @@
 import ImageData from './image-data-stub';
 
-const ctx: {[i: string]: any} = {
+const ctx: Record<string, any> = {
   imageSmoothingEnabled: true,
   webkitImageSmoothingEnabled: false,
   globalAlpha: 1, // number
@@ -75,12 +75,12 @@ export const mockClearAll = () => {
   }
 };
 
-const getContext = (type: string) => {
+const getContext = (type: string): CanvasRenderingContext2D => {
   if (type === '2d') {
-    return ctx;
+    return ctx as any;
   }
 
-  return {};
+  throw new Error('Cannot get a context that is not "2d"');
 };
 
 export default getContext;
