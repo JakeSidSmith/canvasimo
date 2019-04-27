@@ -173,7 +173,7 @@ const groupMethods = (methods: Methods): Docs => {
   const foundAliases: string[] = [];
 
   for (const method of methods) {
-    const { description, name, tags } = method;
+    const { description, name, tags, signatures, typeAliases } = method;
     const aliasIndex = foundAliases.indexOf(name);
 
     if (aliasIndex >= 0) {
@@ -218,8 +218,11 @@ const groupMethods = (methods: Methods): Docs => {
       docs[groupIndex].methods = [
         ...docs[groupIndex].methods,
         {
-          ...method,
+          name,
+          description,
           alias: alias || null,
+          signatures,
+          typeAliases,
         },
       ];
     }
