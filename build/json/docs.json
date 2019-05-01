@@ -10,10 +10,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "HTMLCanvasElement",
-              "alias": null
-            }
+            "returns": "HTMLCanvasElement"
           }
         ],
         "typeAliases": []
@@ -21,20 +18,17 @@
       {
         "name": "setDensity",
         "description": "Set the canvas pixel density.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "density",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -42,13 +36,11 @@
       {
         "name": "getDensity",
         "description": "Get the canvas pixel density.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -56,40 +48,32 @@
       {
         "name": "setSize",
         "description": "Set the canvas dimensions.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "size",
-                "alias": "{\n  width: number;\n  height: number;\n}",
                 "type": "Size",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -102,13 +86,11 @@
       {
         "name": "getSize",
         "description": "Get the canvas dimensions.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Size",
-              "alias": "{\n  width: number;\n  height: number;\n}"
-            }
+            "returns": "Size"
           }
         ],
         "typeAliases": [
@@ -121,20 +103,17 @@
       {
         "name": "setWidth",
         "description": "Set the canvas width.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -142,13 +121,11 @@
       {
         "name": "getWidth",
         "description": "Get the canvas width.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -156,20 +133,17 @@
       {
         "name": "setHeight",
         "description": "Set the canvas height.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -177,13 +151,11 @@
       {
         "name": "getHeight",
         "description": "Get the canvas height.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -191,13 +163,11 @@
       {
         "name": "getBoundingClientRect",
         "description": "Get the canvas size & position on screen.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "ClientRect",
-              "alias": null
-            }
+            "returns": "ClientRect"
           }
         ],
         "typeAliases": []
@@ -211,49 +181,43 @@
       {
         "name": "getContext",
         "description": "Get the standard canvas context (used for drawing).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "type",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "contextAttributes",
-                "alias": "Canvas2DContextAttributes | WebGLContextAttributes",
                 "type": "CanvasContextAttributes",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "CanvasContext",
-              "alias": "CanvasRenderingContext2D | WebGLRenderingContext | null"
-            }
+            "returns": "CanvasContext | null"
           }
         ],
         "typeAliases": [
           {
             "name": "CanvasContextAttributes",
-            "alias": "Canvas2DContextAttributes | WebGLContextAttributes"
+            "alias": "CanvasRenderingContext2DSettings | WebGLContextAttributes"
           },
           {
             "name": "CanvasContext",
-            "alias": "CanvasRenderingContext2D | WebGLRenderingContext | null"
+            "alias": "CanvasRenderingContext2D | WebGLRenderingContext"
           }
         ]
       },
       {
         "name": "getCurrentContext",
         "description": "Get canvas context used by Canvasimo (2d).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "CanvasRenderingContext2D",
-              "alias": null
-            }
+            "returns": "CanvasRenderingContext2D"
           }
         ],
         "typeAliases": []
@@ -261,13 +225,11 @@
       {
         "name": "getCurrentContextType",
         "description": "Get the context type used by Canvasimo ('2d', 'webgl', etc).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "\"2d\"",
-              "alias": null
-            }
+            "returns": "\"2d\""
           }
         ],
         "typeAliases": []
@@ -275,19 +237,17 @@
       {
         "name": "getContextAttributes",
         "description": "Get the context attributes used.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "CanvasContextAttributes",
-              "alias": "Canvas2DContextAttributes | WebGLContextAttributes"
-            }
+            "returns": "CanvasContextAttributes | null"
           }
         ],
         "typeAliases": [
           {
             "name": "CanvasContextAttributes",
-            "alias": "Canvas2DContextAttributes | WebGLContextAttributes"
+            "alias": "CanvasRenderingContext2DSettings | WebGLContextAttributes"
           }
         ]
       }
@@ -306,33 +266,26 @@
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -340,44 +293,37 @@
       {
         "name": "strokeRect",
         "description": "Plot a rectangle and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -385,44 +331,37 @@
       {
         "name": "fillRect",
         "description": "Plot a rectangle and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -430,44 +369,37 @@
       {
         "name": "plotRoundedRect",
         "description": "Plot a rounded rectangle that can then have a fill or stroke applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -475,50 +407,42 @@
       {
         "name": "strokeRoundedRect",
         "description": "Plot a rounded rectangle and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -526,50 +450,42 @@
       {
         "name": "fillRoundedRect",
         "description": "Plot a rounded rectangle and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -577,614 +493,578 @@
       {
         "name": "plotCircle",
         "description": "Plot a circle that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokeCircle",
         "description": "Plot a circle and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillCircle",
         "description": "Plot a circle and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "plotPoly",
         "description": "Plot a polygon that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokePoly",
         "description": "Plot a polygon and apply a stoke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillPoly",
         "description": "Plot a polygon and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "plotStar",
         "description": "Plot a star that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokeStar",
         "description": "Plot a star and apply a stoke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillStar",
         "description": "Plot a star and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "plotBurst",
         "description": "Plot a burst that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokeBurst",
         "description": "Plot a burst and apply a stoke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillBurst",
         "description": "Plot a burst and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sides",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "plotPixel",
         "description": "Plot a single pixel that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1192,32 +1072,27 @@
       {
         "name": "strokePixel",
         "description": "Plot a single pixel and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1225,32 +1100,27 @@
       {
         "name": "fillPixel",
         "description": "Plot a single pixel and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1258,20 +1128,17 @@
       {
         "name": "plotClosedPath",
         "description": "Plot a closed path that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "points",
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "type": "Points",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -1284,26 +1151,22 @@
       {
         "name": "strokeClosedPath",
         "description": "Plot a closed path and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "points",
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "type": "Points",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -1316,26 +1179,22 @@
       {
         "name": "fillClosedPath",
         "description": "Plot a closed path and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "points",
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "type": "Points",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -1354,38 +1213,32 @@
       {
         "name": "plotLine",
         "description": "Plot a line that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1393,44 +1246,37 @@
       {
         "name": "strokeLine",
         "description": "Plot a line and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1438,38 +1284,32 @@
       {
         "name": "plotLength",
         "description": "Plot a line, by length & angle, that can then have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "length",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "angle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1477,44 +1317,37 @@
       {
         "name": "strokeLength",
         "description": "Plot a line, by length & angle, and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "length",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "angle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -1522,20 +1355,17 @@
       {
         "name": "plotPath",
         "description": "Plot a path, that is not self closing, that can have a stroke or fill applied to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "points",
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "type": "Points",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -1548,26 +1378,22 @@
       {
         "name": "strokePath",
         "description": "Plot a path, that is not self closing, and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "points",
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "type": "Points",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -1580,26 +1406,22 @@
       {
         "name": "fillPath",
         "description": "Plot a path, that is not self closing, and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "points",
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "type": "Points",
                 "optional": false
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -1624,162 +1446,150 @@
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "startAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "endAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokeArc",
         "description": "Plot an arc and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "startAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "endAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillArc",
         "description": "Plot an arc and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "startAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "endAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "plotEllipse",
@@ -1790,198 +1600,180 @@
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radiusX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radiusY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "rotation",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "startAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "endAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokeEllipse",
         "description": "Plot an ellipse and apply a stroke to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radiusX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radiusY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "rotation",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "startAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "endAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillEllipse",
         "description": "Plot an ellipse and apply a fill to it.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radiusX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radiusY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "rotation",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "startAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "endAngle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "anticlockwise",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       }
     ]
   },
@@ -1992,149 +1784,140 @@
       {
         "name": "strokeText",
         "description": "Draw a text with a stroke.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "text",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "maxWidth",
-                "alias": null,
-                "type": "number",
+                "type": "MaxWidth",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "MaxWidth",
+            "alias": "number | undefined | null"
+          }
+        ]
       },
       {
         "name": "fillText",
         "description": "Draw a text with a fill.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "text",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "maxWidth",
-                "alias": null,
-                "type": "number",
+                "type": "MaxWidth",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "MaxWidth",
+            "alias": "number | undefined | null"
+          }
+        ]
       },
       {
         "name": "strokeTextMultiline",
         "description": "Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.\nIf no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).\nWords will not break by default (normal) and therefore may overflow.\nbreak-all will break words wherever possible, and break-word will only break words if there is not enough room.\nThe lineHeight parameter is a multiplier for the font size, and defaults to 1.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "text",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "maxWidth",
-                "alias": null,
-                "type": "number",
+                "type": "MaxWidth",
                 "optional": true
               },
               {
                 "name": "wordBreak",
-                "alias": "'normal' | 'break-word' | 'break-all'",
                 "type": "WordBreak",
                 "optional": true
               },
               {
                 "name": "lineHeight",
-                "alias": null,
                 "type": "number",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
+          {
+            "name": "MaxWidth",
+            "alias": "number | undefined | null"
+          },
           {
             "name": "WordBreak",
             "alias": "'normal' | 'break-word' | 'break-all'"
@@ -2144,59 +1927,54 @@
       {
         "name": "fillTextMultiline",
         "description": "Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.\nIf no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).\nWords will not break by default (normal) and therefore may overflow.\nbreak-all will break words wherever possible, and break-word will only break words if there is not enough room.\nThe lineHeight parameter is a multiplier for the font size, and defaults to 1.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "text",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "maxWidth",
-                "alias": null,
-                "type": "number",
+                "type": "MaxWidth",
                 "optional": true
               },
               {
                 "name": "wordBreak",
-                "alias": "'normal' | 'break-word' | 'break-all'",
                 "type": "WordBreak",
                 "optional": true
               },
               {
                 "name": "lineHeight",
-                "alias": null,
                 "type": "number",
                 "optional": true
               },
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
+          {
+            "name": "MaxWidth",
+            "alias": "number | undefined | null"
+          },
           {
             "name": "WordBreak",
             "alias": "'normal' | 'break-word' | 'break-all'"
@@ -2212,15 +1990,11 @@
             "parameters": [
               {
                 "name": "text",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "TextMetrics",
-              "alias": null
-            }
+            "returns": "TextMetrics"
           }
         ],
         "typeAliases": []
@@ -2228,20 +2002,17 @@
       {
         "name": "setTextAlign",
         "description": "Set the horizontal text alignment.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": "'left' | 'right' | 'center' | 'start' | 'end'",
                 "type": "TextAlign",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -2254,13 +2025,11 @@
       {
         "name": "getTextAlign",
         "description": "Get the horizontal text alignment.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "TextAlign",
-              "alias": "'left' | 'right' | 'center' | 'start' | 'end'"
-            }
+            "returns": "TextAlign"
           }
         ],
         "typeAliases": [
@@ -2273,20 +2042,17 @@
       {
         "name": "setTextBaseline",
         "description": "Set the vertical text alignment.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": "'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'",
                 "type": "TextBaseline",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -2299,13 +2065,11 @@
       {
         "name": "getTextBaseline",
         "description": "Get the vertical text alignment.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "TextBaseline",
-              "alias": "'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'"
-            }
+            "returns": "TextBaseline"
           }
         ],
         "typeAliases": [
@@ -2324,20 +2088,17 @@
       {
         "name": "setFont",
         "description": "Set the font to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "font",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2345,13 +2106,11 @@
       {
         "name": "getFont",
         "description": "Get the font that is being used.\nThis returns the exact CanvasRenderingContext2D.font string.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -2359,20 +2118,17 @@
       {
         "name": "setFontFamily",
         "description": "Set the font family to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "family",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2380,13 +2136,11 @@
       {
         "name": "getFontFamily",
         "description": "Get the font that is being used.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string | null"
           }
         ],
         "typeAliases": []
@@ -2394,20 +2148,17 @@
       {
         "name": "setFontSize",
         "description": "Set the font size to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "size",
-                "alias": null,
                 "type": "string | number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2415,13 +2166,11 @@
       {
         "name": "getFontSize",
         "description": "Get the font size that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number | null"
           }
         ],
         "typeAliases": []
@@ -2429,20 +2178,17 @@
       {
         "name": "setFontStyle",
         "description": "Set the font style to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "style",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2450,13 +2196,11 @@
       {
         "name": "getFontStyle",
         "description": "Get the font style that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string | null"
           }
         ],
         "typeAliases": []
@@ -2464,20 +2208,17 @@
       {
         "name": "setFontVariant",
         "description": "Set the font variant to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "variant",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2485,13 +2226,11 @@
       {
         "name": "getFontVariant",
         "description": "Get the font variant that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string | null"
           }
         ],
         "typeAliases": []
@@ -2499,20 +2238,17 @@
       {
         "name": "setFontWeight",
         "description": "Set the font weight to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "weight",
-                "alias": null,
                 "type": "string | number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2520,13 +2256,11 @@
       {
         "name": "getFontWeight",
         "description": "Get the font weight that is being used.\nReturns null if using a special font e.g. caption, icon, menu.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "string | number",
-              "alias": null
-            }
+            "returns": "string | number | null"
           }
         ],
         "typeAliases": []
@@ -2540,54 +2274,42 @@
       {
         "name": "stroke",
         "description": "Apply a stroke to the current shape.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "path",
-                "alias": null,
                 "type": "Path2D",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "path",
-                "alias": null,
                 "type": "Path2D",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2601,15 +2323,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": "string | CanvasGradient | CanvasPattern",
                 "type": "FillOrStrokeStyle",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -2626,10 +2344,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "FillOrStrokeStyle",
-              "alias": "string | CanvasGradient | CanvasPattern"
-            }
+            "returns": "FillOrStrokeStyle"
           }
         ],
         "typeAliases": [
@@ -2648,15 +2363,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": "'butt' | 'round' | 'square'",
                 "type": "LineCap",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -2673,10 +2384,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "LineCap",
-              "alias": "'butt' | 'round' | 'square'"
-            }
+            "returns": "LineCap"
           }
         ],
         "typeAliases": [
@@ -2695,15 +2403,11 @@
             "parameters": [
               {
                 "name": "segments",
-                "alias": null,
                 "type": "number[]",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2715,10 +2419,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number[]",
-              "alias": null
-            }
+            "returns": "number[]"
           }
         ],
         "typeAliases": []
@@ -2732,15 +2433,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2752,10 +2449,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -2769,15 +2463,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": "'bevel' | 'round' | 'miter'",
                 "type": "LineJoin",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -2794,10 +2484,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "LineJoin",
-              "alias": "'bevel' | 'round' | 'miter'"
-            }
+            "returns": "LineJoin"
           }
         ],
         "typeAliases": [
@@ -2816,15 +2503,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2836,10 +2519,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -2847,20 +2527,17 @@
       {
         "name": "setMiterLimit",
         "description": "Set the miter limit to use.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2868,13 +2545,11 @@
       {
         "name": "getMiterLimit",
         "description": "Get the miter limit that is being used.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -2888,54 +2563,42 @@
       {
         "name": "fill",
         "description": "Apply a fill to the current shape.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "fillRule",
-                "alias": "'nonzero' | 'evenodd'",
                 "type": "FillRule",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "fillRule",
-                "alias": "'nonzero' | 'evenodd'",
                 "type": "FillRule",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -2948,20 +2611,17 @@
       {
         "name": "fillCanvas",
         "description": "Apply a fill to the entire canvas area.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2969,13 +2629,11 @@
       {
         "name": "clearCanvas",
         "description": "Clear the entire canvas area",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -2983,38 +2641,32 @@
       {
         "name": "clearRect",
         "description": "Clear a rectangular area of the canvas.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -3028,15 +2680,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": "string | CanvasGradient | CanvasPattern",
                 "type": "FillOrStrokeStyle",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -3053,10 +2701,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "FillOrStrokeStyle",
-              "alias": "string | CanvasGradient | CanvasPattern"
-            }
+            "returns": "FillOrStrokeStyle"
           }
         ],
         "typeAliases": [
@@ -3069,38 +2714,32 @@
       {
         "name": "createLinearGradient",
         "description": "Create a linear gradient to use as a fill.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x0",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y0",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "CanvasGradient",
-              "alias": null
-            }
+            "returns": "CanvasGradient"
           }
         ],
         "typeAliases": []
@@ -3108,50 +2747,42 @@
       {
         "name": "createRadialGradient",
         "description": "Create a radial gradient to use as a fill.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x0",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y0",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "r0",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "r1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "CanvasGradient",
-              "alias": null
-            }
+            "returns": "CanvasGradient"
           }
         ],
         "typeAliases": []
@@ -3159,26 +2790,22 @@
       {
         "name": "createPattern",
         "description": "Create a pattern to be used as a fill.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "image",
-                "alias": null,
-                "type": "HTMLCanvasElement | HTMLImageElement | HTMLVideoElement",
+                "type": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement",
                 "optional": false
               },
               {
                 "name": "repetition",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "CanvasPattern",
-              "alias": null
-            }
+            "returns": "CanvasPattern | null"
           }
         ],
         "typeAliases": []
@@ -3186,132 +2813,107 @@
       {
         "name": "drawImage",
         "description": "Draw an image to the canvas.\nIf the second position / size arguments are supplied, the first will be used for cropping the image,\nand the second for the position and size it will be drawn.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "image",
-                "alias": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap",
                 "type": "ImageLike",
                 "optional": false
               },
               {
                 "name": "dstX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "image",
-                "alias": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap",
                 "type": "ImageLike",
                 "optional": false
               },
               {
                 "name": "dstX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstW",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstH",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "image",
-                "alias": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap",
                 "type": "ImageLike",
                 "optional": false
               },
               {
                 "name": "srcX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "srcY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "srcW",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "srcH",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstX",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstY",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstW",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dstH",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -3330,26 +2932,22 @@
       {
         "name": "getDataURL",
         "description": "Get a data URL of the current canvas state.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "type",
-                "alias": null,
                 "type": "string",
                 "optional": true
               },
               {
                 "name": "...args",
-                "alias": null,
                 "type": "any[]",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3357,40 +2955,32 @@
       {
         "name": "createImageData",
         "description": "Create image data with either the width and height specified,\nor with the width and height of a the image data supplied.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "width",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "height",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "ImageData",
-              "alias": null
-            }
+            "returns": "ImageData"
           },
           {
             "parameters": [
               {
                 "name": "ImageData",
-                "alias": null,
                 "type": "ImageData",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "ImageData",
-              "alias": null
-            }
+            "returns": "ImageData"
           }
         ],
         "typeAliases": []
@@ -3398,38 +2988,32 @@
       {
         "name": "getImageData",
         "description": "Get the image data from an area of the canvas.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "sx",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sy",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sw",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "sh",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "ImageData",
-              "alias": null
-            }
+            "returns": "ImageData"
           }
         ],
         "typeAliases": []
@@ -3437,56 +3021,67 @@
       {
         "name": "putImageData",
         "description": "Draw image data onto the canvas.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "imagedata",
-                "alias": null,
                 "type": "ImageData",
                 "optional": false
               },
               {
                 "name": "dx",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dy",
-                "alias": null,
+                "type": "number",
+                "optional": false
+              }
+            ],
+            "returns": "Canvasimo"
+          },
+          {
+            "parameters": [
+              {
+                "name": "imagedata",
+                "type": "ImageData",
+                "optional": false
+              },
+              {
+                "name": "dx",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "name": "dy",
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dirtyX",
-                "alias": null,
                 "type": "number",
-                "optional": true
+                "optional": false
               },
               {
                 "name": "dirtyY",
-                "alias": null,
                 "type": "number",
-                "optional": true
+                "optional": false
               },
               {
                 "name": "dirtyWidth",
-                "alias": null,
                 "type": "number",
-                "optional": true
+                "optional": false
               },
               {
                 "name": "dirtyHeight",
-                "alias": null,
                 "type": "number",
-                "optional": true
+                "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -3494,26 +3089,22 @@
       {
         "name": "getPixelData",
         "description": "Get image data about a specific pixel.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Uint8ClampedArray",
-              "alias": null
-            }
+            "returns": "Uint8ClampedArray"
           }
         ],
         "typeAliases": []
@@ -3521,26 +3112,22 @@
       {
         "name": "getPixelColor",
         "description": "Get the color of a specific pixel.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3554,32 +3141,27 @@
       {
         "name": "createHSL",
         "description": "Create an HSL color string from the given values.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "h",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "s",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "l",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3587,38 +3169,32 @@
       {
         "name": "createHSLA",
         "description": "Create an HSLA color string from the given values.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "h",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "s",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "l",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "a",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3626,32 +3202,27 @@
       {
         "name": "createRGB",
         "description": "Create an RGB color string from the given values.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "r",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "g",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "b",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3659,38 +3230,32 @@
       {
         "name": "createRGBA",
         "description": "Create an RGBA color string from the given values.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "r",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "g",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "b",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "a",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3698,20 +3263,17 @@
       {
         "name": "getHSLFromHSLA",
         "description": "Return an HSL color string from the given HSLA color string.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3719,20 +3281,17 @@
       {
         "name": "getRGBFromRGBA",
         "description": "Return an RGB color string from the given RGBA color string.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "color",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -3746,20 +3305,17 @@
       {
         "name": "getFractionFromPercent",
         "description": "Get a fraction from the provided percent value e.g. 80 returns 0.8.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "percent",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3767,20 +3323,17 @@
       {
         "name": "getPercentFromFraction",
         "description": "Get a percent from the provided fraction value e.g. 0.7 returns 70.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "fraction",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3788,20 +3341,17 @@
       {
         "name": "getFractionOfWidth",
         "description": "Returns the actual value of a fraction of the canvas width e.g.\na canvas with a width of 200 returns 100 if the provided value is 0.5.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "fraction",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3809,20 +3359,17 @@
       {
         "name": "getFractionOfHeight",
         "description": "Returns the actual value of a fraction of the canvas height e.g.\na canvas with a height of 100 returns 20 if the provided value is 0.2.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "fraction",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3830,20 +3377,17 @@
       {
         "name": "getPercentOfWidth",
         "description": "Returns the actual value of a percentage of the canvas width e.g.\na canvas with a width of 200 returns 100 if the provided value is 50.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "percent",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3851,20 +3395,17 @@
       {
         "name": "getPercentOfHeight",
         "description": "Returns the actual value of a percentage of the canvas height e.g.\na canvas with a height of 100 returns 20 if the provided value is 20.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "percent",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3872,38 +3413,32 @@
       {
         "name": "getDistance",
         "description": "Returns the distance between 2 points.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3917,20 +3452,17 @@
       {
         "name": "getRadiansFromDegrees",
         "description": "Get a radian value from the provided degrees e.g. 90 returns 1.5708.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "degrees",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3938,20 +3470,17 @@
       {
         "name": "getDegreesFromRadians",
         "description": "Get a degree value from the provided radians e.g. 3.14159 returns 180.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "radians",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -3959,82 +3488,67 @@
       {
         "name": "getAngle",
         "description": "Get the angle (in radians) between 2 or 3 points.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           },
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x3",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y3",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -4048,13 +3562,11 @@
       {
         "name": "beginPath",
         "description": "Begin a new path (shape).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4062,13 +3574,11 @@
       {
         "name": "closePath",
         "description": "Close the current path (shape).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4076,26 +3586,22 @@
       {
         "name": "moveTo",
         "description": "Move the starting point of a the next sub-path.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4103,26 +3609,22 @@
       {
         "name": "lineTo",
         "description": "Connect the last point to the provided coordinates.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4130,44 +3632,37 @@
       {
         "name": "arcTo",
         "description": "Arc from one point to another.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y1",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y2",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "radius",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4175,50 +3670,42 @@
       {
         "name": "bezierCurveTo",
         "description": "Connect the last point to the provided coordinates with a bezier curve (2 control points).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "cp1x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "cp1y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "cp2x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "cp2y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4226,38 +3713,32 @@
       {
         "name": "quadraticCurveTo",
         "description": "Connect the last point to the provided coordinates with a quadratic curve (1 control point).",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "cpx",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "cpy",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4271,13 +3752,11 @@
       {
         "name": "save",
         "description": "Push the current state of the canvas into a stack that can later be restored.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4285,13 +3764,11 @@
       {
         "name": "restore",
         "description": "Restore the most recent state of the canvas that was saved.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4299,20 +3776,17 @@
       {
         "name": "rotate",
         "description": "Add rotation (in radians) to the transform matrix so that shapes can be drawn at an angle.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "angle",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4320,26 +3794,22 @@
       {
         "name": "scale",
         "description": "Scale the transform matrix so that shapes can be drawn at the provided scale.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4347,26 +3817,22 @@
       {
         "name": "translate",
         "description": "Move the canvas origin.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4374,50 +3840,42 @@
       {
         "name": "transform",
         "description": "Multiply the current transformation with the provided matrix.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "m11",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "m12",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "m21",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "m22",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dx",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dy",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4425,50 +3883,42 @@
       {
         "name": "setTransform",
         "description": "Replace the current transformation with the provided matrix.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "m11",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "m12",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "m21",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "m22",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dx",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "dy",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4476,13 +3926,11 @@
       {
         "name": "resetTransform",
         "description": "Replace the current transformation with the default matrix: [1, 0, 0, 1, 0, 0].",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4490,20 +3938,17 @@
       {
         "name": "clip",
         "description": "Use the current path as a clipping path.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
-                "name": "fillRules",
-                "alias": "'nonzero' | 'evenodd'",
+                "name": "fillRule",
                 "type": "FillRule",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -4522,15 +3967,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4542,10 +3983,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -4559,15 +3997,11 @@
             "parameters": [
               {
                 "name": "value",
-                "alias": "'source-over' | 'source-in' | 'source-out' | 'source-atop' | 'destination-over' | 'destination-in' | 'destination-out' | 'destination-atop' | 'lighter' | 'copy' | 'xor' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity'",
                 "type": "GlobalCompositeOperation",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": [
@@ -4584,10 +4018,7 @@
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "GlobalCompositeOperation",
-              "alias": "'source-over' | 'source-in' | 'source-out' | 'source-atop' | 'destination-over' | 'destination-in' | 'destination-out' | 'destination-atop' | 'lighter' | 'copy' | 'xor' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity'"
-            }
+            "returns": "GlobalCompositeOperation"
           }
         ],
         "typeAliases": [
@@ -4600,34 +4031,34 @@
       {
         "name": "setImageSmoothingEnabled",
         "description": "Set whether image smoothing should be used.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       },
       {
         "name": "getImageSmoothingEnabled",
         "description": "Get whether image smoothing is being used.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "boolean",
-              "alias": null
-            }
+            "returns": "boolean"
           }
         ],
         "typeAliases": []
@@ -4635,20 +4066,17 @@
       {
         "name": "setShadowBlur",
         "description": "Set how blurry shadows are.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4656,13 +4084,11 @@
       {
         "name": "getShadowBlur",
         "description": "Get the value of how blurry shadows are.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -4670,20 +4096,17 @@
       {
         "name": "setShadowColor",
         "description": "Set the color to be used for shadows.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "string",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4691,13 +4114,11 @@
       {
         "name": "getShadowColor",
         "description": "Get the color being used for shadows.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
         "typeAliases": []
@@ -4705,20 +4126,17 @@
       {
         "name": "setShadowOffsetX",
         "description": "Set how horizontally offset shadows should be.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4726,13 +4144,11 @@
       {
         "name": "getShadowOffsetX",
         "description": "Get the value of how horizontally offset shadows should be.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -4740,20 +4156,17 @@
       {
         "name": "setShadowOffsetY",
         "description": "Set how vertically offset shadows should be.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4761,13 +4174,11 @@
       {
         "name": "getShadowOffsetY",
         "description": "Get the value of how vertically offset shadows should be.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -4781,20 +4192,17 @@
       {
         "name": "tap",
         "description": "Break out of the method chain and execute a callback.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "callback",
-                "alias": null,
                 "type": "() => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4802,84 +4210,67 @@
       {
         "name": "repeat",
         "description": "Break out of the method chain and execute a callback with values between start and end,\nincreasing / decreasing by step (start defaults to 0, step defaults to 1).\nYou may return false from the callback at any point to stop at the current iteration.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "end",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "callback",
-                "alias": null,
                 "type": "(i: number) => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "start",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "end",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "callback",
-                "alias": null,
                 "type": "(i: number) => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "start",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "end",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "step",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "callback",
-                "alias": null,
                 "type": "(i: number) => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4887,66 +4278,52 @@
       {
         "name": "forEach",
         "description": "Break out of the method chain and loop over the given array, object or string,\ncalling the callback with the value & key / index.\nYou may return false from the callback at any point to stop at the current iteration.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "str",
-                "alias": null,
                 "type": "string",
                 "optional": false
               },
               {
                 "name": "callback",
-                "alias": null,
                 "type": "(value: string, index: number) => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "obj",
-                "alias": null,
                 "type": "any[]",
                 "optional": false
               },
               {
                 "name": "callback",
-                "alias": null,
                 "type": "(value: any, index: number) => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           },
           {
             "parameters": [
               {
                 "name": "obj",
-                "alias": null,
                 "type": "{ [i: string]: any; }",
                 "optional": false
               },
               {
                 "name": "callback",
-                "alias": null,
                 "type": "(value: any, key: string) => any",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -4954,32 +4331,27 @@
       {
         "name": "constrain",
         "description": "Constrain a number between a minimum and maximum value.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "min",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "max",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -4987,44 +4359,37 @@
       {
         "name": "map",
         "description": "Map a value from one range to another e.g. mapping 0.5 from 0-1 to 0-10 returns 5.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "value",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "fromStart",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "fromEnd",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "toStart",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "toEnd",
-                "alias": null,
                 "type": "number",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "number",
-              "alias": null
-            }
+            "returns": "number"
           }
         ],
         "typeAliases": []
@@ -5032,20 +4397,17 @@
       {
         "name": "drawFocusIfNeeded",
         "description": "Draw a focus ring around the current path, or the path supplied,\nif the element supplied has focus.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "element",
-                "alias": null,
                 "type": "Element",
                 "optional": false
               }
             ],
-            "returns": {
-              "type": "Canvasimo",
-              "alias": null
-            }
+            "returns": "Canvasimo"
           }
         ],
         "typeAliases": []
@@ -5053,32 +4415,27 @@
       {
         "name": "isPointInPath",
         "description": "Returns whether the given point is within the current or given path.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [
               {
                 "name": "x",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "y",
-                "alias": null,
                 "type": "number",
                 "optional": false
               },
               {
                 "name": "fillRule",
-                "alias": "'nonzero' | 'evenodd'",
                 "type": "FillRule",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "boolean",
-              "alias": null
-            }
+            "returns": "boolean"
           }
         ],
         "typeAliases": [
@@ -5091,13 +4448,11 @@
       {
         "name": "isPointInStroke",
         "description": "Returns whether the given point is within the area contained by applying\na stroke to the current or given path.",
+        "alias": null,
         "signatures": [
           {
             "parameters": [],
-            "returns": {
-              "type": "boolean",
-              "alias": null
-            }
+            "returns": "boolean | null"
           }
         ],
         "typeAliases": []
@@ -5111,18 +4466,19 @@
             "parameters": [
               {
                 "name": "logInfo",
-                "alias": null,
-                "type": "boolean",
+                "type": "BooleanFalsy",
                 "optional": true
               }
             ],
-            "returns": {
-              "type": "string",
-              "alias": null
-            }
+            "returns": "string"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "BooleanFalsy",
+            "alias": "boolean | undefined | null"
+          }
+        ]
       }
     ]
   }

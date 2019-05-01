@@ -1,16 +1,17 @@
+export interface ResolvedType {
+  typeAliases: ReadonlyArray<TypeAlias>;
+  type: string;
+}
+
 export interface Parameter {
   name: string;
-  alias: string | null;
   type: string;
   optional?: boolean;
 }
 
 export interface Signature {
-  returns: {
-    type: string;
-    alias: string | null;
-  };
-  parameters: Parameter[];
+  returns: string;
+  parameters: ReadonlyArray<Parameter>;
 }
 
 export interface Tags {
@@ -20,9 +21,9 @@ export interface Tags {
 export interface Method {
   name: string;
   description: string;
-  optional?: boolean;
   tags: Tags;
-  signatures: Signature[];
+  signatures: ReadonlyArray<Signature>;
+  typeAliases: ReadonlyArray<TypeAlias>;
 }
 
 export interface TypeAlias {
@@ -33,18 +34,17 @@ export interface TypeAlias {
 export interface GroupedMethod {
   name: string;
   description: string;
-  alias?: string;
-  optional?: boolean;
-  signatures: Signature[];
-  typeAliases: TypeAlias[];
+  alias: string | null;
+  signatures: ReadonlyArray<Signature>;
+  typeAliases: ReadonlyArray<TypeAlias>;
 }
 
-export type Methods = Method[];
+export type Methods = ReadonlyArray<Method>;
 
 export interface Group {
   name: string;
   description: string;
-  methods: GroupedMethod[];
+  methods: ReadonlyArray<GroupedMethod>;
 }
 
-export type Docs = Group[];
+export type Docs = ReadonlyArray<Group>;
