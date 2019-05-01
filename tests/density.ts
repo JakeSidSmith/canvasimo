@@ -19,4 +19,13 @@ describe('density', () => {
     expect(ctx.font).toBe('normal normal normal 20px sans-serif');
     expect(instance.getFontSize()).toBe(10);
   });
+
+  it('retains density when the canvas is cleared', () => {
+    // Fake browser font reset
+    ctx.font = '10px sans-serif';
+    instance.clearCanvas();
+
+    expect(ctx.font).toBe('normal normal normal 20px sans-serif');
+    expect(instance.getFontSize()).toBe(10);
+  });
 });
