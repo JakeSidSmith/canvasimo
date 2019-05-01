@@ -16,8 +16,8 @@ export type BooleanFalsy = boolean | undefined | null;
 export type MaxWidth = number | undefined | null;
 
 export type ImageLike = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
-export type CanvasContextAttributes = Canvas2DContextAttributes | WebGLContextAttributes;
-export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext | null;
+export type CanvasContextAttributes = CanvasRenderingContext2DSettings | WebGLContextAttributes;
+export type CanvasContext = CanvasRenderingContext2D | WebGLRenderingContext;
 export type FillOrStrokeStyle = string | CanvasGradient | CanvasPattern;
 
 // tslint:disable-next-line:interface-over-type-literal
@@ -60,6 +60,23 @@ export interface DrawImage {
 export interface CreateImageData {
   (width: number, height: number): ImageData;
   (ImageData: ImageData): ImageData;
+}
+
+export interface PutImageData {
+  (
+    imagedata: ImageData,
+    dx: number,
+    dy: number
+  ): Canvasimo;
+  (
+    imagedata: ImageData,
+    dx: number,
+    dy: number,
+    dirtyX: number,
+    dirtyY: number,
+    dirtyWidth: number,
+    dirtyHeight: number
+  ): Canvasimo;
 }
 
 export interface Fill {

@@ -25,6 +25,7 @@ import {
   LineJoin,
   MaxWidth,
   Points,
+  PutImageData,
   Repeat,
   Segments,
   SetSize,
@@ -178,7 +179,7 @@ export class Canvasimo {
   /**
    * Get the standard canvas context (used for drawing).
    */
-  public getContext = (type: string, contextAttributes?: CanvasContextAttributes): CanvasContext => {
+  public getContext = (type: string, contextAttributes?: CanvasContextAttributes): CanvasContext | null => {
     return this.element.getContext(type, contextAttributes);
   }
   /**
@@ -917,9 +918,16 @@ export class Canvasimo {
    * @alias measureText
    */
   public getTextSize = (text: string): TextMetrics => this.measureText(text);
-  public measureText = (text: string): TextMetrics => ({
-    width: (this.ctx.measureText(text).width || 0) / this.density,
-  })
+  public measureText = (text: string): TextMetrics => {
+    const metrics = this.ctx.measureText(text);
+    const metricsWithDensity: any = {};
+
+    (Object.keys(metrics) as ReadonlyArray<keyof TextMetrics>).forEach((key) => {
+      metricsWithDensity[key] = (metrics[key] || 0) / this.density;
+    });
+
+    return metricsWithDensity;
+  }
   /**
    * Set the horizontal text alignment.
    */
@@ -1292,7 +1300,7 @@ export class Canvasimo {
   public createPattern = (
     image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
     repetition: string
-  ): CanvasPattern => {
+  ): CanvasPattern | null => {
     return this.ctx.createPattern(image, repetition);
   }
   /**
@@ -1355,11 +1363,11 @@ export class Canvasimo {
    * or with the width and height of a the image data supplied.
    */
   public createImageData: CreateImageData = (width: number | ImageData, height?: number): ImageData => {
-    if (typeof width === 'number' && typeof height === 'number') {
-      return this.ctx.createImageData(width * this.density, height * this.density);
+    if (typeof width !== 'number') {
+      return this.ctx.createImageData(width);
     }
 
-    return this.ctx.createImageData(width, height);
+    return this.ctx.createImageData(width * this.density, height || 0 * this.density);
   }
   /**
    * Get the image data from an area of the canvas.
@@ -1370,7 +1378,7 @@ export class Canvasimo {
   /**
    * Draw image data onto the canvas.
    */
-  public putImageData = (
+  public putImageData: PutImageData = (
     imagedata: ImageData,
     dx: number,
     dy: number,
@@ -1379,15 +1387,28 @@ export class Canvasimo {
     dirtyWidth?: number,
     dirtyHeight?: number
   ): Canvasimo => {
-    this.ctx.putImageData(
-      imagedata,
-      dx * this.density,
-      dy * this.density,
-      typeof dirtyX === 'number' ? dirtyX * this.density : dirtyX,
-      typeof dirtyY === 'number' ? dirtyY * this.density : dirtyY,
-      typeof dirtyWidth === 'number' ? dirtyWidth * this.density : dirtyWidth,
-      typeof dirtyHeight === 'number' ? dirtyHeight * this.density : dirtyHeight
-    );
+    if (
+      typeof dirtyX === 'undefined' ||
+      typeof dirtyY === 'undefined' ||
+      typeof dirtyWidth === 'undefined' ||
+      typeof dirtyHeight === 'undefined'
+    ) {
+      this.ctx.putImageData(
+        imagedata,
+        dx * this.density,
+        dy * this.density
+      );
+    } else {
+      this.ctx.putImageData(
+        imagedata,
+        dx * this.density,
+        dy * this.density,
+        dirtyX * this.density,
+        dirtyY * this.density,
+        dirtyWidth * this.density,
+        dirtyHeight * this.density
+      );
+    }
     return this;
   }
   /**
@@ -1676,8 +1697,8 @@ export class Canvasimo {
   /**
    * Use the current path as a clipping path.
    */
-  public clip = (fillRules?: FillRule): Canvasimo => {
-    this.ctx.clip(fillRules);
+  public clip = (fillRule?: FillRule): Canvasimo => {
+    this.ctx.clip(fillRule);
     return this;
   }
   /**
@@ -1961,7 +1982,7 @@ export class Canvasimo {
     const letters = text.split('');
     let lineIndex = lines.length - 1;
 
-    letters.forEach((letter, index) => {
+    letters.forEach((letter) => {
       const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + letter);
 
@@ -1983,7 +2004,7 @@ export class Canvasimo {
     const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
       const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + word);
 
@@ -2007,7 +2028,7 @@ export class Canvasimo {
     const words = text.split(MATCHES_WORD_BREAKS);
     let lineIndex = 0;
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
       const line = lines[lineIndex];
       const { width: newLineWidth } = this.getTextSize(line + word);
 

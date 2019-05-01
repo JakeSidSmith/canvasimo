@@ -1,6 +1,6 @@
 import ImageData from './image-data-stub';
 
-const ctx: {[i: string]: any} = {
+const ctx: Record<string, any> = {
   imageSmoothingEnabled: true,
   webkitImageSmoothingEnabled: false,
   globalAlpha: 1, // number
@@ -20,7 +20,7 @@ const ctx: {[i: string]: any} = {
   textAlign: 'start', // string
   textBaseline: 'alphabetic', // string
   getContextAttributes: jest.fn(),
-  getImageData: jest.fn((x: number, y: number, width: number, height: number) => {
+  getImageData: jest.fn((_x: number, _y: number, width: number, height: number) => {
     return new ImageData(width, height);
   }),
   createLinearGradient: jest.fn(),
@@ -75,12 +75,12 @@ export const mockClearAll = () => {
   }
 };
 
-const getContext = (type: string) => {
+const getContext = (type: string): CanvasRenderingContext2D => {
   if (type === '2d') {
-    return ctx;
+    return ctx as any;
   }
 
-  return {};
+  throw new Error('Cannot get a context that is not "2d"');
 };
 
 export default getContext;

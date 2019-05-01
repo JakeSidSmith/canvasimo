@@ -139,8 +139,7 @@ describe('canvasimo', () => {
 
     it('should return the actual canvas context', () => {
       expect(canvas.getContext('2d')).toBe(element.getContext('2d'));
-      expect(canvas.getContext('SomeOtherContext')).toEqual({});
-      expect(canvas.getContext('')).toEqual({});
+      expect(() => canvas.getContext('SomeOtherContext')).toThrow('Cannot get a context that is not "2d"');
     });
 
     it('should return the current context & context type', () => {
@@ -638,7 +637,7 @@ describe('canvasimo', () => {
       const _resetTransform = (ctx as any).resetTransform;
       delete (ctx as any).resetTransform;
 
-      const setTransformSpy = jest.spyOn(canvas, 'setTransform').mockImplementation(() => null);
+      const setTransformSpy = jest.spyOn(canvas, 'setTransform').mockImplementation(jest.fn());
 
       canvas.resetTransform();
 
@@ -852,8 +851,8 @@ describe('canvasimo', () => {
       const anError = /arguments/i;
 
       expect(canvas.repeat).toThrow(anError);
-      expect(canvas.repeat.bind(null, 0)).toThrow(anError);
-      expect(canvas.repeat.bind(null, 0, 0, 0, 0, 0)).toThrow(anError);
+      expect(() => (canvas.repeat as any)(0)).toThrow(anError);
+      expect(() => (canvas.repeat as any)(0, 0, 0, 0, 0)).toThrow(anError);
     });
 
   });

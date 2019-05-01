@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:recommended", "tslint-eslint-rules"],
   "rules": {
+    "variable-name": [true, "allow-leading-underscore", "ban-keywords"],
     "quotemark": [true, "single", "jsx-double", "avoid-template"],
     "linebreak-style": [true, "LF"],
     "semicolon": [true, "always", "ignore-interfaces"],

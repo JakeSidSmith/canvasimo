@@ -4,13 +4,21 @@
     "skipLibCheck": true,
     "pretty": true,
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "moduleResolution": "node",
     "jsx": "react",
     "target": "es5",
     "module": "commonjs",
     "typeRoots": [
-      "node_modules/@types/",
-      "types/"
+      "./node_modules/@types/",
+      "./@types/"
     ]
-  }
+  },
+  "include": [
+    "./src/",
+    "./@types/",
+    "./docs/src/",
+    "./tests/"
+  ]
 }

@@ -3,12 +3,17 @@
 import * as glob from 'glob';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { Docs, GroupedMethod, Method, Methods, Parameter, Tags, TypeAlias } from '../docs/src/ts/types';
+import { Docs, Method, Methods, Parameter, ResolvedType, Tags, TypeAlias } from '../docs/src/ts/types';
 
 const CLASS_NAME = 'Canvasimo';
-const CWD = process.cwd();
-// tslint:disable-next-line:no-var-requires
-const COMPILER_OPTIONS = require(path.join(CWD, 'tsconfig.json'));
+
+// tslint:disable-next-line:no-bitwise
+const isExported = (flags: ts.ModifierFlags) => (flags & ts.ModifierFlags.Export) !== 0;
+
+// tslint:disable-next-line:no-bitwise
+const isPublic = (flags: ts.ModifierFlags) => (flags & ts.ModifierFlags.Public) !== 0;
+
+const isUnion = (type: ts.TypeNode): type is ts.UnionTypeNode => type.kind === ts.SyntaxKind.UnionType;
 
 const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   const ret: Tags = {};
@@ -20,84 +25,120 @@ const serializeTags = (tags: ts.JSDocTagInfo[]): Tags => {
   return ret;
 };
 
-const getTypeAlias = (type: ts.Type, checker: ts.TypeChecker): string | null => {
-  if (type.aliasSymbol) {
-    const typeAlias = type.aliasSymbol.getDeclarations();
+const resolveTypeNode = (typeNode: ts.TypeNode, checker: ts.TypeChecker): ResolvedType => {
+  if (isUnion(typeNode)) {
+    return typeNode.types.reduce<ResolvedType>(
+      (memo, unionType) => {
+        const resolvedUnionType = resolveTypeNode(unionType, checker);
 
-    if (typeAlias) {
-      return (typeAlias[0] as ts.TypeAliasDeclaration).type.getText();
-    }
+        return {
+          typeAliases: [...memo.typeAliases, ...resolvedUnionType.typeAliases],
+          type: `${memo.type}${memo.type ? ' | ' : ''}${resolvedUnionType.type}`,
+        };
+      },
+      {typeAliases: [], type: ''}
+    );
   }
 
-  return null;
-};
+  const type = checker.getTypeAtLocation(typeNode);
 
-const serializeParameter = (symbol: ts.Symbol, checker: ts.TypeChecker): Parameter => {
-  const name = symbol.getName();
-  const declaration = symbol.valueDeclaration as ts.ParameterDeclaration;
-  const type = checker.getTypeOfSymbolAtLocation(symbol, declaration);
-  const typeName = checker.typeToString(type);
-  const alias = getTypeAlias(type, checker);
+  if (type.aliasSymbol) {
+    const aliasTypeNode = (
+      (type.aliasSymbol.valueDeclaration || type.aliasSymbol.declarations[0]) as ts.TypeAliasDeclaration
+    ).type;
+    const typeName = checker.typeToString(checker.getTypeAtLocation(aliasTypeNode));
+
+    return {
+      typeAliases: [
+        {
+          name: typeName,
+          alias: aliasTypeNode.getText(),
+        },
+      ],
+      type: typeName,
+    };
+  }
 
   return {
-    name: `${declaration.dotDotDotToken ? '...' : ''}${name}`,
-    alias,
-    type: typeName,
-    optional: checker.isOptionalParameter(symbol.valueDeclaration as ts.ParameterDeclaration),
+    typeAliases: [],
+    type: checker.typeToString(type),
   };
 };
 
-const serializeNode = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): Method | null => {
+const serializeProperty = (node: ts.PropertyDeclaration, checker: ts.TypeChecker): Method | null => {
   const symbol = checker.getSymbolAtLocation(node.name);
 
   if (!symbol) {
     return null;
   }
 
+  let typeAliases: ReadonlyArray<TypeAlias> = [];
+
   const name = symbol.getName();
   const description = ts.displayPartsToString(symbol.getDocumentationComment(checker));
   const type = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration as ts.Declaration);
-  const signatures = checker.getSignaturesOfType(type, ts.SignatureKind.Call);
   const tags = serializeTags(symbol.getJsDocTags());
+
+  const signatures = checker.getSignaturesOfType(type, ts.SignatureKind.Call)
+    .map((signature) => {
+      const parameters = signature.parameters.map<Parameter>((param) => {
+        const parameterName = param.getName();
+        const declaration = param.valueDeclaration as ts.ParameterDeclaration;
+        const typeNode = declaration.type;
+        const optional = checker.isOptionalParameter(declaration);
+
+        const parameterType = resolveTypeNode(typeNode as ts.TypeNode, checker);
+
+        typeAliases = [...typeAliases, ...parameterType.typeAliases];
+
+        return {
+          name: `${declaration.dotDotDotToken ? '...' : ''}${parameterName}`,
+          type: parameterType.type,
+          optional,
+        };
+      });
+
+      const returnType = resolveTypeNode(signature.declaration!.type as ts.TypeNode, checker);
+
+      typeAliases = [...typeAliases, ...returnType.typeAliases];
+
+      return {
+        parameters,
+        returns: returnType.type,
+      };
+    });
+
+  const typeAliasesNames = typeAliases.map((typeAlias) => typeAlias.name);
 
   return {
     name,
     description,
     tags,
-    signatures: signatures.map((signature) => {
-      const returnType = checker.getReturnTypeOfSignature(signature);
-      const returnAlias = getTypeAlias(returnType, checker);
-
-      return {
-        parameters: signature.parameters.map((parameter) => serializeParameter(parameter, checker)),
-        returns: {
-          type: checker.typeToString(returnType),
-          alias: returnAlias,
-        },
-      };
+    signatures,
+    typeAliases: typeAliases.filter((typeAlias, index) => {
+      return typeAliasesNames.indexOf(typeAlias.name) === index;
     }),
   };
 };
 
 const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Methods => {
-  const methods: Methods = [];
+  let methods: Methods = [];
 
   const documentProperty = (node: ts.Node) => {
-    const flags = ts.getCombinedModifierFlags(node);
+    const flags = ts.getCombinedModifierFlags(node as ts.Declaration);
 
     if (
       node.kind === ts.SyntaxKind.PropertyDeclaration &&
-      // tslint:disable-next-line:no-bitwise
-      (flags & ts.ModifierFlags.Public) !== 0
+      isPublic(flags)
     ) {
       const initializer = (node as ts.PropertyDeclaration).initializer;
       const name = (node as ts.PropertyDeclaration).name.getText();
 
       if (initializer && initializer.kind === ts.SyntaxKind.ArrowFunction) {
-        const method = serializeNode(node as ts.PropertyDeclaration, checker);
+        const method = serializeProperty(node as ts.PropertyDeclaration, checker);
 
         if (method) {
-          methods.push(method);
+          methods = [...methods, method];
         }
       } else {
         console.error(`Property ${name} is public, but not an arrow function`);
@@ -106,12 +147,12 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   };
 
   const traverse = (node: ts.Node) => {
-    const flags = ts.getCombinedModifierFlags(node);
+    const flags = ts.getCombinedModifierFlags(node as ts.Declaration);
+
     if (
       node.kind === ts.SyntaxKind.ClassDeclaration &&
       (node as ts.ClassDeclaration).name && (node as ts.ClassDeclaration).name!.text === CLASS_NAME &&
-      // tslint:disable-next-line:no-bitwise
-      (flags & ts.ModifierFlags.Export) !== 0
+      isExported(flags)
     ) {
       ts.forEachChild(node, documentProperty);
     } else {
@@ -126,46 +167,13 @@ const getMethods = (sourceFiles: ts.SourceFile[], checker: ts.TypeChecker): Meth
   return methods;
 };
 
-const getMethodWithTypeAliases = ({name, description, tags: { alias }, signatures}: Method): GroupedMethod => {
-  const foundTypeAliases: string[] = [];
-  const typeAliases: TypeAlias[] = [];
-
-  signatures.forEach((signature) => {
-    signature.parameters.forEach((parameter) => {
-      if (parameter.alias && foundTypeAliases.indexOf(parameter.type) < 0) {
-        foundTypeAliases.push(parameter.type);
-        typeAliases.push({
-          name: parameter.type,
-          alias: parameter.alias,
-        });
-      }
-    });
-
-    if (signature.returns.alias && foundTypeAliases.indexOf(signature.returns.type) < 0) {
-      foundTypeAliases.push(signature.returns.type);
-      typeAliases.push({
-        name: signature.returns.type,
-        alias: signature.returns.alias,
-      });
-    }
-  });
-
-  return {
-    name,
-    description,
-    alias,
-    signatures,
-    typeAliases,
-  };
-};
-
 const groupMethods = (methods: Methods): Docs => {
+  let docs: Docs = [];
   const foundGroups: string[] = [];
   const foundAliases: string[] = [];
-  const docs: Docs = [];
 
   for (const method of methods) {
-    const { description, name, tags } = method;
+    const { description, name, tags, signatures, typeAliases } = method;
     const aliasIndex = foundAliases.indexOf(name);
 
     if (aliasIndex >= 0) {
@@ -195,16 +203,28 @@ const groupMethods = (methods: Methods): Docs => {
       } else {
         groupIndex = foundGroups.length;
         foundGroups.push(group);
-        docs.push({
-          name: group,
-          description: groupDescription,
-          methods: [],
-        });
+        docs = [
+          ...docs,
+          {
+            name: group,
+            description: groupDescription,
+            methods: [],
+          },
+        ];
       }
     }
 
     if (groupIndex >= 0 && groupIndex < foundGroups.length) {
-      docs[groupIndex].methods.push(getMethodWithTypeAliases(method));
+      docs[groupIndex].methods = [
+        ...docs[groupIndex].methods,
+        {
+          name,
+          description,
+          alias: alias || null,
+          signatures,
+          typeAliases,
+        },
+      ];
     }
   }
 
@@ -213,7 +233,9 @@ const groupMethods = (methods: Methods): Docs => {
 
 const getDocJson = (): Docs => {
   const sourceFileNames = glob.sync('src/**/*.{js,jsx,ts,tsx}');
-  const program = ts.createProgram(sourceFileNames, COMPILER_OPTIONS);
+  const json = ts.readConfigFile(path.join(process.cwd(), 'tsconfig.json'), ts.sys.readFile);
+  const compilerOptions = ts.parseJsonConfigFileContent(json.config, ts.sys, process.cwd()).options;
+  const program = ts.createProgram(sourceFileNames, compilerOptions);
   const sourceFiles = program.getSourceFiles();
   const checker = program.getTypeChecker();
   const methods = getMethods([...sourceFiles], checker);

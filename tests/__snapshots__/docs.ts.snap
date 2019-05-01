@@ -12,92 +12,70 @@ Array [
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "HTMLCanvasElement",
-            },
+            "returns": "HTMLCanvasElement",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the canvas pixel density.",
         "name": "setDensity",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "density",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the canvas pixel density.",
         "name": "getDensity",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the canvas dimensions.",
         "name": "setSize",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "{
-  width: number;
-  height: number;
-}",
                 "name": "size",
                 "optional": false,
                 "type": "Size",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -111,19 +89,13 @@ Array [
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the canvas dimensions.",
         "name": "getSize",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "{
-  width: number;
-  height: number;
-}",
-              "type": "Size",
-            },
+            "returns": "Size",
           },
         ],
         "typeAliases": Array [
@@ -137,90 +109,73 @@ Array [
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the canvas width.",
         "name": "setWidth",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the canvas width.",
         "name": "getWidth",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the canvas height.",
         "name": "setHeight",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the canvas height.",
         "name": "getHeight",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the canvas size & position on screen.",
         "name": "getBoundingClientRect",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "ClientRect",
-            },
+            "returns": "ClientRect",
           },
         ],
         "typeAliases": Array [],
@@ -232,88 +187,74 @@ Array [
     "description": "'A collection of methods for retrieving a canvas context or information about the context.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the standard canvas context (used for drawing).",
         "name": "getContext",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "type",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": "Canvas2DContextAttributes | WebGLContextAttributes",
                 "name": "contextAttributes",
                 "optional": true,
                 "type": "CanvasContextAttributes",
               },
             ],
-            "returns": Object {
-              "alias": "CanvasRenderingContext2D | WebGLRenderingContext | null",
-              "type": "CanvasContext",
-            },
+            "returns": "CanvasContext | null",
           },
         ],
         "typeAliases": Array [
           Object {
-            "alias": "Canvas2DContextAttributes | WebGLContextAttributes",
+            "alias": "CanvasRenderingContext2DSettings | WebGLContextAttributes",
             "name": "CanvasContextAttributes",
           },
           Object {
-            "alias": "CanvasRenderingContext2D | WebGLRenderingContext | null",
+            "alias": "CanvasRenderingContext2D | WebGLRenderingContext",
             "name": "CanvasContext",
           },
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get canvas context used by Canvasimo (2d).",
         "name": "getCurrentContext",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "CanvasRenderingContext2D",
-            },
+            "returns": "CanvasRenderingContext2D",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the context type used by Canvasimo ('2d', 'webgl', etc).",
         "name": "getCurrentContextType",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "\\"2d\\"",
-            },
+            "returns": "\\"2d\\"",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the context attributes used.",
         "name": "getContextAttributes",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "Canvas2DContextAttributes | WebGLContextAttributes",
-              "type": "CanvasContextAttributes",
-            },
+            "returns": "CanvasContextAttributes | null",
           },
         ],
         "typeAliases": Array [
           Object {
-            "alias": "Canvas2DContextAttributes | WebGLContextAttributes",
+            "alias": "CanvasRenderingContext2DSettings | WebGLContextAttributes",
             "name": "CanvasContextAttributes",
           },
         ],
@@ -333,994 +274,880 @@ those that create a new shape when invoked, and are self closing.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a rectangle and apply a stroke to it.",
         "name": "strokeRect",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a rectangle and apply a fill to it.",
         "name": "fillRect",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a rounded rectangle that can then have a fill or stroke applied to it.",
         "name": "plotRoundedRect",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a rounded rectangle and apply a stroke to it.",
         "name": "strokeRoundedRect",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a rounded rectangle and apply a fill to it.",
         "name": "fillRoundedRect",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a circle that can then have a stroke or fill applied to it.",
         "name": "plotCircle",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a circle and apply a stroke to it.",
         "name": "strokeCircle",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a circle and apply a fill to it.",
         "name": "fillCircle",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a polygon that can then have a stroke or fill applied to it.",
         "name": "plotPoly",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a polygon and apply a stoke to it.",
         "name": "strokePoly",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a polygon and apply a fill to it.",
         "name": "fillPoly",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a star that can then have a stroke or fill applied to it.",
         "name": "plotStar",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a star and apply a stoke to it.",
         "name": "strokeStar",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a star and apply a fill to it.",
         "name": "fillStar",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a burst that can then have a stroke or fill applied to it.",
         "name": "plotBurst",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a burst and apply a stoke to it.",
         "name": "strokeBurst",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a burst and apply a fill to it.",
         "name": "fillBurst",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sides",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a single pixel that can then have a stroke or fill applied to it.",
         "name": "plotPixel",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a single pixel and apply a stroke to it.",
         "name": "strokePixel",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a single pixel and apply a fill to it.",
         "name": "fillPixel",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a closed path that can then have a stroke or fill applied to it.",
         "name": "plotClosedPath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "name": "points",
                 "optional": false,
                 "type": "Points",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -1331,29 +1158,24 @@ those that create a new shape when invoked, and are self closing.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a closed path and apply a stroke to it.",
         "name": "strokeClosedPath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "name": "points",
                 "optional": false,
                 "type": "Points",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -1364,29 +1186,24 @@ those that create a new shape when invoked, and are self closing.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a closed path and apply a fill to it.",
         "name": "fillClosedPath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "name": "points",
                 "optional": false,
                 "type": "Points",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -1404,195 +1221,161 @@ those that create a new shape when invoked, and are self closing.",
 those that create a new shape when invoked, but are not self closing.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a line that can then have a stroke or fill applied to it.",
         "name": "plotLine",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y2",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a line and apply a stroke to it.",
         "name": "strokeLine",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a line, by length & angle, that can then have a stroke or fill applied to it.",
         "name": "plotLength",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "length",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "angle",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a line, by length & angle, and apply a stroke to it.",
         "name": "strokeLength",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "length",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "angle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a path, that is not self closing, that can have a stroke or fill applied to it.",
         "name": "plotPath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "name": "points",
                 "optional": false,
                 "type": "Points",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -1603,29 +1386,24 @@ those that create a new shape when invoked, but are not self closing.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a path, that is not self closing, and apply a stroke to it.",
         "name": "strokePath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "name": "points",
                 "optional": false,
                 "type": "Points",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -1636,29 +1414,24 @@ those that create a new shape when invoked, but are not self closing.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot a path, that is not self closing, and apply a fill to it.",
         "name": "fillPath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "Array<{x: number, y: number}> | Array<[number, number]> | number[]",
                 "name": "points",
                 "optional": false,
                 "type": "Points",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -1683,165 +1456,151 @@ shapes that can be connected to create more complex shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "startAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "endAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot an arc and apply a stroke to it.",
         "name": "strokeArc",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "startAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "endAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot an arc and apply a fill to it.",
         "name": "fillArc",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "startAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "endAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
         "alias": "ellipse",
@@ -1851,201 +1610,181 @@ shapes that can be connected to create more complex shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radiusX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radiusY",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "rotation",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "startAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "endAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot an ellipse and apply a stroke to it.",
         "name": "strokeEllipse",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radiusX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radiusY",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "rotation",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "startAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "endAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Plot an ellipse and apply a fill to it.",
         "name": "fillEllipse",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radiusX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radiusY",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "rotation",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "startAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "endAngle",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "anticlockwise",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
     ],
     "name": "Paths",
@@ -2055,99 +1794,93 @@ shapes that can be connected to create more complex shapes.",
 and getting and setting properties related to text rendering.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw a text with a stroke.",
         "name": "strokeText",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "text",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "maxWidth",
                 "optional": true,
-                "type": "number",
+                "type": "MaxWidth",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "number | undefined | null",
+            "name": "MaxWidth",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw a text with a fill.",
         "name": "fillText",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "text",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "maxWidth",
                 "optional": true,
-                "type": "number",
+                "type": "MaxWidth",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "number | undefined | null",
+            "name": "MaxWidth",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw text with a stroke, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
 If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
 Words will not break by default (normal) and therefore may overflow.
@@ -2158,55 +1891,49 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "text",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "maxWidth",
                 "optional": true,
-                "type": "number",
+                "type": "MaxWidth",
               },
               Object {
-                "alias": "'normal' | 'break-word' | 'break-all'",
                 "name": "wordBreak",
                 "optional": true,
                 "type": "WordBreak",
               },
               Object {
-                "alias": null,
                 "name": "lineHeight",
                 "optional": true,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
+          Object {
+            "alias": "number | undefined | null",
+            "name": "MaxWidth",
+          },
           Object {
             "alias": "'normal' | 'break-word' | 'break-all'",
             "name": "WordBreak",
@@ -2214,7 +1941,7 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw text with a fill, wrapped at newlines and automatically wrapped if the text exceeds the maxWidth.
 If no maxWidth is specified text will only wrap at newlines (wordBreak is ignore).
 Words will not break by default (normal) and therefore may overflow.
@@ -2225,55 +1952,49 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "text",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "maxWidth",
                 "optional": true,
-                "type": "number",
+                "type": "MaxWidth",
               },
               Object {
-                "alias": "'normal' | 'break-word' | 'break-all'",
                 "name": "wordBreak",
                 "optional": true,
                 "type": "WordBreak",
               },
               Object {
-                "alias": null,
                 "name": "lineHeight",
                 "optional": true,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
+          Object {
+            "alias": "number | undefined | null",
+            "name": "MaxWidth",
+          },
           Object {
             "alias": "'normal' | 'break-word' | 'break-all'",
             "name": "WordBreak",
@@ -2288,38 +2009,30 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "text",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "TextMetrics",
-            },
+            "returns": "TextMetrics",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the horizontal text alignment.",
         "name": "setTextAlign",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "'left' | 'right' | 'center' | 'start' | 'end'",
                 "name": "value",
                 "optional": false,
                 "type": "TextAlign",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -2330,16 +2043,13 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the horizontal text alignment.",
         "name": "getTextAlign",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "'left' | 'right' | 'center' | 'start' | 'end'",
-              "type": "TextAlign",
-            },
+            "returns": "TextAlign",
           },
         ],
         "typeAliases": Array [
@@ -2350,23 +2060,19 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the vertical text alignment.",
         "name": "setTextBaseline",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'",
                 "name": "value",
                 "optional": false,
                 "type": "TextBaseline",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -2377,16 +2083,13 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the vertical text alignment.",
         "name": "getTextBaseline",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'",
-              "type": "TextBaseline",
-            },
+            "returns": "TextBaseline",
           },
         ],
         "typeAliases": Array [
@@ -2403,228 +2106,186 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
     "description": "A collection of methods for getting and setting font styles and variations.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the font to use.",
         "name": "setFont",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "font",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the font that is being used.
 This returns the exact CanvasRenderingContext2D.font string.",
         "name": "getFont",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the font family to use.",
         "name": "setFontFamily",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "family",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the font that is being used.",
         "name": "getFontFamily",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string | null",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the font size to use.",
         "name": "setFontSize",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "size",
                 "optional": false,
                 "type": "string | number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the font size that is being used.
 Returns null if using a special font e.g. caption, icon, menu.",
         "name": "getFontSize",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number | null",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the font style to use.",
         "name": "setFontStyle",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "style",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the font style that is being used.
 Returns null if using a special font e.g. caption, icon, menu.",
         "name": "getFontStyle",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string | null",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the font variant to use.",
         "name": "setFontVariant",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "variant",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the font variant that is being used.
 Returns null if using a special font e.g. caption, icon, menu.",
         "name": "getFontVariant",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string | null",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the font weight to use.",
         "name": "setFontWeight",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "weight",
                 "optional": false,
                 "type": "string | number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the font weight that is being used.
 Returns null if using a special font e.g. caption, icon, menu.",
         "name": "getFontWeight",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "string | number",
-            },
+            "returns": "string | number | null",
           },
         ],
         "typeAliases": Array [],
@@ -2637,57 +2298,44 @@ Returns null if using a special font e.g. caption, icon, menu.",
 and applying strokes to existing shapes.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Apply a stroke to the current shape.",
         "name": "stroke",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "path",
                 "optional": true,
                 "type": "Path2D",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "path",
                 "optional": false,
                 "type": "Path2D",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -2700,16 +2348,12 @@ and applying strokes to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": "string | CanvasGradient | CanvasPattern",
                 "name": "value",
                 "optional": false,
                 "type": "FillOrStrokeStyle",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -2726,10 +2370,7 @@ and applying strokes to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "string | CanvasGradient | CanvasPattern",
-              "type": "FillOrStrokeStyle",
-            },
+            "returns": "FillOrStrokeStyle",
           },
         ],
         "typeAliases": Array [
@@ -2747,16 +2388,12 @@ and applying strokes to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": "'butt' | 'round' | 'square'",
                 "name": "value",
                 "optional": false,
                 "type": "LineCap",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -2773,10 +2410,7 @@ and applying strokes to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "'butt' | 'round' | 'square'",
-              "type": "LineCap",
-            },
+            "returns": "LineCap",
           },
         ],
         "typeAliases": Array [
@@ -2794,16 +2428,12 @@ and applying strokes to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "segments",
                 "optional": false,
                 "type": "number[]",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -2815,10 +2445,7 @@ and applying strokes to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number[]",
-            },
+            "returns": "number[]",
           },
         ],
         "typeAliases": Array [],
@@ -2831,16 +2458,12 @@ and applying strokes to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -2852,10 +2475,7 @@ and applying strokes to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
@@ -2868,16 +2488,12 @@ and applying strokes to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": "'bevel' | 'round' | 'miter'",
                 "name": "value",
                 "optional": false,
                 "type": "LineJoin",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -2894,10 +2510,7 @@ and applying strokes to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "'bevel' | 'round' | 'miter'",
-              "type": "LineJoin",
-            },
+            "returns": "LineJoin",
           },
         ],
         "typeAliases": Array [
@@ -2915,16 +2528,12 @@ and applying strokes to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -2936,47 +2545,37 @@ and applying strokes to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the miter limit to use.",
         "name": "setMiterLimit",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the miter limit that is being used.",
         "name": "getMiterLimit",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
@@ -2989,57 +2588,44 @@ and applying strokes to existing shapes.",
 and applying fills to existing shapes.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Apply a fill to the current shape.",
         "name": "fill",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": "'nonzero' | 'evenodd'",
                 "name": "fillRule",
                 "optional": true,
                 "type": "FillRule",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": "'nonzero' | 'evenodd'",
                 "name": "fillRule",
                 "optional": false,
                 "type": "FillRule",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -3050,78 +2636,64 @@ and applying fills to existing shapes.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Apply a fill to the entire canvas area.",
         "name": "fillCanvas",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": true,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Clear the entire canvas area",
         "name": "clearCanvas",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Clear a rectangular area of the canvas.",
         "name": "clearRect",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -3134,16 +2706,12 @@ and applying fills to existing shapes.",
           Object {
             "parameters": Array [
               Object {
-                "alias": "string | CanvasGradient | CanvasPattern",
                 "name": "value",
                 "optional": false,
                 "type": "FillOrStrokeStyle",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -3160,10 +2728,7 @@ and applying fills to existing shapes.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "string | CanvasGradient | CanvasPattern",
-              "type": "FillOrStrokeStyle",
-            },
+            "returns": "FillOrStrokeStyle",
           },
         ],
         "typeAliases": Array [
@@ -3174,127 +2739,106 @@ and applying fills to existing shapes.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create a linear gradient to use as a fill.",
         "name": "createLinearGradient",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x0",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y0",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "CanvasGradient",
-            },
+            "returns": "CanvasGradient",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create a radial gradient to use as a fill.",
         "name": "createRadialGradient",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x0",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y0",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "r0",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "r1",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "CanvasGradient",
-            },
+            "returns": "CanvasGradient",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create a pattern to be used as a fill.",
         "name": "createPattern",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "image",
                 "optional": false,
-                "type": "HTMLCanvasElement | HTMLImageElement | HTMLVideoElement",
+                "type": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement",
               },
               Object {
-                "alias": null,
                 "name": "repetition",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "CanvasPattern",
-            },
+            "returns": "CanvasPattern | null",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw an image to the canvas.
 If the second position / size arguments are supplied, the first will be used for cropping the image,
 and the second for the position and size it will be drawn.",
@@ -3303,128 +2847,102 @@ and the second for the position and size it will be drawn.",
           Object {
             "parameters": Array [
               Object {
-                "alias": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap",
                 "name": "image",
                 "optional": false,
                 "type": "ImageLike",
               },
               Object {
-                "alias": null,
                 "name": "dstX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstY",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap",
                 "name": "image",
                 "optional": false,
                 "type": "ImageLike",
               },
               Object {
-                "alias": null,
                 "name": "dstX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstY",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstW",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstH",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": "HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap",
                 "name": "image",
                 "optional": false,
                 "type": "ImageLike",
               },
               Object {
-                "alias": null,
                 "name": "srcX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "srcY",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "srcW",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "srcH",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstX",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstY",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstW",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dstH",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -3441,35 +2959,30 @@ and the second for the position and size it will be drawn.",
     "description": "A collection of methods for creating, putting, or getting image data about the canvas.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get a data URL of the current canvas state.",
         "name": "getDataURL",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "type",
                 "optional": true,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "...args",
                 "optional": false,
                 "type": "any[]",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create image data with either the width and height specified,
 or with the width and height of a the image data supplied.",
         "name": "createImageData",
@@ -3477,190 +2990,174 @@ or with the width and height of a the image data supplied.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "width",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "height",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "ImageData",
-            },
+            "returns": "ImageData",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "ImageData",
                 "optional": false,
                 "type": "ImageData",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "ImageData",
-            },
+            "returns": "ImageData",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the image data from an area of the canvas.",
         "name": "getImageData",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "sx",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sy",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sw",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "sh",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "ImageData",
-            },
+            "returns": "ImageData",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw image data onto the canvas.",
         "name": "putImageData",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "imagedata",
                 "optional": false,
                 "type": "ImageData",
               },
               Object {
-                "alias": null,
                 "name": "dx",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
+                "name": "dy",
+                "optional": false,
+                "type": "number",
+              },
+            ],
+            "returns": "Canvasimo",
+          },
+          Object {
+            "parameters": Array [
+              Object {
+                "name": "imagedata",
+                "optional": false,
+                "type": "ImageData",
+              },
+              Object {
+                "name": "dx",
+                "optional": false,
+                "type": "number",
+              },
+              Object {
                 "name": "dy",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dirtyX",
-                "optional": true,
+                "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dirtyY",
-                "optional": true,
+                "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dirtyWidth",
-                "optional": true,
+                "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dirtyHeight",
-                "optional": true,
+                "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get image data about a specific pixel.",
         "name": "getPixelData",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Uint8ClampedArray",
-            },
+            "returns": "Uint8ClampedArray",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the color of a specific pixel.",
         "name": "getPixelColor",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
@@ -3672,193 +3169,159 @@ or with the width and height of a the image data supplied.",
     "description": "A collection of methods to help with creating color strings.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create an HSL color string from the given values.",
         "name": "createHSL",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "h",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "s",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "l",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create an HSLA color string from the given values.",
         "name": "createHSLA",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "h",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "s",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "l",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "a",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create an RGB color string from the given values.",
         "name": "createRGB",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "r",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "g",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "b",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Create an RGBA color string from the given values.",
         "name": "createRGBA",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "r",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "g",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "b",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "a",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Return an HSL color string from the given HSLA color string.",
         "name": "getHSLFromHSLA",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Return an RGB color string from the given RGBA color string.",
         "name": "getRGBFromRGBA",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "color",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
@@ -3870,51 +3333,43 @@ or with the width and height of a the image data supplied.",
     "description": "A collection of methods to help with calculating and converting sizes, and distances.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get a fraction from the provided percent value e.g. 80 returns 0.8.",
         "name": "getFractionFromPercent",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "percent",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get a percent from the provided fraction value e.g. 0.7 returns 70.",
         "name": "getPercentFromFraction",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "fraction",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns the actual value of a fraction of the canvas width e.g.
 a canvas with a width of 200 returns 100 if the provided value is 0.5.",
         "name": "getFractionOfWidth",
@@ -3922,22 +3377,18 @@ a canvas with a width of 200 returns 100 if the provided value is 0.5.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "fraction",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns the actual value of a fraction of the canvas height e.g.
 a canvas with a height of 100 returns 20 if the provided value is 0.2.",
         "name": "getFractionOfHeight",
@@ -3945,22 +3396,18 @@ a canvas with a height of 100 returns 20 if the provided value is 0.2.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "fraction",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns the actual value of a percentage of the canvas width e.g.
 a canvas with a width of 200 returns 100 if the provided value is 50.",
         "name": "getPercentOfWidth",
@@ -3968,22 +3415,18 @@ a canvas with a width of 200 returns 100 if the provided value is 50.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "percent",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns the actual value of a percentage of the canvas height e.g.
 a canvas with a height of 100 returns 20 if the provided value is 20.",
         "name": "getPercentOfHeight",
@@ -3991,56 +3434,45 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "percent",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns the distance between 2 points.",
         "name": "getDistance",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y2",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
@@ -4052,129 +3484,105 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
     "description": "A collection of methods to help with calculating and converting angles.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get a radian value from the provided degrees e.g. 90 returns 1.5708.",
         "name": "getRadiansFromDegrees",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "degrees",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get a degree value from the provided radians e.g. 3.14159 returns 180.",
         "name": "getDegreesFromRadians",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "radians",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the angle (in radians) between 2 or 3 points.",
         "name": "getAngle",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y2",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x3",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y3",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
@@ -4186,225 +3594,185 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
     "description": "A collection of methods for path drawing.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Begin a new path (shape).",
         "name": "beginPath",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Close the current path (shape).",
         "name": "closePath",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Move the starting point of a the next sub-path.",
         "name": "moveTo",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Connect the last point to the provided coordinates.",
         "name": "lineTo",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Arc from one point to another.",
         "name": "arcTo",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y1",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y2",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "radius",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Connect the last point to the provided coordinates with a bezier curve (2 control points).",
         "name": "bezierCurveTo",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "cp1x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "cp1y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "cp2x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "cp2y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Connect the last point to the provided coordinates with a quadratic curve (1 control point).",
         "name": "quadraticCurveTo",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "cpx",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "cpy",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -4416,250 +3784,205 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
     "description": "A collection of methods to save, restore, or transform the canvas state.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Push the current state of the canvas into a stack that can later be restored.",
         "name": "save",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Restore the most recent state of the canvas that was saved.",
         "name": "restore",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Add rotation (in radians) to the transform matrix so that shapes can be drawn at an angle.",
         "name": "rotate",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "angle",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Scale the transform matrix so that shapes can be drawn at the provided scale.",
         "name": "scale",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Move the canvas origin.",
         "name": "translate",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Multiply the current transformation with the provided matrix.",
         "name": "transform",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "m11",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "m12",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "m21",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "m22",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dx",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dy",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Replace the current transformation with the provided matrix.",
         "name": "setTransform",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "m11",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "m12",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "m21",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "m22",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dx",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "dy",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Replace the current transformation with the default matrix: [1, 0, 0, 1, 0, 0].",
         "name": "resetTransform",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Use the current path as a clipping path.",
         "name": "clip",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": "'nonzero' | 'evenodd'",
-                "name": "fillRules",
+                "name": "fillRule",
                 "optional": true,
                 "type": "FillRule",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -4677,16 +4000,12 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
@@ -4698,10 +4017,7 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
@@ -4714,16 +4030,12 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
           Object {
             "parameters": Array [
               Object {
-                "alias": "'source-over' | 'source-in' | 'source-out' | 'source-atop' | 'destination-over' | 'destination-in' | 'destination-out' | 'destination-atop' | 'lighter' | 'copy' | 'xor' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity'",
                 "name": "value",
                 "optional": false,
                 "type": "GlobalCompositeOperation",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [
@@ -4740,10 +4052,7 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": "'source-over' | 'source-in' | 'source-out' | 'source-atop' | 'destination-over' | 'destination-in' | 'destination-out' | 'destination-atop' | 'lighter' | 'copy' | 'xor' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity'",
-              "type": "GlobalCompositeOperation",
-            },
+            "returns": "GlobalCompositeOperation",
           },
         ],
         "typeAliases": Array [
@@ -4754,186 +4063,156 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set whether image smoothing should be used.",
         "name": "setImageSmoothingEnabled",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get whether image smoothing is being used.",
         "name": "getImageSmoothingEnabled",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "boolean",
-            },
+            "returns": "boolean",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set how blurry shadows are.",
         "name": "setShadowBlur",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the value of how blurry shadows are.",
         "name": "getShadowBlur",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set the color to be used for shadows.",
         "name": "setShadowColor",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "string",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the color being used for shadows.",
         "name": "getShadowColor",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set how horizontally offset shadows should be.",
         "name": "setShadowOffsetX",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the value of how horizontally offset shadows should be.",
         "name": "getShadowOffsetX",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Set how vertically offset shadows should be.",
         "name": "setShadowOffsetY",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Get the value of how vertically offset shadows should be.",
         "name": "getShadowOffsetY",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
@@ -4945,29 +4224,25 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
     "description": "Miscellaneous methods.",
     "methods": Array [
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Break out of the method chain and execute a callback.",
         "name": "tap",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "() => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Break out of the method chain and execute a callback with values between start and end,
 increasing / decreasing by step (start defaults to 0, step defaults to 1).
 You may return false from the callback at any point to stop at the current iteration.",
@@ -4976,86 +4251,68 @@ You may return false from the callback at any point to stop at the current itera
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "end",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "(i: number) => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "start",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "end",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "(i: number) => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "start",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "end",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "step",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "(i: number) => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Break out of the method chain and loop over the given array, object or string,
 calling the callback with the value & key / index.
 You may return false from the callback at any point to stop at the current iteration.",
@@ -5064,148 +4321,119 @@ You may return false from the callback at any point to stop at the current itera
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "str",
                 "optional": false,
                 "type": "string",
               },
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "(value: string, index: number) => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "obj",
                 "optional": false,
                 "type": "any[]",
               },
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "(value: any, index: number) => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "obj",
                 "optional": false,
                 "type": "{ [i: string]: any; }",
               },
               Object {
-                "alias": null,
                 "name": "callback",
                 "optional": false,
                 "type": "(value: any, key: string) => any",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Constrain a number between a minimum and maximum value.",
         "name": "constrain",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "min",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "max",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Map a value from one range to another e.g. mapping 0.5 from 0-1 to 0-10 returns 5.",
         "name": "map",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "value",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "fromStart",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "fromEnd",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "toStart",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "toEnd",
                 "optional": false,
                 "type": "number",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "number",
-            },
+            "returns": "number",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Draw a focus ring around the current path, or the path supplied,
 if the element supplied has focus.",
         "name": "drawFocusIfNeeded",
@@ -5213,50 +4441,40 @@ if the element supplied has focus.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "element",
                 "optional": false,
                 "type": "Element",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "Canvasimo",
-            },
+            "returns": "Canvasimo",
           },
         ],
         "typeAliases": Array [],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns whether the given point is within the current or given path.",
         "name": "isPointInPath",
         "signatures": Array [
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "x",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": null,
                 "name": "y",
                 "optional": false,
                 "type": "number",
               },
               Object {
-                "alias": "'nonzero' | 'evenodd'",
                 "name": "fillRule",
                 "optional": true,
                 "type": "FillRule",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "boolean",
-            },
+            "returns": "boolean",
           },
         ],
         "typeAliases": Array [
@@ -5267,17 +4485,14 @@ if the element supplied has focus.",
         ],
       },
       Object {
-        "alias": undefined,
+        "alias": null,
         "description": "Returns whether the given point is within the area contained by applying
 a stroke to the current or given path.",
         "name": "isPointInStroke",
         "signatures": Array [
           Object {
             "parameters": Array [],
-            "returns": Object {
-              "alias": null,
-              "type": "boolean",
-            },
+            "returns": "boolean | null",
           },
         ],
         "typeAliases": Array [],
@@ -5290,19 +4505,20 @@ a stroke to the current or given path.",
           Object {
             "parameters": Array [
               Object {
-                "alias": null,
                 "name": "logInfo",
                 "optional": true,
-                "type": "boolean",
+                "type": "BooleanFalsy",
               },
             ],
-            "returns": Object {
-              "alias": null,
-              "type": "string",
-            },
+            "returns": "string",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "boolean | undefined | null",
+            "name": "BooleanFalsy",
+          },
+        ],
       },
     ],
     "name": "Misc",
