@@ -545,7 +545,7 @@ describe('canvasimo', () => {
   describe('plot path', () => {
 
     it('should accept and plot valid point arrays', () => {
-      const context = canvas.getCurrentContext() as CanvasRenderingContext2D;
+      const context = canvas.getCurrentContext();
       const moveToSpy = jest.spyOn(context, 'moveTo');
       const lineToSpy = jest.spyOn(context, 'lineTo');
 
