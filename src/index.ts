@@ -66,7 +66,7 @@ export class Canvasimo {
     }
 
     this.ctx = ctx;
-    this.ctx.font = formatFont(ctx.font, this.density, true);
+    this.ctx.font = formatFont(this.ctx.font, this.density, true);
   }
 
   /**
@@ -1246,8 +1246,10 @@ export class Canvasimo {
    * Clear the entire canvas area
    */
   public clearCanvas = (): Canvasimo => {
-    return this
-      .setWidth(this.getWidth());
+    // Ensure densities are retained
+    const currentDensity = this.density;
+    this.density = 1;
+    return this.setWidth(this.getWidth()).setDensity(currentDensity);
   }
   /**
    * Clear a rectangular area of the canvas.
