@@ -16,6 +16,7 @@ const PRIVATE_PROPERTIES = [
   'wrapBreakWord',
   'wrapNormal',
   'textMultiline',
+  'resetDensityRelatedValues',
 ];
 
 describe('getDocJson', () => {

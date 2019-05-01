@@ -87,38 +87,7 @@ export class Canvasimo {
   public setDensity = (density: number): Canvasimo => {
     const prevDensity = this.density;
 
-    const {
-      width: prevWidth,
-      height: prevHeight,
-    } = this.getSize();
-    const prevFontSize = this.getFontSize();
-    const prevLineDash = this.getLineDash();
-    const prevLineDashOffset = this.getLineDashOffset();
-    const prevLineWidth = this.getLineWidth();
-    const prevMiterLimit = this.getMiterLimit();
-    const prevShadowBlur = this.getShadowBlur();
-    const prevShadowOffsetX = this.getShadowOffsetX();
-    const prevShadowOffsetY = this.getShadowOffsetY();
-
-    this.density = density;
-
-    if (prevDensity !== density) {
-      this.setSize(prevWidth, prevHeight);
-
-      if (typeof prevFontSize === 'number') {
-        this.setFontSize(prevFontSize);
-      }
-
-      this.setLineDash(prevLineDash);
-      this.setLineDashOffset(prevLineDashOffset);
-      this.setLineWidth(prevLineWidth);
-      this.setMiterLimit(prevMiterLimit);
-      this.setShadowBlur(prevShadowBlur);
-      this.setShadowOffsetX(prevShadowOffsetX);
-      this.setShadowOffsetY(prevShadowOffsetY);
-    }
-
-    return this;
+    return this.resetDensityRelatedValues(prevDensity, density, true);
   }
   /**
    * Get the canvas pixel density.
@@ -1247,10 +1216,9 @@ export class Canvasimo {
    * Clear the entire canvas area
    */
   public clearCanvas = (): Canvasimo => {
+    this.setWidth(this.getWidth());
     // Ensure densities are retained
-    const currentDensity = this.density;
-    this.density = DEFAULT_DENSITY;
-    return this.setWidth(this.getWidth()).setDensity(currentDensity);
+    return this.resetDensityRelatedValues(DEFAULT_DENSITY, this.density, false);
   }
   /**
    * Clear a rectangular area of the canvas.
@@ -2072,6 +2040,45 @@ export class Canvasimo {
       const lines = text.split('\n').map((subText) => this.wrapNormal(subText, maxWidth).join('\n'));
       return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     }
+  }
+  private resetDensityRelatedValues = (prevDensity: number, density: number, setSize: boolean): Canvasimo => {
+    this.density = prevDensity;
+
+    const {
+      width: prevWidth,
+      height: prevHeight,
+    } = this.getSize();
+
+    const prevFontSize = this.getFontSize();
+    const prevLineDash = this.getLineDash();
+    const prevLineDashOffset = this.getLineDashOffset();
+    const prevLineWidth = this.getLineWidth();
+    const prevMiterLimit = this.getMiterLimit();
+    const prevShadowBlur = this.getShadowBlur();
+    const prevShadowOffsetX = this.getShadowOffsetX();
+    const prevShadowOffsetY = this.getShadowOffsetY();
+
+    this.density = density;
+
+    if (prevDensity !== density) {
+      if (setSize) {
+        this.setSize(prevWidth, prevHeight);
+      }
+
+      if (typeof prevFontSize === 'number') {
+        this.setFontSize(prevFontSize);
+      }
+
+      this.setLineDash(prevLineDash);
+      this.setLineDashOffset(prevLineDashOffset);
+      this.setLineWidth(prevLineWidth);
+      this.setMiterLimit(prevMiterLimit);
+      this.setShadowBlur(prevShadowBlur);
+      this.setShadowOffsetX(prevShadowOffsetX);
+      this.setShadowOffsetY(prevShadowOffsetY);
+    }
+
+    return this;
   }
 }
 
