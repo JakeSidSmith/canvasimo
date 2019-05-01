@@ -32,6 +32,7 @@ export const INCORRECT_GET_ANGLE_ARGUMENTS = 'Incorrect number of arguments supp
  'Arguments must be [x1, y1, x2, y2] or [x1, y1, x2, y2, x3, y3].';
 
 export const DEFAULT_FONT = ['normal', 'normal', 'normal', '10px', 'sans-serif'];
+export const DEFAULT_DENSITY = 1;
 
 export const MATCHES_SPECIAL_FILL = /^(nonzero|evenodd)$/i;
 export const MATCHES_NORMAL = /^(normal)$/i;

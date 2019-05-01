@@ -2,6 +2,7 @@
 const { version: VERSION } = require('../package.json');
 import {
   CONTEXT_TYPE,
+  DEFAULT_DENSITY,
   DEFAULT_FONT,
   IMAGE_SMOOTHING_KEYS,
   INCORRECT_GET_ANGLE_ARGUMENTS,
@@ -55,7 +56,7 @@ export class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
-  private density: number = 1;
+  private density: number = DEFAULT_DENSITY;
 
   public constructor (element: HTMLCanvasElement) {
     this.element = element;
@@ -1248,7 +1249,7 @@ export class Canvasimo {
   public clearCanvas = (): Canvasimo => {
     // Ensure densities are retained
     const currentDensity = this.density;
-    this.density = 1;
+    this.density = DEFAULT_DENSITY;
     return this.setWidth(this.getWidth()).setDensity(currentDensity);
   }
   /**

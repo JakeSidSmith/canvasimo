@@ -55,12 +55,8 @@ describe('inspect', () => {
           if (property.initializer.kind === ts.SyntaxKind.Identifier) {
             if (name === 'ctxType') {
               expect((property.initializer as any).text).toBe('CONTEXT_TYPE');
-            } else {
-              throw new Error(`Un-tested property ${name} at index ${index}`);
-            }
-          } else if (property.initializer.kind === ts.SyntaxKind.NumericLiteral) {
-            if (name === 'density') {
-              expect((property.initializer as any).text).toBe('1');
+            } else if (name === 'density') {
+              expect((property.initializer as any).text).toBe('DEFAULT_DENSITY');
             } else {
               throw new Error(`Un-tested property ${name} at index ${index}`);
             }
