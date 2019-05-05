@@ -1720,7 +1720,7 @@ export class Canvasimo {
    */
   public getImageSmoothingEnabled = (): boolean => {
     for (const key of IMAGE_SMOOTHING_KEYS) {
-      if (Object.prototype.hasOwnProperty.call(this.ctx, key)) {
+      if (key in this.ctx) {
         return this.ctx[key];
       }
     }
