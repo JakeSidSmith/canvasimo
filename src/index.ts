@@ -61,9 +61,9 @@ const logUnsupportedMethodError = (method: string) => {
 export class Canvasimo {
   private element: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
+  private storedContextValues: StoredContextValues;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
   private density: number = DEFAULT_DENSITY;
-  private storedContextValues: StoredContextValues;
 
   public constructor (element: HTMLCanvasElement) {
     this.element = element;

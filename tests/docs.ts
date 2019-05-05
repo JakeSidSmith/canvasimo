@@ -7,9 +7,9 @@ import getContextStub from './helpers/get-context-stub';
 const PRIVATE_PROPERTIES = [
   'element',
   'ctx',
+  'storedContextValues',
   'ctxType',
   'density',
-  'storedContextValues',
   'setCanvasProperty',
   'getCanvasProperty',
   'drawTextWithLineBreaks',
@@ -17,7 +17,6 @@ const PRIVATE_PROPERTIES = [
   'wrapBreakWord',
   'wrapNormal',
   'textMultiline',
-  'resetDensityRelatedValues',
   'setDefaultContextValues',
   'saveContextValues',
   'restoreContextValues',
