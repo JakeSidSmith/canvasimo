@@ -26,6 +26,11 @@ export type Size = {
   height: number;
 };
 
+// tslint:disable-next-line:interface-over-type-literal
+export type LimitedTextMetrics = {
+  width: number;
+};
+
 export interface SetSize {
   (size: Size): Canvasimo;
   (width: number, height: number): Canvasimo;
@@ -128,8 +133,4 @@ export interface StoredContextValues {
   imageSmoothingEnabled: boolean;
   imageSmoothingQuality: ImageSmoothingQuality;
   lineDash: number[];
-}
-
-export interface LimitedTextMetrics {
-  width: number;
 }

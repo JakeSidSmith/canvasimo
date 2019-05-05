@@ -2017,7 +2017,14 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
             "returns": "LimitedTextMetrics",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "{
+  width: number;
+}",
+            "name": "LimitedTextMetrics",
+          },
+        ],
       },
       Object {
         "alias": null,
