@@ -19,6 +19,7 @@ import {
   CanvasContext,
   CanvasContextAttributes,
   CreateImageData,
+  DensityRelatedValues,
   DrawImage,
   Fill,
   FillOrStrokeStyle,
@@ -61,6 +62,7 @@ export class Canvasimo {
   private ctx: CanvasRenderingContext2D;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
   private density: number = DEFAULT_DENSITY;
+  private previousDensityRelatedValues: DensityRelatedValues;
 
   public constructor (element: HTMLCanvasElement) {
     this.element = element;
@@ -72,6 +74,7 @@ export class Canvasimo {
 
     this.ctx = ctx;
     this.setDefaultContextValues();
+    this.previousDensityRelatedValues = this.saveDensityRelatedValues();
   }
 
   /**
@@ -2083,6 +2086,42 @@ export class Canvasimo {
     this.setLineDash(DEFAULT_LINE_DASH);
 
     return this;
+  }
+  private saveDensityRelatedValues = (): DensityRelatedValues => {
+    this.previousDensityRelatedValues = {
+      font: this.getFont(),
+      lineDashOffset: this.getLineDashOffset(),
+      lineDash: this.getLineDash(),
+      lineWidth: this.getLineWidth(),
+      miterLimit: this.getMiterLimit(),
+      shadowBlur: this.getShadowBlur(),
+      shadowOffsetX: this.getShadowOffsetX(),
+      shadowOffsetY: this.getShadowOffsetY(),
+    };
+
+    return this.previousDensityRelatedValues;
+  }
+  private restoreDensityRelatedValues = (): Canvasimo => {
+    const {
+      font,
+      lineDashOffset,
+      lineDash,
+      lineWidth,
+      miterLimit,
+      shadowBlur,
+      shadowOffsetX,
+      shadowOffsetY,
+    } = this.previousDensityRelatedValues;
+
+    return this
+      .setFont(font)
+      .setLineDashOffset(lineDashOffset)
+      .setLineDash(lineDash)
+      .setLineWidth(lineWidth)
+      .setMiterLimit(miterLimit)
+      .setShadowBlur(shadowBlur)
+      .setShadowOffsetX(shadowOffsetX)
+      .setShadowOffsetY(shadowOffsetY);
   }
 }
 
