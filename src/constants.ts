@@ -23,6 +23,13 @@ export const IMAGE_SMOOTHING_KEYS = [
   'webkitImageSmoothingEnabled',
 ] as Array<'imageSmoothingEnabled'>;
 
+export const IMAGE_SMOOTHING_QUALITY_KEYS = [
+  'imageSmoothingQuality',
+  'msImageSmoothingQuality',
+  'mozImageSmoothingQuality',
+  'webkitImageSmoothingQuality',
+] as Array<'imageSmoothingQuality'>;
+
 export const CONTEXT_TYPE = '2d';
 
 export const INCORRECT_POINT_FORMAT = `Path points must be an array of:\n
