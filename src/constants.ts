@@ -53,12 +53,10 @@ export const MATCHES_ALL_WHITESPACE = /^\s*$/;
 export const MATCHES_FONT_SIZE = /(^|\s+)(\d*\.?\d+)([a-z]+|%)(\/\d*\.?\d+(?:[a-z]+|%)?)?\s/i;
 export const MATCHES_WORD_BREAKS = /(?![^\w\s])\b/g;
 
-export const DEFAULT_CONTEXT_VALUES = {
+export const DEFAULT_CONTEXT_VALUES: {[i: string]: string | number} = {
   globalAlpha: 1,
   globalCompositeOperation: 'source-over',
   filter: 'none',
-  imageSmoothingEnabled: true,
-  imageSmoothingQuality: 'low',
   strokeStyle: '#000000',
   fillStyle: '#000000',
   shadowOffsetX: 0,
@@ -74,3 +72,10 @@ export const DEFAULT_CONTEXT_VALUES = {
   textAlign: 'start',
   textBaseline: 'alphabetic',
 };
+
+export const DEFAULT_IMAGE_SMOOTHING_VALUES = {
+  imageSmoothingEnabled: true,
+  imageSmoothingQuality: 'low' as ImageSmoothingQuality,
+};
+
+export const DEFAULT_LINE_DASH = [];

@@ -110,11 +110,12 @@ export interface ForEach {
 
 export interface DensityRelatedValues {
   font: string;
-  getLineDash: number[];
   lineDashOffset: number;
   lineWidth: number;
   miterLimit: number;
   shadowBlur: number;
   shadowOffsetX: number;
   shadowOffsetY: number;
+  // Has setter and getter
+  lineDash: number[];
 }

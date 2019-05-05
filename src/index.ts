@@ -1754,7 +1754,7 @@ export class Canvasimo {
       }
     }
 
-    return DEFAULT_CONTEXT_VALUES.imageSmoothingQuality as ImageSmoothingQuality;
+    return DEFAULT_IMAGE_SMOOTHING_VALUES.imageSmoothingQuality;
   }
   /**
    * Set how blurry shadows are.
