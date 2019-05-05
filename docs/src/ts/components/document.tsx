@@ -171,6 +171,9 @@ export default class Document extends Component<Props, {}> {
                   <li>
                     Useful helper functions
                   </li>
+                  <li>
+                    Retain context state when resizing / clearing the canvas
+                  </li>
                 </ul>
 
                 <LinkHeader type="h2" header="About" />
