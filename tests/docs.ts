@@ -9,6 +9,7 @@ const PRIVATE_PROPERTIES = [
   'ctx',
   'ctxType',
   'density',
+  'storedContextValues',
   'setCanvasProperty',
   'getCanvasProperty',
   'drawTextWithLineBreaks',
@@ -17,6 +18,9 @@ const PRIVATE_PROPERTIES = [
   'wrapNormal',
   'textMultiline',
   'resetDensityRelatedValues',
+  'setDefaultContextValues',
+  'saveContextValues',
+  'restoreContextValues',
 ];
 
 describe('getDocJson', () => {
