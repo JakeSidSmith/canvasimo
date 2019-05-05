@@ -10,7 +10,10 @@ if (!element) {
 }
 
 const parentElement = element.parentElement;
-const canvas = new Canvasimo(element as HTMLCanvasElement).setDensity(2);
+const canvas = new Canvasimo(element as HTMLCanvasElement)
+  .setDensity(2)
+  .setStrokeCap('round')
+  .setStrokeJoin('round');
 
 canvas.version(true);
 
@@ -97,8 +100,6 @@ const draw = () => {
 
   canvas
     .clearCanvas()
-    .setStrokeCap('round')
-    .setStrokeJoin('round')
     .translate(canvas.getWidth() / 2, canvas.getHeight());
 
   const treeDone = drawBranch(tree, 0, 6);
