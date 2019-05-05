@@ -12,7 +12,7 @@ const canvas = new Canvasimo(element as HTMLCanvasElement);
 const rect = canvas.getBoundingClientRect();
 
 canvas
-  .setDensity(2)
+  .setDensity(window.devicePixelRatio >= 2 ? 2 : 1)
   .setSize(rect.width, rect.height);
 
 const draw = () => {
@@ -29,6 +29,18 @@ const draw = () => {
     .fillCanvas('#FFFFFF')
     .setTextBaseline('top')
     .setFontFamily('arial')
+    .setTextAlign('center')
+    .setFontSize(FONT_SIZE - 2)
+    .fillTextMultiline(
+      'Try resizing the window! :D',
+      width / 2,
+      FONT_SIZE * 4,
+      width - MARGIN * 2,
+      undefined,
+      undefined,
+      '#555555'
+    )
+    .setTextAlign('start')
     .setFontSize(FONT_SIZE)
     .fillText(
       'Regular text that does not have newlines or automatic wrapping',
@@ -42,20 +54,8 @@ const draw = () => {
       MARGIN,
       FONT_SIZE * 2
     )
-    .setTextAlign('center')
-    .setFontSize(FONT_SIZE - 2)
-    .fillTextMultiline(
-      'Try resizing the window! :D',
-      width / 2,
-      FONT_SIZE * 4,
-      width - MARGIN * 2,
-      undefined,
-      undefined,
-      '#555555'
-    )
-    .setFontSize(FONT_SIZE)
-    .setFill('black')
     .translate(multilineTextOffset, 0)
+    .beginPath()
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('left')
     .fillTextMultiline(
@@ -66,6 +66,7 @@ const draw = () => {
       'normal'
     )
     .translate(MARGIN * 2 + multilineTextWidth, 0)
+    .beginPath()
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('center')
     .fillTextMultiline(
@@ -76,6 +77,7 @@ const draw = () => {
       'break-word'
     )
     .translate(MARGIN * 2 + multilineTextWidth, 0)
+    .beginPath()
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('right')
     .fillTextMultiline(

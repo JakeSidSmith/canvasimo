@@ -1994,10 +1994,15 @@
                 "optional": false
               }
             ],
-            "returns": "TextMetrics"
+            "returns": "LimitedTextMetrics"
           }
         ],
-        "typeAliases": []
+        "typeAliases": [
+          {
+            "name": "LimitedTextMetrics",
+            "alias": "{\n  width: number;\n}"
+          }
+        ]
       },
       {
         "name": "setTextAlign",
@@ -4062,6 +4067,46 @@
           }
         ],
         "typeAliases": []
+      },
+      {
+        "name": "setImageSmoothingQuality",
+        "description": "Set the image smoothing quality.",
+        "alias": null,
+        "signatures": [
+          {
+            "parameters": [
+              {
+                "name": "value",
+                "type": "ImageSmoothingQuality",
+                "optional": false
+              }
+            ],
+            "returns": "Canvasimo"
+          }
+        ],
+        "typeAliases": [
+          {
+            "name": "ImageSmoothingQuality",
+            "alias": "\"low\" | \"medium\" | \"high\""
+          }
+        ]
+      },
+      {
+        "name": "getImageSmoothingQuality",
+        "description": "Get the current image smoothing quality.",
+        "alias": null,
+        "signatures": [
+          {
+            "parameters": [],
+            "returns": "ImageSmoothingQuality"
+          }
+        ],
+        "typeAliases": [
+          {
+            "name": "ImageSmoothingQuality",
+            "alias": "\"low\" | \"medium\" | \"high\""
+          }
+        ]
       },
       {
         "name": "setShadowBlur",
