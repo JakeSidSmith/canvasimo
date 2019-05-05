@@ -1728,6 +1728,31 @@ export class Canvasimo {
     return false;
   }
   /**
+   * Set the image smoothing quality.
+   */
+  public setImageSmoothingQuality = (value: ImageSmoothingQuality): Canvasimo => {
+    for (const key of IMAGE_SMOOTHING_QUALITY_KEYS) {
+      if (key in this.ctx) {
+        this.ctx[key] = value;
+        return this;
+      }
+    }
+
+    return this;
+  }
+  /**
+   * Get the current image smoothing quality.
+   */
+  public getImageSmoothingQuality = (): ImageSmoothingQuality => {
+    for (const key of IMAGE_SMOOTHING_QUALITY_KEYS) {
+      if (key in this.ctx) {
+        return this.ctx[key];
+      }
+    }
+
+    return DEFAULT_CONTEXT_VALUES.imageSmoothingQuality as ImageSmoothingQuality;
+  }
+  /**
    * Set how blurry shadows are.
    */
   public setShadowBlur = (value: number): Canvasimo => this.setCanvasProperty('shadowBlur', value * this.density);
