@@ -82,7 +82,8 @@ describe('canvasimo', () => {
     textMultiline: [jest.fn(), '', 0, 0],
   };
 
-  const isGetter = /^(get|create|is|measure|constrain|map|version|wrapBreakAll|wrapBreakWord|wrapNormal)/i;
+  // tslint:disable-next-line:max-line-length
+  const isGetter = /^(get|create|is|measure|constrain|map|version|wrapBreakAll|wrapBreakWord|wrapNormal|saveContextValues)/i;
 
   beforeEach(() => {
     mockClearAll();
@@ -569,9 +570,9 @@ describe('canvasimo', () => {
 
   describe('actions and setters', () => {
 
-    it('should return the canvas', () => {
+    it('should return the canvasimo instance', () => {
       each(canvas, (method, key) => {
-        if (typeof method === 'function' && !isGetter.exec(key)) {
+        if (typeof method === 'function' && !isGetter.test(key)) {
           let result;
 
           try {

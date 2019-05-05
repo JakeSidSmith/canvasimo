@@ -25,8 +25,6 @@ describe('density', () => {
   });
 
   it('retains density when the canvas is cleared (without changing the canvas size)', () => {
-    // Fake browser font reset
-    ctx.font = '10px sans-serif';
     instance.clearCanvas();
 
     expect(ctx.font).toBe('normal normal normal 20px sans-serif');

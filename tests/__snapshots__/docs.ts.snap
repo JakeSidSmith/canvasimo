@@ -2014,10 +2014,17 @@ The lineHeight parameter is a multiplier for the font size, and defaults to 1.",
                 "type": "string",
               },
             ],
-            "returns": "TextMetrics",
+            "returns": "LimitedTextMetrics",
           },
         ],
-        "typeAliases": Array [],
+        "typeAliases": Array [
+          Object {
+            "alias": "{
+  width: number;
+}",
+            "name": "LimitedTextMetrics",
+          },
+        ],
       },
       Object {
         "alias": null,
@@ -4096,6 +4103,46 @@ a canvas with a height of 100 returns 20 if the provided value is 20.",
           },
         ],
         "typeAliases": Array [],
+      },
+      Object {
+        "alias": null,
+        "description": "Set the image smoothing quality.",
+        "name": "setImageSmoothingQuality",
+        "signatures": Array [
+          Object {
+            "parameters": Array [
+              Object {
+                "name": "value",
+                "optional": false,
+                "type": "ImageSmoothingQuality",
+              },
+            ],
+            "returns": "Canvasimo",
+          },
+        ],
+        "typeAliases": Array [
+          Object {
+            "alias": "\\"low\\" | \\"medium\\" | \\"high\\"",
+            "name": "ImageSmoothingQuality",
+          },
+        ],
+      },
+      Object {
+        "alias": null,
+        "description": "Get the current image smoothing quality.",
+        "name": "getImageSmoothingQuality",
+        "signatures": Array [
+          Object {
+            "parameters": Array [],
+            "returns": "ImageSmoothingQuality",
+          },
+        ],
+        "typeAliases": Array [
+          Object {
+            "alias": "\\"low\\" | \\"medium\\" | \\"high\\"",
+            "name": "ImageSmoothingQuality",
+          },
+        ],
       },
       Object {
         "alias": null,
