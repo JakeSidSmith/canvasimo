@@ -129,3 +129,7 @@ export interface StoredContextValues {
   imageSmoothingQuality: ImageSmoothingQuality;
   lineDash: number[];
 }
+
+export interface LimitedTextMetrics {
+  width: number;
+}
