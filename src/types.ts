@@ -107,3 +107,14 @@ export interface ForEach {
   (obj: any[], callback: (value: any, index: number) => any): Canvasimo;
   (obj: {[i: string]: any}, callback: (value: any, key: string) => any): Canvasimo;
 }
+
+export interface DensityRelatedValues {
+  font: string;
+  getLineDash: number[];
+  lineDashOffset: number;
+  lineWidth: number;
+  miterLimit: number;
+  shadowBlur: number;
+  shadowOffsetX: number;
+  shadowOffsetY: number;
+}
