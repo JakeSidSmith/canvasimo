@@ -191,7 +191,7 @@ export default class Document extends Component<Props, {}> {
                 </p>
 
                 <p>
-                  Along the way, I realised that a lot of the canvas attributes & methods were not very idiomatic,
+                  Along the way, I realized that a lot of the canvas attributes & methods were not very idiomatic,
                   and so I came up with some more suitable method / attribute names.
                 </p>
 
@@ -218,6 +218,14 @@ export default class Document extends Component<Props, {}> {
                   e.g. <code>fillRect(0, 0, 10, 10, 'black')</code>, <code>strokeLine(0, 0, 0, 20, 'red')</code>.
                   And similarly, the fill and stroke methods can now be passed a color; <code>fill('red')</code>, <code>
                     stroke('green')</code>, <code>fillCanvas('blue')</code>.
+                </p>
+
+                <p>
+                  The most recent change in Canvasimo <code>0.8.0</code> is that Canvasimo saves and retains the context
+                  state when resizing or clearing the canvas. This means that it's not always necessary to explicitly
+                  set values like font size, line width, and color in every draw loop - if you only ever use one font
+                  you can simply set this once when you're initializing Canvasimo and calls to <code>clearCanvas</code>,
+                  <code>setSize</code>, etc will not reset these values.
                 </p>
 
                 <LinkHeader type="h2" header="Examples" />
