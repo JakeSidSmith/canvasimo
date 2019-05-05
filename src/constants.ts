@@ -56,7 +56,6 @@ export const MATCHES_WORD_BREAKS = /(?![^\w\s])\b/g;
 export const DEFAULT_CONTEXT_VALUES: {[i: string]: string | number} = {
   globalAlpha: 1,
   globalCompositeOperation: 'source-over',
-  filter: 'none',
   strokeStyle: '#000000',
   fillStyle: '#000000',
   shadowOffsetX: 0,
