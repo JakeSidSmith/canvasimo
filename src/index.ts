@@ -22,6 +22,7 @@ import {
   ForEach,
   GetAngle,
   GlobalCompositeOperation,
+  LimitedTextMetrics,
   LineCap,
   LineJoin,
   MaxWidth,
@@ -887,16 +888,13 @@ export class Canvasimo {
    * Get information about the size text will be drawn.
    * @alias measureText
    */
-  public getTextSize = (text: string): TextMetrics => this.measureText(text);
-  public measureText = (text: string): TextMetrics => {
+  public getTextSize = (text: string): LimitedTextMetrics => this.measureText(text);
+  public measureText = (text: string): LimitedTextMetrics => {
     const metrics = this.ctx.measureText(text);
-    const metricsWithDensity: any = {};
 
-    (Object.keys(metrics) as ReadonlyArray<keyof TextMetrics>).forEach((key) => {
-      metricsWithDensity[key] = (metrics[key] || 0) / this.density;
-    });
-
-    return metricsWithDensity;
+    return {
+      width: (metrics.width || 0) / this.density,
+    };
   }
   /**
    * Set the horizontal text alignment.
