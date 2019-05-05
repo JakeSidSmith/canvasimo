@@ -108,14 +108,24 @@ export interface ForEach {
   (obj: {[i: string]: any}, callback: (value: any, key: string) => any): Canvasimo;
 }
 
-export interface DensityRelatedValues {
-  font: string;
-  lineDashOffset: number;
-  lineWidth: number;
-  miterLimit: number;
-  shadowBlur: number;
+export interface StoredContextValues {
+  globalAlpha: number;
+  globalCompositeOperation: GlobalCompositeOperation;
+  strokeStyle: FillOrStrokeStyle;
+  fillStyle: FillOrStrokeStyle;
   shadowOffsetX: number;
   shadowOffsetY: number;
-  // Has setter and getter
+  shadowBlur: number;
+  shadowColor: string;
+  lineWidth: number;
+  lineCap: LineCap;
+  lineJoin: LineJoin;
+  miterLimit: number;
+  lineDashOffset: number;
+  font: string;
+  textAlign: TextAlign;
+  textBaseline: TextBaseline;
+  imageSmoothingEnabled: boolean;
+  imageSmoothingQuality: ImageSmoothingQuality;
   lineDash: number[];
 }

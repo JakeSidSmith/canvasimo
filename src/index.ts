@@ -19,7 +19,6 @@ import {
   CanvasContext,
   CanvasContextAttributes,
   CreateImageData,
-  DensityRelatedValues,
   DrawImage,
   Fill,
   FillOrStrokeStyle,
@@ -36,6 +35,7 @@ import {
   Segments,
   SetSize,
   Size,
+  StoredContextValues,
   Stroke,
   TextAlign,
   TextBaseline,
@@ -62,7 +62,7 @@ export class Canvasimo {
   private ctx: CanvasRenderingContext2D;
   private ctxType: typeof CONTEXT_TYPE = CONTEXT_TYPE;
   private density: number = DEFAULT_DENSITY;
-  private previousDensityRelatedValues: DensityRelatedValues;
+  private storedContextValues: StoredContextValues;
 
   public constructor (element: HTMLCanvasElement) {
     this.element = element;
@@ -74,7 +74,7 @@ export class Canvasimo {
 
     this.ctx = ctx;
     this.setDefaultContextValues();
-    this.previousDensityRelatedValues = this.saveDensityRelatedValues();
+    this.storedContextValues = this.saveContextValues();
   }
 
   /**
@@ -92,9 +92,22 @@ export class Canvasimo {
    * Set the canvas pixel density.
    */
   public setDensity = (density: number): Canvasimo => {
-    const prevDensity = this.density;
+    if (this.density !== density) {
+      const {
+        width: prevWidth,
+        height: prevHeight,
+      } = this.getSize();
 
-    return this.resetDensityRelatedValues(prevDensity, density, true);
+      this.saveContextValues();
+      this.density = density;
+
+      this.element.width = prevWidth * density;
+      this.element.height = prevHeight * density;
+
+      this.restoreContextValues();
+    }
+
+    return this;
   }
   /**
    * Get the canvas pixel density.
@@ -104,6 +117,8 @@ export class Canvasimo {
    * Set the canvas dimensions.
    */
   public setSize: SetSize = (width: number | Size, height?: number): Canvasimo => {
+    this.saveContextValues();
+
     if (typeof width === 'object') {
       this.element.width = width.width * this.density;
       this.element.height = width.height * this.density;
@@ -111,6 +126,8 @@ export class Canvasimo {
       this.element.width = width * this.density;
       this.element.height = height * this.density;
     }
+
+    this.restoreContextValues();
 
     return this;
   }
@@ -125,7 +142,9 @@ export class Canvasimo {
    * Set the canvas width.
    */
   public setWidth = (width: number): Canvasimo => {
+    this.saveContextValues();
     this.element.width = width * this.density;
+    this.restoreContextValues();
     return this;
   }
   /**
@@ -136,7 +155,9 @@ export class Canvasimo {
    * Set the canvas height.
    */
   public setHeight = (height: number): Canvasimo => {
+    this.saveContextValues();
     this.element.height = height * this.density;
+    this.restoreContextValues();
     return this;
   }
   /**
@@ -1223,9 +1244,7 @@ export class Canvasimo {
    * Clear the entire canvas area
    */
   public clearCanvas = (): Canvasimo => {
-    this.setWidth(this.getWidth());
-    // Ensure densities are retained
-    return this.resetDensityRelatedValues(DEFAULT_DENSITY, this.density, false);
+    return this.setWidth(this.getWidth());
   }
   /**
    * Clear a rectangular area of the canvas.
@@ -2087,41 +2106,74 @@ export class Canvasimo {
 
     return this;
   }
-  private saveDensityRelatedValues = (): DensityRelatedValues => {
-    this.previousDensityRelatedValues = {
-      font: this.getFont(),
-      lineDashOffset: this.getLineDashOffset(),
-      lineDash: this.getLineDash(),
-      lineWidth: this.getLineWidth(),
-      miterLimit: this.getMiterLimit(),
-      shadowBlur: this.getShadowBlur(),
+  private saveContextValues = (): StoredContextValues => {
+    this.storedContextValues = {
+      globalAlpha: this.getGlobalAlpha(),
+      globalCompositeOperation: this.getCompositeOperation(),
+      strokeStyle: this.getStroke(),
+      fillStyle: this.getFill(),
       shadowOffsetX: this.getShadowOffsetX(),
       shadowOffsetY: this.getShadowOffsetY(),
+      shadowBlur: this.getShadowBlur(),
+      shadowColor: this.getShadowColor(),
+      lineWidth: this.getLineWidth(),
+      lineCap: this.getLineCap(),
+      lineJoin: this.getLineJoin(),
+      miterLimit: this.getMiterLimit(),
+      lineDashOffset: this.getLineDashOffset(),
+      font: this.getFont(),
+      textAlign: this.getTextAlign(),
+      textBaseline: this.getTextBaseline(),
+      imageSmoothingEnabled: this.getImageSmoothingEnabled(),
+      imageSmoothingQuality: this.getImageSmoothingQuality(),
+      lineDash: this.getLineDash(),
     };
 
-    return this.previousDensityRelatedValues;
+    return this.storedContextValues;
   }
-  private restoreDensityRelatedValues = (): Canvasimo => {
+  private restoreContextValues = (): Canvasimo => {
     const {
-      font,
-      lineDashOffset,
-      lineDash,
-      lineWidth,
-      miterLimit,
-      shadowBlur,
+      globalAlpha,
+      globalCompositeOperation,
+      strokeStyle,
+      fillStyle,
       shadowOffsetX,
       shadowOffsetY,
-    } = this.previousDensityRelatedValues;
+      shadowBlur,
+      shadowColor,
+      lineWidth,
+      lineCap,
+      lineJoin,
+      miterLimit,
+      lineDashOffset,
+      font,
+      textAlign,
+      textBaseline,
+      imageSmoothingEnabled,
+      imageSmoothingQuality,
+      lineDash,
+    } = this.storedContextValues;
 
     return this
-      .setFont(font)
-      .setLineDashOffset(lineDashOffset)
-      .setLineDash(lineDash)
-      .setLineWidth(lineWidth)
-      .setMiterLimit(miterLimit)
-      .setShadowBlur(shadowBlur)
+      .setGlobalAlpha(globalAlpha)
+      .setCompositeOperation(globalCompositeOperation)
+      .setStroke(strokeStyle)
+      .setFill(fillStyle)
       .setShadowOffsetX(shadowOffsetX)
-      .setShadowOffsetY(shadowOffsetY);
+      .setShadowOffsetY(shadowOffsetY)
+      .setShadowBlur(shadowBlur)
+      .setShadowColor(shadowColor)
+      .setLineWidth(lineWidth)
+      .setLineCap(lineCap)
+      .setLineJoin(lineJoin)
+      .setMiterLimit(miterLimit)
+      .setLineDashOffset(lineDashOffset)
+      .setFont(font)
+      .setTextAlign(textAlign)
+      .setTextBaseline(textBaseline)
+      .setImageSmoothingEnabled(imageSmoothingEnabled)
+      .setImageSmoothingQuality(imageSmoothingQuality)
+      .setLineDash(lineDash);
   }
 }
 
