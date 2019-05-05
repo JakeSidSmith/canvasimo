@@ -12,7 +12,7 @@ const canvas = new Canvasimo(element as HTMLCanvasElement);
 const rect = canvas.getBoundingClientRect();
 
 canvas
-  .setDensity(2)
+  .setDensity(window.devicePixelRatio >= 2 ? 2 : 1)
   .setSize(rect.width, rect.height);
 
 const draw = () => {

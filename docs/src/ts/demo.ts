@@ -11,7 +11,7 @@ if (!element) {
 
 const parentElement = element.parentElement;
 const canvas = new Canvasimo(element as HTMLCanvasElement)
-  .setDensity(2)
+  .setDensity(window.devicePixelRatio >= 2 ? 2 : 1)
   .setStrokeCap('round')
   .setStrokeJoin('round');
 

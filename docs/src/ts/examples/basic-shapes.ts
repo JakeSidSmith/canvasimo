@@ -12,7 +12,7 @@ const rect = canvas.getBoundingClientRect();
 const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => Math.random());
 
 canvas
-  .setDensity(2)
+  .setDensity(window.devicePixelRatio >= 2 ? 2 : 1)
   .setSize(rect.width, rect.height);
 
 const draw = () => {
