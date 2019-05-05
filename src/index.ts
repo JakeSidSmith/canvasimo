@@ -2,9 +2,13 @@
 const { version: VERSION } = require('../package.json');
 import {
   CONTEXT_TYPE,
+  DEFAULT_CONTEXT_VALUES,
   DEFAULT_DENSITY,
   DEFAULT_FONT_PARTS,
+  DEFAULT_IMAGE_SMOOTHING_VALUES,
+  DEFAULT_LINE_DASH,
   IMAGE_SMOOTHING_KEYS,
+  IMAGE_SMOOTHING_QUALITY_KEYS,
   INCORRECT_GET_ANGLE_ARGUMENTS,
   MATCHES_ALL_WHITESPACE,
   MATCHES_WORD_BREAKS,
@@ -67,7 +71,7 @@ export class Canvasimo {
     }
 
     this.ctx = ctx;
-    this.ctx.font = formatFont(this.ctx.font, this.density, true);
+    this.setDefaultContextValues();
   }
 
   /**
@@ -2066,42 +2070,17 @@ export class Canvasimo {
       return this.drawTextWithLineBreaks(method, lines.join('\n'), x, y, lineHeight, color);
     }
   }
-  private resetDensityRelatedValues = (prevDensity: number, density: number, setSize: boolean): Canvasimo => {
-    this.density = prevDensity;
-
-    const {
-      width: prevWidth,
-      height: prevHeight,
-    } = this.getSize();
-
-    const prevFontSize = this.getFontSize();
-    const prevLineDash = this.getLineDash();
-    const prevLineDashOffset = this.getLineDashOffset();
-    const prevLineWidth = this.getLineWidth();
-    const prevMiterLimit = this.getMiterLimit();
-    const prevShadowBlur = this.getShadowBlur();
-    const prevShadowOffsetX = this.getShadowOffsetX();
-    const prevShadowOffsetY = this.getShadowOffsetY();
-
-    this.density = density;
-
-    if (prevDensity !== density) {
-      if (setSize) {
-        this.setSize(prevWidth, prevHeight);
+  private setDefaultContextValues = (): Canvasimo => {
+    for (const key in DEFAULT_CONTEXT_VALUES) {
+      if (key in this.ctx) {
+        this.setCanvasProperty(key, DEFAULT_CONTEXT_VALUES[key]);
       }
-
-      if (typeof prevFontSize === 'number') {
-        this.setFontSize(prevFontSize);
-      }
-
-      this.setLineDash(prevLineDash);
-      this.setLineDashOffset(prevLineDashOffset);
-      this.setLineWidth(prevLineWidth);
-      this.setMiterLimit(prevMiterLimit);
-      this.setShadowBlur(prevShadowBlur);
-      this.setShadowOffsetX(prevShadowOffsetX);
-      this.setShadowOffsetY(prevShadowOffsetY);
     }
+
+    this.setImageSmoothingEnabled(DEFAULT_IMAGE_SMOOTHING_VALUES.imageSmoothingEnabled);
+    this.setImageSmoothingQuality(DEFAULT_IMAGE_SMOOTHING_VALUES.imageSmoothingQuality);
+
+    this.setLineDash(DEFAULT_LINE_DASH);
 
     return this;
   }
