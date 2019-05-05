@@ -55,6 +55,7 @@ const draw = () => {
       FONT_SIZE * 2
     )
     .translate(multilineTextOffset, 0)
+    .beginPath()
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('left')
     .fillTextMultiline(
@@ -65,6 +66,7 @@ const draw = () => {
       'normal'
     )
     .translate(MARGIN * 2 + multilineTextWidth, 0)
+    .beginPath()
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('center')
     .fillTextMultiline(
@@ -75,6 +77,7 @@ const draw = () => {
       'break-word'
     )
     .translate(MARGIN * 2 + multilineTextWidth, 0)
+    .beginPath()
     .strokeLine(0, 0, 0, height, '#AAAAAA')
     .setTextAlign('right')
     .fillTextMultiline(
