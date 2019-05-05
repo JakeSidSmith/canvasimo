@@ -3,7 +3,7 @@ const { version: VERSION } = require('../package.json');
 import {
   CONTEXT_TYPE,
   DEFAULT_DENSITY,
-  DEFAULT_FONT,
+  DEFAULT_FONT_PARTS,
   IMAGE_SMOOTHING_KEYS,
   INCORRECT_GET_ANGLE_ARGUMENTS,
   MATCHES_ALL_WHITESPACE,
@@ -942,7 +942,7 @@ export class Canvasimo {
     if (parts.length < 5) {
       return this.setFont('');
     }
-    parts[4] = family || DEFAULT_FONT[4];
+    parts[4] = family || DEFAULT_FONT_PARTS[4];
     this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
@@ -964,7 +964,7 @@ export class Canvasimo {
     if (parts.length < 5) {
       return this.setFont('');
     }
-    parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT[3];
+    parts[3] = (typeof size === 'number' ? size + 'px' : size) || DEFAULT_FONT_PARTS[3];
     this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
@@ -987,7 +987,7 @@ export class Canvasimo {
     if (parts.length < 5) {
       return this.setFont('');
     }
-    parts[0] = style || DEFAULT_FONT[0];
+    parts[0] = style || DEFAULT_FONT_PARTS[0];
     this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
@@ -1010,7 +1010,7 @@ export class Canvasimo {
     if (parts.length < 5) {
       return this.setFont('');
     }
-    parts[1] = variant || DEFAULT_FONT[1];
+    parts[1] = variant || DEFAULT_FONT_PARTS[1];
     this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }
@@ -1033,7 +1033,7 @@ export class Canvasimo {
     if (parts.length < 5) {
       return this.setFont('');
     }
-    parts[2] = weight.toString() || DEFAULT_FONT[2];
+    parts[2] = weight.toString() || DEFAULT_FONT_PARTS[2];
     this.ctx.font = formatFont(parts.join(' '), this.density, false);
     return this;
   }

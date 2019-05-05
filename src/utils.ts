@@ -1,5 +1,5 @@
 import {
-  DEFAULT_FONT,
+  DEFAULT_FONT_PARTS,
   INCORRECT_POINT_FORMAT,
   MATCHES_FONT_SIZE,
   MATCHES_FONT_STYLE,
@@ -30,7 +30,7 @@ let warnedAboutLineHeight = false;
 
 export const getFontParts = (input: string | undefined, density: number, getter: boolean) => {
   if (!input) {
-    return DEFAULT_FONT;
+    return DEFAULT_FONT_PARTS;
   }
 
   const font = input.trim();
@@ -42,7 +42,7 @@ export const getFontParts = (input: string | undefined, density: number, getter:
   const matchFontSize = MATCHES_FONT_SIZE.exec(font);
 
   if (!matchFontSize) {
-    return DEFAULT_FONT;
+    return DEFAULT_FONT_PARTS;
   }
 
   const fontString = matchFontSize[0].trim();
@@ -83,15 +83,15 @@ export const getFontParts = (input: string | undefined, density: number, getter:
       } else if (MATCHES_NORMAL.test(optionalParts[0])) {
         optionalParts.splice(0, 1);
       } else {
-        return DEFAULT_FONT;
+        return DEFAULT_FONT_PARTS;
       }
     }
   }
 
   return [
-    fontStyle || DEFAULT_FONT[0],
-    fontVariant || DEFAULT_FONT[1],
-    fontWeight || DEFAULT_FONT[2],
+    fontStyle || DEFAULT_FONT_PARTS[0],
+    fontVariant || DEFAULT_FONT_PARTS[1],
+    fontWeight || DEFAULT_FONT_PARTS[2],
     fontSize,
     fontFamily,
   ];
